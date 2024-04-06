@@ -21,13 +21,18 @@ class GameData:
             for y in range(self.noBlockY):
                 #not precalculating positions for now
                 pixel = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_at((x,y))
-
+                print(pixel)
                 if pixel == (0,255,0,255):
                     curDict = {"tile":self.imgIndxMap["block"]}
                     groundData[x][y] = curDict
-
-                else : 
+                elif pixel == (0,255,255,255) : 
                     curDict = {"tile":self.imgIndxMap["water"]}
+                    groundData[x][y] = curDict
+                elif pixel == (192,192,192,255) :
+                    curDict = {"tile":self.imgIndxMap["rock"]}
+                    groundData[x][y] = curDict
+                else : 
+                    curDict = {"tile":self.imgIndxMap["tree"]}
                     groundData[x][y] = curDict
 
                 # curDict = {"tile":self.imgIndxMap["block"]}
@@ -53,3 +58,7 @@ class GameData:
         waterImg = ldImage("res/graphics/waterfallEndE.png")
         self.imgIndxMap["water"] = 4
         self.imgArr.append(waterImg)
+
+        treeImg = ldImage("res/graphics/tree.png")
+        self.imgIndxMap["tree"] = 5
+        self.imgArr.append(treeImg)
