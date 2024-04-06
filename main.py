@@ -9,7 +9,7 @@ def main():
 
     pg.init()
     pg.mixer.init()
-    screen = pg.display.set_mode((0,0),flag)
+    screen = pg.display.set_mode((0,0),flag,vsync=True)
     clock = pg.time.Clock()
 
     game = MainGameScene(screen,clock)
