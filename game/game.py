@@ -29,7 +29,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.world = GameData(50,50,self.width,self.height)
+        self.world = GameData(50,50,self.width,self.height,"res/graphics/mapWaterGrass.png")
         self.playing = True
 
         self.cameraPos = (0,0)
@@ -64,6 +64,7 @@ class MainGameScene:
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        
         for x in range(self.world.noBlockX):
             for y in range(self.world.noBlockY-1,-1,-1):
                 renderPos = isoCoordToRenderPos((x,y),centerOffset)

@@ -1,9 +1,13 @@
 from .util import ldImage
 class GameData:
     __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData"]
-    def __init__(self,noBlockX,noBlockY,width,height):
-        self.noBlockX = noBlockX
-        self.noBlockY = noBlockY
+    def __init__(self,noBlockX,noBlockY,width,height,*args):
+        if len(args) == 1 : 
+            self.noBlockX = ldImage(args[0]).get_width()
+            self.noBlockY = ldImage(args[0]).get_height()
+        else : 
+            self.noBlockX = noBlockX
+            self.noBlockY = noBlockY
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
