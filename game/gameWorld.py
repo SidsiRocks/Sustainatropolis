@@ -21,11 +21,11 @@ class GameData:
                 if pixel == (0,255,0,255):
                     curDict = {"tile":self.imgIndxMap["block"]}
                     groundData[x][y] = curDict
-                    continue
+
                 else : 
                     curDict = {"tile":self.imgIndxMap["water"]}
                     groundData[x][y] = curDict
-                    continue
+
                 # curDict = {"tile":self.imgIndxMap["block"]}
                 # groundData[x][y] = curDict
         return groundData
