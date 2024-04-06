@@ -12,11 +12,22 @@ class GameData:
         self.groundData = self.createGroundData()    
     def createGroundData(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
+        
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):
                 #not precalculating positions for now
-                curDict = {"tile":self.imgIndxMap["block"]}
-                groundData[x][y] = curDict
+                pixel = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_at((x,y))
+
+                if pixel == (0,255,0,255):
+                    curDict = {"tile":self.imgIndxMap["block"]}
+                    groundData[x][y] = curDict
+                    continue
+                else : 
+                    curDict = {"tile":self.imgIndxMap["water"]}
+                    groundData[x][y] = curDict
+                    continue
+                # curDict = {"tile":self.imgIndxMap["block"]}
+                # groundData[x][y] = curDict
         return groundData
     def loadImages(self):
         blockImg = ldImage("res/graphics/block.png")
@@ -30,3 +41,11 @@ class GameData:
         treeImg  = ldImage("res/graphics/tree.png")
         self.imgIndxMap["tree"] = 2
         self.imgArr.append(treeImg)
+
+        mapWaterGrassImg = ldImage("res/graphics/mapWaterGrass.png")
+        self.imgIndxMap["mapWaterGrass"] = 3
+        self.imgArr.append(mapWaterGrassImg)
+
+        waterImg = ldImage("res/graphics/waterfallEndE.png")
+        self.imgIndxMap["water"] = 4
+        self.imgArr.append(waterImg)
