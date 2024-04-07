@@ -14,7 +14,10 @@ from .customUIprogress import CustomUIprogressBar
 
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
-
+def createLabelId(txt):
+    return ObjectID(class_id="@"+"statisticsLabel",object_id="#Label_"+txt)
+def createProgessLabelId(txt):
+    return ObjectID(class_id="@"+"statisticalProgress",object_id="#Progress_"+txt)
 class StatisticsWindow:
     def __init__(self,manager):
         self.statNames = ["unclean water","clean water","PMI","percentage occupied"]
@@ -26,14 +29,14 @@ class StatisticsWindow:
         y += padTop
         txtLblRect = Rect(padX,y,statsWinWidth-5*padX,txtLblHt)
         txtLbl = UILabel(relative_rect=txtLblRect,manager=manager,
-                         container=self.statsWindow,text=lblTxt)
+                         container=self.statsWindow,text=lblTxt,object_id=createLabelId(lblTxt))
         y += txtLblHt
         y += padTop
         prgrssRect = Rect(padX,y,statsWinWidth-5*padX,prgrssHt)
         prgrssBar = CustomUIprogressBar(
             relative_rect=prgrssRect,manager=manager,
             container=self.statsWindow,
-            object_id=createId(lblTxt),
+            object_id=createProgessLabelId(lblTxt),
             current_progress=100,
             maximum_progess=250
         )

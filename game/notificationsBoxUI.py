@@ -44,7 +44,7 @@ text = """
 """
 
 def createId(txt):
-    return ObjectID(class_id="@"+txt,object_id="#"+txt)
+    return ObjectID(class_id="@"+"NotificationsBox",object_id="#"+txt)
 
 class NotificationsBoxUI:
     def __init__(self,manager):

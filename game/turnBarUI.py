@@ -15,7 +15,12 @@ from .customUIprogress import CustomUIprogressBar
 
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
-
+def createProgressId(txt):
+    return ObjectID(class_id="@"+"TurnProgress",object_id="#"+txt)
+def createStartEndLabelId(txt):
+    return ObjectID(class_id="@"+"TurnStartEndLabel",object_id="#"+txt)
+def createCurrentYearLabel(txt):
+    return ObjectID(class_id="@"+"TurnCurrentYearLabel",object_id="#"+txt)
 class TurnBarUI:
     def __init__(self,manager):
         self.strtYr = 2020
@@ -26,8 +31,8 @@ class TurnBarUI:
         width = manager.window_resolution[0]
         height = manager.window_resolution[1]
 
-        turnBarWidth = 200
-        turnBarHeight = 20
+        turnBarWidth = 250
+        turnBarHeight = 40
         txtLblWidth  = 100 
         txtLblHeight = 30
 
@@ -45,15 +50,15 @@ class TurnBarUI:
 
         turnBar = CustomUIprogressBar(
             relative_rect=prgrsBarRect,manager=manager,
-            object_id=createId("Number_Turn_Progress"),
+            object_id=createProgressId("Number_Turn_Progress"),
             current_progress=(self.crntYr-self.strtYr),
             maximum_progess=(self.endYr-self.strtYr)
         )
         turnBar.set_current_progress(self.crntYr-self.strtYr)
 
-        strtYrLbl = UILabel(relative_rect=startYearLblRect,manager=manager,text=strtLblTxt)
-        endYrLbl = UILabel(relative_rect=endYearLblRect,manager=manager,text=endLblTxt)
-        crntYrLbl = UILabel(relative_rect=crntYearLblRect,manager=manager,text=crntLblTxt)
+        strtYrLbl = UILabel(relative_rect=startYearLblRect,manager=manager,text=strtLblTxt,object_id=createStartEndLabelId("startYrLbl"))
+        endYrLbl = UILabel(relative_rect=endYearLblRect,manager=manager,text=endLblTxt,object_id=createStartEndLabelId("endYrLbl"))
+        crntYrLbl = UILabel(relative_rect=crntYearLblRect,manager=manager,text=crntLblTxt,object_id=createStartEndLabelId("curYrLbl"))
 
         return (strtYrLbl,endYrLbl,crntYrLbl,turnBar)
 
