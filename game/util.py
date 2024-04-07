@@ -26,3 +26,18 @@ def isoRenderPosToImgRenderPos(posXY,imgWdth,imgHt):
     newX = posXY[0] + TILE_SIZE - imgWdth/2
     newY = posXY[1] + TILE_SIZE - imgHt
     return (newX,newY)
+
+def crossProduct(v1,v2):
+    return v1[0]*v2[1] - v2[0]*v1[1]
+
+def basisVecX():
+    return (TILE_SIZE,TILE_SIZE/2)
+def basisVecY():
+    return (-TILE_SIZE,TILE_SIZE/2)
+
+#from statndard to isometric
+def changeOfBasis(posStndrd,basisv1,basisv2):
+    basisCrossProd = crossProduct(basisv1,basisv2)
+    X = crossProduct(posStndrd,basisv2)/basisCrossProd
+    Y = crossProduct(posStndrd,basisv1)/basisCrossProd
+    return (X,Y)

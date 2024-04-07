@@ -1,6 +1,6 @@
 import pygame as pg
 from .gameWorld import GameData
-from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos
+from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos,changeOfBasis,basisVecX,basisVecY
 from .settings import TILE_SIZE
 import sys
 import pygame_gui 
@@ -27,7 +27,7 @@ def cameraMovement(width,height):
     
     return (dx,dy)
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton"]
+    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset"]
     def __init__(self,screen,clock):
         self.screen = screen 
         self.clock = clock
@@ -54,6 +54,8 @@ class MainGameScene:
         </br>
         """
         self.timeDelta = self.clock.tick(60)/1000.0
+        self.groundCenterOffset = (0,0)
+        self.imgCenterOffset = (0,0)
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -85,6 +87,10 @@ class MainGameScene:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quitScene()
+            if event.type == pg.MOUSEBUTTONDOWN:
+                mouseX,mouseY = pg.mouse.get_pos()
+                pos = self.findClickCoord(mouseX,mouseY)
+                print('clicked on isocord:',pos)
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == self.clearButton:
                     print("clicked on clear button")
@@ -102,7 +108,8 @@ class MainGameScene:
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
-        
+        self.groundCenterOffset = centerOffset
+
         for x in range(self.world.noBlockX):
             for y in range(self.world.noBlockY-1,-1,-1):
                 renderPos = isoCoordToRenderPos((x,y),centerOffset)
@@ -112,6 +119,7 @@ class MainGameScene:
     def drawGround(self):
         imgOffsetX = (self.width - self.groundBuffSize[0])/2
         imgOffsetY = (self.height - self.groundBuffSize[1])/2
+        self.imgCenterOffset =(imgOffsetX,imgOffsetY)
         self.screen.blit(self.groundSurface,(imgOffsetX-self.cameraPos[0],imgOffsetY-self.cameraPos[1]))
     def drawTreeRock(self):
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
@@ -145,3 +153,14 @@ class MainGameScene:
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
         self.manager.draw_ui(self.screen)
         pg.display.flip()
+    def findIsoGridOrg(self):
+        orgX = self.imgCenterOffset[0] - self.cameraPos[0] + isoCoordToRenderPos((0,0),self.groundCenterOffset)[0]+0
+        orgY = self.imgCenterOffset[1] - self.cameraPos[1] + isoCoordToRenderPos((0,0),self.groundCenterOffset)[1]+TILE_SIZE/2
+        return (orgX,orgY)
+    def findClickCoord(self,mouseX,mouseY):
+        (orgX,orgY) = self.findIsoGridOrg()
+        xRel = mouseX - orgX
+        yRel = mouseY - orgY
+        (X,Y) = changeOfBasis((xRel,yRel),basisVecX(),basisVecY())
+        return (int(X),int(Y))
+    
