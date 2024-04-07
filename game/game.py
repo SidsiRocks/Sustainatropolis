@@ -44,6 +44,7 @@ class MainGameScene:
 
 
         self.manager = pygame_gui.UIManager((self.width,self.height))
+        self.loadFonts()
         self.mainGameUI = MainGameUI(self.manager,"./game/theme.json")
 
         self.clearButton = UIButton(Rect(500,500,100,50),"Clear HTML",self.manager)
@@ -53,6 +54,16 @@ class MainGameScene:
         </br>
         """
         self.timeDelta = self.clock.tick(60)/1000.0
+    def loadFonts(self):
+        self.manager.add_font_paths("Montserrat",
+                                    "./res/fonts/Montserrat-Regular.ttf",
+                                    "./res/fonts/Montserrat-Bold.ttf",
+                                    "./res/fonts/Montserrat-Italic.ttf",
+                                    "./res/fonts/Montserrat-BoldItalic.ttf")
+        self.manager.preload_fonts([
+            {'name':'Montserrat','html_size':'6','style':'bold'},
+            {'name':'Montserrat','html_size':'4','style':'regular'}
+        ])
     def run(self):
         while self.playing:
             self.clock.tick(60)
@@ -81,6 +92,7 @@ class MainGameScene:
                 if event.ui_element == self.appendButton:
                     print("clicked on append button")
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
+                self.mainGameUI.processEvents(event)
             self.manager.process_events(event)
             self.manager.update(self.timeDelta)
     def update(self):

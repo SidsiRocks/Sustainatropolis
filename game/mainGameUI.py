@@ -19,6 +19,9 @@ from .turnBarUI import TurnBarUI
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
 
+def testEventListener(name):
+    print("clicked on project with name:",name)
+
 class MainGameUI:
     def __init__(self,manager,themePath):
         #have to create manager correctly
@@ -28,7 +31,9 @@ class MainGameUI:
         self.turnBar = TurnBarUI(manager)
         self.notificationBox = NotificationsBoxUI(manager)
         self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow)
-
+        self.projectUIWrapper.setExtEventListener(testEventListener)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
     
+    def processEvents(self,event):
+        self.projectUIWrapper.processEvent(event)

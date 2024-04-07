@@ -13,9 +13,22 @@ from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 
 from .statisticsUI import StatisticsWindow
 
+def createObjectId(txt):
+    return "#"+txt
+def getTxtFromObjectId(objId):
+    return objId[1:]
+def createClassId(txt):
+    return "@"+txt
+def getTxtFromClassId(classId):
+    return classId[1:]
 def createId(txt):
-    return ObjectID(class_id="@"+txt,object_id="#"+txt)
+    return ObjectID(class_id=createClassId(txt),object_id=createObjectId(txt))
 
+def extractMainObjectId(objId):
+    for i in range(len(objId)-1,-1,-1):
+        if objId[i] == '.':
+            return objId[i+1:]
+    return objId
 class ProjectsUI:
     def __init__(self,manager,statsWindow):
         self.projectLst = ["Dam","Pipes","Sewage Treatment",
@@ -24,6 +37,7 @@ class ProjectsUI:
                            "Precipitator","Chimney","City"]
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
+        self.externalEventListener = None
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
         imgBtnWidth = 150
         imgBtnPadX = 10
@@ -78,5 +92,12 @@ class ProjectsUI:
         #set scrollable window size here will be different
         #doesnt seem to be working either
         projectListScrollable.set_scrollable_area_dimensions((x,projectListScrollableRect.height))
-        print("x is:",x)
         return projectListWindow
+    def setExtEventListener(self,extEventLst):
+        self.externalEventListener = extEventLst
+    def processEvent(self,event):
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
+            if buttonName in self.projectNameButtonDct:
+                if self.externalEventListener:
+                    self.externalEventListener(buttonName)
