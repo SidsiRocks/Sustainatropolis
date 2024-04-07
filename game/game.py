@@ -90,6 +90,8 @@ class MainGameScene:
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouseX,mouseY = pg.mouse.get_pos()
                 pos = self.findClickCoord(mouseX,mouseY)
+                (posX,posY) = pos
+                self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                 print('clicked on isocord:',pos)
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == self.clearButton:

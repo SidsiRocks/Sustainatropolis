@@ -93,3 +93,11 @@ class GameData:
         mapTreeRockImg = ldImage("res/graphics/mapTreeRock.png")
         self.imgIndxMap["mapTreeRock"] = 6
         self.imgArr.append(mapTreeRockImg)
+
+        buildingOneImg = ldImage("res/graphics/building01.png")
+        self.imgIndxMap["building01"] = 7
+        self.imgArr.append(buildingOneImg)
+
+        buildingTwoImg = ldImage("res/graphics/building01.png")
+        self.imgIndxMap["building02"] = 8
+        self.imgArr.append(buildingTwoImg)
