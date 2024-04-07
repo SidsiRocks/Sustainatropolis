@@ -21,3 +21,8 @@ def isoCoordToRenderPos(posXY,centreOffset):
     renderX = (x+y)*TILE_SIZE
     renderY = ((x-y)*TILE_SIZE)/2
     return (renderX+centreOffset[0],renderY+centreOffset[1])
+
+def isoRenderPosToImgRenderPos(posXY,imgWdth,imgHt):
+    newX = posXY[0] + TILE_SIZE - imgWdth/2
+    newY = posXY[1] + TILE_SIZE - imgHt
+    return (newX,newY)

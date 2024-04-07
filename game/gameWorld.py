@@ -1,19 +1,23 @@
 from .util import ldImage
+#should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData"]
     def __init__(self,noBlockX,noBlockY,width,height,*args):
-        if len(args) == 1 : 
-            self.noBlockX = ldImage(args[0]).get_width()
-            self.noBlockY = ldImage(args[0]).get_height()
-        else : 
-            self.noBlockX = noBlockX
-            self.noBlockY = noBlockY
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
         self.imgArr = []
         self.loadImages()
-        self.groundData = self.createGroundData()    
+        if len(args) == 2 : 
+            self.noBlockX = ldImage(args[0]).get_width()
+            self.noBlockY = ldImage(args[0]).get_height()
+            self.groundData = self.createGroundData()    
+            self.rockTreeData = self.createRockTreeData()
+        else: 
+            self.noBlockX = noBlockX
+            self.noBlockY = noBlockY
+            self.groundData = self.createGroundDataDebug()
+    #didnt create separate function to only generate grass
     def createGroundData(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
         
@@ -28,15 +32,34 @@ class GameData:
                 elif pixel == (0,255,255,255) : 
                     curDict = {"tile":self.imgIndxMap["water"]}
                     groundData[x][y] = curDict
-                elif pixel == (192,192,192,255) :
-                    curDict = {"tile":self.imgIndxMap["rock"]}
-                    groundData[x][y] = curDict
-                else : 
-                    curDict = {"tile":self.imgIndxMap["tree"]}
-                    groundData[x][y] = curDict
 
                 # curDict = {"tile":self.imgIndxMap["block"]}
                 # groundData[x][y] = curDict
+        return groundData
+    def createRockTreeData(self):
+        rockTreeData = [[None for y in range(self.noBlockY)] for x in range(self.noBlockX)]
+        for x in range(self.noBlockX):
+            for y in range(self.noBlockY):
+                #not precalculating positions for now
+                pixel = self.imgArr[self.imgIndxMap["mapTreeRock"]].get_at((x,y))
+                #print(pixel)
+                if pixel == (93,61,0,255):
+                    curDict = {"tile":self.imgIndxMap["rock"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (0,93,6,255) : 
+                    curDict = {"tile":self.imgIndxMap["tree"]}
+                    rockTreeData[x][y] = curDict
+                else:
+                    #ignoring if someother coulour so include water and grass for refrence in the image
+                    pass
+                # curDict = {"tile":self.imgIndxMap["block"]}
+                # groundData[x][y] = curDict
+        return rockTreeData
+    def createGroundDataDebug(self):
+        groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
+        for x in range(self.noBlockX):
+            for y in range(self.noBlockY):
+                curDict = {"tile":self.imgIndxMap["block"]}
         return groundData
     def loadImages(self):
         blockImg = ldImage("res/graphics/block.png")
@@ -62,3 +85,7 @@ class GameData:
         treeImg = ldImage("res/graphics/tree.png")
         self.imgIndxMap["tree"] = 5
         self.imgArr.append(treeImg)
+
+        mapTreeRockImg = ldImage("res/graphics/mapTreeRock.png")
+        self.imgIndxMap["mapTreeRock"] = 6
+        self.imgArr.append(mapTreeRockImg)

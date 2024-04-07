@@ -1,6 +1,6 @@
 import pygame as pg
 from .gameWorld import GameData
-from .util import drawDebugText,isoCoordToRenderPos
+from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos
 from .settings import TILE_SIZE
 import sys
 import pygame_gui 
@@ -33,7 +33,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.world = GameData(50,50,self.width,self.height,"res/graphics/mapWaterGrass.png")
+        self.world = GameData(50,50,self.width,self.height,"res/graphics/mapWaterGrass.png","res/graphics/mapTreeRock.png")
         self.playing = True
 
         self.cameraPos = (0,0)
@@ -113,6 +113,21 @@ class MainGameScene:
         imgOffsetX = (self.width - self.groundBuffSize[0])/2
         imgOffsetY = (self.height - self.groundBuffSize[1])/2
         self.screen.blit(self.groundSurface,(imgOffsetX-self.cameraPos[0],imgOffsetY-self.cameraPos[1]))
+    def drawTreeRock(self):
+        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        imgOffsetX = (self.width - self.groundBuffSize[0])/2
+        imgOffsetY = (self.height - self.groundBuffSize[1])/2
+        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.cameraPos[0],centerOffset[1]+imgOffsetY-self.cameraPos[1])
+        rockTreeData = self.world.rockTreeData
+        groundImgArr = self.world.imgArr
+        for x in range(self.world.noBlockX):
+            for y in range(self.world.noBlockY-1,-1,-1):
+                curDict =  rockTreeData[x][y]
+                if curDict:
+                    renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
+                    curImg = groundImgArr[curDict["tile"]]
+                    imgRenderPos = isoRenderPosToImgRenderPos(renderPos,curImg.get_width(),curImg.get_height())
+                    self.screen.blit(curImg,imgRenderPos)
     def calGroundSurfaceSize(self):
         width  = (self.world.noBlockX + self.world.noBlockY)*TILE_SIZE
         height = ((self.world.noBlockX + self.world.noBlockY)*TILE_SIZE)//2 + 4*TILE_SIZE
@@ -126,6 +141,7 @@ class MainGameScene:
         fps = round(self.clock.get_fps())
         #print("fps is:",fps)
         self.drawGround()
+        self.drawTreeRock()
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
         self.manager.draw_ui(self.screen)
         pg.display.flip()
