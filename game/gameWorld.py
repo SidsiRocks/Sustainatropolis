@@ -21,7 +21,7 @@ class GameData:
             for y in range(self.noBlockY):
                 #not precalculating positions for now
                 pixel = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_at((x,y))
-                print(pixel)
+                #print(pixel)
                 if pixel == (0,255,0,255):
                     curDict = {"tile":self.imgIndxMap["block"]}
                     groundData[x][y] = curDict

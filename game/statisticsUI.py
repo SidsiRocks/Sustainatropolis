@@ -6,10 +6,11 @@ import pygame_gui
 from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
 from pygame_gui.elements.ui_window import UIWindow
-from pygame_gui.elements.ui_progress_bar import UIProgressBar
 from pygame_gui.elements.ui_label import UILabel
 from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
+
+from .customUIprogress import CustomUIprogressBar
 
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
@@ -29,10 +30,12 @@ class StatisticsWindow:
         y += txtLblHt
         y += padTop
         prgrssRect = Rect(padX,y,statsWinWidth-5*padX,prgrssHt)
-        prgrssBar = UIProgressBar(
+        prgrssBar = CustomUIprogressBar(
             relative_rect=prgrssRect,manager=manager,
             container=self.statsWindow,
-            object_id=createId(lblTxt)
+            object_id=createId(lblTxt),
+            current_progress=10,
+            maximum_progess=250
         )
         y += prgrssHt
         return (y,txtLbl,prgrssBar)
@@ -61,3 +64,4 @@ class StatisticsWindow:
         object_id=createId("statWindow"),
         resizable=False,draggable=False)
         return statsWindow
+    
