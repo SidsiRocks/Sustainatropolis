@@ -16,7 +16,8 @@ class GameData:
         else: 
             self.noBlockX = noBlockX
             self.noBlockY = noBlockY
-            self.groundData = self.createGroundDataDebug()
+            self.groundData   = self.createGroundDataDebug()
+            self.rockTreeData = self.createRockTreeDebug()
     #didnt create separate function to only generate grass
     def createGroundData(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
@@ -61,6 +62,9 @@ class GameData:
             for y in range(self.noBlockY):
                 curDict = {"tile":self.imgIndxMap["block"]}
         return groundData
+    def createRockTreeDebug(self):
+        rockTreeData = [[None for y in range(self.noBlockY)] for x in range(self.noBlockX)]
+        return rockTreeData
     def loadImages(self):
         blockImg = ldImage("res/graphics/block.png")
         self.imgIndxMap["block"] = 0
