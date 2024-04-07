@@ -13,6 +13,7 @@ from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 
 from .statisticsUI import StatisticsWindow
 
+#modifing ovject id to be common so styling can be done together
 def createObjectId(txt):
     return "#"+txt
 def getTxtFromObjectId(objId):
@@ -78,10 +79,10 @@ class ProjectsUI:
             object_id=createId("projectsList"),
             resizable=False,draggable=False)
 
-        compensateScrollBarHeight = 60
+        compensateScrollBarHeight = 35
         projectListScrollableRect = Rect(0,0,projectListWidth,projectListHeight - compensateScrollBarHeight)    
         projectListScrollable = UIScrollingContainer(relative_rect=projectListScrollableRect,manager=manager,
-            container=projectListWindow)
+            container=projectListWindow,object_id=createId("projectScrollingContainer"))
 
         x = 0
         for name in self.projectLst:
