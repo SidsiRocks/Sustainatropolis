@@ -34,11 +34,18 @@ class StatisticsWindow:
             relative_rect=prgrssRect,manager=manager,
             container=self.statsWindow,
             object_id=createId(lblTxt),
-            current_progress=10,
+            current_progress=100,
             maximum_progess=250
         )
+        #have to explicitly call to set progress
+        prgrssBar.set_current_progress(100)
         y += prgrssHt
         return (y,txtLbl,prgrssBar)
+
+    def setStats(self,name,curProgress,maximum=None):
+        self.statProgressBarDict[name].set_current_progress(curProgress)
+        if maximum:
+            self.statProgressBarDict[name].maximum_progress = maximum
     def populateStatsWindow(self,manager):    
         y = 0
         padX = 10

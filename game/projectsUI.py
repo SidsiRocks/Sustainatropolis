@@ -101,3 +101,5 @@ class ProjectsUI:
             if buttonName in self.projectNameButtonDct:
                 if self.externalEventListener:
                     self.externalEventListener(buttonName)
+    
+    
