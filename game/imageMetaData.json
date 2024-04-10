@@ -3,37 +3,46 @@
         "path":"res/graphics/block.png"
         ,"colour":"rgba(0,255,0,255)"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "rock":{
         "path":"res/graphics/rock.png"
         ,"colour":"rgba(93,61,0,255)"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "tree":{
         "path":"res/graphics/tree.png"
         ,"colour":"rgb(0,93,6)"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "mapWaterGrass":{
         "path":"res/graphics/mapWaterGrass.png"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
+        ,"comment":"dummy size not actually used"
     },
     "water":{
         "path":"res/graphics/waterfallEndE.png"
         ,"colour":"rgba(0,255,255,255)"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "mapTreeRock":{
         "path":"res/graphics/mapTreeRockDebug.png"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "building01":{
         "path":"res/graphics/building01.png"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "building02":{
         "path":"res/graphics/building02.png"
         ,"offset":"(0,0)"
+        ,"size":"(1,1)"
     },
     "waterTreatment":{
         "path":"res/graphics/WaterTreatmentContainersRemovedResized.png"

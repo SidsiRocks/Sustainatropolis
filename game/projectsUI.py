@@ -32,15 +32,15 @@ def extractMainObjectId(objId):
     return objId
 class ProjectsUI:
     def __init__(self,manager,statsWindow):
-        self.projectLst = ["Dam","Pipes","Sewage Treatment",
-                           "PMI monitor","Weir","Reservoir",
-                           "Small Reservoir","Borewell","Pipe",
-                           "Precipitator","Chimney","City"]
+        self.projectLst = ["waterTreatment","sewagePlant","waterPump",
+                           "purificationPlant","industrialPlant","solarPower",
+                           "powerPlant","windMill"]
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.externalEventListener = None
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
         imgBtnWidth = 150
+        #imgBtnHt for these values is 175
         imgBtnPadX = 10
         imgBtnPady = 10
 
@@ -48,6 +48,7 @@ class ProjectsUI:
 
         projLstHeight = projLstWinScroll.rect.height
         imgBtnHt = projLstHeight - 4 * imgBtnPady
+        print("image button height is:",imgBtnHt)
         projLstRect = Rect(x,imgBtnPadX,imgBtnWidth,imgBtnHt)
 
         curBut = UIButton(relative_rect=

@@ -2,7 +2,7 @@ from .util import ldImage,parseColour,parseTuple
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr"]
     def __init__(self,noBlockX,noBlockY,width,height,*args):
         self.width = width 
         self.height = height
@@ -10,6 +10,7 @@ class GameData:
         self.tileToColor = {}
         self.imgArr = []
         self.offsetArr = []
+        self.sizeArr = []
         #self.loadImages()
         self.loadImagesFromJSON()
         if len(args) == 2 : 
@@ -110,94 +111,7 @@ class GameData:
             self.imgArr.append(curImg)
             curCoord = parseTuple(data[key]["offset"])
             self.offsetArr.append(curCoord)
+            curSize = parseTuple(data[key]["size"])
+            self.sizeArr.append(curSize)
             if "colour" in data[key]:
                 self.tileToColor[key] = parseColour(data[key]["colour"])
-    def loadImages(self):
-        blockImg = ldImage("res/graphics/block.png")
-        self.imgIndxMap["block"] = len(self.imgArr)
-        self.imgArr.append(blockImg)
-        self.tileToColor["block"] = (0,255,0,255)
-        
-        rockImg  = ldImage("res/graphics/rock.png")
-        self.imgIndxMap["rock"] = len(self.imgArr)
-        self.imgArr.append(rockImg)
-        self.tileToColor["rock"] = (93,61,0,255)
-        #93 61 0
-
-        treeImg  = ldImage("res/graphics/tree.png")
-        self.imgIndxMap["tree"] = len(self.imgArr)
-        self.imgArr.append(treeImg)
-        self.tileToColor["tree"] = (0,93,6,255)
-        #0 93 6
-
-        mapWaterGrassImg = ldImage("res/graphics/mapWaterGrass.png")
-        self.imgIndxMap["mapWaterGrass"] = len(self.imgArr)
-        self.imgArr.append(mapWaterGrassImg)
-
-        waterImg = ldImage("res/graphics/waterfallEndE.png")
-        self.imgIndxMap["water"] = len(self.imgArr)
-        self.imgArr.append(waterImg)
-        self.tileToColor["water"] = (0,255,255,255)
-
-        mapTreeRockImg = ldImage("res/graphics/mapTreeRockDebug.png")
-        self.imgIndxMap["mapTreeRock"] = len(self.imgArr)
-        self.imgArr.append(mapTreeRockImg)
-
-        buildingOneImg = ldImage("res/graphics/building01.png")
-        self.imgIndxMap["building01"] = len(self.imgArr)
-        self.imgArr.append(buildingOneImg)
-
-        buildingTwoImg = ldImage("res/graphics/building02.png")
-        self.imgIndxMap["building02"] = len(self.imgArr)
-        self.imgArr.append(buildingTwoImg)
-
-        waterPlantImg = ldImage("res/graphics/waterTreatment3by3preserveAspect.png")
-        self.imgIndxMap["waterTreatment"] = len(self.imgArr)
-        self.imgArr.append(waterPlantImg)
-        self.tileToColor["waterTreatment"] = (23,20,157)
-        #23 20 157
-
-        sewagePlantImg = ldImage("res/graphics/sewageTreatmentPlantResize.png")
-        self.imgIndxMap["sewagePlant"] = len(self.imgArr)
-        self.imgArr.append(sewagePlantImg)
-        self.tileToColor["sewagePlant"] = (23,207,40)
-        #23 207 40
-
-        waterPumpImg = ldImage("res/graphics/pumpingPlantResize.png")
-        self.imgIndxMap["waterPump"] = len(self.imgArr)
-        self.imgArr.append(waterPumpImg)
-        self.tileToColor["waterPump"] = (158,37,21)
-        #158 37 21
-
-
-        purificationPlant = ldImage("res/graphics/PurificationPlantResize.png")
-        self.imgIndxMap["purificationPlant"] = len(self.imgArr)
-        self.imgArr.append(purificationPlant)
-        self.tileToColor["purificationPlant"] = (169,16,152)
-        #169 16 152
-
-        #may want to resize the pumping station
-
-        industrialPlant = ldImage("res/graphics/IndustrialPlantResize.png")
-        self.imgIndxMap["industrialPlant"] = len(self.imgArr)
-        self.imgArr.append(industrialPlant)
-        self.tileToColor["industrialPlant"] = (56,57,56)
-        #56 57 56
-
-        solarPowerPlant = ldImage("res/graphics/SolarPowerPlantResize.png")
-        self.imgIndxMap["solarPowerPlant"] = len(self.imgArr)
-        self.imgArr.append(solarPowerPlant)
-        self.tileToColor["solarPowerPlant"] = (251,254,105)
-        #251 254 105
-
-        powerPlant = ldImage("res/graphics/powerPlantResize.png")
-        self.imgIndxMap["powerPlant"] = len(self.imgArr)
-        self.imgArr.append(powerPlant)
-        self.tileToColor["powerPlant"] = (55,209,226)
-        #55 209 226
-
-        windMill = ldImage("res/graphics/windMillIndivResize.png")
-        self.imgIndxMap["windMill"] = len(self.imgArr)
-        self.imgArr.append(windMill)
-        self.tileToColor["windMill"] = (243,243,243)
-        #243 243 243

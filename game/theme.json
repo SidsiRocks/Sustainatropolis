@@ -73,6 +73,32 @@
             "border_width":"5"
         }
     },
+    "images":{"normal_image":{}}
+    ,
+    "#waterTreatment":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/WaterTreatmentContainersRemovedResized.png"}}
+    },
+    "#sewagePlant":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/sewageTreatmentPlantResize.png"}}
+    },
+    "#waterPump":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/pumpingPlantRemoveBackgroundResized.png"}}
+    },
+    "#purificationPlant":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/PurificationPlantResize.png"}}
+    },
+    "#industrialPlant":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/IndustrialPlantResize.png"}}
+    },
+    "#solarPower":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/SolarPowerPlantResize.png"}}
+    },
+    "#powerPlant":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/powerPlantResize.png"}}
+    },
+    "#windMill":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/windMillIndivResize.png"}}
+    },
     "@statWindow":{
         "misc":{
             "shape":"rounded_rectangle",
