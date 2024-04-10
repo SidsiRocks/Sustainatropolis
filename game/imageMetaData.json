@@ -2,61 +2,86 @@
     "block":{
         "path":"res/graphics/block.png"
         ,"colour":"rgba(0,255,0,255)"
+        ,"offset":"(0,0)"
     },
     "rock":{
         "path":"res/graphics/rock.png"
         ,"colour":"rgba(93,61,0,255)"
+        ,"offset":"(0,0)"
     },
     "tree":{
         "path":"res/graphics/tree.png"
         ,"colour":"rgb(0,93,6)"
+        ,"offset":"(0,0)"
     },
     "mapWaterGrass":{
         "path":"res/graphics/mapWaterGrass.png"
+        ,"offset":"(0,0)"
     },
     "water":{
         "path":"res/graphics/waterfallEndE.png"
         ,"colour":"rgba(0,255,255,255)"
+        ,"offset":"(0,0)"
     },
     "mapTreeRock":{
-        "path":"res/graphics/mapTreeRock.png"
+        "path":"res/graphics/mapTreeRockDebug.png"
+        ,"offset":"(0,0)"
     },
     "building01":{
         "path":"res/graphics/building01.png"
+        ,"offset":"(0,0)"
     },
     "building02":{
         "path":"res/graphics/building02.png"
+        ,"offset":"(0,0)"
     },
     "waterTreatment":{
-        "path":"res/graphics/waterTreatment3by3preserveAspect.png"
+        "path":"res/graphics/WaterTreatmentContainersRemovedResized.png"
         ,"colour":"rgb(23,20,157)"
+        ,"offset":"(70,-40)"
+        ,"size":"(3,5)" 
+        ,"comment":"confirm not reversed"
     },
     "sewagePlant":{
         "path":"res/graphics/sewageTreatmentPlantResize.png"
         ,"colour":"rgb(23,207,40)"
+        ,"offset":"(0,-10)"
+        ,"size":"(4,4)"
     },
     "waterPump":{
-        "path":"res/graphics/pumpingPlantResize.png"
+        "path":"res/graphics/pumpingPlantRemoveBackgroundResized.png"
         ,"colour":"rgb(158,37,21)"
+        ,"offset":"(-50,-70)"
+        ,"size":"(3,3)"
     },
     "purificationPlant":{
         "path":"res/graphics/PurificationPlantResize.png"
         ,"colour":"rgb(169,16,152)"
+        ,"offset":"(-18,-20)"
+        ,"size":"(4,4)"
     },
     "industrialPlant":{
         "path":"res/graphics/IndustrialPlantResize.png"
         ,"colour":"rgb(56,57,56)"
+        ,"offset":"(-20,10)"
+        ,"size":"(4,3)"
     },
     "solarPowerPlant":{
         "path":"res/graphics/SolarPowerPlantResize.png"
         ,"colour":"rgb(251,254,105)"
+        ,"offset":"(-40,0)"
+        ,"size":"(4,3)"
     },
     "powerPlant":{
         "path":"res/graphics/powerPlantResize.png"
         ,"colour":"rgb(55,209,226)"
+        ,"offset":"(-40,-15)"
+        ,"size":"(4,3)"
     },
     "windMill":{
         "path":"res/graphics/windMillIndivResize.png"
         ,"colour":"rgb(243,243,243)"
+        ,"offset":"(10,-15)"
+        ,"size":"(1,1)"
     }
 }

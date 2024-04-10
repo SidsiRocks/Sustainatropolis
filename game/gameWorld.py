@@ -1,14 +1,15 @@
-from .util import ldImage,parseColour
+from .util import ldImage,parseColour,parseTuple
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr"]
     def __init__(self,noBlockX,noBlockY,width,height,*args):
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
         self.tileToColor = {}
         self.imgArr = []
+        self.offsetArr = []
         #self.loadImages()
         self.loadImagesFromJSON()
         if len(args) == 2 : 
@@ -93,6 +94,13 @@ class GameData:
     def createRockTreeDebug(self):
         rockTreeData = [[None for y in range(self.noBlockY)] for x in range(self.noBlockX)]
         return rockTreeData
+    def reloadOffsets(self):
+        f = open("game/imageMetaData.json")
+        data = json.load(f)
+        for key in data:
+            curIndx = self.imgIndxMap[key]
+            curCoord = parseTuple(data[key]["offset"])
+            self.offsetArr[curIndx] = curCoord
     def loadImagesFromJSON(self):
         f = open("game/imageMetaData.json")
         data = json.load(f)
@@ -100,6 +108,8 @@ class GameData:
             curImg = ldImage(data[key]["path"])
             self.imgIndxMap[key] = len(self.imgArr)
             self.imgArr.append(curImg)
+            curCoord = parseTuple(data[key]["offset"])
+            self.offsetArr.append(curCoord)
             if "colour" in data[key]:
                 self.tileToColor[key] = parseColour(data[key]["colour"])
     def loadImages(self):
@@ -129,7 +139,7 @@ class GameData:
         self.imgArr.append(waterImg)
         self.tileToColor["water"] = (0,255,255,255)
 
-        mapTreeRockImg = ldImage("res/graphics/mapTreeRock.png")
+        mapTreeRockImg = ldImage("res/graphics/mapTreeRockDebug.png")
         self.imgIndxMap["mapTreeRock"] = len(self.imgArr)
         self.imgArr.append(mapTreeRockImg)
 

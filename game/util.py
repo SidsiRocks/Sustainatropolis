@@ -59,3 +59,10 @@ def parseColour(txt:str):
         txt = txt[5:-1]
         colorArr = [int(i) for i in txt.split(",")]
         return (colorArr[0],colorArr[1],colorArr[2],colorArr[3])
+
+def parseTuple(txt:str):
+    txt = removeSpaces(txt)
+    if txt.startswith("(") and txt.endswith(")"):
+        txt = txt[1:-1]
+        coordArr = [int(i) for i in txt.split(",")]
+        return (coordArr[0],coordArr[1])

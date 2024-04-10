@@ -7,7 +7,7 @@ import pygame_gui
 from game.mainGameUI import MainGameUI
 from pygame import Rect
 from pygame_gui.elements.ui_button import UIButton
-
+"""
 def cameraMovement(width,height):
     mouse_pos = pg.mouse.get_pos()
     fractionY = 0.03 
@@ -26,6 +26,20 @@ def cameraMovement(width,height):
         dy = -speed
     
     return (dx,dy)
+"""
+def cameraMovement(width,height):
+    return (0,0)
+def cameraMovementKeyBoard(keyPress):
+    speed = 25
+    print("key press is:",keyPress)
+    if keyPress == pg.K_w:
+        return (0,-speed)
+    elif keyPress == pg.K_s:
+        return (0,speed)
+    elif keyPress == pg.K_d:
+        return (speed,0)
+    elif keyPress == pg.K_a:
+        return (-speed,0)
 class MainGameScene:
     __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset"]
     def __init__(self,screen,clock):
@@ -33,7 +47,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.world = GameData(50,50,self.width,self.height,"res/graphics/mapWaterGrass.png","res/graphics/mapTreeRock.png")
+        self.world = GameData(50,50,self.width,self.height,"res/graphics/mapWaterGrass.png","res/graphics/mapTreeRockDebug.png")
         self.playing = True
 
         self.cameraPos = (0,0)
@@ -81,6 +95,19 @@ class MainGameScene:
         sys.exit()
     def events(self):
         self.timeDelta = self.clock.tick(60)/1000.0
+        keys = pg.key.get_pressed()
+        if keys[pg.K_w]:
+            x,y = cameraMovementKeyBoard(pg.K_w)
+            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+        if keys[pg.K_a]:
+            x,y = cameraMovementKeyBoard(pg.K_a)
+            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+        if keys[pg.K_s]:
+            x,y = cameraMovementKeyBoard(pg.K_s)
+            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+        if keys[pg.K_d]:
+            x,y = cameraMovementKeyBoard(pg.K_d)
+            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quitScene()
@@ -124,19 +151,24 @@ class MainGameScene:
         self.imgCenterOffset =(imgOffsetX,imgOffsetY)
         self.screen.blit(self.groundSurface,(imgOffsetX-self.cameraPos[0],imgOffsetY-self.cameraPos[1]))
     def drawTreeRock(self):
+        self.world.reloadOffsets()
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
         imgOffsetX = (self.width - self.groundBuffSize[0])/2
         imgOffsetY = (self.height - self.groundBuffSize[1])/2
         totalCenterOffset = (centerOffset[0]+imgOffsetX-self.cameraPos[0],centerOffset[1]+imgOffsetY-self.cameraPos[1])
         rockTreeData = self.world.rockTreeData
         groundImgArr = self.world.imgArr
+        offsetArr = self.world.offsetArr
         for x in range(self.world.noBlockX):
             for y in range(self.world.noBlockY-1,-1,-1):
                 curDict =  rockTreeData[x][y]
                 if curDict:
                     renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
-                    curImg = groundImgArr[curDict["tile"]]
+                    tileName = curDict["tile"]
+                    curImg = groundImgArr[tileName]
+                    curOff = offsetArr[tileName]
                     imgRenderPos = isoRenderPosToImgRenderPos(renderPos,curImg.get_width(),curImg.get_height())
+                    imgRenderPos = (imgRenderPos[0]+curOff[0],imgRenderPos[1]+curOff[1])
                     self.screen.blit(curImg,imgRenderPos)
     def calGroundSurfaceSize(self):
         width  = (self.world.noBlockX + self.world.noBlockY)*TILE_SIZE
