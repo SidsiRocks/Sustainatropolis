@@ -90,7 +90,7 @@
     "#industrialPlant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/IndustrialPlantResize.png"}}
     },
-    "#solarPower":{
+    "#solarPowerPlant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/SolarPowerPlantResize.png"}}
     },
     "#powerPlant":{

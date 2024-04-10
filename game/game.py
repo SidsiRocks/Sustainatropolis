@@ -31,7 +31,6 @@ def cameraMovement(width,height):
     return (0,0)
 def cameraMovementKeyBoard(keyPress):
     speed = 25
-    print("key press is:",keyPress)
     if keyPress == pg.K_w:
         return (0,-speed)
     elif keyPress == pg.K_s:
@@ -59,7 +58,7 @@ class MainGameScene:
 
         self.manager = pygame_gui.UIManager((self.width,self.height))
         self.loadFonts()
-        self.mainGameUI = MainGameUI(self.manager,"./game/theme.json")
+        self.mainGameUI = MainGameUI(self.manager,"./game/theme.json",self.world)
 
         self.clearButton = UIButton(Rect(500,500,100,50),"Clear HTML",self.manager)
         self.appendButton = UIButton(Rect(600,600,100,50),"Append HTML",self.manager)
@@ -118,8 +117,10 @@ class MainGameScene:
                 mouseX,mouseY = pg.mouse.get_pos()
                 pos = self.findClickCoord(mouseX,mouseY)
                 (posX,posY) = pos
-                self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
-                print('clicked on isocord:',pos)
+                #self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
+                self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
+                if posX < self.world.noBlockX and posX >= 0 and posY < self.world.noBlockY and posY >= 0:
+                    pass #is a valid coordinate
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == self.clearButton:
                     print("clicked on clear button")
@@ -162,7 +163,7 @@ class MainGameScene:
         for x in range(self.world.noBlockX):
             for y in range(self.world.noBlockY-1,-1,-1):
                 curDict =  rockTreeData[x][y]
-                if curDict:
+                if type(curDict) == dict:
                     renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
                     tileName = curDict["tile"]
                     curImg = groundImgArr[tileName]

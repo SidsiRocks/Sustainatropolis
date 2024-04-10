@@ -33,11 +33,12 @@ def extractMainObjectId(objId):
 class ProjectsUI:
     def __init__(self,manager,statsWindow):
         self.projectLst = ["waterTreatment","sewagePlant","waterPump",
-                           "purificationPlant","industrialPlant","solarPower",
+                           "purificationPlant","industrialPlant","solarPowerPlant",
                            "powerPlant","windMill"]
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
-        self.externalEventListener = None
+        self.currentProject = None
+        self.world = None
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
         imgBtnWidth = 150
         #imgBtnHt for these values is 175
@@ -95,13 +96,16 @@ class ProjectsUI:
         #doesnt seem to be working either
         projectListScrollable.set_scrollable_area_dimensions((x,projectListScrollableRect.height))
         return projectListWindow
-    def setExtEventListener(self,extEventLst):
-        self.externalEventListener = extEventLst
+    def clickedOnWorld(self,x,y):
+        if self.currentProject != None:
+            self.world.placeObject(x,y,self.currentProject)
+            self.currentProject = None
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
             if buttonName in self.projectNameButtonDct:
-                if self.externalEventListener:
-                    self.externalEventListener(buttonName)
-    
-    
+                self.handleProjectButtonClick(buttonName)
+    def handleProjectButtonClick(self,buttonName):
+        self.currentProject = buttonName
+    def setWorld(self,world):
+        self.world = world

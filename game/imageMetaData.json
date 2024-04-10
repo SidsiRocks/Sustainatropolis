@@ -60,8 +60,9 @@
     "waterPump":{
         "path":"res/graphics/pumpingPlantRemoveBackgroundResized.png"
         ,"colour":"rgb(158,37,21)"
-        ,"offset":"(-50,-70)"
-        ,"size":"(3,3)"
+        ,"offset":"(30,-30)"
+        ,"size":"(3,4)"
+        ,"comment":"Extended pipe size in y direction from 3 to 4 to prevent weird rendering glitches"
     },
     "purificationPlant":{
         "path":"res/graphics/PurificationPlantResize.png"
@@ -92,5 +93,6 @@
         ,"colour":"rgb(243,243,243)"
         ,"offset":"(10,-15)"
         ,"size":"(1,1)"
+        ,"comment":"may want to increase size in x direction here too to prevent weird rendering errors"
     }
 }

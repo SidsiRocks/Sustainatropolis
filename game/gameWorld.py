@@ -1,4 +1,5 @@
 from .util import ldImage,parseColour,parseTuple
+from .InvalidPlacementException import InvalidPlacementException
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
@@ -43,6 +44,21 @@ class GameData:
                 # curDict = {"tile":self.imgIndxMap["block"]}
                 # groundData[x][y] = curDict
         return groundData
+    def blockNeighbourSlots(self,x,y,size,rockTreeData,tileName):
+        xSize,ySize = size 
+        if(x < (xSize-1) or y+ySize > self.noBlockY):
+            raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects at {x},{y} {tileName}")
+        for i in range(xSize):
+            for j in range(ySize):
+                if rockTreeData[x-i][y+j] == None:
+                    rockTreeData[x-i][y+j] = (i,-j)
+                else:
+                    raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects {x},{y} {tileName}")
+        rockTreeData[x][y] = {"tile":self.imgIndxMap[tileName]}
+    def placeObject(self,x,y,tileName):
+        curSize = self.sizeArr[self.imgIndxMap[tileName]]
+        self.blockNeighbourSlots(x,y,curSize,self.rockTreeData,tileName)
+        return True
     def createRockTreeData(self):
         rockTreeData = [[None for y in range(self.noBlockY)] for x in range(self.noBlockX)]
         for x in range(self.noBlockX):
@@ -51,35 +67,35 @@ class GameData:
                 pixel = self.imgArr[self.imgIndxMap["mapTreeRock"]].get_at((y,x))
                 #print(pixel)
                 if pixel == self.tileToColor["rock"]:
-                    curDict = {"tile":self.imgIndxMap["rock"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["rock"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"rock")
                 elif pixel == self.tileToColor["tree"]: 
-                    curDict = {"tile":self.imgIndxMap["tree"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["tree"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"tree")
                 elif pixel == self.tileToColor["waterTreatment"]:
-                    curDict = {"tile":self.imgIndxMap["waterTreatment"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["waterTreatment"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"waterTreatment")
                 elif pixel == self.tileToColor["sewagePlant"]:
-                    curDict = {"tile":self.imgIndxMap["sewagePlant"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["sewagePlant"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"sewagePlant")
                 elif pixel == self.tileToColor["waterPump"]:
-                    curDict = {"tile":self.imgIndxMap["waterPump"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["waterPump"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"waterPump")
                 elif pixel == self.tileToColor["purificationPlant"]:
-                    curDict = {"tile":self.imgIndxMap["purificationPlant"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["purificationPlant"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"purificationPlant")
                 elif pixel == self.tileToColor["industrialPlant"]:
-                    curDict = {"tile":self.imgIndxMap["industrialPlant"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["industrialPlant"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"industrialPlant")
                 elif pixel == self.tileToColor["solarPowerPlant"]:
-                    curDict = {"tile":self.imgIndxMap["solarPowerPlant"]}
-                    rockTreeData[x][y] = curDict                    
+                    curSize = self.sizeArr[self.imgIndxMap["solarPowerPlant"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"solarPowerPlant")
                 elif pixel == self.tileToColor["powerPlant"]:
-                    curDict = {"tile":self.imgIndxMap["powerPlant"]}
-                    rockTreeData[x][y] = curDict                    
+                    curSize = self.sizeArr[self.imgIndxMap["powerPlant"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"powerPlant")
                 elif pixel == self.tileToColor["windMill"]:
-                    curDict = {"tile":self.imgIndxMap["windMill"]}
-                    rockTreeData[x][y] = curDict
+                    curSize = self.sizeArr[self.imgIndxMap["windMill"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"windMill")
                 else:
                     #ignoring if someother coulour so include water and grass for refrence in the image
                     pass

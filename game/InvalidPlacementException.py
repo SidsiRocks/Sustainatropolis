@@ -1,0 +1,2 @@
+class InvalidPlacementException(Exception):
+    pass
