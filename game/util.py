@@ -41,3 +41,21 @@ def changeOfBasis(posStndrd,basisv1,basisv2):
     X = crossProduct(posStndrd,basisv2)/basisCrossProd
     Y = crossProduct(posStndrd,basisv1)/basisCrossProd
     return (X,Y)
+
+def removeSpaces(txt:str):
+    result = ""
+    for c in txt:
+        if c != ' ':
+            result = result + c
+    return result
+
+def parseColour(txt:str):
+    txt = removeSpaces(txt)
+    if txt.startswith("rgb(") and txt.endswith(")"):
+        txt = txt[4:-1]
+        colorArr = [int(i) for i in txt.split(",")]
+        return (colorArr[0],colorArr[1],colorArr[2])
+    elif txt.startswith("rgba(") and txt.endswith(")"): 
+        txt = txt[5:-1]
+        colorArr = [int(i) for i in txt.split(",")]
+        return (colorArr[0],colorArr[1],colorArr[2],colorArr[3])
