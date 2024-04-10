@@ -9,8 +9,8 @@ class GameData:
         self.imgArr = []
         self.loadImages()
         if len(args) == 2 : 
-            self.noBlockX = ldImage(args[0]).get_width()
-            self.noBlockY = ldImage(args[0]).get_height()
+            self.noBlockX = ldImage(args[0]).get_height()
+            self.noBlockY = ldImage(args[0]).get_width()
             self.groundData = self.createGroundData()    
             self.rockTreeData = self.createRockTreeData()
         else: 
@@ -25,7 +25,8 @@ class GameData:
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):
                 #not precalculating positions for now
-                pixel = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_at((x,y))
+                #flipping as changed convention before and causing problems when reading image
+                pixel = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_at((y,x))
                 #print(pixel)
                 if pixel == (0,255,0,255):
                     curDict = {"tile":self.imgIndxMap["block"]}
@@ -42,13 +43,37 @@ class GameData:
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):
                 #not precalculating positions for now
-                pixel = self.imgArr[self.imgIndxMap["mapTreeRock"]].get_at((x,y))
+                pixel = self.imgArr[self.imgIndxMap["mapTreeRock"]].get_at((y,x))
                 #print(pixel)
                 if pixel == (93,61,0,255):
                     curDict = {"tile":self.imgIndxMap["rock"]}
                     rockTreeData[x][y] = curDict
                 elif pixel == (0,93,6,255) : 
                     curDict = {"tile":self.imgIndxMap["tree"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (23,20,157):
+                    curDict = {"tile":self.imgIndxMap["waterTreatment"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (23,207,40):
+                    curDict = {"tile":self.imgIndxMap["sewagePlant"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (158,37,21):
+                    curDict = {"tile":self.imgIndxMap["waterPump"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (169,16,152):
+                    curDict = {"tile":self.imgIndxMap["purificationPlant"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (56,57,56):
+                    curDict = {"tile":self.imgIndxMap["industrialPlant"]}
+                    rockTreeData[x][y] = curDict
+                elif pixel == (251,254,105):
+                    curDict = {"tile":self.imgIndxMap["solarPowerPlant"]}
+                    rockTreeData[x][y] = curDict                    
+                elif pixel == (55,209,226):
+                    curDict = {"tile":self.imgIndxMap["powerPlant"]}
+                    rockTreeData[x][y] = curDict                    
+                elif pixel == (243,243,243):
+                    curDict = {"tile":self.imgIndxMap["windMill"]}
                     rockTreeData[x][y] = curDict
                 else:
                     #ignoring if someother coulour so include water and grass for refrence in the image
@@ -101,3 +126,46 @@ class GameData:
         buildingTwoImg = ldImage("res/graphics/building01.png")
         self.imgIndxMap["building02"] = 8
         self.imgArr.append(buildingTwoImg)
+
+        waterPlantImg = ldImage("res/graphics/waterTreatment3by3preserveAspect.png")
+        self.imgIndxMap["waterTreatment"] = 9
+        self.imgArr.append(waterPlantImg)
+        #23 20 157
+
+        sewagePlantImg = ldImage("res/graphics/sewageTreatmentPlantResize.png")
+        self.imgIndxMap["sewagePlant"] = 10
+        self.imgArr.append(sewagePlantImg)
+        #23 207 40
+
+        waterPumpImg = ldImage("res/graphics/pumpingPlantResize.png")
+        self.imgIndxMap["waterPump"] = 11
+        self.imgArr.append(waterPumpImg)
+        #158 37 21
+
+
+        purificationPlant = ldImage("res/graphics/PurificationPlantResize.png")
+        self.imgIndxMap["purificationPlant"] = 12
+        self.imgArr.append(purificationPlant)
+        #169 16 152
+
+        #may want to resize the pumping station
+
+        industrialPlant = ldImage("res/graphics/IndustrialPlantResize.png")
+        self.imgIndxMap["industrialPlant"] = 13
+        self.imgArr.append(industrialPlant)
+        #56 57 56
+
+        solarPowerPlant = ldImage("res/graphics/SolarPowerPlantResize.png")
+        self.imgIndxMap["solarPowerPlant"] = 14
+        self.imgArr.append(solarPowerPlant)
+        #251 254 105
+
+        powerPlant = ldImage("res/graphics/powerPlantResize.png")
+        self.imgIndxMap["powerPlant"] = 15
+        self.imgArr.append(powerPlant)
+        #55 209 226
+
+        windMill = ldImage("res/graphics/windMillIndivResize.png")
+        self.imgIndxMap["windMill"] = 16
+        self.imgArr.append(windMill)
+        #243 243 243
