@@ -49,8 +49,14 @@ def createId(txt):
 class NotificationsBoxUI:
     def __init__(self,manager):
         self.txtBox,self.moneyButton = self.createNotificationBox(manager)
-        self.money = 20
+        self.money = 0
 
+    def setMoney(self,curMoney):
+        self.money = curMoney
+        self.moneyButton.set_text(f"Money: {self.money}")
+    def diffMoney(self,incMoney):
+        self.money += incMoney
+        self.moneyButton.set_text(f"Money: {self.money}")
     def createNotificationBox(self,manager):
         topPad = 10
         leftPad = 10

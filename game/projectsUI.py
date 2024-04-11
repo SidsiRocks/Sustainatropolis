@@ -6,13 +6,16 @@ import pygame_gui
 
 from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
+
 from pygame_gui.elements.ui_window import UIWindow
 from pygame_gui.elements.ui_progress_bar import UIProgressBar
 from pygame_gui.elements.ui_label import UILabel
 from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
+from pygame_gui.windows.ui_message_window import UIMessageWindow
 
 from .statisticsUI import StatisticsWindow
+from .MessageWindow import MessageWindow
 
 #modifing ovject id to be common so styling can be done together
 def createObjectId(txt):
@@ -32,15 +35,17 @@ def extractMainObjectId(objId):
             return objId[i+1:]
     return objId
 class ProjectsUI:
-    def __init__(self,manager,statsWindow):
+    def __init__(self,manager,statsWindow,notificationBox):
         #order also important
         self.projectLst,self.projectToCostMap = self.loadProjectLstAndCost("game/projectCostData.json")
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.currentProject = None
         self.world = None
+        self.notificationBox = notificationBox
         #this will be read from and rednered to in game
         self.curTileDrawReq = {}
+        self.manager = manager
     def loadProjectLstAndCost(self,jsonFilePath):
         data = json.load(open(jsonFilePath))
         projectLst = data["projectLists"]
@@ -122,6 +127,7 @@ class ProjectsUI:
     def clickedOnWorld(self,x,y):
         #may want to add something to cancel placement like left clicking
         if self.currentProject != None and self.world.checkPlacementValid(x,y,self.currentProject):
+            self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
             self.world.placeObject(x,y,self.currentProject)
             self.currentProject = None
     def hoverOnWorld(self,x,y):
@@ -136,6 +142,56 @@ class ProjectsUI:
             if buttonName in self.projectNameButtonDct:
                 self.handleProjectButtonClick(buttonName)
     def handleProjectButtonClick(self,buttonName):
-        self.currentProject = buttonName
+        if self.notificationBox.money >= self.projectToCostMap[buttonName]:
+            self.currentProject = buttonName
+        else:
+            notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
+            self.createNotEnoughMoneyWindow(notEnghMoneyMsg)
     def setWorld(self,world):
         self.world = world
+    #should create one and reload as needed possibly
+    #also need to deactivate remaining components in the mean time
+    def generateNotEnoughMoneyMsg(self,projName,curMoney):
+        projCost = self.projectToCostMap[projName]
+        txt = f"""<font face='Montseraat' color="#ffffff">
+Require {projCost} to build
+{projName} but currently only have {curMoney}</font>
+        """
+        return txt
+    def createNotEnoughMoneyWindow(self,warnWinMessHTML):
+        width = 300
+        height = 300
+        winWidth = self.manager.window_resolution[0]
+        winHeight = self.manager.window_resolution[1]
+        wanrWinRect = Rect((winWidth-width)/2,(winHeight-height)/2,width,height)
+        
+        buttonHt = 50
+        buttonWdth = 100
+        paddingY = 10
+        paddingX = 15
+        warnWindow = MessageWindow(wanrWinRect,warnWinMessHTML,buttonHt,
+                                   buttonWdth,paddingY,paddingX,self.manager,
+                                   "Not Enough Money",
+                                   ObjectID(class_id="@warnWindow",object_id="#warnWindow"),1)
+        return warnWindow
+
+"""
+    def createNotEnoughMoneyWindow(self,warnWinMessHTML):
+        width = 500
+        height = 500
+        winWidth = self.manager.window_resolution[0]
+        winHeight = self.manager.window_resolution[1]
+        wanrWinRect = Rect((winWidth-width)/2,(winHeight-height)/2,width,height)
+        warnWindow = UIMessageWindow(
+            rect=wanrWinRect,
+            html_message=warnWinMessHTML,
+            manager=self.manager,
+            window_title="Title",
+            object_id=ObjectID(class_id="@warnWindow",object_id="#warnWindow")
+        )
+        warnWindow.dismiss_button.relative_rect.height = 50
+        warnWindow.dismiss_button.relative_rect.height = 180
+        warnWindow.dismiss_button.set_text("Dismiss") 
+        warnWindow.set_blocking(True)
+        return warnWindow
+"""
