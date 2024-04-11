@@ -1,0 +1,22 @@
+{
+    "projectLists":[
+        "waterTreatment",
+        "sewagePlant",
+        "waterPump",
+        "purificationPlant",
+        "industrialPlant",
+        "solarPowerPlant",
+        "powerPlant",
+        "windMill"
+    ]
+    ,"projectToCostMap":{
+        "waterTreatment":10,
+        "sewagePlant":10,
+        "waterPump":10,
+        "purificationPlant":10,
+        "industrialPlant":10,
+        "solarPowerPlant":10,
+        "powerPlant":10,
+        "windMill":10
+    }
+}

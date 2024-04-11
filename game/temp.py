@@ -1,12 +1,16 @@
 import json
 
-f = open('game/imageMetaData.json')
+f = open('game/projectCostData.json')
 
 data = json.load(f)
 
 print(data)
 print("separator")
-print(data["block"])
+lst = data["projectLists"]
+print("type of lst",type(lst))
+print(lst)
 print("separator")
-for key in data:
-    print("key is:",key)
+projToCostMap = data["projectToCostMap"]
+print("type of map",type(projToCostMap))
+print(projToCostMap)
+print("separator")
