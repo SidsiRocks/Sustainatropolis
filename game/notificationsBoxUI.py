@@ -48,19 +48,27 @@ def createId(txt):
 
 class NotificationsBoxUI:
     def __init__(self,manager):
-        self.txtBox = self.createNotificationBox(manager)
+        self.txtBox,self.moneyButton = self.createNotificationBox(manager)
+        self.money = 20
 
     def createNotificationBox(self,manager):
         topPad = 10
         leftPad = 10
         width = 300
         height = 500 
-        txtBoxRect = Rect(topPad,leftPad,width,height)
+        txtBoxRect = Rect(leftPad,topPad,width,height)
         txtBox = UITextBox(html_text= text,
             relative_rect=txtBoxRect,
             manager=manager,
             object_id=createId("notifications Box"))
-        return txtBox
+
+        currencyWidth = 200
+        currenctHeight = 80
+        currencyRect = Rect(leftPad,txtBoxRect.top + height + topPad,currencyWidth,currenctHeight)
+        currentMoney = UIButton(relative_rect=currencyRect,
+            text="Money: 20",manager=manager,
+            object_id=createId("currencyButton"))
+        return txtBox,currentMoney
     
     def clearHtmlText(self):
         self.txtBox.set_text("")

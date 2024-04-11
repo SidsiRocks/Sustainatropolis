@@ -1,4 +1,5 @@
 import pygame 
+import json
 from pygame import Rect
 
 import pygame_gui
@@ -32,15 +33,34 @@ def extractMainObjectId(objId):
     return objId
 class ProjectsUI:
     def __init__(self,manager,statsWindow):
-        self.projectLst = ["waterTreatment","sewagePlant","waterPump",
-                           "purificationPlant","industrialPlant","solarPowerPlant",
-                           "powerPlant","windMill"]
+        #order also important
+        self.projectLst,self.projectToCostMap = self.loadProjectLstAndCost("game/projectCostData.json")
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.currentProject = None
         self.world = None
         #this will be read from and rednered to in game
         self.curTileDrawReq = {}
+    def loadProjectLstAndCost(self,jsonFilePath):
+        data = json.load(open(jsonFilePath))
+        projectLst = data["projectLists"]
+        projectToCostMap = data["projectToCostMap"] 
+        return projectLst,projectToCostMap       
+    def createCurrencyButton(self,projButton,projButRect:Rect,projName,manager,projLstWinScroll):
+        width = 30
+        height = 30
+        buttonWdth = projButRect.width 
+        buttonHt = projButRect.height
+        offX = -10
+        offY = -10
+        currencyRect = Rect(projButRect.left + buttonWdth - width + offX,
+                            projButRect.top + buttonHt - height + offY,
+                            width,height)
+        currencyLbl = UILabel(relative_rect=currencyRect,text=str(self.projectToCostMap[projName]),
+            object_id=ObjectID(
+            object_id="#"+projName+"Currency",
+            class_id="@currencyButton")
+            ,manager=manager,container=projLstWinScroll)
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
         imgBtnWidth = 150
         #imgBtnHt for these values is 175
@@ -59,6 +79,7 @@ class ProjectsUI:
             manager=manager,container=projLstWinScroll,
             object_id=ObjectID(class_id='@projectButtons',
             object_id='#'+projName) )
+        self.createCurrencyButton(curBut,projLstRect,projName,manager,projLstWinScroll)
 
         x += imgBtnWidth
         return (x,curBut)
@@ -99,7 +120,8 @@ class ProjectsUI:
         projectListScrollable.set_scrollable_area_dimensions((x,projectListScrollableRect.height))
         return projectListWindow
     def clickedOnWorld(self,x,y):
-        if self.currentProject != None:
+        #may want to add something to cancel placement like left clicking
+        if self.currentProject != None and self.world.checkPlacementValid(x,y,self.currentProject):
             self.world.placeObject(x,y,self.currentProject)
             self.currentProject = None
     def hoverOnWorld(self,x,y):
