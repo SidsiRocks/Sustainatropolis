@@ -46,7 +46,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.world = GameData(50,50,self.width,self.height,"res/graphics/mapWaterGrass.png","res/graphics/mapTreeRockDebug.png")
+        self.world = GameData(50,50,self.width,self.height,"res/graphics/imgForPlacement/mapWaterGrass.png","res/graphics/imgForPlacement/mapTreeRockDebug.png")
         self.playing = True
 
         self.cameraPos = (0,0)
@@ -95,6 +95,7 @@ class MainGameScene:
     def events(self):
         self.timeDelta = self.clock.tick(60)/1000.0
         keys = pg.key.get_pressed()
+        curMousePos = pg.mouse.get_pos()
         if keys[pg.K_w]:
             x,y = cameraMovementKeyBoard(pg.K_w)
             self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)

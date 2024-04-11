@@ -1,17 +1,21 @@
 from .util import ldImage,parseColour,parseTuple
 from .InvalidPlacementException import InvalidPlacementException
+import pygame as pg
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr"]
     def __init__(self,noBlockX,noBlockY,width,height,*args):
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
         self.tileToColor = {}
         self.imgArr = []
+        self.transpImgArr = []
+        self.transRedArr = []
         self.offsetArr = []
         self.sizeArr = []
+        self.redTintColor = (255,0,0)
         #self.loadImages()
         self.loadImagesFromJSON()
         if len(args) == 2 : 
@@ -40,10 +44,21 @@ class GameData:
                 elif pixel == self.tileToColor["water"]: 
                     curDict = {"tile":self.imgIndxMap["water"]}
                     groundData[x][y] = curDict
-
+                else:
+                    pass
+                    #print(f"Unrecognized pixel at {x},{y} with colour {pixel}")
                 # curDict = {"tile":self.imgIndxMap["block"]}
                 # groundData[x][y] = curDict
         return groundData
+    def checkPlacementValid(self,x,y,tileName):
+        xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
+        if(x <(xSize-1) or y+ySize > self.noBlockY):
+            return False
+        for i in range(xSize):
+            for j in range(ySize):
+                if self.rockTreeData[x-i][y+j] != None:
+                    return False
+        return True
     def blockNeighbourSlots(self,x,y,size,rockTreeData,tileName):
         xSize,ySize = size 
         if(x < (xSize-1) or y+ySize > self.noBlockY):
@@ -122,9 +137,17 @@ class GameData:
         f = open("game/imageMetaData.json")
         data = json.load(f)
         for key in data:
-            curImg = ldImage(data[key]["path"])
+            curImg = ldImage(data[key]["path"]["normal"])
+            curTransparent = ldImage(data[key]["path"]["transparent"])
             self.imgIndxMap[key] = len(self.imgArr)
+            
+            curTransRed = curTransparent.__copy__()
+            curTransRed.fill((210,0,0),special_flags=pg.BLEND_ADD)
+
+            self.transRedArr.append(curTransRed)
             self.imgArr.append(curImg)
+            self.transpImgArr.append(curTransparent)
+
             curCoord = parseTuple(data[key]["offset"])
             self.offsetArr.append(curCoord)
             curSize = parseTuple(data[key]["size"])

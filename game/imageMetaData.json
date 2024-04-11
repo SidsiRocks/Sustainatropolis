@@ -1,95 +1,143 @@
 {
     "block":{
-        "path":"res/graphics/block.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/block.png",
+            "transparent":"res/graphics/imgTransparencyPlace/block.png"
+        }
         ,"colour":"rgba(0,255,0,255)"
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "rock":{
-        "path":"res/graphics/rock.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/rock.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/rock.png"
+        }
         ,"colour":"rgba(93,61,0,255)"
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "tree":{
-        "path":"res/graphics/tree.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/tree.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/tree.png"
+        }
         ,"colour":"rgb(0,93,6)"
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "mapWaterGrass":{
-        "path":"res/graphics/mapWaterGrass.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/mapWaterGrass.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/mapWaterGrass.png"
+        }
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
         ,"comment":"dummy size not actually used"
     },
     "water":{
-        "path":"res/graphics/waterfallEndE.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/waterfallEndE.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/waterfallEndE.png"
+        }
         ,"colour":"rgba(0,255,255,255)"
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "mapTreeRock":{
-        "path":"res/graphics/mapTreeRockDebug.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/mapTreeRockDebug.png",
+            "transparent":"res/graphics/imgTransparencyPlace/mapTreeRockDebug.png"
+        }
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "building01":{
-        "path":"res/graphics/building01.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/building01.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/building01.png"
+        }
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "building02":{
-        "path":"res/graphics/building02.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/building02.png",
+            "transparent":"res/graphics/imgTransparencyPlace/building02.png"
+        }
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "waterTreatment":{
-        "path":"res/graphics/WaterTreatmentContainersRemovedResized.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/WaterTreatmentContainersRemovedResized.png",
+            "transparent":"res/graphics/imgTransparencyPlace/WaterTreatmentContainersRemovedResized.png"
+        }
         ,"colour":"rgb(23,20,157)"
         ,"offset":"(70,-40)"
         ,"size":"(3,5)" 
         ,"comment":"confirm not reversed"
     },
     "sewagePlant":{
-        "path":"res/graphics/sewageTreatmentPlantResize.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/sewageTreatmentPlantResize.png",
+            "transparent":"res/graphics/imgTransparencyPlace/sewageTreatmentPlantResize.png"
+        }
         ,"colour":"rgb(23,207,40)"
         ,"offset":"(0,-10)"
         ,"size":"(4,4)"
     },
     "waterPump":{
-        "path":"res/graphics/pumpingPlantRemoveBackgroundResized.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/pumpingPlantRemoveBackgroundResized.png",
+            "transparent":"res/graphics/imgTransparencyPlace/pumpingPlantRemoveBackgroundResized.png"
+        }
         ,"colour":"rgb(158,37,21)"
         ,"offset":"(30,-30)"
         ,"size":"(3,4)"
         ,"comment":"Extended pipe size in y direction from 3 to 4 to prevent weird rendering glitches"
     },
     "purificationPlant":{
-        "path":"res/graphics/PurificationPlantResize.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/PurificationPlantResize.png",
+            "transparent":"res/graphics/imgTransparencyPlace/PurificationPlantResize.png"
+        }
         ,"colour":"rgb(169,16,152)"
         ,"offset":"(-18,-20)"
         ,"size":"(4,4)"
     },
     "industrialPlant":{
-        "path":"res/graphics/IndustrialPlantResize.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/IndustrialPlantResize.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/IndustrialPlantResize.png"
+        }
         ,"colour":"rgb(56,57,56)"
         ,"offset":"(-20,10)"
         ,"size":"(4,3)"
     },
     "solarPowerPlant":{
-        "path":"res/graphics/SolarPowerPlantResize.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/SolarPowerPlantResize.png",
+            "transparent":"res/graphics/imgTransparencyPlace/SolarPowerPlantResize.png"
+        }
         ,"colour":"rgb(251,254,105)"
         ,"offset":"(-40,0)"
         ,"size":"(4,3)"
     },
     "powerPlant":{
-        "path":"res/graphics/powerPlantResize.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/powerPlantResize.png",
+            "transparent":"res/graphics/imgTransparencyPlace/powerPlantResize.png"
+        }
         ,"colour":"rgb(55,209,226)"
         ,"offset":"(-40,-15)"
         ,"size":"(4,3)"
     },
     "windMill":{
-        "path":"res/graphics/windMillIndivResize.png"
+        "path":{
+            "normal":"res/graphics/imgForPlacement/windMillIndivResize.png",
+            "transparent":"res/graphics/imgTransparencyPlace/windMillIndivResize.png"
+        }
         ,"colour":"rgb(243,243,243)"
         ,"offset":"(10,-15)"
         ,"size":"(1,1)"

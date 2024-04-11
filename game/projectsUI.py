@@ -100,6 +100,8 @@ class ProjectsUI:
         if self.currentProject != None:
             self.world.placeObject(x,y,self.currentProject)
             self.currentProject = None
+    def hoverOnWorld(self,x,y):
+        pass
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
