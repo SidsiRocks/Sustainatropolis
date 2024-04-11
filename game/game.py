@@ -92,10 +92,15 @@ class MainGameScene:
     def quitScene(self):
         pg.quit()
         sys.exit()
+    def mouseHoverEvents(self):
+        x,y = pg.mouse.get_pos()
+        isoX,isoY = self.findClickCoord(x,y)
+        #print(f"hover on coordinates {isoX} {isoY}")
+        self.mainGameUI.projectUIWrapper.hoverOnWorld(isoX,isoY)
     def events(self):
         self.timeDelta = self.clock.tick(60)/1000.0
         keys = pg.key.get_pressed()
-        curMousePos = pg.mouse.get_pos()
+        self.mouseHoverEvents()
         if keys[pg.K_w]:
             x,y = cameraMovementKeyBoard(pg.K_w)
             self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
@@ -186,9 +191,34 @@ class MainGameScene:
         #print("fps is:",fps)
         self.drawGround()
         self.drawTreeRock()
+        self.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq)
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
         self.manager.draw_ui(self.screen)
         pg.display.flip()
+
+    def drawPlacementReq(self,curDict):
+
+        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        imgOffsetX = (self.width - self.groundBuffSize[0])/2
+        imgOffsetY = (self.height - self.groundBuffSize[1])/2
+        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.cameraPos[0],centerOffset[1]+imgOffsetY-self.cameraPos[1])
+
+        if curDict != {}:
+            imgIndx = self.world.imgIndxMap[curDict["tile"]]
+            x,y = curDict["pos"]
+            mode = curDict["mode"]
+            curImg = None
+            if mode == "transparent":
+                curImg = self.world.transpImgArr[imgIndx]
+            elif mode == "red":
+                curImg = self.world.transRedArr[imgIndx]
+            renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
+            curOff = self.world.offsetArr[imgIndx]
+            imgRenderPos = isoRenderPosToImgRenderPos(renderPos,curImg.get_width(),curImg.get_height())
+            imgRenderPos = (imgRenderPos[0]+curOff[0],imgRenderPos[1]+curOff[1])
+            self.screen.blit(curImg,imgRenderPos)
+        else: 
+            pass
     def findIsoGridOrg(self):
         orgX = self.imgCenterOffset[0] - self.cameraPos[0] + isoCoordToRenderPos((0,0),self.groundCenterOffset)[0]+0
         orgY = self.imgCenterOffset[1] - self.cameraPos[1] + isoCoordToRenderPos((0,0),self.groundCenterOffset)[1]+TILE_SIZE/2

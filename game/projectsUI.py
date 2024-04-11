@@ -39,6 +39,8 @@ class ProjectsUI:
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.currentProject = None
         self.world = None
+        #this will be read from and rednered to in game
+        self.curTileDrawReq = {}
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
         imgBtnWidth = 150
         #imgBtnHt for these values is 175
@@ -101,7 +103,11 @@ class ProjectsUI:
             self.world.placeObject(x,y,self.currentProject)
             self.currentProject = None
     def hoverOnWorld(self,x,y):
-        pass
+        if self.currentProject != None:
+            if self.world.checkPlacementValid(x,y,self.currentProject):
+                self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"transparent"}
+            else:
+                self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"red"}
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
