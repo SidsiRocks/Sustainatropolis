@@ -1,0 +1,15 @@
+{
+    "produceUncleanWater":{"Dam":10,"waterPump":10},
+    "consumeUncleanWater":{"purificationPlant":10},
+
+    "produceCleanWater":{"purificationPlant":10,"sewagePlant":10},
+    "consumeCleanWater":{"WaterTank":10},
+
+    "produceStoreWater":{"WaterTank":10},
+    "consumeStoreWater":{},"comment":["Houses go here"],
+
+    "produceSewage":{},"comment2":["Houses go here"],
+    "consumeSewage":{"sewagePlant":10},
+
+    "comments":["Houses and such would go here"]
+}
