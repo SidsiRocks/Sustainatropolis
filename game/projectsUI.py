@@ -131,10 +131,13 @@ class ProjectsUI:
         if self.currentProject != None and self.world.checkPlacementValid(x,y,self.currentProject):
             self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
             self.world.placeObject(x,y,self.currentProject)
+            oldProjName = self.projName
             self.currentProject = None
+            return oldProjName
         else :
             self.currentProject = None
             self.curTileDrawReq = {}
+        return None
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
             if self.world.checkPlacementValid(x,y,self.currentProject):

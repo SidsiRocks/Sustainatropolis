@@ -2,6 +2,8 @@ import pygame as pg
 from .gameWorld import GameData
 from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos,changeOfBasis,basisVecX,basisVecY
 from .settings import TILE_SIZE
+from .powerManagement import PowerManagement
+
 import sys
 import pygame_gui 
 from game.mainGameUI import MainGameUI
@@ -71,6 +73,8 @@ class MainGameScene:
         self.timeDelta = self.clock.tick(60)/1000.0
         self.groundCenterOffset = (0,0)
         self.imgCenterOffset = (0,0)
+
+        self.powerManagement = PowerManagement()        
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -157,9 +161,9 @@ class MainGameScene:
                     print("continuing")
                 else : 
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
-                    self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
-                    if posX < self.world.noBlockX and posX >= 0 and posY < self.world.noBlockY and posY >= 0:
-                        pass #is a valid coordinate
+                    projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
+                    if projName != None:
+                        self.pwe
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later
