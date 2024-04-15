@@ -105,6 +105,11 @@
     "#WaterTank":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/smallWaterTank.png"}}
     },
+    "CityBuilding1":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/city-building-1-bg-removed.png"}}
+    },
+
+
     "@statWindow":{
         "misc":{
             "shape":"rounded_rectangle",

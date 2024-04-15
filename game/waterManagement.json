@@ -6,9 +6,9 @@
     "consumeCleanWater":{"WaterTank":10},
 
     "produceStoreWater":{"WaterTank":10},
-    "consumeStoreWater":{},"comment":["Houses go here"],
+    "consumeStoreWater":{"CityBuilding1":10},"comment":["Houses go here"],
 
-    "produceSewage":{},"comment2":["Houses go here"],
+    "produceSewage":{"CityBuilding1":10},"comment2":["Houses go here"],
     "consumeSewage":{"sewagePlant":10},
 
     "comments":["Houses and such would go here"]

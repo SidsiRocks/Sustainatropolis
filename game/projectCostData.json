@@ -9,7 +9,8 @@
         "powerPlant",
         "windMill",
         "Dam",
-        "WaterTank"
+        "WaterTank",
+        "CityBuilding1"
     ]
     ,"projectToCostMap":{
         "waterTreatment":10,
@@ -21,6 +22,7 @@
         "powerPlant":10,
         "windMill":10,
         "Dam":10,
-        "WaterTank":10
+        "WaterTank":10,
+        "CityBuilding1":10
     }
 }

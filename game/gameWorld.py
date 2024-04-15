@@ -134,6 +134,9 @@ class GameData:
                 elif pixel == self.tileToColor["WaterTank"]:
                     curSize = self.sizeArr[self.imgIndxMap["WaterTank"]]
                     self.blockNeighbourSlots(x,y,curSize,rockTreeData,"WaterTank")
+                elif pixel == self.tileToColor["CityBuilding1"]:
+                    curSize = self.sizeArr[self.imgIndxMap["CityBuilding1"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"CityBuilding1")
                 else:
                     #ignoring if someother coulour so include water and grass for refrence in the image
                     pass
