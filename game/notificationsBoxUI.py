@@ -48,8 +48,8 @@ def createId(txt):
 
 class NotificationsBoxUI:
     def __init__(self,manager):
+        self.money = 100
         self.txtBox,self.moneyButton = self.createNotificationBox(manager)
-        self.money = 0
 
     def setMoney(self,curMoney):
         self.money = curMoney
@@ -72,7 +72,7 @@ class NotificationsBoxUI:
         currenctHeight = 80
         currencyRect = Rect(leftPad,txtBoxRect.top + height + topPad,currencyWidth,currenctHeight)
         currentMoney = UIButton(relative_rect=currencyRect,
-            text="Money: 20",manager=manager,
+            text=f"Money: {self.money}",manager=manager,
             object_id=createId("currencyButton"))
         return txtBox,currentMoney
     
