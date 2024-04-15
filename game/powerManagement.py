@@ -38,10 +38,18 @@ class PowerManagement:
             self.curPowerCons += self.powerConsumeDic[projName]
     
     def validProjPlace(self,projName):
-        if projName in self.noPowerReqDict:
+        print(f"self.powerConsumeDic:{self.powerConsumeDic}")
+        if projName in self.powerConsumeDic:
             if (self.curPowerCons + self.powerConsumeDic[projName]) <= self.curPowerProd:
+                return True
+            else:
                 return False
         return True
+
+    def getPowerReqForProj(self,projName):
+        if projName in self.powerConsumeDic:
+            return self.powerConsumeDic[projName]
+        
     def getPowerProd(self):
         return self.curPowerProd
     def getPowerCons(self):

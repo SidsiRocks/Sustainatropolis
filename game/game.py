@@ -62,7 +62,7 @@ class MainGameScene:
 
         self.manager = pygame_gui.UIManager((self.width,self.height))
         self.loadFonts()
-        self.mainGameUI = MainGameUI(self.manager,"./game/theme.json",self.world)
+        self.mainGameUI = MainGameUI(self.manager,"./game/theme.json",self.world,self)
 
         self.clearButton = UIButton(Rect(500,500,100,50),"Clear HTML",self.manager)
         self.appendButton = UIButton(Rect(600,600,100,50),"Append HTML",self.manager)
