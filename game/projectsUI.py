@@ -134,6 +134,7 @@ class ProjectsUI:
             self.currentProject = None
         else :
             self.currentProject = None
+            self.curTileDrawReq = {}
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
             if self.world.checkPlacementValid(x,y,self.currentProject):
