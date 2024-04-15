@@ -131,7 +131,7 @@ class ProjectsUI:
         if self.currentProject != None and self.world.checkPlacementValid(x,y,self.currentProject):
             self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
             self.world.placeObject(x,y,self.currentProject)
-            oldProjName = self.projName
+            oldProjName = self.currentProject
             self.currentProject = None
             return oldProjName
         else :

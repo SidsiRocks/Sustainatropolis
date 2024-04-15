@@ -43,7 +43,7 @@ def cameraMovementKeyBoard(keyPress):
     elif keyPress == pg.K_a:
         return (-speed,0)
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset"]
+    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement"]
     def __init__(self,screen,clock):
         self.screen = screen 
         self.clock = clock
@@ -163,7 +163,8 @@ class MainGameScene:
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
                     if projName != None:
-                        self.pwe
+                        self.powerManagement.handleProj(projName)
+                        self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later
