@@ -20,7 +20,7 @@ def createProgessLabelId(txt):
     return ObjectID(class_id="@"+"statisticalProgress",object_id="#Progress_"+txt)
 class StatisticsWindow:
     def __init__(self,manager):
-        self.statNames = ["unclean water","clean water","power usage"]
+        self.statNames = ["unclean water","clean water","store water","sewage water","power usage"]
         self.statProgressBarDict = {}
         self.statsWindow = self.createStatsWindow(manager)
         self.populateStatsWindow(manager)

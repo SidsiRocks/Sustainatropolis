@@ -3,6 +3,7 @@ from .gameWorld import GameData
 from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos,changeOfBasis,basisVecX,basisVecY
 from .settings import TILE_SIZE
 from .powerManagement import PowerManagement
+from .waterManagement import WaterManagement
 
 import sys
 import pygame_gui 
@@ -75,6 +76,7 @@ class MainGameScene:
         self.imgCenterOffset = (0,0)
 
         self.powerManagement = PowerManagement()        
+        self.waterManagement = WaterManagement()
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -165,6 +167,9 @@ class MainGameScene:
                     if projName != None:
                         self.powerManagement.handleProj(projName)
                         self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
+                    if projName != None:
+                        self.waterManagement.handleProj(projName)
+                        self.waterManagement.setStats(self.mainGameUI.statsWindowWrapper)
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later

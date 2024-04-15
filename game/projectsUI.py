@@ -161,11 +161,14 @@ class ProjectsUI:
     def handleProjectButtonClick(self,buttonName):
         isEnoughMoney = self.notificationBox.money >= self.projectToCostMap[buttonName]
         isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
+        waterError = self.game.waterManagement.validProjPlace(buttonName)
+        isWaterValid = (waterError == None)
+
         print(f"isEnoughPower:{isEnoughPower} for the projName:{buttonName}")
         if self.currentProject == buttonName:
             self.currentProject = None
             self.curTileDrawReq = {}
-        elif isEnoughMoney and isEnoughPower:
+        elif isEnoughMoney and isEnoughPower and isWaterValid:
             self.currentProject = buttonName
         elif not isEnoughMoney:
             notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
@@ -173,10 +176,22 @@ class ProjectsUI:
         elif not isEnoughPower:
             notEnghPowerMsg = self.generateNotEnoughPowerMsg(buttonName,self.game.powerManagement)
             self.createNotEnoughWindow(notEnghPowerMsg)
+        elif waterError != None:
+            incrWaterErrorMsg = self.generateWaterErrorMsg(buttonName,waterError)
+            self.createNotEnoughWindow(incrWaterErrorMsg)
     def setWorld(self,world):
         self.world = world
     #should create one and reload as needed possibly
     #also need to deactivate remaining components in the mean time
+    def generateWaterErrorMsg(self,projName,waterError):
+        typeOfError = waterError[0]
+        waterVal1 = waterError[1][0]
+        waterVal2 = waterError[1][1]
+        txt = f"""<font face='Montseraat' color="#ffffff">
+Require {typeOfError} of quantity:{waterVal2} to build
+{projName} but currently only have {waterVal1}</font>
+"""
+        return txt
     def generateNotEnoughPowerMsg(self,projName,powerManag:PowerManagement):
         projPower = powerManag.getPowerReqForProj(projName)
         totalPower = powerManag.getPowerCons() + projPower
@@ -185,7 +200,7 @@ class ProjectsUI:
         txt = f"""<font face='Montseraat' color="#ffffff">
 Require power production {totalPower} to build
 {projName} but currently only have {curPower}</font>
-                """
+"""
         return txt
     def generateNotEnoughMoneyMsg(self,projName,curMoney):
         projCost = self.projectToCostMap[projName]
