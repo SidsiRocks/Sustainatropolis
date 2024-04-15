@@ -121,6 +121,8 @@ class MainGameScene:
             self.audioManager.setVolume(self.audioManager.getVolume()+0.1)
         if keys[pg.K_KP_MINUS] :
             self.audioManager.setVolume(self.audioManager.getVolume()-0.1)
+        if keys[pg.K_q]:
+            self.audioManager.playSound("click")
         # print("list og events" , pg.event.get())
         eventslist = pg.event.get()
         # (pg.event.get().reverse)
