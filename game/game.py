@@ -7,6 +7,7 @@ import pygame_gui
 from game.mainGameUI import MainGameUI
 from pygame import Rect
 from pygame_gui.elements.ui_button import UIButton
+from .audio import AudioManager
 """
 def cameraMovement(width,height):
     mouse_pos = pg.mouse.get_pos()
@@ -54,7 +55,8 @@ class MainGameScene:
         self.centerOffset = self.calCenterOffset(self.width,self.height)
         self.groundSurface = pg.Surface(self.groundBuffSize).convert_alpha()
         self.firstRender = True
-
+        self.audioManager = AudioManager()
+        self.audioManager.playMusic()
 
         self.manager = pygame_gui.UIManager((self.width,self.height))
         self.loadFonts()
@@ -113,6 +115,14 @@ class MainGameScene:
         if keys[pg.K_d]:
             x,y = cameraMovementKeyBoard(pg.K_d)
             self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+        if keys[pg.K_p] : 
+            self.audioManager.toggleMusic()
+        if keys[pg.K_KP_PLUS] : 
+            self.audioManager.setVolume(self.audioManager.getVolume()+0.1)
+        if keys[pg.K_KP_MINUS] :
+            self.audioManager.setVolume(self.audioManager.getVolume()-0.1)
+        if keys[pg.K_q]:
+            self.audioManager.playSound("click")
         # print("list og events" , pg.event.get())
         eventslist = pg.event.get()
         # (pg.event.get().reverse)
