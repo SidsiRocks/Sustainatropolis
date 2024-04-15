@@ -1,7 +1,8 @@
 from typing import Any
 import json
+from .statisticsUI import StatisticsWindow
 
-class WaterManagemetSystem :
+class WaterManagement:
 
     def __init__ (self) :
         findDict = json.load(open("game/waterManagement.json"))
@@ -15,7 +16,7 @@ class WaterManagemetSystem :
         self.consStoreWaterDic = findDict["consumeStoreWater"]
 
         self.prodSewage = findDict["produceSewage"]
-        self.consSewageDic = findDict["sewagePlant"]
+        self.consSewageDic = findDict["consumeSewage"]
 
         self.unCleanWater = 0
         self.consUnCleanWater = 0
@@ -38,25 +39,30 @@ class WaterManagemetSystem :
         self.sewageWater,self.consSewageWater = sewageWaterTpl
 
     def updateVal(self,projName):
+        unCleanWater,consUnCleanWater = self.unCleanWater,self.consUnCleanWater
+        cleanWater,consCleanWater = self.cleanWater,self.consCleanWater
+        storeWater,consStoreWater = self.storeWater,self.consStoreWater
+        sewageWater,consSewageWater = self.sewageWater,self.consSewageWater
+
         if projName in self.prodUncleanWater:
-            unCleanWater = self.unCleanWater + self.prodUncleanWater[projName]
+            unCleanWater = unCleanWater + self.prodUncleanWater[projName]
         if projName in self.consUncleanWaterDic:
-            consUnCleanWater = self.consUnCleanWater + self.consUncleanWaterDic[projName]
+            consUnCleanWater = consUnCleanWater + self.consUncleanWaterDic[projName]
 
         if projName in self.prodCleanWater:
-            cleanWater = self.cleanWater + self.prodCleanWater[projName]
+            cleanWater = cleanWater + self.prodCleanWater[projName]
         if projName in self.consCleanWaterDic:
-            consCleanWater = self.consCleanWater + self.consCleanWaterDic[projName]
+            consCleanWater = consCleanWater + self.consCleanWaterDic[projName]
 
         if projName in self.prodStoreWater:
-            storeWater = self.storeWater + self.prodStoreWater[projName]
+            storeWater = storeWater + self.prodStoreWater[projName]
         if projName in self.consStoreWaterDic:
-            consStoreWater = self.consStoreWater + self.consStoreWaterDic[projName]     
+            consStoreWater = consStoreWater + self.consStoreWaterDic[projName]     
     
         if projName in self.prodSewage:
-            sewageWater = self.sewageWater + self.prodSewage[projName]
+            sewageWater = sewageWater + self.prodSewage[projName]
         if projName in self.consSewageDic:
-            consSewageWater = self.consSewageWater + self.consSewageDic[projName]        
+            consSewageWater = consSewageWater + self.consSewageDic[projName]        
 
         unCleanWaterTpl = (unCleanWater,consUnCleanWater)
         cleanWaterTpl = (cleanWater,consCleanWater)
@@ -67,9 +73,27 @@ class WaterManagemetSystem :
 
     def waterDataTplValid(self,tpl):
         unCleanWaterTpl,cleanWaterTpl,storeWaterTpl,sewageWaterTpl = tpl
-        isValid1 = (unCleanWaterTpl[0] >= unCleanWaterTpl[1]) and (cleanWaterTpl[0] >= cleanWaterTpl[1])
-        isValid2 = (storeWaterTpl[0] >= storeWaterTpl[1]) and (sewageWaterTpl[0] >= sewageWaterTpl[1])
-        return isValid1 and isValid2
+        
+        isValidUnClean =  unCleanWaterTpl[0] >= unCleanWaterTpl[1]
+        isValidClean   =  cleanWaterTpl[0] >= cleanWaterTpl[1]
+        isValidSewage = sewageWaterTpl[0] >= sewageWaterTpl[1]
+        isValidStore = storeWaterTpl[0] >= sewageWaterTpl[1]
+
+        if not isValidUnClean:
+            return ("unclean water",(unCleanWaterTpl))
+        if not isValidClean:
+            return ("clean water",(cleanWaterTpl))
+        if not isValidSewage:
+            return ("sewage",(sewageWaterTpl))
+        if not isValidStore:
+            return ("store water",(storeWaterTpl))
+        return None
     
     def validProjPlace(self,projName):
         return self.waterDataTplValid(self.updateVal(projName))
+
+    def setStats(self,statWin:StatisticsWindow):
+        statWin.setStats("unclean water",self.consUnCleanWater,self.unCleanWater)
+        statWin.setStats("clean water",self.consCleanWater,self.cleanWater)
+        statWin.setStats("store water",self.consStoreWater,self.storeWater)
+        statWin.setStats("sewage water",self.consSewageWater,self.sewageWater)
