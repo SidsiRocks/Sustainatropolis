@@ -113,21 +113,19 @@ class MainGameScene:
         if keys[pg.K_d]:
             x,y = cameraMovementKeyBoard(pg.K_d)
             self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
-        for event in pg.event.get():
+        # print("list og events" , pg.event.get())
+        eventslist = pg.event.get()
+        # (pg.event.get().reverse)
+        eventslist.reverse()
+        for event in eventslist:
+            # print(templist)
             if event.type == pg.QUIT:
                 self.quitScene()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quitScene()
-            if event.type == pg.MOUSEBUTTONDOWN:
-                mouseX,mouseY = pg.mouse.get_pos()
-                pos = self.findClickCoord(mouseX,mouseY)
-                (posX,posY) = pos
-                #self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
-                self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
-                if posX < self.world.noBlockX and posX >= 0 and posY < self.world.noBlockY and posY >= 0:
-                    pass #is a valid coordinate
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                print("considered this to be ui button click")
                 if event.ui_element == self.clearButton:
                     print("clicked on clear button")
                     self.mainGameUI.notificationBox.clearHtmlText()
@@ -135,6 +133,28 @@ class MainGameScene:
                     print("clicked on append button")
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
                 self.mainGameUI.processEvents(event)
+                skipMouseClickEvents = True
+            elif event.type == pg.MOUSEBUTTONDOWN :
+
+                print("considered this to be mouse click")
+                mouseX,mouseY = pg.mouse.get_pos()
+                coordinates = self.mainGameUI.projectUIWrapper.projectListWindow.rect
+                pos = self.findClickCoord(mouseX,mouseY)
+                (posX,posY) = pos
+                print(mouseX,mouseY,coordinates)
+
+                if not(mouseX < coordinates[0] or mouseX > coordinates[0]+coordinates[2] or mouseY < coordinates[1] or mouseY > coordinates[1]+coordinates[3]):
+                    print("continuing")
+                else : 
+                    
+                    # continue
+                # if self.mainGameUI.projectUIWrapper!= None and self.mainGameUI.projectUIWrapper.projectListRect.collidepoint(mouseX,mouseY) : 
+                #     print("continuing")
+                #     continue 
+                # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
+                    self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
+                    if posX < self.world.noBlockX and posX >= 0 and posY < self.world.noBlockY and posY >= 0:
+                        pass #is a valid coordinate
             self.manager.process_events(event)
             self.manager.update(self.timeDelta)
     def update(self):
