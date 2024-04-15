@@ -133,7 +133,7 @@ class ProjectsUI:
             self.world.placeObject(x,y,self.currentProject)
             self.currentProject = None
         else :
-            print(self.currentProject)
+            self.currentProject = None
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
             if self.world.checkPlacementValid(x,y,self.currentProject):
@@ -151,7 +151,10 @@ class ProjectsUI:
             if buttonName in self.projectNameButtonDct:
                 self.handleProjectButtonClick(buttonName)
     def handleProjectButtonClick(self,buttonName):
-        if self.notificationBox.money >= self.projectToCostMap[buttonName]:
+        if self.currentProject == buttonName:
+            self.currentProject = None
+            self.curTileDrawReq = {}
+        elif self.notificationBox.money >= self.projectToCostMap[buttonName]:
             self.currentProject = buttonName
         else:
             notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
