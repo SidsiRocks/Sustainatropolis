@@ -50,7 +50,19 @@ class GameData:
                 # curDict = {"tile":self.imgIndxMap["block"]}
                 # groundData[x][y] = curDict
         return groundData
-    def checkPlacementValid(self,x,y,tileName):
+    def checkGroundTiles(self,x,y,tileName):
+        incorrectTile = "water"
+        if tileName == "Dam":
+            incorrectTile = "block"
+        xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
+        if (x < (xSize -1) or y+ySize > self.noBlockY):
+            return False
+        for i in range(xSize):
+            for j in range(ySize):
+                if self.groundData[x-i][y+j]["tile"] == self.imgIndxMap[incorrectTile]:
+                    return False
+        return True
+    def checkSpacePresent(self,x,y,tileName):
         xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
         if(x <(xSize-1) or y+ySize > self.noBlockY):
             return False
@@ -58,7 +70,12 @@ class GameData:
             for j in range(ySize):
                 if self.rockTreeData[x-i][y+j] != None:
                     return False
+        
         return True
+    def checkPlacementValid(self,x,y,tileName):
+        isSpacePresent = self.checkSpacePresent(x,y,tileName)
+        isGroundTileCorr = self.checkGroundTiles(x,y,tileName)
+        return isSpacePresent and isGroundTileCorr
     def blockNeighbourSlots(self,x,y,size,rockTreeData,tileName):
         xSize,ySize = size 
         if(x < (xSize-1) or y+ySize > self.noBlockY):
