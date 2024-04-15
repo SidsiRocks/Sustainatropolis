@@ -49,7 +49,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.world = GameData(50,50,self.width,self.height,"res/graphics/imgForPlacement/mapWaterGrass.png","res/graphics/imgForPlacement/mapTreeRockDebug.png")
+        self.world = GameData(50,50,self.width,self.height,"res/graphics/imgForPlacement/mapWaterGrasscopy.png","res/graphics/imgForPlacement/mapWaterGrasscopy2.png")
         self.playing = True
 
         self.cameraPos = (0,0)

@@ -22,14 +22,14 @@
             "normal":"res/graphics/imgForPlacement/tree.png"
             ,"transparent":"res/graphics/imgTransparencyPlace/tree.png"
         }
-        ,"colour":"rgb(0,93,6)"
+        ,"colour":"rgb(115,79,6)"
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
     "mapWaterGrass":{
         "path":{
-            "normal":"res/graphics/imgForPlacement/mapWaterGrass.png"
-            ,"transparent":"res/graphics/imgTransparencyPlace/mapWaterGrass.png"
+            "normal":"res/graphics/imgForPlacement/mapWaterGrasscopy.png"
+            ,"transparent":"res/graphics/imgTransparencyPlace/mapWaterGrasscopy.png"
         }
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
@@ -46,7 +46,7 @@
     },
     "mapTreeRock":{
         "path":{
-            "normal":"res/graphics/imgForPlacement/mapTreeRockDebug.png",
+            "normal":"res/graphics/imgForPlacement/mapWaterGrasscopy2.png",
             "transparent":"res/graphics/imgTransparencyPlace/mapTreeRockDebug.png"
         }
         ,"offset":"(0,0)"
