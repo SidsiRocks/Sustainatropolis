@@ -104,6 +104,8 @@ class ProjectsUI:
         projectsListTop = windowHeight - padY - projectListHeight
 
         projectsListRect = Rect(projectListLeft,projectsListTop,projectListWidth,projectListHeight)
+        self.projectListRect = projectsListRect
+        print("created project list rect" , projectsListRect , self.projectListRect)
         projectListWindow = UIWindow(rect=projectsListRect,manager=manager,
             window_display_title="Projects List",
             object_id=createId("projectsList"),
@@ -130,15 +132,22 @@ class ProjectsUI:
             self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
             self.world.placeObject(x,y,self.currentProject)
             self.currentProject = None
+        else :
+            print(self.currentProject)
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
             if self.world.checkPlacementValid(x,y,self.currentProject):
                 self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"transparent"}
             else:
                 self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"red"}
+        # else :
+        # else : 
+                # self.curTileDrawReq = None
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            print("inside processEvents button pressed")
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
+            print(buttonName)
             if buttonName in self.projectNameButtonDct:
                 self.handleProjectButtonClick(buttonName)
     def handleProjectButtonClick(self,buttonName):
