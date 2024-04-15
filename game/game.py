@@ -146,11 +146,6 @@ class MainGameScene:
                 if not(mouseX < coordinates[0] or mouseX > coordinates[0]+coordinates[2] or mouseY < coordinates[1] or mouseY > coordinates[1]+coordinates[3]):
                     print("continuing")
                 else : 
-                    
-                    # continue
-                # if self.mainGameUI.projectUIWrapper!= None and self.mainGameUI.projectUIWrapper.projectListRect.collidepoint(mouseX,mouseY) : 
-                #     print("continuing")
-                #     continue 
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                     self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
                     if posX < self.world.noBlockX and posX >= 0 and posY < self.world.noBlockY and posY >= 0:

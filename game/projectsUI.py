@@ -113,6 +113,9 @@ class ProjectsUI:
                 self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"transparent"}
             else:
                 self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"red"}
+        # else :
+        # else : 
+                # self.curTileDrawReq = None
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             print("inside processEvents button pressed")
@@ -124,6 +127,7 @@ class ProjectsUI:
         print("inside handleProjectButtonClick" , buttonName , self.currentProject)
         if self.currentProject != None and self.currentProject == buttonName:
             self.currentProject = None
+            # self.hoverOnWorld(-1,-1)
         else :
             self.currentProject = buttonName
     def setWorld(self,world):
