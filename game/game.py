@@ -136,7 +136,9 @@ class MainGameScene:
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
                 self.mainGameUI.processEvents(event)
             self.manager.process_events(event)
-            self.manager.update(self.timeDelta)
+            
+        #perhaps next statement outside loop recheck later
+        self.manager.update(self.timeDelta)
     def update(self):
         (dx,dy) = cameraMovement(self.width,self.height)
         self.cameraPos = (self.cameraPos[0]+dx,self.cameraPos[1]+dy)

@@ -26,7 +26,8 @@ class TurnBarUI:
         self.strtYr = 2020
         self.crntYr = 2030
         self.endYr = 2040
-        (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar) = self.createTurnBar(manager)
+        (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
+        self.moneyPerYear = 20
     def createTurnBar(self,manager):
         width = manager.window_resolution[0]
         height = manager.window_resolution[1]
@@ -36,6 +37,9 @@ class TurnBarUI:
         txtLblWidth  = 100 
         txtLblHeight = 30
 
+        nextTurnButtonWidth  = 120
+        nextTurnButtonHeight = 50
+
         strtLblTxt  = str(self.strtYr)
         endLblTxt = str(self.endYr)
         crntLblTxt = str(self.crntYr)
@@ -44,9 +48,14 @@ class TurnBarUI:
         prgrsBarLeft = prgrsBarRect.left
         prgrsBarRight = prgrsBarLeft + turnBarWidth
         prgrsBarBottom = turnBarHeight
+
         startYearLblRect = Rect(prgrsBarLeft-txtLblWidth,0,txtLblWidth,txtLblHeight)
         endYearLblRect = Rect(prgrsBarRight,0,txtLblWidth,txtLblHeight)
         crntYearLblRect = Rect((width-txtLblWidth)/2,prgrsBarBottom,txtLblWidth,txtLblHeight,text=strtLblTxt)
+
+        nextTurnButtonRects = Rect((width-nextTurnButtonWidth)/2,
+                                   crntYearLblRect.top + crntYearLblRect.height,
+                                   nextTurnButtonWidth,nextTurnButtonHeight)
 
         turnBar = CustomUIprogressBar(
             relative_rect=prgrsBarRect,manager=manager,
@@ -60,7 +69,11 @@ class TurnBarUI:
         endYrLbl = UILabel(relative_rect=endYearLblRect,manager=manager,text=endLblTxt,object_id=createStartEndLabelId("endYrLbl"))
         crntYrLbl = UILabel(relative_rect=crntYearLblRect,manager=manager,text=crntLblTxt,object_id=createStartEndLabelId("curYrLbl"))
 
-        return (strtYrLbl,endYrLbl,crntYrLbl,turnBar)
+        nextTurnButton = UIButton(relative_rect=nextTurnButtonRects,manager=manager,
+                                  text="Next Turn",
+                                  object_id=ObjectID(object_id="#nextTurnButton",class_id="@nextTurnButton"))
+
+        return (strtYrLbl,endYrLbl,crntYrLbl,turnBar,nextTurnButton)
 
     def updatePrgrsBar(self):
         self.turnBar.set_current_progress(self.crntYr-self.strtYr)
@@ -72,9 +85,13 @@ class TurnBarUI:
         self.updatePrgrsBar()
     def setEndYear(self,endYr):
         self.endYr = endYr
-        self.endYrLbl.set_text(set(endYr))
+        self.endYrLbl.set_text(str(endYr))
         self.updatePrgrsBar()
     def setCrntYear(self,crntYr):
         self.crntYr = crntYr
-        self.crntYrLbl.set_text(set(crntYr))
+        self.crntYrLbl.set_text(str(crntYr))
         self.updatePrgrsBar()
+    def processEvents(self,event):
+        if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
+            if self.crntYr < self.endYr:
+                self.setCrntYear(self.crntYr+1)

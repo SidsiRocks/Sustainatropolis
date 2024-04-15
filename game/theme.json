@@ -422,5 +422,24 @@
             "selected_bg":"#e68a00",
             "active_bg":"#ffad33"
         }
+    },
+    "@nextTurnButton":{
+        "colours":{
+            "normal_bg":"#ffad33",
+            "hovered_bg":"#ffc266",
+            "disabled_bg":"#ffebcc",
+            "selected_bg":"#e68a00",
+            "active_bg":"#ffad33",
+            "normal_border":"#e68a00",
+            "hovered_border":"#e68a00",
+            "disabled_border":"#e68a00",
+            "selected_border":"#e68a00",
+            "active_border":"#e68a00"
+        },
+        "misc":{
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"10",
+            "border_width":"5"
+        }
     }
 }
