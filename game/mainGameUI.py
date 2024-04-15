@@ -21,7 +21,7 @@ def createId(txt):
 
 
 class MainGameUI:
-    def __init__(self,manager,themePath,world):
+    def __init__(self,manager,themePath,world,game):
         #have to create manager correctly
         self.manager = manager
         self.loadTheme(themePath)
@@ -30,6 +30,7 @@ class MainGameUI:
         self.notificationBox = NotificationsBoxUI(manager)
         self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,self.notificationBox)
         self.projectUIWrapper.setWorld(world)
+        self.projectUIWrapper.setGame(game)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
     

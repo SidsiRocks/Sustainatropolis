@@ -20,7 +20,7 @@ def createProgessLabelId(txt):
     return ObjectID(class_id="@"+"statisticalProgress",object_id="#Progress_"+txt)
 class StatisticsWindow:
     def __init__(self,manager):
-        self.statNames = ["unclean water","clean water","PMI","percentage occupied"]
+        self.statNames = ["unclean water","clean water","power usage"]
         self.statProgressBarDict = {}
         self.statsWindow = self.createStatsWindow(manager)
         self.populateStatsWindow(manager)
@@ -37,8 +37,8 @@ class StatisticsWindow:
             relative_rect=prgrssRect,manager=manager,
             container=self.statsWindow,
             object_id=createProgessLabelId(lblTxt),
-            current_progress=100,
-            maximum_progess=250
+            current_progress=0,
+            maximum_progess=0
         )
         #have to explicitly call to set progress
         prgrssBar.set_current_progress(100)
@@ -46,9 +46,11 @@ class StatisticsWindow:
         return (y,txtLbl,prgrssBar)
 
     def setStats(self,name,curProgress,maximum=None):
-        self.statProgressBarDict[name].set_current_progress(curProgress)
+        self.statProgressBarDict[name]["progressBar"].set_current_progress(curProgress)
         if maximum:
-            self.statProgressBarDict[name].maximum_progress = maximum
+            #self.statProgressBarDict[name].maximum_progress = maximum
+            self.statProgressBarDict[name]["progressBar"].set_maximum(maximum)
+
     def populateStatsWindow(self,manager):    
         y = 0
         padX = 10

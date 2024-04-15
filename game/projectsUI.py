@@ -16,6 +16,7 @@ from pygame_gui.windows.ui_message_window import UIMessageWindow
 
 from .statisticsUI import StatisticsWindow
 from .MessageWindow import MessageWindow
+from .powerManagement import PowerManagement
 
 #modifing ovject id to be common so styling can be done together
 def createObjectId(txt):
@@ -46,6 +47,9 @@ class ProjectsUI:
         #this will be read from and rednered to in game
         self.curTileDrawReq = {}
         self.manager = manager
+        self.game = None
+    def setGame(self,game):
+        self.game = game
     def loadProjectLstAndCost(self,jsonFilePath):
         data = json.load(open(jsonFilePath))
         projectLst = data["projectLists"]
@@ -131,10 +135,13 @@ class ProjectsUI:
         if self.currentProject != None and self.world.checkPlacementValid(x,y,self.currentProject):
             self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
             self.world.placeObject(x,y,self.currentProject)
+            oldProjName = self.currentProject
             self.currentProject = None
+            return oldProjName
         else :
             self.currentProject = None
             self.curTileDrawReq = {}
+        return None
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
             if self.world.checkPlacementValid(x,y,self.currentProject):
@@ -152,18 +159,34 @@ class ProjectsUI:
             if buttonName in self.projectNameButtonDct:
                 self.handleProjectButtonClick(buttonName)
     def handleProjectButtonClick(self,buttonName):
+        isEnoughMoney = self.notificationBox.money >= self.projectToCostMap[buttonName]
+        isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
+        print(f"isEnoughPower:{isEnoughPower} for the projName:{buttonName}")
         if self.currentProject == buttonName:
             self.currentProject = None
             self.curTileDrawReq = {}
-        elif self.notificationBox.money >= self.projectToCostMap[buttonName]:
+        elif isEnoughMoney and isEnoughPower:
             self.currentProject = buttonName
-        else:
+        elif not isEnoughMoney:
             notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
-            self.createNotEnoughMoneyWindow(notEnghMoneyMsg)
+            self.createNotEnoughWindow(notEnghMoneyMsg)
+        elif not isEnoughPower:
+            notEnghPowerMsg = self.generateNotEnoughPowerMsg(buttonName,self.game.powerManagement)
+            self.createNotEnoughWindow(notEnghPowerMsg)
     def setWorld(self,world):
         self.world = world
     #should create one and reload as needed possibly
     #also need to deactivate remaining components in the mean time
+    def generateNotEnoughPowerMsg(self,projName,powerManag:PowerManagement):
+        projPower = powerManag.getPowerReqForProj(projName)
+        totalPower = powerManag.getPowerCons() + projPower
+        curPower = powerManag.getPowerProd()
+
+        txt = f"""<font face='Montseraat' color="#ffffff">
+Require power production {totalPower} to build
+{projName} but currently only have {curPower}</font>
+                """
+        return txt
     def generateNotEnoughMoneyMsg(self,projName,curMoney):
         projCost = self.projectToCostMap[projName]
         txt = f"""<font face='Montseraat' color="#ffffff">
@@ -171,7 +194,7 @@ Require {projCost} to build
 {projName} but currently only have {curMoney}</font>
         """
         return txt
-    def createNotEnoughMoneyWindow(self,warnWinMessHTML):
+    def createNotEnoughWindow(self,warnWinMessHTML):
         width = 300
         height = 300
         winWidth = self.manager.window_resolution[0]

@@ -2,6 +2,8 @@ import pygame as pg
 from .gameWorld import GameData
 from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos,changeOfBasis,basisVecX,basisVecY
 from .settings import TILE_SIZE
+from .powerManagement import PowerManagement
+
 import sys
 import pygame_gui 
 from game.mainGameUI import MainGameUI
@@ -41,7 +43,7 @@ def cameraMovementKeyBoard(keyPress):
     elif keyPress == pg.K_a:
         return (-speed,0)
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset"]
+    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement"]
     def __init__(self,screen,clock):
         self.screen = screen 
         self.clock = clock
@@ -60,7 +62,7 @@ class MainGameScene:
 
         self.manager = pygame_gui.UIManager((self.width,self.height))
         self.loadFonts()
-        self.mainGameUI = MainGameUI(self.manager,"./game/theme.json",self.world)
+        self.mainGameUI = MainGameUI(self.manager,"./game/theme.json",self.world,self)
 
         self.clearButton = UIButton(Rect(500,500,100,50),"Clear HTML",self.manager)
         self.appendButton = UIButton(Rect(600,600,100,50),"Append HTML",self.manager)
@@ -71,6 +73,8 @@ class MainGameScene:
         self.timeDelta = self.clock.tick(60)/1000.0
         self.groundCenterOffset = (0,0)
         self.imgCenterOffset = (0,0)
+
+        self.powerManagement = PowerManagement()        
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -157,9 +161,10 @@ class MainGameScene:
                     print("continuing")
                 else : 
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
-                    self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
-                    if posX < self.world.noBlockX and posX >= 0 and posY < self.world.noBlockY and posY >= 0:
-                        pass #is a valid coordinate
+                    projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
+                    if projName != None:
+                        self.powerManagement.handleProj(projName)
+                        self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later

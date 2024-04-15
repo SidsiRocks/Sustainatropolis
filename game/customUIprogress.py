@@ -29,16 +29,29 @@ class CustomUIprogressBar(UIStatusBar):
                          anchors=anchors,
                          visible=visible)
 
-        print("current and maximum progress in constructor",self.current_progress,self.maximum_progress)
+        #print("current and maximum progress in constructor",self.current_progress,self.maximum_progress)
         
     @property
     def progress_percentage(self):
-        print("current progress is:",self.current_progress,"maximum is:",self.maximum_progress)
-        return self.current_progress/ self.maximum_progress
+#        print("current progress is:",self.current_progress,"maximum is:",self.maximum_progress)
+        if self.maximum_progress != 0:
+            return min(self.current_progress/ self.maximum_progress,1)
+        else:
+            return 0
     def status_text(self):
-        print("current progress is:",self.current_progress,"maximum is:",self.maximum_progress)
+#        print("current progress is:",self.current_progress,"maximum is:",self.maximum_progress)
         return f"{self.current_progress:0.1f}/{self.maximum_progress:0.1f}"
         
     def set_current_progress(self,progress:float):
+        if self.current_progress != progress:
+            self.status_changed = True
         self.current_progress = progress 
-        self.percent_full = (progress*100)/self.maximum_progress
+        if self.maximum_progress != 0:
+            self.percent_full = min((progress*100)/self.maximum_progress,1)
+        else:
+            self.percent_full = 0
+    def set_maximum(self,maxVal):
+        if maxVal != self.maximum_progress:
+            self.maximum_progress = maxVal
+            self.status_changed = True 
+    
