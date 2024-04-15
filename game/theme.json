@@ -99,6 +99,12 @@
     "#windMill":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/windMillIndivResize.png"}}
     },
+    "#Dam":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/DamResize.png"}}
+    },
+    "#WaterTank":{
+        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/smallWaterTank.png"}}
+    },
     "@statWindow":{
         "misc":{
             "shape":"rounded_rectangle",

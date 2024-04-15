@@ -7,7 +7,9 @@
         "industrialPlant",
         "solarPowerPlant",
         "powerPlant",
-        "windMill"
+        "windMill",
+        "Dam",
+        "WaterTank"
     ]
     ,"projectToCostMap":{
         "waterTreatment":10,
@@ -17,6 +19,8 @@
         "industrialPlant":10,
         "solarPowerPlant":10,
         "powerPlant":10,
-        "windMill":10
+        "windMill":10,
+        "Dam":10,
+        "WaterTank":10
     }
 }

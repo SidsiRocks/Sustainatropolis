@@ -142,5 +142,25 @@
         ,"offset":"(10,-15)"
         ,"size":"(1,1)"
         ,"comment":"may want to increase size in x direction here too to prevent weird rendering errors"
+    },
+    "Dam":{
+        "path":
+        {
+            "normal":"res/graphics/imgForPlacement/DamResize.png",
+            "transparent":"res/graphics/imgTransparencyPlace/DamResize.png"
+        }
+        ,"colour":"rgb(144,151,18)"
+        ,"offset":"(-30,-10)"
+        ,"size":"(4,4)"
+    },
+    "WaterTank":{
+        "path": 
+        {
+            "normal":"res/graphics/imgForPlacement/smallWaterTank.png",
+            "transparent":"res/graphics/imgTransparencyPlace/smallWaterTank.png"
+        }
+        ,"colour":"rgb(0,42,255)" 
+        ,"offset":"(0,0)" 
+        ,"size":"(1,1)"
     }
 }
