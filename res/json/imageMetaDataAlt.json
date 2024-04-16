@@ -8,7 +8,7 @@
         },
         "mapTreeRock":{
             "path":{
-                "normal":"res/graphics/imgForPlacement/mapRockTreeForTopRightDebug.png"
+                "normal":"res/graphics/imgForPlacement/playerData.png"
             }
         }
     },
@@ -51,7 +51,7 @@
                 "normal":"res/graphics/imgForPlacement/building01.png"
                 ,"transparent":"res/graphics/imgAlternateTrans/building01.png"
             }
-            ,"colour":"rgb(0,0,0)"
+            ,"colour":"rgb(2,2,2)"
             ,"offset":"(0,0)"
             ,"size":"(1,1)"
         },

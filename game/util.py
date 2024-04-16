@@ -66,3 +66,7 @@ def parseTuple(txt:str):
         txt = txt[1:-1]
         coordArr = [int(i) for i in txt.split(",")]
         return (coordArr[0],coordArr[1])
+
+def generateRedTintedImage(curTransparent):
+    curTransRed = curTransparent.__copy__()
+    curTransRed.fill((255,0,0),special_flags=pg.BLEND_ADD)

@@ -1,14 +1,16 @@
 from .util import ldImage,parseColour,parseTuple
 from .InvalidPlacementException import InvalidPlacementException
 import pygame as pg
+from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap"]
     def __init__(self,noBlockX,noBlockY,width,height,*args):
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
+        self.indxImgMap = {}
         self.tileToColor = {}
         self.imgArr = []
         self.transpImgArr = []
@@ -93,7 +95,15 @@ class GameData:
                 if rockTreeData[x+i][y-j] == None:
                     rockTreeData[x+i][y-j] = (-i,j)
                 else:
-                    raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects {x},{y} {tileName}")
+                    overLapObj = rockTreeData[x+i][y-j]
+                    overlapCoord = (x+i,y-j)
+                    tile = None
+                    if type(overLapObj) == tuple:
+                        overlapCoord = (overlapCoord[0]+overLapObj[0],overlapCoord[1]+overLapObj[1])
+                        tile = rockTreeData[overlapCoord[0]][overlapCoord[1]]["tile"]
+                    else:
+                        tile = rockTreeData[overlapCoord[0]][overlapCoord[1]]["tile"]
+                    raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]}")
         rockTreeData[x][y] = {"tile":self.imgIndxMap[tileName]}
     def placeObject(self,x,y,tileName):
         curSize = self.sizeArr[self.imgIndxMap[tileName]]
@@ -105,54 +115,10 @@ class GameData:
             for y in range(self.noBlockY):
                 #not precalculating positions for now
                 pixel = self.imgArr[self.imgIndxMap["mapTreeRock"]].get_at((y,x))
-                #print(pixel)
-                if pixel == self.tileToColor["rock"]:
-                    curSize = self.sizeArr[self.imgIndxMap["rock"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"rock")
-                elif pixel == self.tileToColor["tree"]: 
-                    curSize = self.sizeArr[self.imgIndxMap["tree"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"tree")
-                elif pixel == self.tileToColor["waterTreatment"]:
-                    curSize = self.sizeArr[self.imgIndxMap["waterTreatment"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"waterTreatment")
-                elif pixel == self.tileToColor["sewagePlant"]:
-                    curSize = self.sizeArr[self.imgIndxMap["sewagePlant"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"sewagePlant")
-                elif pixel == self.tileToColor["waterPump"]:
-                    curSize = self.sizeArr[self.imgIndxMap["waterPump"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"waterPump")
-                elif pixel == self.tileToColor["purificationPlant"]:
-                    curSize = self.sizeArr[self.imgIndxMap["purificationPlant"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"purificationPlant")
-                elif pixel == self.tileToColor["industrialPlant"]:
-                    curSize = self.sizeArr[self.imgIndxMap["industrialPlant"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"industrialPlant")
-                elif pixel == self.tileToColor["solarPowerPlant"]:
-                    curSize = self.sizeArr[self.imgIndxMap["solarPowerPlant"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"solarPowerPlant")
-                elif pixel == self.tileToColor["powerPlant"]:
-                    curSize = self.sizeArr[self.imgIndxMap["powerPlant"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"powerPlant")
-                elif pixel == self.tileToColor["windMill"]:
-                    curSize = self.sizeArr[self.imgIndxMap["windMill"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"windMill")
-                elif pixel == self.tileToColor["Dam"]:
-                    curSize = self.sizeArr[self.imgIndxMap["Dam"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"Dam")
-                elif pixel == self.tileToColor["WaterTank"]:
-                    curSize = self.sizeArr[self.imgIndxMap["WaterTank"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"WaterTank")
-                elif pixel == self.tileToColor["CityBuilding1"]:
-                    curSize = self.sizeArr[self.imgIndxMap["CityBuilding1"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"CityBuilding1")
-                elif pixel == self.tileToColor["CityBuilding2"]:
-                    curSize = self.sizeArr[self.imgIndxMap["CityBuilding2"]]
-                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"CityBuilding2")
-                else:
-                    #ignoring if someother coulour so include water and grass for refrence in the image
-                    pass
-                # curDict = {"tile":self.imgIndxMap["block"]}
-                # groundData[x][y] = curDict
+                for key in self.projectNames:
+                    if pixel == self.tileToColor[key]:
+                        curSize = self.sizeArr[self.imgIndxMap[key]]
+                        self.blockNeighbourSlots(x,y,curSize,rockTreeData,key)
         return rockTreeData
     def createGroundDataDebug(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
@@ -183,6 +149,7 @@ class GameData:
             curTransRed = None
             
             self.imgIndxMap[key] = len(self.imgArr)
+            self.indxImgMap[len(self.imgArr)] = key
 
             self.imgArr.append(curImg)
             self.transpImgArr.append(curTransparent)
@@ -200,6 +167,7 @@ class GameData:
             curTransRed = None
             
             self.imgIndxMap[key] = len(self.imgArr)
+            self.indxImgMap[len(self.imgArr)] = key
 
             self.imgArr.append(curImg)
             self.transpImgArr.append(curTransparent)
@@ -217,7 +185,8 @@ class GameData:
             curTransparent = ldImage(projData[key]["path"]["transparent"])
 
             self.imgIndxMap[key] = len(self.imgArr)
-            
+            self.indxImgMap[len(self.imgArr)] = key
+
             curTransRed = curTransparent.__copy__()
             curTransRed.fill((255,0,0),special_flags=pg.BLEND_ADD)
 
@@ -231,3 +200,14 @@ class GameData:
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(projData[key]["colour"])
+    def writeRockTreeData(self,imagePath):
+        image = Image.new('RGB',(self.noBlockY,self.noBlockX))
+        for x in range(self.noBlockX):
+            for y in range(self.noBlockY):
+                curDict = self.rockTreeData[x][y]
+                if type(curDict) == dict:
+                    imgIndx = curDict["tile"]
+                    imgName = self.indxImgMap[imgIndx]
+                    curColor = self.tileToColor[imgName]
+                    image.putpixel((y,x),curColor)
+        image.save(imagePath)
