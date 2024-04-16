@@ -1,5 +1,5 @@
 import pygame as pg
-from .gameWorld import GameData
+from .gameWorldAlt import GameData
 from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos,changeOfBasis,basisVecX,basisVecY
 from .settings import TILE_SIZE
 from .powerManagement import PowerManagement
