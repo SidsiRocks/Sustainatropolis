@@ -51,9 +51,9 @@ class GameData:
                 # groundData[x][y] = curDict
         return groundData
     def checkGroundTiles(self,x,y,tileName):
-        incorrectTile = "tree"
+        incorrectTile = "water"
         if tileName == "Dam":
-            incorrectTile = "tree"
+            incorrectTile = "block"
         xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
 #        if (x < (xSize -1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
 #            return False
