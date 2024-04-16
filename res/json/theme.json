@@ -455,5 +455,21 @@
             "shape_corner_radius":"10",
             "border_width":"5"
         }
+    },
+
+    "@settingsWin":{
+        "misc":{
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"15",
+            "border_width":"5"
+        },
+        "colours":{
+            "dark_bg":"#e68a00",
+            "normal_border":"#e68a00",
+            "hovered_border":"#e68a00",
+            "disabled_border":"#e68a00",
+            "selected_border":"#e68a00",
+            "active_border":"#e68a00"
+        }
     }
 }
