@@ -35,20 +35,20 @@
         ,"size":"(1,1)"
         ,"comment":"dummy size not actually used"
     },
+    "mapTreeRock":{
+        "path":{
+            "normal":"res/graphics/imgForPlacement/mapRockTreeForTopRightDebug.png",
+            "transparent":"res/graphics/imgTransparencyPlace/mapTreeRockDebug.png"
+        }
+        ,"offset":"(0,0)"
+        ,"size":"(1,1)"
+    },
     "water":{
         "path":{
             "normal":"res/graphics/imgForPlacement/waterfallEndE.png"
             ,"transparent":"res/graphics/imgTransparencyPlace/waterfallEndE.png"
         }
         ,"colour":"rgba(0,255,255,255)"
-        ,"offset":"(0,0)"
-        ,"size":"(1,1)"
-    },
-    "mapTreeRock":{
-        "path":{
-            "normal":"res/graphics/imgForPlacement/mapWaterGrasscopy2.png",
-            "transparent":"res/graphics/imgTransparencyPlace/mapTreeRockDebug.png"
-        }
         ,"offset":"(0,0)"
         ,"size":"(1,1)"
     },
@@ -93,8 +93,8 @@
             "transparent":"res/graphics/imgTransparencyPlace/pumpingPlantRemoveBackgroundResized.png"
         }
         ,"colour":"rgb(158,37,21)"
-        ,"offset":"(30,-30)"
-        ,"size":"(3,4)"
+        ,"offset":"(30,90)"
+        ,"size":"(3,3)"
         ,"comment":"Extended pipe size in y direction from 3 to 4 to prevent weird rendering glitches"
     },
     "purificationPlant":{

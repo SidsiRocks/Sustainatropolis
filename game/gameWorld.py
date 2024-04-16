@@ -14,6 +14,7 @@ class GameData:
         self.transpImgArr = []
         self.transRedArr = []
         self.offsetArr = []
+        self.renderOffsetArr = []
         self.sizeArr = []
         self.redTintColor = (255,0,0)
         #self.loadImages()
@@ -51,24 +52,28 @@ class GameData:
                 # groundData[x][y] = curDict
         return groundData
     def checkGroundTiles(self,x,y,tileName):
-        incorrectTile = "water"
+        incorrectTile = "tree"
         if tileName == "Dam":
-            incorrectTile = "block"
+            incorrectTile = "tree"
         xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
-        if (x < (xSize -1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
+#        if (x < (xSize -1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
+#            return False
+        if(y < (ySize - 1) or y > self.noBlockY or x +xSize > self.noBlockX or x < 0):
             return False
         for i in range(xSize):
             for j in range(ySize):
-                if self.groundData[x-i][y+j]["tile"] == self.imgIndxMap[incorrectTile]:
+                if self.groundData[x+i][y-j]["tile"] == self.imgIndxMap[incorrectTile]:
                     return False
         return True
     def checkSpacePresent(self,x,y,tileName):
         xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
-        if(x <(xSize-1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
+#        if(x <(xSize-1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
+#            return False
+        if(y < (ySize - 1) or y > self.noBlockY or x +xSize > self.noBlockX or x < 0):
             return False
         for i in range(xSize):
             for j in range(ySize):
-                if self.rockTreeData[x-i][y+j] != None:
+                if self.rockTreeData[x+i][y-j] != None:
                     return False
         
         return True
@@ -78,12 +83,14 @@ class GameData:
         return isSpacePresent and isGroundTileCorr
     def blockNeighbourSlots(self,x,y,size,rockTreeData,tileName):
         xSize,ySize = size 
-        if(x < (xSize-1) or y+ySize > self.noBlockY):
-            raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects at {x},{y} {tileName}")
+#        if(x < (xSize-1) or y+ySize > self.noBlockY):
+#            raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects at {x},{y} {tileName}")
+        if(y < (ySize - 1) or y > self.noBlockY or x +xSize > self.noBlockX or x < 0):
+            return False
         for i in range(xSize):
             for j in range(ySize):
-                if rockTreeData[x-i][y+j] == None:
-                    rockTreeData[x-i][y+j] = (i,-j)
+                if rockTreeData[x+i][y-j] == None:
+                    rockTreeData[x+i][y-j] = (-i,j)
                 else:
                     raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects {x},{y} {tileName}")
         rockTreeData[x][y] = {"tile":self.imgIndxMap[tileName]}
