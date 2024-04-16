@@ -12,6 +12,7 @@ from game.mainGameUI import MainGameUI
 from pygame import Rect
 from pygame_gui.elements.ui_button import UIButton
 from .audio import AudioManager
+from .groundRender import GroundRender
 """
 def cameraMovement(width,height):
     mouse_pos = pg.mouse.get_pos()
@@ -57,9 +58,14 @@ class MainGameScene:
         self.camera = Camera()
         #
         self.groundBuffSize = self.calGroundSurfaceSize()
-        self.centerOffset = self.calCenterOffset(self.width,self.height)
-        self.groundSurface = pg.Surface(self.groundBuffSize).convert_alpha()
-        self.firstRender = True
+        self.centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+
+        imgOffsetX = (self.width - self.groundBuffSize[0])/2
+        imgOffsetY = (self.height - self.groundBuffSize[1])/2
+        self.imgCenterOffset =(imgOffsetX,imgOffsetY)
+        #self.groundSurface = pg.Surface(self.groundBuffSize).convert_alpha()
+        #self.firstRender = True
+        self.groundRender = GroundRender(self.camera,self.groundBuffSize,self.centerOffset,self.imgCenterOffset,self.world)
 
         self.audioManager = AudioManager()
         self.audioManager.playMusic()
@@ -75,11 +81,8 @@ class MainGameScene:
         </br>
         """
         self.timeDelta = self.clock.tick(60)/1000.0
-        self.groundCenterOffset = (0,0)
+        self.groundCenterOffset = self.centerOffset
 
-        imgOffsetX = (self.width - self.groundBuffSize[0])/2
-        imgOffsetY = (self.height - self.groundBuffSize[1])/2
-        self.imgCenterOffset =(imgOffsetX,imgOffsetY)
 
         self.powerManagement = PowerManagement()        
         # self.waterManagement = WaterManagement()
@@ -183,7 +186,7 @@ class MainGameScene:
     def drawToGroundBuff(self):
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
-        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        centerOffset = self.centerOffset
         self.groundCenterOffset = centerOffset
 
         for x in range(self.world.noBlockX):
@@ -196,7 +199,7 @@ class MainGameScene:
         self.screen.blit(self.groundSurface,(self.imgCenterOffset[0]-self.camera.getX(),self.imgCenterOffset[1]-self.camera.getY()))
     def drawTreeRock(self):
         self.world.reloadOffsets()
-        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        centerOffset = self.centerOffset
         totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
         rockTreeData = self.world.rockTreeData
         groundImgArr = self.world.imgArr
@@ -220,13 +223,10 @@ class MainGameScene:
         return (width,height)
     def draw(self):
         self.screen.fill((0,0,0))
-        if self.firstRender:
-            self.drawToGroundBuff()
-            self.firstRender = False
-        self.drawGround()
+        #self.drawGround()
+        self.groundRender.drawGround(self.screen)
         fps = round(self.clock.get_fps())
         #print("fps is:",fps)
-        self.drawGround()
         self.drawTreeRock()
         self.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq)
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
@@ -235,7 +235,7 @@ class MainGameScene:
 
     def drawPlacementReq(self,curDict):
 
-        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        centerOffset = self.centerOffset
         totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
 
         if curDict != {}:
