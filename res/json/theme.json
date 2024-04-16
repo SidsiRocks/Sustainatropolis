@@ -518,5 +518,16 @@
             "shape_corner_radius":"10",
             "border_width":"5"
         }
+    },
+    "@projectDescLbl":{
+        "font":{
+            "name":"Montserrat",
+            "size":"15",
+            "bold":"1"
+        },
+        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
+        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
+        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
+        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
     }
 }

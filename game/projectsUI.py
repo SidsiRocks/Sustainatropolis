@@ -70,8 +70,14 @@ class ProjectsUI:
             object_id="#"+projName+"Currency",
             class_id="@currencyButton")
             ,manager=manager,container=projLstWinScroll)
+    def createProjectLabel(self,labelWidth,labelTxt,projLstWinScroll,projButtonRect,manager):
+        labelHeight = 30
+        padY = 10
+        labelRect = Rect(projButtonRect.left,projButtonRect.top + padY,labelWidth,labelHeight)
+        curLabl = UILabel(relative_rect=labelRect,text=labelTxt,manager=manager,container=projLstWinScroll,object_id=ObjectID("#"+labelTxt+"Lbl","@projectDescLbl"))
+        return curLabl
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
-        imgBtnWidth = 150
+        imgBtnWidth = 170
         #imgBtnHt for these values is 175
         imgBtnPadX = 10
         imgBtnPady = 10
@@ -88,13 +94,14 @@ class ProjectsUI:
             object_id=ObjectID(class_id='@projectButtons',
             object_id='#'+projName) )
         self.createCurrencyButton(curBut,projLstRect,projName,manager,projLstWinScroll)
+        self.createProjectLabel(imgBtnWidth,projName,projLstWinScroll,projLstRect,manager)
 
         x += imgBtnWidth
         return (x,curBut)
 
     def createProjectsList(self,statsWindow,manager):
         projectListWidth = 1200
-        projectListHeight = 250
+        projectListHeight = 290
         padX = 10
         padY = 10
 
