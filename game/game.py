@@ -4,6 +4,7 @@ from .util import drawDebugText,isoCoordToRenderPos,isoRenderPosToImgRenderPos,c
 from .settings import TILE_SIZE
 from .powerManagement import PowerManagement
 from .waterManagement import WaterManagement
+from .camera import Camera
 
 import sys
 import pygame_gui 
@@ -53,7 +54,8 @@ class MainGameScene:
         self.world = GameData(50,50,self.width,self.height,"res/graphics/imgForPlacement/mapWaterGrasscopy.png","res/graphics/imgForPlacement/mapWaterGrasscopy2.png")
         self.playing = True
 
-        self.cameraPos = (0,0)
+        self.camera = Camera()
+        #
         self.groundBuffSize = self.calGroundSurfaceSize()
         self.centerOffset = self.calCenterOffset(self.width,self.height)
         self.groundSurface = pg.Surface(self.groundBuffSize).convert_alpha()
@@ -73,7 +75,10 @@ class MainGameScene:
         """
         self.timeDelta = self.clock.tick(60)/1000.0
         self.groundCenterOffset = (0,0)
-        self.imgCenterOffset = (0,0)
+
+        imgOffsetX = (self.width - self.groundBuffSize[0])/2
+        imgOffsetY = (self.height - self.groundBuffSize[1])/2
+        self.imgCenterOffset =(imgOffsetX,imgOffsetY)
 
         self.powerManagement = PowerManagement()        
         self.waterManagement = WaterManagement()
@@ -111,16 +116,16 @@ class MainGameScene:
         self.mouseHoverEvents()
         if keys[pg.K_w]:
             x,y = cameraMovementKeyBoard(pg.K_w)
-            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+            self.camera.moveCamera(x,y)
         if keys[pg.K_a]:
             x,y = cameraMovementKeyBoard(pg.K_a)
-            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+            self.camera.moveCamera(x,y)
         if keys[pg.K_s]:
             x,y = cameraMovementKeyBoard(pg.K_s)
-            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+            self.camera.moveCamera(x,y)
         if keys[pg.K_d]:
             x,y = cameraMovementKeyBoard(pg.K_d)
-            self.cameraPos = (self.cameraPos[0]+x,self.cameraPos[1]+y)
+            self.camera.moveCamera(x,y)
         if keys[pg.K_p] : 
             self.audioManager.toggleMusic()
         if keys[pg.K_KP_PLUS] : 
@@ -177,7 +182,7 @@ class MainGameScene:
         self.manager.update(self.timeDelta)
     def update(self):
         (dx,dy) = cameraMovement(self.width,self.height)
-        self.cameraPos = (self.cameraPos[0]+dx,self.cameraPos[1]+dy)
+        self.camera.moveCamera(dx,dy)
     def drawToGroundBuff(self):
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
@@ -191,16 +196,13 @@ class MainGameScene:
                 #print("x:",x,"y:",y,"renderPos:",renderPos)
                 self.groundSurface.blit(curImg,renderPos)
     def drawGround(self):
-        imgOffsetX = (self.width - self.groundBuffSize[0])/2
-        imgOffsetY = (self.height - self.groundBuffSize[1])/2
-        self.imgCenterOffset =(imgOffsetX,imgOffsetY)
-        self.screen.blit(self.groundSurface,(imgOffsetX-self.cameraPos[0],imgOffsetY-self.cameraPos[1]))
+        self.screen.blit(self.groundSurface,(self.imgCenterOffset[0]-self.camera.getX(),self.imgCenterOffset[1]-self.camera.getY()))
     def drawTreeRock(self):
         self.world.reloadOffsets()
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
         imgOffsetX = (self.width - self.groundBuffSize[0])/2
         imgOffsetY = (self.height - self.groundBuffSize[1])/2
-        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.cameraPos[0],centerOffset[1]+imgOffsetY-self.cameraPos[1])
+        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.camera.getX(),centerOffset[1]+imgOffsetY-self.camera.getY())
         rockTreeData = self.world.rockTreeData
         groundImgArr = self.world.imgArr
         offsetArr = self.world.offsetArr
@@ -241,7 +243,7 @@ class MainGameScene:
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
         imgOffsetX = (self.width - self.groundBuffSize[0])/2
         imgOffsetY = (self.height - self.groundBuffSize[1])/2
-        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.cameraPos[0],centerOffset[1]+imgOffsetY-self.cameraPos[1])
+        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.camera.getX(),centerOffset[1]+imgOffsetY-self.camera.getY())
 
         if curDict != {}:
             imgIndx = self.world.imgIndxMap[curDict["tile"]]
@@ -260,8 +262,8 @@ class MainGameScene:
         else: 
             pass
     def findIsoGridOrg(self):
-        orgX = self.imgCenterOffset[0] - self.cameraPos[0] + isoCoordToRenderPos((0,0),self.groundCenterOffset)[0]+0
-        orgY = self.imgCenterOffset[1] - self.cameraPos[1] + isoCoordToRenderPos((0,0),self.groundCenterOffset)[1]+TILE_SIZE/2
+        orgX = self.imgCenterOffset[0] - self.camera.getX() + isoCoordToRenderPos((0,0),self.groundCenterOffset)[0]+0
+        orgY = self.imgCenterOffset[1] - self.camera.getY() + isoCoordToRenderPos((0,0),self.groundCenterOffset)[1]+TILE_SIZE/2
         return (orgX,orgY)
     def findClickCoord(self,mouseX,mouseY):
         (orgX,orgY) = self.findIsoGridOrg()
