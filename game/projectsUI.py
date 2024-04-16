@@ -80,7 +80,6 @@ class ProjectsUI:
 
         projLstHeight = projLstWinScroll.rect.height
         imgBtnHt = projLstHeight - 4 * imgBtnPady
-        print("image button height is:",imgBtnHt)
         projLstRect = Rect(x,imgBtnPadX,imgBtnWidth,imgBtnHt)
 
         curBut = UIButton(relative_rect=
@@ -109,7 +108,6 @@ class ProjectsUI:
 
         projectsListRect = Rect(projectListLeft,projectsListTop,projectListWidth,projectListHeight)
         self.projectListRect = projectsListRect
-        print("created project list rect" , projectsListRect , self.projectListRect)
         projectListWindow = UIWindow(rect=projectsListRect,manager=manager,
             window_display_title="Projects List",
             object_id=createId("projectsList"),
@@ -154,17 +152,16 @@ class ProjectsUI:
                 # self.curTileDrawReq = None
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            print("inside processEvents button pressed")
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
-            print(buttonName)
             if buttonName in self.projectNameButtonDct:
                 self.handleProjectButtonClick(buttonName)
     def handleProjectButtonClick(self,buttonName):
         isEnoughMoney = self.notificationBox.money >= self.projectToCostMap[buttonName]
-        isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
-        waterError = self.game.waterManagement.validProjPlace(buttonName)
-        isWaterValid = (waterError == None)
+        # isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
+        # waterError = self.game.waterManagement.validProjPlace(buttonName)
+        # isWaterValid = (waterError == None)
 
+<<<<<<< HEAD
         #temporary code to make placement easy
         #waterError = None
         #isWaterValid = True
@@ -176,16 +173,25 @@ class ProjectsUI:
             self.currentProject = None
             self.curTileDrawReq = {}
         elif isEnoughMoney and isEnoughPower and isWaterValid:
+=======
+        if isEnoughMoney: 
+>>>>>>> Test
             self.currentProject = buttonName
-        elif not isEnoughMoney:
-            notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
-            self.createNotEnoughWindow(notEnghMoneyMsg)
-        elif not isEnoughPower:
-            notEnghPowerMsg = self.generateNotEnoughPowerMsg(buttonName,self.game.powerManagement)
-            self.createNotEnoughWindow(notEnghPowerMsg)
-        elif waterError != None:
-            incrWaterErrorMsg = self.generateWaterErrorMsg(buttonName,waterError)
-            self.createNotEnoughWindow(incrWaterErrorMsg)
+        # print(f"isEnoughPower:{isEnoughPower} for the projName:{buttonName}")
+        # if self.currentProject == buttonName:
+            # self.currentProject = None
+            # self.curTileDrawReq = {}
+        # elif isEnoughMoney and isEnoughPower and isWaterValid:
+            # self.currentProject = buttonName
+        # elif not isEnoughMoney:
+        #     notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
+        #     self.createNotEnoughWindow(notEnghMoneyMsg)
+        # elif not isEnoughPower:
+        #     notEnghPowerMsg = self.generateNotEnoughPowerMsg(buttonName,self.game.powerManagement)
+        #     self.createNotEnoughWindow(notEnghPowerMsg)
+        # elif waterError != None:
+        #     incrWaterErrorMsg = self.generateWaterErrorMsg(buttonName,waterError)
+        #     self.createNotEnoughWindow(incrWaterErrorMsg)
     def setWorld(self,world):
         self.world = world
     #should create one and reload as needed possibly

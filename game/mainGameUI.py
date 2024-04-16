@@ -26,7 +26,7 @@ class MainGameUI:
         self.manager = manager
         self.loadTheme(themePath)
         self.statsWindowWrapper = StatisticsWindow(manager)
-        self.turnBar = TurnBarUI(manager)
+        self.turnBar = TurnBarUI(manager,game)
         self.notificationBox = NotificationsBoxUI(manager)
         self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,self.notificationBox)
         self.projectUIWrapper.setWorld(world)

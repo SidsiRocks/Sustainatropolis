@@ -82,7 +82,7 @@ class MainGameScene:
         self.imgCenterOffset =(imgOffsetX,imgOffsetY)
 
         self.powerManagement = PowerManagement()        
-        self.waterManagement = WaterManagement()
+        # self.waterManagement = WaterManagement()
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -147,27 +147,20 @@ class MainGameScene:
                 if event.key == pg.K_ESCAPE:
                     self.quitScene()
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
-                print("considered this to be ui button click")
                 if event.ui_element == self.clearButton:
-                    print("clicked on clear button")
                     self.mainGameUI.notificationBox.clearHtmlText()
                 if event.ui_element == self.appendButton:
-                    print("clicked on append button")
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
                 self.mainGameUI.processEvents(event)
                 skipMouseClickEvents = True
             elif event.type == pg.MOUSEBUTTONDOWN :
-
-                print("considered this to be mouse click")
                 mouseX,mouseY = pg.mouse.get_pos()
                 coordinates = self.mainGameUI.projectUIWrapper.projectListWindow.rect
                 pos = self.findClickCoord(mouseX,mouseY)
                 (posX,posY) = pos
-                print("required" , posX , posY)
-                print(mouseX,mouseY,coordinates)
 
                 if not(mouseX < coordinates[0] or mouseX > coordinates[0]+coordinates[2] or mouseY < coordinates[1] or mouseY > coordinates[1]+coordinates[3]):
-                    print("continuing")
+                    pass
                 else : 
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
@@ -175,8 +168,11 @@ class MainGameScene:
                         self.powerManagement.handleProj(projName)
                         self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
                     if projName != None:
-                        self.waterManagement.handleProj(projName)
-                        self.waterManagement.setStats(self.mainGameUI.statsWindowWrapper)
+                        print("inside placing a project element game.py", projName)
+                        self.mainGameUI.turnBar.waterManagementManager.projectPlanted(projName)   
+                        self.mainGameUI.turnBar.waterManagementManager.updateVals()
+                        print("\n\n updating Stats")
+                        self.mainGameUI.turnBar.waterManagementManager.setStats(self.mainGameUI.statsWindowWrapper)
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later

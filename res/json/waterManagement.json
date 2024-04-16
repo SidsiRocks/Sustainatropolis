@@ -1,15 +1,57 @@
 {
-    "produceUncleanWater":{"Dam":10,"waterPump":10},
-    "consumeUncleanWater":{"purificationPlant":10},
-
-    "produceCleanWater":{"purificationPlant":10,"sewagePlant":10},
-    "consumeCleanWater":{"WaterTank":10},
-
-    "produceStoreWater":{"WaterTank":10},
-    "consumeStoreWater":{"CityBuilding1":10 , "CityBuilding2" : 10},"comment":["Houses go here"],
-
-    "produceSewage":{"CityBuilding1":10 , "CityBuilding2" : 10},"comment2":["Houses go here"],
-    "consumeSewage":{"sewagePlant":10},
-
-    "comments":["Houses and such would go here"]
+    "produceUncleanWater": {
+        "Dam": 10,
+        "waterPump": 10
+    },
+    "consumeUncleanWater": {
+        "purificationPlant": 10
+    },
+    "produceCleanWater": {
+        "purificationPlant": 10,
+        "sewagePlant": 10
+    },
+    "consumeCleanWater": {
+        "WaterTank": 10
+    },
+    "produceStoreWater": {
+        "WaterTank": 10
+    },
+    "consumeStoreWater": {
+        "CityBuilding1": 10,
+        "CityBuilding2": 10
+    },
+    "comment": [
+        "Houses go here"
+    ],
+    "produceSewage": {
+        "CityBuilding1": 10,
+        "CityBuilding2": 10
+    },
+    "comment2": [
+        "Houses go here"
+    ],
+    "consumeSewage": {
+        "sewagePlant": 10
+    },
+    "offsetsFromRegular": {
+        "Drought": {
+            "produceUncleanWater": {
+                "Dam": -10,
+                "waterPump": -7
+            }
+        },
+        "Summer": {
+            "produceUncleanWater": {
+                "Dam" : -3 ,
+                "waterPump" : -5
+            },
+            "consumeStoreWater": {
+                "CityBuilding1": -5,
+                "CityBUilding2": -10
+            }
+        }
+    },
+    "comments": [
+        "Houses and such would go here"
+    ]
 }
