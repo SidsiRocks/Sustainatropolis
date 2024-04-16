@@ -13,6 +13,7 @@ from pygame import Rect
 from pygame_gui.elements.ui_button import UIButton
 from .audio import AudioManager
 from .groundRender import GroundRender
+from .renderTreeRock import RockTreeRender
 """
 def cameraMovement(width,height):
     mouse_pos = pg.mouse.get_pos()
@@ -46,7 +47,7 @@ def cameraMovementKeyBoard(keyPress):
     elif keyPress == pg.K_a:
         return (-speed,0)
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement"]
+    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock"]
     def __init__(self,screen,clock):
         self.screen = screen 
         self.clock = clock
@@ -83,6 +84,7 @@ class MainGameScene:
         self.timeDelta = self.clock.tick(60)/1000.0
         self.groundCenterOffset = self.centerOffset
 
+        self.renderTreeRock = RockTreeRender(self.camera,self.centerOffset,self.world,self.imgCenterOffset)
 
         self.powerManagement = PowerManagement()        
         # self.waterManagement = WaterManagement()
@@ -195,12 +197,10 @@ class MainGameScene:
                 curImg = groundImgArr[groundData[x][y]["tile"]]
                 #print("x:",x,"y:",y,"renderPos:",renderPos)
                 self.groundSurface.blit(curImg,renderPos)
-    def drawGround(self):
-        self.screen.blit(self.groundSurface,(self.imgCenterOffset[0]-self.camera.getX(),self.imgCenterOffset[1]-self.camera.getY()))
     def drawTreeRock(self):
-        self.world.reloadOffsets()
         centerOffset = self.centerOffset
-        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
+        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX()
+                             ,centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
         rockTreeData = self.world.rockTreeData
         groundImgArr = self.world.imgArr
         offsetArr = self.world.offsetArr
@@ -227,8 +227,8 @@ class MainGameScene:
         self.groundRender.drawGround(self.screen)
         fps = round(self.clock.get_fps())
         #print("fps is:",fps)
-        self.drawTreeRock()
-        self.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq)
+        self.renderTreeRock.drawTreeRock(self.screen)
+        self.renderTreeRock.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq,self.screen)
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
         self.manager.draw_ui(self.screen)
         pg.display.flip()
@@ -236,7 +236,8 @@ class MainGameScene:
     def drawPlacementReq(self,curDict):
 
         centerOffset = self.centerOffset
-        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
+        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),
+                             centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
 
         if curDict != {}:
             imgIndx = self.world.imgIndxMap[curDict["tile"]]
