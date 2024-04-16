@@ -7,7 +7,7 @@ class AudioManager :
         self.sounds = {}
         self.music = None
         self.musicPlaying = False
-        self.loadMusic("game/music.mp3")
+        self.loadMusic("res/music/music.mp3")
         print(self.getVolume())
         self.loadSound("click","game/sound.mp3")
     def loadSound(self,soundName,soundPath):
