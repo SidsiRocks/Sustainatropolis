@@ -162,14 +162,14 @@ class GameData:
         rockTreeData = [[None for y in range(self.noBlockY)] for x in range(self.noBlockX)]
         return rockTreeData
     def reloadOffsets(self):
-        f = open("game/imageMetaData.json")
+        f = open("res/json/imageMetaData.json")
         data = json.load(f)
         for key in data:
             curIndx = self.imgIndxMap[key]
             curCoord = parseTuple(data[key]["offset"])
             self.offsetArr[curIndx] = curCoord
     def loadImagesFromJSON(self):
-        f = open("game/imageMetaData.json")
+        f = open("res/json/imageMetaData.json")
         data = json.load(f)
         for key in data:
             curImg = ldImage(data[key]["path"]["normal"])

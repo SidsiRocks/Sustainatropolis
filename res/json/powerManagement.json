@@ -1,0 +1,11 @@
+{
+    "producers":{
+        "solarPowerPlant":10,
+        "powerPlant":10,
+        "windMill":10,
+        "Dam":10
+    },
+    "consumers":{
+        "waterPump":10
+    }
+}

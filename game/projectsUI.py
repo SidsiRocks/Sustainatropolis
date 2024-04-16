@@ -38,7 +38,7 @@ def extractMainObjectId(objId):
 class ProjectsUI:
     def __init__(self,manager,statsWindow,notificationBox):
         #order also important
-        self.projectLst,self.projectToCostMap = self.loadProjectLstAndCost("game/projectCostData.json")
+        self.projectLst,self.projectToCostMap = self.loadProjectLstAndCost("res/json/projectCostData.json")
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.currentProject = None

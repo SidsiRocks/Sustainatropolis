@@ -5,7 +5,7 @@ from .statisticsUI import StatisticsWindow
 class WaterManagement:
 
     def __init__ (self) :
-        findDict = json.load(open("game/waterManagement.json"))
+        findDict = json.load(open("res/json/waterManagement.json"))
         self.prodUncleanWater = findDict["produceUncleanWater"] 
         self.consUncleanWaterDic = findDict["consumeUncleanWater"]
 

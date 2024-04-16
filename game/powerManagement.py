@@ -1,7 +1,7 @@
 import json
 class PowerManagement:
     def __init__(self):
-        findDict = json.load(open("game/powerManagement.json"))
+        findDict = json.load(open("res/json/powerManagement.json"))
         self.powerProduceDic = findDict["producers"]
         self.powerConsumeDic = findDict["consumers"]
 
