@@ -181,28 +181,32 @@ class WaterManagement:
         print(self.countProjects)
 
     def processNotifs(self,notif) :
-        if notif == "drought" : 
+        if notif == "Drought" : 
             print("drough came inside water Management")
             self.offSets["Dam"] = -5
             self.offSets["waterPump"] = -7
-            self.updateVals()
-        elif notif == "summer" : 
+            
+            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
+                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
+        elif notif == "Summer" : 
             self.offSets["Dam"] = -10
             self.offSets["waterPump"] = -5
             self.offSets["CityBuilding1"] = 5
             self.offSets["CityBuilding2"] = 5
-        
-        elif notif == "rain" :
+            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
+                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
+        elif notif == "Rain" :
+            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
+                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
+
+        elif notif == "Flood" :
             pass
 
-        elif notif == "flood" :
-            pass
-
-        elif notif == "tourists" :
+        elif notif == "Tourists" :
 
             pass
 
-        elif notif == "reset" : 
+        elif notif == "Reset" : 
             for proj,changes in self.offSets.items() : 
                 self.offSets[proj] = 0  
 

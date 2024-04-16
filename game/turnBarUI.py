@@ -95,11 +95,11 @@ class TurnBarUI:
     def processEvents(self,event,maingameui):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
             if self.crntYr < self.endYr:
-                self.waterManagementManager.processNotifs("reset")
+                self.waterManagementManager.processNotifs("Reset")
                 self.setCrntYear(self.crntYr+1)
 
                 if self.crntYr == 2021 : 
-                    self.waterManagementManager.projectPlanted("summer")
+                    self.waterManagementManager.processNotifs("Summer")
                     maingameui.notificationBox.appendHtmlText(
                         """<font face='Montserrat' color="#ffffff" size=6><b>2021</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
@@ -109,7 +109,7 @@ class TurnBarUI:
                 elif self.crntYr == 2022 : 
                     pass
                 elif self.crntYr == 2023 : 
-                    self.waterManagementManager.processNotifs("drought")
+                    self.waterManagementManager.processNotifs("Drought")
                     maingameui.notificationBox.appendHtmlText(
                         """<font face='Montserrat' color="#ffffff" size=6><b>2023</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
@@ -117,7 +117,7 @@ class TurnBarUI:
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
                     )
                 elif self.crntYr == 2024 : 
-                    self.waterManagementManager.processNotifs("flood") 
+                    self.waterManagementManager.processNotifs("Flood") 
                     maingameui.notificationBox.appendHtmlText(
                         """<font face='Montserrat' color="#ffffff" size=6><b>2024</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
@@ -128,7 +128,7 @@ class TurnBarUI:
                     pass
 
                 elif self.crntYr == 2026 : 
-                    self.waterManagementManager.processNotifs("rain")
+                    self.waterManagementManager.processNotifs("Rain")
                     maingameui.notificationBox.appendHtmlText(
                         """<font face='Montserrat' color="#ffffff" size=6><b>2026</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
@@ -136,7 +136,7 @@ class TurnBarUI:
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
                     )
                 elif self.crntYr == 2027 : 
-                    self.waterManagementManager.processNotifs("tourists")
+                    self.waterManagementManager.processNotifs("Tourists")
                     maingameui.notificationBox.appendHtmlText(
                         """<font face='Montserrat' color="#ffffff" size=6><b>2027</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
@@ -144,7 +144,7 @@ class TurnBarUI:
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
                     )
                 elif self.crntYr == 2028 : 
-                    self.waterManagementManager.processNotifs("summer")
+                    self.waterManagementManager.processNotifs("Summer")
                     maingameui.notificationBox.appendHtmlText(
                         """<font face='Montserrat' color="#ffffff" size=6><b>2028</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
@@ -152,7 +152,7 @@ class TurnBarUI:
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
                     )
                 elif self.crntYr == 2031 :
-                    self.waterManagementManager.processNotifs("drought")
+                    self.waterManagementManager.processNotifs("Drought")
                     maingameui.notificationBox.appendHtmlText("""<font face='Montserrat' color="#ffffff" size=6><b>2031</b></font>
 <font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
 <font face='Montserrat' color="#f0f0f0" size=4>Testing</font>
