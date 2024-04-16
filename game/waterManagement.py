@@ -123,7 +123,7 @@ class WaterManagement:
         statWin.setStats("sewage water",self.consSewageWater,self.sewageWater)
 
     def projectPlanted(self,project) :
-        print("planting project" , project)
+    
         if project in self.countProjects :
             print("incrementinf 1")
             self.countProjects[project] += 1
@@ -173,6 +173,11 @@ class WaterManagement:
 
         # self.statsManager.setStats("unclean water",self.unCleanWater,self.unCleanWater)
         # self.setStats()
+        self.consUnCleanWater = min(self.consUnCleanWater,self.unCleanWater)
+        self.cleanWater = min(self.cleanWater,self.consUnCleanWater)
+        self.consCleanWater = min(self.consCleanWater,self.cleanWater)
+        self.storeWater = min(self.storeWater,self.consCleanWater)
+        self.consStoreWater = min(self.consStoreWater,self.storeWater)
         print("inside updateVals")
         print(self.unCleanWater)
         print(self.consUnCleanWater)
@@ -181,18 +186,32 @@ class WaterManagement:
         print(self.countProjects)
 
     def processNotifs(self,notif) :
-        if notif == "drought" : 
+        if notif == "Drought" : 
             print("drough came inside water Management")
             self.offSets["Dam"] = -5
             self.offSets["waterPump"] = -7
-            self.updateVals()
-        elif notif == "summer" : 
+            
+            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
+                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
+        elif notif == "Summer" : 
             self.offSets["Dam"] = -10
             self.offSets["waterPump"] = -5
             self.offSets["CityBuilding1"] = 5
             self.offSets["CityBuilding2"] = 5
-        
-        elif notif == "reset" : 
+            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
+                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
+        elif notif == "Rain" :
+            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
+                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
+
+        elif notif == "Flood" :
+            pass
+
+        elif notif == "Tourists" :
+
+            pass
+
+        elif notif == "Reset" : 
             for proj,changes in self.offSets.items() : 
                 self.offSets[proj] = 0  
 

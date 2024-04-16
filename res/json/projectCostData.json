@@ -14,17 +14,17 @@
         "CityBuilding2"
     ]
     ,"projectToCostMap":{
-        "waterTreatment":10,
-        "sewagePlant":10,
-        "waterPump":10,
-        "purificationPlant":10,
-        "industrialPlant":10,
-        "solarPowerPlant":10,
-        "powerPlant":10,
-        "windMill":10,
-        "Dam":10,
-        "WaterTank":10,
-        "CityBuilding1":10,
-        "CityBuilding2":10
+        "waterTreatment":1000,
+        "sewagePlant":6000,
+        "waterPump":1000,
+        "purificationPlant":800,
+        "industrialPlant":1000,
+        "solarPowerPlant":5000,
+        "powerPlant":10000,
+        "windMill":100,
+        "Dam":140,
+        "WaterTank":100,
+        "CityBuilding1":1000,
+        "CityBuilding2":1750
     }
 }

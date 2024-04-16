@@ -42,5 +42,5 @@ class MainGameUI:
 
     def processEvents(self,event):
         self.projectUIWrapper.processEvent(event)
-        self.turnBar.processEvents(event)
+        self.turnBar.processEvents(event,self)
         self.settingsUI.processEvent(event)

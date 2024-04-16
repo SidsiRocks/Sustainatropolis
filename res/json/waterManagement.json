@@ -1,54 +1,75 @@
 {
     "produceUncleanWater": {
-        "Dam": 10,
-        "waterPump": 10
+        "Dam": 10000,
+        "waterPump": 5000
     },
     "consumeUncleanWater": {
-        "purificationPlant": 10
+        "purificationPlant": 7000
     },
     "produceCleanWater": {
-        "purificationPlant": 10,
-        "sewagePlant": 10
+        "purificationPlant": 7000,
+        "sewagePlant": 3000
     },
     "consumeCleanWater": {
-        "WaterTank": 10
+        "WaterTank": 50000
     },
     "produceStoreWater": {
-        "WaterTank": 10
+        "WaterTank": 50000
     },
     "consumeStoreWater": {
-        "CityBuilding1": 10,
-        "CityBuilding2": 10
+        "CityBuilding1": 5000,
+        "CityBuilding2": 10000
     },
     "comment": [
         "Houses go here"
     ],
     "produceSewage": {
-        "CityBuilding1": 10,
-        "CityBuilding2": 10
+        "CityBuilding1": 2000,
+        "CityBuilding2": 4500
     },
     "comment2": [
         "Houses go here"
     ],
     "consumeSewage": {
-        "sewagePlant": 10
+        "sewagePlant": 4000
     },
     "offsetsFromRegular": {
         "Drought": {
-            "produceUncleanWater": {
-                "Dam": -10,
-                "waterPump": -7
-            }
+            
+                "Dam": -3000,
+                "waterPump": -1000
+            
         },
         "Summer": {
-            "produceUncleanWater": {
-                "Dam" : -3 ,
-                "waterPump" : -5
-            },
-            "consumeStoreWater": {
-                "CityBuilding1": -5,
-                "CityBUilding2": -10
-            }
+            
+                "Dam" : -2000 ,
+                "waterPump" : -500,
+            
+            
+                "CityBuilding1": 1000,
+                "CityBUilding2": 2000
+            
+        },
+        "Flood":{
+            
+                "Dam" : 5000 ,
+                "waterPump" : 2000
+           
+        },
+        "Tourists" :{
+            
+                "CityBuilding1" : 3000,
+                "CityBuilding2" : 6000
+            
+            
+        },
+
+        "Rain" :{
+            
+                "Dam" : 2000,
+                "waterPump" : 1000
+            
+            
         }
     },
     "comments": [
