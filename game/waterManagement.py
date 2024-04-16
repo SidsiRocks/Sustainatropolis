@@ -30,26 +30,9 @@ class WaterManagement:
 
         self.sewageWater = 0
         self.consSewageWater = 0
-        self.countProjects = {
-            "Dam" : 0 ,
-            "purificationPlant" : 0 ,
-            "waterPump" : 0 , 
-            "sewagePlant" : 0 ,
-            "waterTreatment" : 0 ,
-            "WaterTank" : 0 ,
-            "CityBuilding1" : 0 ,
-            "CityBuilding2" : 0 ,
-        }
-        self.offSets = {
-            "Dam" : 0 ,
-            "purificationPlant" : 0 ,
-            "waterPump" : 0 , 
-            "sewagePlant" : 0 ,
-            "waterTreatment" : 0 ,
-            "WaterTank" : 0 ,
-            "CityBuilding1" : 0 ,
-            "CityBuilding2" : 0 ,
-        }
+        self.countProjects = findDict["countProjects"]
+        self.offSets = findDict["offsets"]
+        
 
     def waterDataTplValid(self,tpl):
         pass

@@ -11,37 +11,7 @@ from pygame_gui.elements.ui_label import UILabel
 from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 
-text = """
-<font face='Montserrat' color="#ffffff" size=6><b>2020</b></font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-<font face='Montserrat' color="#f0f0f0" size=4>Must perform maintence on shivalik dam</font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-
-<font face='Montserrat' color="#ffffff" size=6><b>2020</b></font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-<font face='Montserrat' color="#f0f0f0" size=4>Must perform maintence on shivalik dam</font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-
-<font face='Montserrat' color="#ffffff" size=6><b>2020</b></font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-<font face='Montserrat' color="#f0f0f0" size=4>Must perform maintence on shivalik dam</font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-
-<font face='Montserrat' color="#ffffff" size=6><b>2020</b></font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-<font face='Montserrat' color="#f0f0f0" size=4>Must perform maintence on shivalik dam</font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-
-<font face='Montserrat' color="#ffffff" size=6><b>2020</b></font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-<font face='Montserrat' color="#f0f0f0" size=4>Must perform maintence on shivalik dam</font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-
-<font face='Montserrat' color="#ffffff" size=6><b>2020</b></font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-<font face='Montserrat' color="#f0f0f0" size=4>Must perform maintence on shivalik dam</font>
-<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
-"""
+text = """"""
 
 def createId(txt):
     return ObjectID(class_id="@"+"NotificationsBox",object_id="#"+txt)
