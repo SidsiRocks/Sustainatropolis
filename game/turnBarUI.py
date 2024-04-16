@@ -1,8 +1,7 @@
 import pygame 
 from pygame import Rect
-
+from .waterManagement import WaterManagement
 import pygame_gui
-
 from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
 from pygame_gui.elements.ui_window import UIWindow
@@ -22,10 +21,12 @@ def createStartEndLabelId(txt):
 def createCurrentYearLabel(txt):
     return ObjectID(class_id="@"+"TurnCurrentYearLabel",object_id="#"+txt)
 class TurnBarUI:
-    def __init__(self,manager):
+    def __init__(self,manager,game):
+        self.game = game
         self.strtYr = 2020
         self.crntYr = 2030
         self.endYr = 2040
+        self.waterManagementManager = WaterManagement()
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.moneyPerYear = 20
     def createTurnBar(self,manager):
@@ -94,4 +95,12 @@ class TurnBarUI:
     def processEvents(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
             if self.crntYr < self.endYr:
+                self.waterManagementManager.processNotifs("reset")
                 self.setCrntYear(self.crntYr+1)
+                if self.crntYr == 2031 :
+                    self.waterManagementManager.processNotifs("drought")
+                self.waterManagementManager.updateVals()
+                # self.game.mainGameUI.statsWindowWrapper.updateStats()
+                self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)
+                
+# self.mainGameUI.turnBar.waterManagementManager.setStats(self.mainGameUI.statsWindowWrapper)
