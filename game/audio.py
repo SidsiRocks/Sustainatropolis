@@ -7,14 +7,9 @@ class AudioManager :
         self.sounds = {}
         self.music = None
         self.musicPlaying = False
-<<<<<<< HEAD
         self.loadMusic("res/music/music.mp3")
         print(self.getVolume())
         self.loadSound("click","res/music/sound.mp3")
-=======
-        self.loadMusic("game/music.mp3")
-        self.loadSound("click","game/sound.mp3")
->>>>>>> Test
     def loadSound(self,soundName,soundPath):
         self.sounds[soundName] = mixer.Sound(soundPath)
     def playSound(self,soundName):

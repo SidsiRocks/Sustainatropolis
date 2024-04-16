@@ -161,21 +161,7 @@ class ProjectsUI:
         # waterError = self.game.waterManagement.validProjPlace(buttonName)
         # isWaterValid = (waterError == None)
 
-<<<<<<< HEAD
-        #temporary code to make placement easy
-        #waterError = None
-        #isWaterValid = True
-        #isEnoughMoney = True
-        #isEnoughPower = True
-        
-        print(f"isEnoughPower:{isEnoughPower} for the projName:{buttonName}")
-        if self.currentProject == buttonName:
-            self.currentProject = None
-            self.curTileDrawReq = {}
-        elif isEnoughMoney and isEnoughPower and isWaterValid:
-=======
         if isEnoughMoney: 
->>>>>>> Test
             self.currentProject = buttonName
         # print(f"isEnoughPower:{isEnoughPower} for the projName:{buttonName}")
         # if self.currentProject == buttonName:

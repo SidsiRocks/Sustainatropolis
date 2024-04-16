@@ -183,7 +183,7 @@ class MainGameScene:
     def drawToGroundBuff(self):
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
-        centerOffset = self.centerOffset
+        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
         self.groundCenterOffset = centerOffset
 
         for x in range(self.world.noBlockX):
