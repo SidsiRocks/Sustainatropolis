@@ -109,6 +109,7 @@ class MainGameScene:
         offY = -(self.world.noBlockX - self.world.noBlockY)*TILE_SIZE/4 + height/2
         return (offX,offY)
     def quitScene(self):
+        self.world.writeRockTreeData("playerData.png")
         pg.quit()
         sys.exit()
     def mouseHoverEvents(self):
