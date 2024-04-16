@@ -51,71 +51,12 @@ class WaterManagement:
             "CityBuilding1" : 0 ,
             "CityBuilding2" : 0 ,
         }
-    # def handleProj(self,projName):
-    #     unCleanWaterTpl,cleanWaterTpl,storeWaterTpl,sewageWaterTpl = self.updateVal(projName)
-        
-    #     self.unCleanWater,self.consUnCleanWater = unCleanWaterTpl
-    #     self.cleanWater,self.consCleanWater = cleanWaterTpl
-    #     self.storeWater,self.consStoreWater = storeWaterTpl
-    #     self.sewageWater,self.consSewageWater = sewageWaterTpl
-
-    # def updateVal(self,projName):
-    #     unCleanWater,consUnCleanWater = self.unCleanWater,self.consUnCleanWater
-    #     cleanWater,consCleanWater = self.cleanWater,self.consCleanWater
-    #     storeWater,consStoreWater = self.storeWater,self.consStoreWater
-    #     sewageWater,consSewageWater = self.sewageWater,self.consSewageWater
-
-    #     if projName in self.prodUncleanWater:
-    #         unCleanWater = unCleanWater + self.prodUncleanWater[projName]
-    #     if projName in self.consUncleanWaterDic:
-    #         consUnCleanWater = consUnCleanWater + self.consUncleanWaterDic[projName]
-
-    #     if projName in self.prodCleanWater:
-    #         cleanWater = cleanWater + self.prodCleanWater[projName]
-    #     if projName in self.consCleanWaterDic:
-    #         consCleanWater = consCleanWater + self.consCleanWaterDic[projName]
-
-    #     if projName in self.prodStoreWater:
-    #         storeWater = storeWater + self.prodStoreWater[projName]
-    #     if projName in self.consStoreWaterDic:
-    #         consStoreWater = consStoreWater + self.consStoreWaterDic[projName]     
-    
-    #     if projName in self.prodSewage:
-    #         sewageWater = sewageWater + self.prodSewage[projName]
-    #     if projName in self.consSewageDic:
-    #         consSewageWater = consSewageWater + self.consSewageDic[projName]        
-
-    #     unCleanWaterTpl = (unCleanWater,consUnCleanWater)
-    #     cleanWaterTpl = (cleanWater,consCleanWater)
-    #     storeWaterTpl = (storeWater,consStoreWater)
-    #     sewageWaterTpl = (sewageWater,consSewageWater)
-
-    #     return (unCleanWaterTpl,cleanWaterTpl,storeWaterTpl,sewageWaterTpl)
 
     def waterDataTplValid(self,tpl):
-        unCleanWaterTpl,cleanWaterTpl,storeWaterTpl,sewageWaterTpl = tpl
-        
-        isValidUnClean =  unCleanWaterTpl[0] >= unCleanWaterTpl[1]
-        isValidClean   =  cleanWaterTpl[0] >= cleanWaterTpl[1]
-        isValidSewage = sewageWaterTpl[0] >= sewageWaterTpl[1]
-        isValidStore = storeWaterTpl[0] >= sewageWaterTpl[1]
-
-        if not isValidUnClean:
-            return ("unclean water",(unCleanWaterTpl))
-        if not isValidClean:
-            return ("clean water",(cleanWaterTpl))
-        if not isValidSewage:
-            return ("sewage",(sewageWaterTpl))
-        if not isValidStore:
-            return ("store water",(storeWaterTpl))
-        return None
+        pass
     
     def validProjPlace(self,projName):
-        self.updateVals()
-        # Updates the values 
-
-        return self.waterDataTplValid(self.updateVal(projName))
-
+        pass
     def setStats(self,statWin:StatisticsWindow):
         statWin.setStats("unclean water",self.consUnCleanWater,self.unCleanWater)
         statWin.setStats("clean water",self.consCleanWater,self.cleanWater)
@@ -187,17 +128,9 @@ class WaterManagement:
 
     def processNotifs(self,notif) :
         if notif == "Drought" : 
-            print("drough came inside water Management")
-            self.offSets["Dam"] = -5
-            self.offSets["waterPump"] = -7
-            
             for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
                 self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
         elif notif == "Summer" : 
-            self.offSets["Dam"] = -10
-            self.offSets["waterPump"] = -5
-            self.offSets["CityBuilding1"] = 5
-            self.offSets["CityBuilding2"] = 5
             for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
                 self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
         elif notif == "Rain" :
