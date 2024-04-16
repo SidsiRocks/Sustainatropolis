@@ -1,32 +1,6 @@
 	
 
  {
-    "defaults":
-    {
-        "colours":
-        {
-            "normal_bg":"#45494e",
-            "hovered_bg":"#35393e",
-            "disabled_bg":"#25292e",
-            "selected_bg":"#193754",
-            "dark_bg":"#15191e",
-            "normal_text":"#c5cbd8",
-            "hovered_text":"#FFFFFF",
-            "selected_text":"#FFFFFF",
-            "disabled_text":"#6d736f",
-            "link_text": "#0000EE",
-            "link_hover": "#2020FF",
-            "link_selected": "#551A8B",
-            "text_shadow": "#777777",
-            "normal_border": "#DDDDDD",
-            "hovered_border": "#B0B0B0",
-            "disabled_border": "#808080",
-            "selected_border": "#8080B0",
-            "active_border": "#8080B0",
-            "filled_bar":"#f4251b",
-            "unfilled_bar":"#CCCCCC"
-        }
-    },
     "button":
     {
         "misc":
@@ -50,11 +24,6 @@
     },
     "@projectButtons":
     {
-        "images":{
-            "normal_image":{
-                "path":"res/graphics/building01.png"
-            }
-        },
         "colours":{
             "normal_bg":"#ffad33",
             "hovered_bg":"#ffc266",
@@ -112,8 +81,7 @@
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/city-building-2.png"}}
     },
 
-
-    "@statWindow":{
+    "#windowPrototype":{
         "misc":{
             "shape":"rounded_rectangle",
             "shape_corner_radius":"15",
@@ -129,22 +97,13 @@
             "active_border":"#e68a00"
         }
     },
+
+    "@statWindow":{
+        "prototype":"#windowPrototype"
+    },
     "@projectsList":
     {
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"15",
-            "border_width":"5",
-            "enable_title_bar":"0"
-        },
-        "colours":{
-            "dark_bg":"#e68a00",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
-        }
+        "prototype":"#windowPrototype"
     },
     "@projectScrollingContainer.horizontal_scroll_bar":
     {
@@ -155,12 +114,7 @@
             "border_width":"0"
         }
     },
-    "@projectScrollingContainer.horizontal_scroll_bar.#sliding_button":{
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
-            "border_width":"0"
-        },
+    "#windowColourProtoType":{
         "colours":{
             "normal_bg":"#ffad33",
             "hovered_bg":"#ffc266",
@@ -169,19 +123,21 @@
             "active_bg":"#ffad33"
         }
     },
-    "@projectScrollingContainer.horizontal_scroll_bar.#left_button":{
+    "@projectScrollingContainer.horizontal_scroll_bar.#sliding_button":{
+        "prototype":"#windowColourProtoType",
         "misc":{
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"10",
             "border_width":"0"
-        },
-        "colours":{
-            "normal_bg":"#ffad3300",
-            "hovered_bg":"#ffc26600",
-            "disabled_bg":"#ffebcc00",
-            "selected_bg":"#e68a0000",
-            "active_bg":"#ffad3300"
         }
     },
-    "@statisticsLabel":{
+    "@projectScrollingContainer.horizontal_scroll_bar.#left_button":{
+        "prototype":"#windowColourProtoType",
+        "misc":{
+            "border_width":"0"
+        }
+    },
+    "#fontPrototype":{
         "font":{
             "name":"Montserrat",
             "size":"20",
@@ -192,16 +148,11 @@
         "italic_path":"./res/fonts/Montserrat-Italic.ttf",
         "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
     },
+    "@statisticsLabel":{
+        "prototype":"#fontPrototype"
+    },
     "@statisticalProgress":{
-        "font":{
-            "name":"Montserrat",
-            "size":"15",
-            "bold":"1"
-        },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf",
+        "prototype":"#fontPrototype",
         "misc":{
             "shape":"rounded_rectangle",
             "shape_corner_radius":"20"
@@ -213,15 +164,7 @@
         }
     },
     "@TurnProgress":{
-        "font":{
-            "name":"Montserrat",
-            "size":"15",
-            "bold":"1"
-        },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf",
+        "prototype":"#fontPrototype",
         "misc":{
             "shape":"rounded_rectangle",
             "shape_corner_radius":"20"
@@ -233,42 +176,16 @@
         }
     },
     "@TurnStartEndLabel":{
-        "font":{
-            "name":"Montserrat",
-            "size":"20",
-            "bold":"1"
-        },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
+        "prototype":"#fontPrototype"
     },
     "@TurnCurrentYearLabel":{
-        "font":{
-            "name":"Montserrat",
-            "size":"20",
-            "bold":"1"
-        },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
+        "#prototype":"#fontPrototype"
     },
     "@NotificationsBox":
     {
+        "prototype":"#windowPrototype",
         "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"15",
-            "border_width":"5",
-            "enable_title_bar":"0"
-        },
-        "colours":{
-            "dark_bg":"#e68a00",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
+            "border_width":"5"
         }
     },
     "@NotificationsBox.vertical_scroll_bar":
@@ -280,10 +197,8 @@
             "border_width":"0"
         }
     },
-    "@NotificationsBox.vertical_scroll_bar.#sliding_button":{
+    "#buttonShapePrototype":{
         "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
             "border_width":"0"
         },
         "colours":{
@@ -294,28 +209,36 @@
             "active_bg":"#ffad33"
         }
     },
-    "@NotificationsBox.vertical_scroll_bar.#left_button":{
+    "@NotificationsBox.vertical_scroll_bar.#sliding_button":{
+        "prototype":"#buttonShapePrototype",
         "misc":{
-            "border_width":"0"
-        },
-        "colours":{
-            "normal_bg":"#ffad3300",
-            "hovered_bg":"#ffc26600",
-            "disabled_bg":"#ffebcc00",
-            "selected_bg":"#e68a0000",
-            "active_bg":"#ffad3300"
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"10"
         }
     },
+    "@NotificationsBox.vertical_scroll_bar.#left_button":{
+        "prototype":"#buttonShapePrototype"
+    },
     "@NotificationsBox.vertical_scroll_bar.#right_button":{
-        "misc":{
-            "border_width":"0"
-        },
+        "prototype":"#buttonShapePrototype"
+    },
+    "#hoverButtonPrototype":{
         "colours":{
-            "normal_bg":"#ffad3300",
-            "hovered_bg":"#ffc26600",
-            "disabled_bg":"#ffebcc00",
-            "selected_bg":"#e68a0000",
-            "active_bg":"#ffad3300"
+            "normal_bg":"#ffad33",
+            "hovered_bg":"#ffc266",
+            "disabled_bg":"#ffebcc",
+            "selected_bg":"#e68a00",
+            "active_bg":"#ffad33",
+            "normal_border":"#e68a00",
+            "hovered_border":"#e68a00",
+            "disabled_border":"#e68a00",
+            "selected_border":"#e68a00",
+            "active_border":"#e68a00"
+        },
+        "misc":{
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"10",
+            "border_width":"5"
         }
     },
     "#currencyButton":{
@@ -336,15 +259,7 @@
             "shape_corner_radius":"10",
             "border_width":"5"
         },
-        "font":{
-            "name":"Montserrat",
-            "size":"25",
-            "bold":"1"
-        },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
+        "prototype":"#fontPrototype"
     }
     ,"@currencyButton":{
         "colours":{
@@ -352,16 +267,8 @@
             ,"normal_text":"#ffffff" 
             ,"disabled_text":"" 
             ,"text_shadow": "#a0a0a0"
-        }
-        ,"font":{
-            "name":"Montserrat",
-            "size":"25",
-            "bold":"1"
         },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
+        "prototype":"#fontPrototype"
     }
     ,"@warnWindow":{
         "colours":{
@@ -379,40 +286,11 @@
                 "path":"res/graphics/building01.png"
             }
         },
-        "colours":{
-            "normal_bg":"#ffad33",
-            "hovered_bg":"#ffc266",
-            "disabled_bg":"#ffebcc",
-            "selected_bg":"#e68a00",
-            "active_bg":"#ffad33",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
-        },
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
-            "border_width":"5"
-        }
+        "prototype":"#hoverButtonPrototype"
     }
     ,"@messageTextBox":
     {
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"15",
-            "border_width":"5",
-            "enable_title_bar":"0"
-        },
-        "colours":{
-            "dark_bg":"#e68a00",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
-        }
+        "prototype":"#windowPrototype"
     },
     "@messageTextBox.vertical_scroll_bar":
     {
@@ -438,23 +316,7 @@
         }
     },
     "@nextTurnButton":{
-        "colours":{
-            "normal_bg":"#ffad33",
-            "hovered_bg":"#ffc266",
-            "disabled_bg":"#ffebcc",
-            "selected_bg":"#e68a00",
-            "active_bg":"#ffad33",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
-        },
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
-            "border_width":"5"
-        }
+        "prototype":"#hoverButtonPrototype"
     },
 
     "@settingsWin":{
@@ -473,23 +335,7 @@
         }
     },
     "@settingsWin.#title_bar":{
-        "colours":{
-            "normal_bg":"#ffad33",
-            "hovered_bg":"#ffc266",
-            "disabled_bg":"#ffebcc",
-            "selected_bg":"#e68a00",
-            "active_bg":"#ffad33",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
-        },
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
-            "border_width":"5"
-        },
+        "#prototype":"#hoverButtonPrototype",
         "font":{
             "name":"Montserrat",
             "size":"15",
@@ -501,33 +347,10 @@
         "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
     },
     "@settingsWin.#close_button":{
-        "colours":{
-            "normal_bg":"#ffad33",
-            "hovered_bg":"#ffc266",
-            "disabled_bg":"#ffebcc",
-            "selected_bg":"#e68a00",
-            "active_bg":"#ffad33",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
-        },
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
-            "border_width":"5"
-        }
+        "prototype":"#hoverButtonPrototype"
     },
     "@projectDescLbl":{
-        "font":{
-            "name":"Montserrat",
-            "size":"15",
-            "bold":"1"
-        },
-        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
-        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
-        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
-        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
+        "prototype":"#fontPrototype",
+        "font":{"size":"15"}
     }
 }
