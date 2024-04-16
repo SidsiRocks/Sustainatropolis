@@ -33,10 +33,13 @@ class MainGameUI:
         self.projectUIWrapper.setWorld(world)
         self.projectUIWrapper.setGame(game)
 
-        self.settingsUI = SettingsUI(manager)
+        self.settingsUI = SettingsUI(manager,game.audioManager)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
     
+    def update(self):
+        self.settingsUI.update()
+
     def processEvents(self,event):
         self.projectUIWrapper.processEvent(event)
         self.turnBar.processEvents(event)

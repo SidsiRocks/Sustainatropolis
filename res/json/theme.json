@@ -471,5 +471,52 @@
             "selected_border":"#e68a00",
             "active_border":"#e68a00"
         }
+    },
+    "@settingsWin.#title_bar":{
+        "colours":{
+            "normal_bg":"#ffad33",
+            "hovered_bg":"#ffc266",
+            "disabled_bg":"#ffebcc",
+            "selected_bg":"#e68a00",
+            "active_bg":"#ffad33",
+            "normal_border":"#e68a00",
+            "hovered_border":"#e68a00",
+            "disabled_border":"#e68a00",
+            "selected_border":"#e68a00",
+            "active_border":"#e68a00"
+        },
+        "misc":{
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"10",
+            "border_width":"5"
+        },
+        "font":{
+            "name":"Montserrat",
+            "size":"15",
+            "bold":"1"
+        },
+        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
+        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
+        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
+        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
+    },
+    "@settingsWin.#close_button":{
+        "colours":{
+            "normal_bg":"#ffad33",
+            "hovered_bg":"#ffc266",
+            "disabled_bg":"#ffebcc",
+            "selected_bg":"#e68a00",
+            "active_bg":"#ffad33",
+            "normal_border":"#e68a00",
+            "hovered_border":"#e68a00",
+            "disabled_border":"#e68a00",
+            "selected_border":"#e68a00",
+            "active_border":"#e68a00"
+        },
+        "misc":{
+            "shape":"rounded_rectangle",
+            "shape_corner_radius":"10",
+            "border_width":"5"
+        }
     }
 }

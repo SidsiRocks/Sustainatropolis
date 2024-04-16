@@ -185,6 +185,7 @@ class MainGameScene:
     def update(self):
         (dx,dy) = cameraMovement(self.width,self.height)
         self.camera.moveCamera(dx,dy)
+        self.mainGameUI.update()
     def drawToGroundBuff(self):
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
@@ -232,29 +233,6 @@ class MainGameScene:
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
         self.manager.draw_ui(self.screen)
         pg.display.flip()
-
-    def drawPlacementReq(self,curDict):
-
-        centerOffset = self.centerOffset
-        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),
-                             centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
-
-        if curDict != {}:
-            imgIndx = self.world.imgIndxMap[curDict["tile"]]
-            x,y = curDict["pos"]
-            mode = curDict["mode"]
-            curImg = None
-            if mode == "transparent":
-                curImg = self.world.transpImgArr[imgIndx]
-            elif mode == "red":
-                curImg = self.world.transRedArr[imgIndx]
-            renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
-            curOff = self.world.offsetArr[imgIndx]
-            imgRenderPos = isoRenderPosToImgRenderPos(renderPos,curImg.get_width(),curImg.get_height())
-            imgRenderPos = (imgRenderPos[0]+curOff[0],imgRenderPos[1]+curOff[1])
-            self.screen.blit(curImg,imgRenderPos)
-        else: 
-            pass
     def findIsoGridOrg(self):
         orgX = self.imgCenterOffset[0] - self.camera.getX() + isoCoordToRenderPos((0,0),self.groundCenterOffset)[0]+0
         orgY = self.imgCenterOffset[1] - self.camera.getY() + isoCoordToRenderPos((0,0),self.groundCenterOffset)[1]+TILE_SIZE/2

@@ -19,5 +19,10 @@ class HideUIwindow(UIWindow):
                 window_display_title,element_id,
                 object_id,resizable,visible,
                 draggable)
+        self.title_bar_height = 50
+        self.title_bar_close_button_width = 30
+        self.title_bar = None
+        self.close_window_button = None
+        self.rebuild()
     def on_close_window_button_pressed(self):
         self.hide()

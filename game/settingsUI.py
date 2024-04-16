@@ -8,8 +8,9 @@ from .hideOnCloseWindow import HideUIwindow
 import pygame_gui
 
 class SettingsUI:
-    def __init__(self,manager):
+    def __init__(self,manager,audioManager):
         self.settingsWindow,self.horizontalSlider,self.settingsButton = self.createSettingsWindow(manager)
+        self.audioManager = audioManager
     def createSettingsWindow(self,manager):
         settingsWinWidth = 380
         settingsWinHeight = 500
@@ -51,6 +52,7 @@ class SettingsUI:
 
     def update(self):
         sliderVal = self.horizontalSlider.get_current_value()
+        self.audioManager.setVolume(sliderVal/100)
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             objectID = event.ui_object_id
