@@ -60,6 +60,7 @@ class MainGameScene:
         self.centerOffset = self.calCenterOffset(self.width,self.height)
         self.groundSurface = pg.Surface(self.groundBuffSize).convert_alpha()
         self.firstRender = True
+
         self.audioManager = AudioManager()
         self.audioManager.playMusic()
 
@@ -186,7 +187,7 @@ class MainGameScene:
     def drawToGroundBuff(self):
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
-        centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
+        centerOffset = self.centerOffset
         self.groundCenterOffset = centerOffset
 
         for x in range(self.world.noBlockX):
@@ -200,9 +201,7 @@ class MainGameScene:
     def drawTreeRock(self):
         self.world.reloadOffsets()
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
-        imgOffsetX = (self.width - self.groundBuffSize[0])/2
-        imgOffsetY = (self.height - self.groundBuffSize[1])/2
-        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.camera.getX(),centerOffset[1]+imgOffsetY-self.camera.getY())
+        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
         rockTreeData = self.world.rockTreeData
         groundImgArr = self.world.imgArr
         offsetArr = self.world.offsetArr
@@ -241,9 +240,7 @@ class MainGameScene:
     def drawPlacementReq(self,curDict):
 
         centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
-        imgOffsetX = (self.width - self.groundBuffSize[0])/2
-        imgOffsetY = (self.height - self.groundBuffSize[1])/2
-        totalCenterOffset = (centerOffset[0]+imgOffsetX-self.camera.getX(),centerOffset[1]+imgOffsetY-self.camera.getY())
+        totalCenterOffset = (centerOffset[0]+self.imgCenterOffset[0]-self.camera.getX(),centerOffset[1]+self.imgCenterOffset[1]-self.camera.getY())
 
         if curDict != {}:
             imgIndx = self.world.imgIndxMap[curDict["tile"]]
