@@ -5,7 +5,6 @@ from .statisticsUI import StatisticsWindow
 class WaterManagement:
 
     def __init__ (self) :
-        # self.statsManager = StatisticsWindow()
         findDict = json.load(open("res/json/waterManagement.json"))
         self.JSONdict = findDict
         self.prodUncleanWater = findDict["produceUncleanWater"] 
@@ -66,15 +65,9 @@ class WaterManagement:
     def projectPlanted(self,project) :
     
         if project in self.countProjects :
-            print("incrementinf 1")
             self.countProjects[project] += 1
         else : 
-            print("creating")
             self.countProjects[project] = 1
-        print("Current ddictionary of proj freq")
-        print(self.countProjects)
-
-        self.updateVals()
         
 
     def updateVals(self) :
@@ -88,63 +81,42 @@ class WaterManagement:
         self.consSewageWater = 0
 
         for proj in self.countProjects :
+
             if proj in self.JSONdict["produceUncleanWater"] :
-                # print('"projects with unclean water')
-                # print(self.offSets[proj] , proj)
-                # print(self.JSONdict["produceUncleanWater"][proj])
-                # print(self.countProjects[proj])
                 self.unCleanWater += (self.JSONdict["produceUncleanWater"][proj] + self.offSets[proj] )* self.countProjects[proj] 
+            
             if proj in self.JSONdict["consumeUncleanWater"] :
                 self.consUnCleanWater += (self.JSONdict["consumeUncleanWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
             
             if proj in self.JSONdict["produceCleanWater"] :
                 self.cleanWater += (self.JSONdict["produceCleanWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+            
             if proj in self.JSONdict["consumeCleanWater"] :
                 self.consCleanWater += (self.JSONdict["consumeCleanWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
             
             if proj in self.JSONdict["produceStoreWater"] :
                 self.storeWater += (self.JSONdict["produceStoreWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+            
             if proj in self.JSONdict["consumeStoreWater"] :
                 self.consStoreWater += (self.JSONdict["consumeStoreWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
             
             if proj in self.JSONdict["produceSewage"] :
                 self.sewageWater += (self.JSONdict["produceSewage"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+            
             if proj in self.JSONdict["consumeSewage"] :
                 self.consSewageWater += (self.JSONdict["consumeSewage"][proj] + self.offSets[proj] ) * self.countProjects[proj]
 
-        # self.statsManager.setStats("unclean water",self.unCleanWater,self.unCleanWater)
-        # self.setStats()
         self.consUnCleanWater = min(self.consUnCleanWater,self.unCleanWater)
         self.cleanWater = min(self.cleanWater,self.consUnCleanWater)
         self.consCleanWater = min(self.consCleanWater,self.cleanWater)
         self.storeWater = min(self.storeWater,self.consCleanWater)
         self.consStoreWater = min(self.consStoreWater,self.storeWater)
-        print("inside updateVals")
-        print(self.unCleanWater)
-        print(self.consUnCleanWater)
-
-        print("inside update function dict" )
-        print(self.countProjects)
 
     def processNotifs(self,notif) :
-        if notif == "Drought" : 
-            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
-                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
-        elif notif == "Summer" : 
-            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
-                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
-        elif notif == "Rain" :
-            for x in self.JSONdict["offsetsFromRegular"]["Rain"] : 
-                self.offSets[x] = self.JSONdict["offsetsFromRegular"]["Rain"][x]
-
-        elif notif == "Flood" :
-            pass
-
-        elif notif == "Tourists" :
-
-            pass
-
-        elif notif == "Reset" : 
+        if notif == "Reset" :
             for proj,changes in self.offSets.items() : 
                 self.offSets[proj] = 0  
+                return 
+        for update in self.JSONdict["offsetsFromRegular"][notif] :
+            self.offSets[update] = self.JSONdict["offsetsFromRegular"][notif][update]
 
