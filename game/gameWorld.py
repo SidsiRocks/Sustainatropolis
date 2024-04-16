@@ -55,7 +55,7 @@ class GameData:
         if tileName == "Dam":
             incorrectTile = "block"
         xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
-        if (x < (xSize -1) or y+ySize > self.noBlockY):
+        if (x < (xSize -1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
             return False
         for i in range(xSize):
             for j in range(ySize):
@@ -64,7 +64,7 @@ class GameData:
         return True
     def checkSpacePresent(self,x,y,tileName):
         xSize,ySize = self.sizeArr[self.imgIndxMap[tileName]]
-        if(x <(xSize-1) or y+ySize > self.noBlockY):
+        if(x <(xSize-1) or y+ySize > self.noBlockY or x+xSize > self.noBlockX or y < ySize-1):
             return False
         for i in range(xSize):
             for j in range(ySize):
@@ -137,6 +137,9 @@ class GameData:
                 elif pixel == self.tileToColor["CityBuilding1"]:
                     curSize = self.sizeArr[self.imgIndxMap["CityBuilding1"]]
                     self.blockNeighbourSlots(x,y,curSize,rockTreeData,"CityBuilding1")
+                elif pixel == self.tileToColor["CityBuilding2"]:
+                    curSize = self.sizeArr[self.imgIndxMap["CityBuilding2"]]
+                    self.blockNeighbourSlots(x,y,curSize,rockTreeData,"CityBuilding2")
                 else:
                     #ignoring if someother coulour so include water and grass for refrence in the image
                     pass

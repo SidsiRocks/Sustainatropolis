@@ -157,6 +157,7 @@ class MainGameScene:
                 coordinates = self.mainGameUI.projectUIWrapper.projectListWindow.rect
                 pos = self.findClickCoord(mouseX,mouseY)
                 (posX,posY) = pos
+                print("required" , posX , posY)
                 print(mouseX,mouseY,coordinates)
 
                 if not(mouseX < coordinates[0] or mouseX > coordinates[0]+coordinates[2] or mouseY < coordinates[1] or mouseY > coordinates[1]+coordinates[3]):
@@ -204,7 +205,9 @@ class MainGameScene:
         groundImgArr = self.world.imgArr
         offsetArr = self.world.offsetArr
         for x in range(self.world.noBlockX):
+        # for x in range(self.world.noBlockX-1,-1,-1):
             for y in range(self.world.noBlockY-1,-1,-1):
+            # for y in range(self.world.noBlockY):    
                 curDict =  rockTreeData[x][y]
                 if type(curDict) == dict:
                     renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
