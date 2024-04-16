@@ -24,7 +24,7 @@ class TurnBarUI:
     def __init__(self,manager,game):
         self.game = game
         self.strtYr = 2020
-        self.crntYr = 2030
+        self.crntYr = 2020
         self.endYr = 2040
         self.waterManagementManager = WaterManagement()
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
@@ -92,13 +92,75 @@ class TurnBarUI:
         self.crntYr = crntYr
         self.crntYrLbl.set_text(str(crntYr))
         self.updatePrgrsBar()
-    def processEvents(self,event):
+    def processEvents(self,event,maingameui):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
             if self.crntYr < self.endYr:
                 self.waterManagementManager.processNotifs("reset")
                 self.setCrntYear(self.crntYr+1)
-                if self.crntYr == 2031 :
+
+                if self.crntYr == 2021 : 
+                    self.waterManagementManager.projectPlanted("summer")
+                    maingameui.notificationBox.appendHtmlText(
+                        """<font face='Montserrat' color="#ffffff" size=6><b>2021</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>It's Summer, People will need more water. You should start finding ways to increase clean water storage</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
+)
+                elif self.crntYr == 2022 : 
+                    pass
+                elif self.crntYr == 2023 : 
                     self.waterManagementManager.processNotifs("drought")
+                    maingameui.notificationBox.appendHtmlText(
+                        """<font face='Montserrat' color="#ffffff" size=6><b>2023</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>It's Drought, GroundWater Level will drastically go down, Be aware!</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
+                    )
+                elif self.crntYr == 2024 : 
+                    self.waterManagementManager.processNotifs("flood") 
+                    maingameui.notificationBox.appendHtmlText(
+                        """<font face='Montserrat' color="#ffffff" size=6><b>2024</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>It's Flood, Try gathering this water, purify it and store for future use</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
+                    )
+                elif self.crntYr == 2025 : 
+                    pass
+
+                elif self.crntYr == 2026 : 
+                    self.waterManagementManager.processNotifs("rain")
+                    maingameui.notificationBox.appendHtmlText(
+                        """<font face='Montserrat' color="#ffffff" size=6><b>2026</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>It's predicted that It will rain heavily this year, Be prepared to collect lots of water</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
+                    )
+                elif self.crntYr == 2027 : 
+                    self.waterManagementManager.processNotifs("tourists")
+                    maingameui.notificationBox.appendHtmlText(
+                        """<font face='Montserrat' color="#ffffff" size=6><b>2027</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>It's a very important event in your city, lots of tourists will be visiting, Make sure no faces water supply Issue.</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
+                    )
+                elif self.crntYr == 2028 : 
+                    self.waterManagementManager.processNotifs("summer")
+                    maingameui.notificationBox.appendHtmlText(
+                        """<font face='Montserrat' color="#ffffff" size=6><b>2028</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>It's Summer, People will need more water. You should start finding ways to increase clean water storage</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>"""
+                    )
+                elif self.crntYr == 2031 :
+                    self.waterManagementManager.processNotifs("drought")
+                    maingameui.notificationBox.appendHtmlText("""<font face='Montserrat' color="#ffffff" size=6><b>2031</b></font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>
+<font face='Montserrat' color="#f0f0f0" size=4>Testing</font>
+<font face='Montserrat' color="#ffffff" size=6><b>------------------------------</b></font>""")
+
+                
+
+
                 self.waterManagementManager.updateVals()
                 # self.game.mainGameUI.statsWindowWrapper.updateStats()
                 self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)

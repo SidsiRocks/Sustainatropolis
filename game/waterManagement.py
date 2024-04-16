@@ -123,7 +123,7 @@ class WaterManagement:
         statWin.setStats("sewage water",self.consSewageWater,self.sewageWater)
 
     def projectPlanted(self,project) :
-        print("planting project" , project)
+    
         if project in self.countProjects :
             print("incrementinf 1")
             self.countProjects[project] += 1
@@ -192,6 +192,16 @@ class WaterManagement:
             self.offSets["CityBuilding1"] = 5
             self.offSets["CityBuilding2"] = 5
         
+        elif notif == "rain" :
+            pass
+
+        elif notif == "flood" :
+            pass
+
+        elif notif == "tourists" :
+
+            pass
+
         elif notif == "reset" : 
             for proj,changes in self.offSets.items() : 
                 self.offSets[proj] = 0  

@@ -168,10 +168,10 @@ class MainGameScene:
                         self.powerManagement.handleProj(projName)
                         self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
                     if projName != None:
-                        print("inside placing a project element game.py", projName)
+                       
                         self.mainGameUI.turnBar.waterManagementManager.projectPlanted(projName)   
                         self.mainGameUI.turnBar.waterManagementManager.updateVals()
-                        print("\n\n updating Stats")
+                      
                         self.mainGameUI.turnBar.waterManagementManager.setStats(self.mainGameUI.statsWindowWrapper)
             self.manager.process_events(event)
             
