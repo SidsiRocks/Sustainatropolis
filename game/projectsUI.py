@@ -137,6 +137,7 @@ class ProjectsUI:
             self.world.placeObject(x,y,self.currentProject)
             oldProjName = self.currentProject
             self.currentProject = None
+            self.curTileDrawReq = {}
             return oldProjName
         else :
             self.currentProject = None

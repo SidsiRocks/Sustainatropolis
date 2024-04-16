@@ -14,7 +14,6 @@ class GameData:
         self.transpImgArr = []
         self.transRedArr = []
         self.offsetArr = []
-        self.renderOffsetArr = []
         self.sizeArr = []
         self.redTintColor = (255,0,0)
         #self.loadImages()
@@ -178,7 +177,7 @@ class GameData:
             self.imgIndxMap[key] = len(self.imgArr)
             
             curTransRed = curTransparent.__copy__()
-            curTransRed.fill((210,0,0),special_flags=pg.BLEND_ADD)
+            curTransRed.fill((255,0,0),special_flags=pg.BLEND_ADD)
 
             self.transRedArr.append(curTransRed)
             self.imgArr.append(curImg)
