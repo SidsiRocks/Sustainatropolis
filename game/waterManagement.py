@@ -173,6 +173,11 @@ class WaterManagement:
 
         # self.statsManager.setStats("unclean water",self.unCleanWater,self.unCleanWater)
         # self.setStats()
+        self.consUnCleanWater = min(self.consUnCleanWater,self.unCleanWater)
+        self.cleanWater = min(self.cleanWater,self.consUnCleanWater)
+        self.consCleanWater = min(self.consCleanWater,self.cleanWater)
+        self.storeWater = min(self.storeWater,self.consCleanWater)
+        self.consStoreWater = min(self.consStoreWater,self.storeWater)
         print("inside updateVals")
         print(self.unCleanWater)
         print(self.consUnCleanWater)
