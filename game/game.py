@@ -173,7 +173,7 @@ class MainGameScene:
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
                     if projName != None:
                         self.powerManagement.handleProj(projName)
-                        self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
+                        self.mainGameUI.statsWindowWrapper.setStats("Power Usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
                     if projName != None:
                         self.audioManager.playSound("construction")
                         self.mainGameUI.turnBar.waterManagementManager.projectPlanted(projName)   
