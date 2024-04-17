@@ -11,7 +11,10 @@ class AudioManager :
         print(self.getVolume())
         self.volume = 1
         self.setVolume(1)
-        self.loadSound("click","res/music/sound.mp3")
+        self.loadSound("test","res/music/sound.mp3")
+        self.loadSound("construction","res/audios/construction.wav")
+        self.loadSound("click","res/audios/audio.mp3")
+        self.loadSound("celebration","res/audios/celebration.wav")
     def loadSound(self,soundName,soundPath):
         self.sounds[soundName] = mixer.Sound(soundPath)
     def playSound(self,soundName):

@@ -140,7 +140,7 @@ class MainGameScene:
         if keys[pg.K_KP_MINUS] :
             self.audioManager.setVolume(self.audioManager.getVolume()-0.1)
         if keys[pg.K_q]:
-            self.audioManager.playSound("click")
+            self.audioManager.playSound("test")
         # print("list og events" , pg.event.get())
         eventslist = pg.event.get()
         # (pg.event.get().reverse)
@@ -153,11 +153,12 @@ class MainGameScene:
                 if event.key == pg.K_ESCAPE:
                     self.quitScene()
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                self.audioManager.playSound("click")
                 if event.ui_element == self.clearButton:
                     self.mainGameUI.notificationBox.clearHtmlText()
                 if event.ui_element == self.appendButton:
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
-                self.mainGameUI.processEvents(event)
+                self.mainGameUI.processEvents(event,self.audioManager)
                 skipMouseClickEvents = True
             elif event.type == pg.MOUSEBUTTONDOWN :
                 mouseX,mouseY = pg.mouse.get_pos()
@@ -174,7 +175,7 @@ class MainGameScene:
                         self.powerManagement.handleProj(projName)
                         self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
                     if projName != None:
-                       
+                        self.audioManager.playSound("construction")
                         self.mainGameUI.turnBar.waterManagementManager.projectPlanted(projName)   
                         self.mainGameUI.turnBar.waterManagementManager.updateVals()
                       

@@ -109,12 +109,12 @@ class TurnBarUI:
         maingameui.notificationBox.appendHtmlText(self.createNotifMessage(self.crntYr,self.notifMessages[event_name]))
 
 
-    def processEvents(self,event,maingameui):
+    def processEvents(self,event,maingameui,audioManager):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
             if self.crntYr < self.endYr:
                 self.waterManagementManager.processNotifs("Reset")
                 self.setCrntYear(self.crntYr+1)
-
+                audioManager.playSound("celebration")
                 if self.crntYr == 2021 : 
                     self.proceedEvent("Summer",maingameui)
                 elif self.crntYr == 2022 : 

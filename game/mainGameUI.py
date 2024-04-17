@@ -40,7 +40,7 @@ class MainGameUI:
     def update(self):
         self.settingsUI.update()
 
-    def processEvents(self,event):
+    def processEvents(self,event,audioManager):
         self.projectUIWrapper.processEvent(event)
-        self.turnBar.processEvents(event,self)
+        self.turnBar.processEvents(event,self,audioManager)
         self.settingsUI.processEvent(event)

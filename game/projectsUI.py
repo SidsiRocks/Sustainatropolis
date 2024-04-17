@@ -170,6 +170,7 @@ class ProjectsUI:
 
         if isEnoughMoney: 
             self.currentProject = buttonName
+            
         else:
             notEnoughMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
             self.createNotEnoughWindow(notEnoughMoneyMsg)
