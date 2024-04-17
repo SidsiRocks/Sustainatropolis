@@ -15,7 +15,7 @@
     "groundRelated":{
         "block":{
             "path":{
-                "normal":"res/graphics/imgForPlacement/block.png"
+                "normal":"res/graphics/imgForPlacement/grassBlockSimplifiedRemove.png"
             }
             ,"colour":"rgba(0,255,0,255)"
         },
