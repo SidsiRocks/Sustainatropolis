@@ -44,40 +44,40 @@
     },
     "images":{"normal_image":{}}
     ,
-    "#waterTreatment":{
+    "#Water Treatment":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/WaterTreatmentContainersRemovedResized.png"}}
     },
-    "#sewagePlant":{
+    "#Sewage Plant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/sewageTreatmentPlantResize.png"}}
     },
-    "#waterPump":{
+    "#Water Pump":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/pumpingPlantRemoveBackgroundResized.png"}}
     },
-    "#purificationPlant":{
+    "#Purification Plant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/PurificationPlantResize.png"}}
     },
-    "#industrialPlant":{
+    "#Industrial Plant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/IndustrialPlantResize.png"}}
     },
-    "#solarPowerPlant":{
+    "#Solar PowerPlant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/SolarPowerPlantResize.png"}}
     },
-    "#powerPlant":{
+    "#PowerPlant":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/powerPlantResize.png"}}
     },
-    "#windMill":{
+    "#WindMill":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/windMillIndivResize.png"}}
     },
     "#Dam":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/DamResize.png"}}
     },
-    "#WaterTank":{
+    "#Water Tank":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/smallWaterTank.png"}}
     },
-    "#CityBuilding1":{
+    "#CityBuilding":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/city-building-1-bg-removed.png"}}
     },
-    "#CityBuilding2":{
+    "#Big CityBuilding":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/city-building-2.png"}}
     },
 

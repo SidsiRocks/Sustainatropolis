@@ -1,30 +1,30 @@
 {
     "projectLists":[
-        "waterTreatment",
-        "sewagePlant",
-        "waterPump",
-        "purificationPlant",
-        "industrialPlant",
-        "solarPowerPlant",
-        "powerPlant",
-        "windMill",
+        "Water Treatment",
+        "Sewage Plant",
+        "Water Pump",
+        "Purification Plant",
+        "Industrial Plant",
+        "Solar PowerPlant",
+        "PowerPlant",
+        "WindMill",
         "Dam",
         "WaterTank",
-        "CityBuilding1",
-        "CityBuilding2"
+        "CityBuilding",
+        "Big CityBuilding"
     ]
     ,"projectToCostMap":{
-        "waterTreatment":1000,
-        "sewagePlant":6000,
-        "waterPump":1000,
-        "purificationPlant":800,
-        "industrialPlant":1000,
-        "solarPowerPlant":5000,
-        "powerPlant":10000,
-        "windMill":100,
+        "Water Treatment":1000,
+        "Sewage Plant":6000,
+        "Water Pump":1000,
+        "Purification Plant":800,
+        "Industrial Plant":1000,
+        "Solar PowerPlant":5000,
+        "PowerPlant":10000,
+        "WindMill":100,
         "Dam":140,
         "WaterTank":100,
-        "CityBuilding1":1000,
-        "CityBuilding2":1750
+        "CityBuilding":1000,
+        "Big CityBuilding":1750
     }
 }

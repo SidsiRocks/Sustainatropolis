@@ -64,7 +64,7 @@
             ,"offset":"(0,0)"
             ,"size":"(1,1)"
         },
-        "waterTreatment":{
+        "water Treatment":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/WaterTreatmentContainersRemovedResized.png",
                 "transparent":"res/graphics/imgAlternateTrans/WaterTreatmentContainersRemovedResized.png"
@@ -74,7 +74,7 @@
             ,"size":"(3,5)" 
             ,"comment":"confirm not reversed"
         },
-        "sewagePlant":{
+        "Sewage Plant":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/sewageTreatmentPlantResize.png",
                 "transparent":"res/graphics/imgAlternateTrans/sewageTreatmentPlantResize.png"
@@ -83,7 +83,7 @@
             ,"offset":"(30,190)"
             ,"size":"(4,4)"
         },
-        "waterPump":{
+        "Water Pump":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/pumpingPlantRemoveBackgroundResized.png",
                 "transparent":"res/graphics/imgAlternateTrans/pumpingPlantRemoveBackgroundResized.png"
@@ -93,7 +93,7 @@
             ,"size":"(3,4)"
             ,"comment":"Extended pipe size in y direction from 3 to 4 to prevent weird rendering glitches"
         },
-        "purificationPlant":{
+        "Purification Plant":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/PurificationPlantResize.png",
                 "transparent":"res/graphics/imgAlternateTrans/PurificationPlantResize.png"
@@ -102,7 +102,7 @@
             ,"offset":"(-20,170)"
             ,"size":"(4,4)"
         },
-        "industrialPlant":{
+        "Industrial Plant":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/IndustrialPlantResize.png"
                 ,"transparent":"res/graphics/imgAlternateTrans/IndustrialPlantResize.png"
@@ -111,7 +111,7 @@
             ,"offset":"(-20,190)"
             ,"size":"(4,4)"
         },
-        "solarPowerPlant":{
+        "Solar PowerPlant":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/SolarPowerPlantResize.png",
                 "transparent":"res/graphics/imgAlternateTrans/SolarPowerPlantResize.png"
@@ -120,7 +120,7 @@
             ,"offset":"(30,160)"
             ,"size":"(4,3)"
         },
-        "powerPlant":{
+        "PowerPlant":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/powerPlantResize.png",
                 "transparent":"res/graphics/imgAlternateTrans/powerPlantResize.png"
@@ -129,7 +129,7 @@
             ,"offset":"(-20,180)"
             ,"size":"(4,4)"
         },
-        "windMill":{
+        "WindMill":{
             "path":{
                 "normal":"res/graphics/imgForPlacement/windMillIndivResize.png",
                 "transparent":"res/graphics/imgAlternateTrans/windMillIndivResize.png"
@@ -149,7 +149,7 @@
             ,"offset":"(-20,190)"
             ,"size":"(4,4)"
         },
-        "WaterTank":{
+        "Water Tank":{
             "path": 
             {
                 "normal":"res/graphics/imgForPlacement/smallWaterTank.png",
@@ -159,7 +159,7 @@
             ,"offset":"(0,0)" 
             ,"size":"(1,1)"
         },
-        "CityBuilding1":{
+        "CityBuilding":{
             "path":
             {
                 "normal":"res/graphics/imgForPlacement/city-building-1-bg-removed.png",
@@ -169,7 +169,7 @@
             ,"offset":"(0,250)"
             ,"size":"(4,4)"
         },
-        "CityBuilding2":{
+        "Big CityBuilding":{
             "path":
             {
                 "normal":"res/graphics/imgForPlacement/city-building-2.png",

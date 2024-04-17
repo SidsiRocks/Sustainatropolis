@@ -40,10 +40,10 @@ class WaterManagement:
     def validProjPlace(self,projName):
         pass
     def setStats(self,statWin:StatisticsWindow):
-        statWin.setStats("unclean water",self.consUnCleanWater,self.unCleanWater)
-        statWin.setStats("clean water",self.consCleanWater,self.cleanWater)
-        statWin.setStats("store water",self.consStoreWater,self.storeWater)
-        statWin.setStats("sewage water",self.consSewageWater,self.sewageWater)
+        statWin.setStats("Unclean Water",self.consUnCleanWater,self.unCleanWater)
+        statWin.setStats("Clean Water",self.consCleanWater,self.cleanWater)
+        statWin.setStats("Store Water",self.consStoreWater,self.storeWater)
+        statWin.setStats("Sewage Water",self.consSewageWater,self.sewageWater)
 
     def projectPlanted(self,project) :
     
