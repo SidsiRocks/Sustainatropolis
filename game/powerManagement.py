@@ -1,6 +1,7 @@
 import json
+from .statisticsUI import StatisticsWindow
 class PowerManagement:
-    def __init__(self):
+    def __init__(self,game):
         findDict = json.load(open("res/json/powerManagement.json"))
         self.powerProduceDic = findDict["producers"]
         self.powerConsumeDic = findDict["consumers"]
@@ -16,7 +17,7 @@ class PowerManagement:
         
         self.curPowerProd = 0
         self.curPowerCons = 0
-
+        self.game = game
 
     def createPlantDict(self,powerPlant):
         resultDict = {}
@@ -36,7 +37,12 @@ class PowerManagement:
         elif projName in self.noPowerReqDict:
             self.noPowerReqDict[projName] = self.noPowerReqDict[projName] + 1
             self.curPowerCons += self.powerConsumeDic[projName]
-    
+
+        self.setStats(self.game.mainGameUI.statsWindowWrapper)
+
+    def setStats(self,statWin:StatisticsWindow):
+        statWin.setStats("Power Usage",self.curPowerCons,self.curPowerProd)
+
     def validProjPlace(self,projName):
         print(f"self.powerConsumeDic:{self.powerConsumeDic}")
         if projName in self.powerConsumeDic:

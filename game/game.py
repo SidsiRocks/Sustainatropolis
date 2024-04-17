@@ -53,7 +53,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.powerManagement = PowerManagement()        
+        self.powerManagement = PowerManagement(self)        
         self.waterManagement = WaterManagement(self)
 
         self.audioManager = AudioManager()
@@ -175,6 +175,7 @@ class MainGameScene:
                 else : 
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
+                    #add set stats function to powerManagement
                     if projName != None:
                         self.powerManagement.handleProj(projName)
                     if projName != None:
