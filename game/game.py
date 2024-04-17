@@ -53,7 +53,16 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-        self.world = GameData(50,50,self.width,self.height,"res/graphics/imgForPlacement/mapWaterGrasscopy.png","res/graphics/imgForPlacement/mapWaterGrasscopy2.png")
+        self.powerManagement = PowerManagement()        
+        self.waterManagement = WaterManagement(self)
+
+        self.audioManager = AudioManager()
+        self.audioManager.playMusic()
+        self.manager = pygame_gui.UIManager((self.width,self.height))
+        self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self)
+        self.world = GameData(50,50,self.width,self.height,self,
+                              "res/graphics/imgForPlacement/mapWaterGrasscopy.png",
+                              "res/graphics/imgForPlacement/mapWaterGrasscopy2.png")
         self.playing = True
 
         self.camera = Camera()
@@ -68,12 +77,9 @@ class MainGameScene:
         #self.firstRender = True
         self.groundRender = GroundRender(self.camera,self.groundBuffSize,self.centerOffset,self.imgCenterOffset,self.world)
 
-        self.audioManager = AudioManager()
-        self.audioManager.playMusic()
 
-        self.manager = pygame_gui.UIManager((self.width,self.height))
+
         self.loadFonts()
-        self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self.world,self)
 
         self.clearButton = UIButton(Rect(500,500,100,50),"Clear HTML",self.manager)
         self.appendButton = UIButton(Rect(600,600,100,50),"Append HTML",self.manager)
@@ -86,8 +92,6 @@ class MainGameScene:
 
         self.renderTreeRock = RockTreeRender(self.camera,self.centerOffset,self.world,self.imgCenterOffset)
 
-        self.powerManagement = PowerManagement()        
-        # self.waterManagement = WaterManagement()
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -173,13 +177,10 @@ class MainGameScene:
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
                     if projName != None:
                         self.powerManagement.handleProj(projName)
-                        self.mainGameUI.statsWindowWrapper.setStats("power usage",self.powerManagement.getPowerCons(),self.powerManagement.getPowerProd())
                     if projName != None:
                         self.audioManager.playSound("construction")
-                        self.mainGameUI.turnBar.waterManagementManager.projectPlanted(projName)   
-                        self.mainGameUI.turnBar.waterManagementManager.updateVals()
+                        self.waterManagement.handleProj(projName)   
                       
-                        self.mainGameUI.turnBar.waterManagementManager.setStats(self.mainGameUI.statsWindowWrapper)
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later

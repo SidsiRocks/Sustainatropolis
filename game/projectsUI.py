@@ -36,19 +36,17 @@ def extractMainObjectId(objId):
             return objId[i+1:]
     return objId
 class ProjectsUI:
-    def __init__(self,manager,statsWindow,notificationBox):
+    def __init__(self,manager,statsWindow,game,notificationBox):
         #order also important
         self.projectLst,self.projectToCostMap = self.loadProjectLstAndCost("res/json/projectCostData.json")
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.currentProject = None
-        self.world = None
+
         self.notificationBox = notificationBox
         #this will be read from and rednered to in game
         self.curTileDrawReq = {}
         self.manager = manager
-        self.game = None
-    def setGame(self,game):
         self.game = game
     def loadProjectLstAndCost(self,jsonFilePath):
         data = json.load(open(jsonFilePath))
@@ -137,9 +135,9 @@ class ProjectsUI:
         return projectListWindow
     def clickedOnWorld(self,x,y):
         #may want to add something to cancel placement like left clicking
-        if self.currentProject != None and self.world.checkPlacementValid(x,y,self.currentProject):
+        if self.currentProject != None and self.game.world.checkPlacementValid(x,y,self.currentProject):
             self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
-            self.world.placeObject(x,y,self.currentProject)
+            self.game.world.placeObject(x,y,self.currentProject)
             oldProjName = self.currentProject
             self.currentProject = None
             self.curTileDrawReq = {}
@@ -150,7 +148,7 @@ class ProjectsUI:
         return None
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
-            if self.world.checkPlacementValid(x,y,self.currentProject):
+            if self.game.world.checkPlacementValid(x,y,self.currentProject):
                 self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"transparent"}
             else:
                 self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"red"}
@@ -189,8 +187,6 @@ class ProjectsUI:
         # elif waterError != None:
         #     incrWaterErrorMsg = self.generateWaterErrorMsg(buttonName,waterError)
         #     self.createNotEnoughWindow(incrWaterErrorMsg)
-    def setWorld(self,world):
-        self.world = world
     #should create one and reload as needed possibly
     #also need to deactivate remaining components in the mean time
     def generateWaterErrorMsg(self,projName,waterError):

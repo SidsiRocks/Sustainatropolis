@@ -4,7 +4,7 @@ from .statisticsUI import StatisticsWindow
 
 class WaterManagement:
 
-    def __init__ (self) :
+    def __init__ (self,game) :
         findDict = json.load(open("res/json/waterManagement.json"))
         self.JSONdict = findDict
         self.prodUncleanWater = findDict["produceUncleanWater"] 
@@ -33,6 +33,7 @@ class WaterManagement:
         self.countProjects = findDict["countProjects"]
         self.offSets = findDict["offsets"]
         
+        self.game = game
 
     def waterDataTplValid(self,tpl):
         pass
@@ -45,14 +46,14 @@ class WaterManagement:
         statWin.setStats("Store Water",self.consStoreWater,self.storeWater)
         statWin.setStats("Sewage Water",self.consSewageWater,self.sewageWater)
 
-    def projectPlanted(self,project) :
+    def handleProj(self,project) :
     
         if project in self.countProjects :
             self.countProjects[project] += 1
         else : 
             self.countProjects[project] = 1
         
-
+        self.updateVals()
     def updateVals(self) :
         self.unCleanWater = 0 
         self.consUnCleanWater = 0
@@ -94,7 +95,7 @@ class WaterManagement:
         self.consCleanWater = min(self.consCleanWater,self.cleanWater)
         self.storeWater = min(self.storeWater,self.consCleanWater)
         self.consStoreWater = min(self.consStoreWater,self.storeWater)
-
+        self.setStats(self.game.mainGameUI.statsWindowWrapper)
     def processNotifs(self,notif) :
         if notif == "Reset" :
             for proj,changes in self.offSets.items() : 

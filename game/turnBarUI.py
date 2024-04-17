@@ -28,7 +28,7 @@ class TurnBarUI:
         self.crntYr = 2020
         self.endYr = 2040
         self.moneyPerYear = 20
-        self.waterManagementManager = WaterManagement()
+        self.waterManagementManager = self.game.waterManagement
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
     def createTurnBar(self,manager):
@@ -133,6 +133,4 @@ class TurnBarUI:
                     self.proceedEvent("Summer",maingameui)
                 elif self.crntYr == 2031 :
                     self.proceedEvent("Drought",maingameui)
-                self.waterManagementManager.updateVals()
-                self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)
-                
+                self.waterManagementManager.updateVals()                

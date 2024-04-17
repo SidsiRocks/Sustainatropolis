@@ -71,7 +71,7 @@
     "#Dam":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/DamResize.png"}}
     },
-    "#Water Tank":{
+    "#WaterTank":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/smallWaterTank.png"}}
     },
     "#CityBuilding":{
