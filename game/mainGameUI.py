@@ -16,6 +16,7 @@ from .projectsUI import ProjectsUI
 from .notificationsBoxUI import NotificationsBoxUI
 from .turnBarUI import TurnBarUI
 from .settingsUI import SettingsUI
+from .explanationUI import ExplanationUI
 
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
@@ -34,6 +35,7 @@ class MainGameUI:
         self.projectUIWrapper.setGame(game)
 
         self.settingsUI = SettingsUI(manager,game.audioManager)
+        self.explainUI = ExplanationUI(manager)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
     
@@ -44,3 +46,4 @@ class MainGameUI:
         self.projectUIWrapper.processEvent(event)
         self.turnBar.processEvents(event,self,audioManager)
         self.settingsUI.processEvent(event)
+        self.explainUI.processEvent(event)

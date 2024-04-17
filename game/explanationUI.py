@@ -3,46 +3,45 @@ from pygame import Rect
 from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.core import ObjectID
 from pygame_gui.elements.ui_window import UIWindow
+from pygame_gui.core.interfaces import IContainerLikeInterface, IUIManagerInterface
+
+import pygame_gui
+
+from .hideOnCloseWindow import HideUIwindow
 
 class ExplanationUI:
-    def __init__(self,manager):
-        self.imgButtonSize = (150,150)
-        self.explanationWinSize = (170,325)
-        self.txtBoxSize = (150,150)
+    def __init__(self,manager:IUIManagerInterface):
+        self.mainWindow = (1100,750)
+
+        width = manager.window_resolution[0]
+        height = manager.window_resolution[1]
+
+        explainButtonWidth  = 80
+        explainButtonHeight = 80
+        padX = 10
+
+        mainExplainWinRect = Rect((width-self.mainWindow[0])/2,(height-self.mainWindow[1])/2
+                                       ,self.mainWindow[0],self.mainWindow[1])
         
-        self.explainWinPadX = (self.explanationWinSize[0]-self.imgButtonSize[0])/2
-        self.explainWinPadY = (self.explanationWinSize[1]-self.imgButtonSize[1]-self.txtBoxSize[1])/3
+        #have to remove window padding in styling and add ObjectID
+        self.mainExplainWin = HideUIwindow(mainExplainWinRect,manager,"",
+                                       resizable=False,draggable=False,
+                                       object_id=ObjectID("#explainWin","@explainWin"),
+                                       visible=0)
 
-    def makeVisible():
-        pass
-    def createImgButton(self,projName,enclosingWin,manager):
-        padX = self.explainWinPadX
-        padY = self.explainWinPadY
-        buttonRect = Rect(padX,padY,self.imgButtonSize[0],self.imgButtonSize[1])
-        curButton = UIButton(buttonRect,manager=manager,
-                             container=enclosingWin,tool_tip_text="",
-                             object_id=
-                                ObjectID("#"+projName+"ExplainButton",
-                                        "@"+projName+"ExplainButton"))
-        return curButton
-    def createTxtBox(self,explainTxt,enclosingWin,manager,projName):
-        padX = self.explainWinPadX
-        padY = self.explainWinPadY
-        imgBtnHt = self.imgButtonSize[1]
+        buttonWidth = mainExplainWinRect.width
+        buttonHeight = mainExplainWinRect.height
+        self.imgButton = UIButton(Rect(0,0,buttonWidth,buttonHeight),text="",
+                                  manager=manager,container=self.mainExplainWin,
+                                  object_id=ObjectID("#explainImg","@explainImg"))
 
-        txtBoxRect = Rect(padX,imgBtnHt+padY,self.imgButtonSize[0],self.imgButtonSize[1])
-        txtBox = UITextBox(html_text=explainTxt,
-            relative_rect=txtBoxRect,manager=manager
-            ,object_id=
-            ObjectID("#"+projName+"ExplainTextBox"
-                     ,"@"+projName+"ExplainTextBox"),container=enclosingWin)
-        return txtBox
+        explainBtnRect = Rect(width-2*explainButtonWidth-padX,0,explainButtonWidth,explainButtonHeight)
+        self.explainButton = UIButton(explainBtnRect,text="Explain",
+                                  manager=manager,
+                                  object_id=ObjectID("#explainBtn","@explainBtn"))
     
-    def createEnclosingWin(self,projName,windowRect,manager):
-        curWindow = UIWindow(rect=windowRect,manager=manager,
-                    object_id=
-                        ObjectID("#"+projName+"EnclosingWin",
-                                 "@"+projName+"EnclosingWin"),draggable=False)
-
-    def createMainErrorWin():
-        pass
+    def processEvent(self,event):
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            objectID = event.ui_object_id
+            if objectID == "#explainBtn":
+                self.mainExplainWin.show()
