@@ -234,7 +234,7 @@ class GameData:
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(projData[key]["colour"])
-    def writeRockTreeData(self,imagePath):
+    def writeRockTreeData(self,imagePath,projMaintPath):
         image = Image.new('RGB',(self.noBlockY,self.noBlockX))
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):
@@ -245,6 +245,11 @@ class GameData:
                     curColor = self.tileToColor[imgName]
                     image.putpixel((y,x),curColor)
         image.save(imagePath)
+
+        sourceFile = open(projMaintPath,'w')
+        for proj in self.allProjectsList:
+            print(f"{proj.pos} {proj.maintenance}",file=sourceFile)
+    
 #    def createProject(self,projName,pos,mode="normal"):
 #        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}
     def createProject(self,projName,pos,mode="normal"):
@@ -261,4 +266,4 @@ class GameData:
             for y in range(self.noBlockY):
                 if type(self.rockTreeData[x][y]) == Project:
                     self.rockTreeData[x][y].updateMaintBar(totalOffset)
-        
+    
