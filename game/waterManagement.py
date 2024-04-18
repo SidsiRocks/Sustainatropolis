@@ -55,6 +55,7 @@ class WaterManagement:
                     # print(self.currentlyDown)
                     proj.maintBar.set_current_progress(0)
             # pass
+        self.updateVals()
             
 
     def createNotEnoughWindow(self,manager,warnWinMessHTML):
@@ -99,10 +100,16 @@ class WaterManagement:
                 self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
                 #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
     def setStats(self,statWin:StatisticsWindow):
+        # print("inside set Stats" , self.unCleanWater)
+        # print("unclean Calling  water" , self.consUnCleanWater , self.unCleanWater)
         statWin.setStats("Unclean Water",self.consUnCleanWater,self.unCleanWater)
+        # print("clean Calling unclean water" , self.consCleanWater , self.cleanWater)
         statWin.setStats("Clean Water",self.consCleanWater,self.cleanWater)
+        # print("store Calling unclean water" , self.consStoreWater , self.storeWater)
         statWin.setStats("Store Water",self.consStoreWater,self.storeWater)
+        # print("sewage Calling unclean water" , self.consSewageWater , self.sewageWater)
         statWin.setStats("Sewage Water",self.consSewageWater,self.sewageWater)
+        # print("sewage Calling sewge water")
 
     def handleProj(self,project) :
         # print(project)
@@ -151,12 +158,13 @@ class WaterManagement:
                 self.sewageWater += (self.JSONdict["produceSewage"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
             if proj in self.JSONdict["consumeSewage"] :
                 self.consSewageWater += (self.JSONdict["consumeSewage"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
-
+        print("inside update vals" , self.currentlyDown , self.unCleanWater)
         self.consUnCleanWater = min(self.consUnCleanWater,self.unCleanWater)
         self.cleanWater = min(self.cleanWater,self.consUnCleanWater)
         self.consCleanWater = min(self.consCleanWater,self.cleanWater)
         self.storeWater = min(self.storeWater,self.consCleanWater)
         self.consStoreWater = min(self.consStoreWater,self.storeWater)
+        self.population = min(self.population,self.consStoreWater/100)
         self.setStats(self.game.mainGameUI.statsWindowWrapper)
     def processNotifs(self,notif) :
         if notif == "Reset" :

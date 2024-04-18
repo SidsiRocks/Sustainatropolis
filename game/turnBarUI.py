@@ -126,6 +126,7 @@ class TurnBarUI:
                 self.waterManagementManager.decreaseMaintenance()
                 self.setCrntYear(self.crntYr+1)
                 audioManager.playSound("celebration")
+                print("Current Year is", self.crntYr)
                 if self.crntYr == 2021 :  #summer
                     self.proceedEvent("Summer",maingameui)
                     self.proceedEvent("Holi",maingameui)

@@ -41,15 +41,19 @@ class CustomUIprogressBar(UIStatusBar):
         return f"{self.current_progress:0.1f}/{self.maximum_progress:0.1f}"
         
     def set_current_progress(self,progress:float):
+        print("inside set current" , progress , self.current_progress)
         if self.current_progress != progress:
             self.status_changed = True
+            print("status changed")
         self.current_progress = progress 
         if self.maximum_progress != 0:
             self.percent_full = min((progress*100)/self.maximum_progress,1)
         else:
             self.percent_full = 0
     def set_maximum(self,maxVal):
+        print("inside set_nax" , maxVal, self.maximum_progress)
         if maxVal != self.maximum_progress:
+            print("status changed in max")
             self.maximum_progress = maxVal
             self.status_changed = True 
     

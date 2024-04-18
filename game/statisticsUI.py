@@ -46,8 +46,9 @@ class StatisticsWindow:
         return (y,txtLbl,prgrssBar)
 
     def setStats(self,name,curProgress,maximum=None):
+        print("inside setStats",name , curProgress, maximum)
         self.statProgressBarDict[name]["progressBar"].set_current_progress(curProgress)
-        if maximum:
+        if maximum!=None :
             #self.statProgressBarDict[name].maximum_progress = maximum
             self.statProgressBarDict[name]["progressBar"].set_maximum(maximum)
 
