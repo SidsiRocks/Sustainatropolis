@@ -1,17 +1,4 @@
 {
-    "mapRelated":{
-        "mapWaterGrass":{
-            "path":{
-                "normal":"res/graphics/imgForPlacement/mapWaterGrasscopy.png"
-            }
-            ,"comment":"dummy size not actually used"
-        },
-        "mapTreeRock":{
-            "path":{
-                "normal":"res/graphics/imgAlternateTrans/mapWaterGrasscopy2.png"
-            }
-        }
-    },
     "groundRelated":{
         "block":{
             "path":{

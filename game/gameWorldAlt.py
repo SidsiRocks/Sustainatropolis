@@ -6,7 +6,7 @@ from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr","allProjectsList"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr","allProjectsList","mapData"]
     def __init__(self,noBlockX,noBlockY,width,height,game,*args):
         self.allProjectsList = []
         self.width = width 
@@ -26,6 +26,7 @@ class GameData:
         self.redTintColor = (255,0,0)
         #self.loadImages()
         self.projectNames = {}
+        self.mapData = json.load(open("res/json/mapData.json"))
         self.loadImages()
 
         self.disableMaintBar = {"tree":0,"rock":0}
@@ -39,6 +40,7 @@ class GameData:
             self.noBlockY = noBlockY
             self.groundData   = self.createGroundDataDebug()
             self.rockTreeData = self.createRockTreeDebug()
+
     #didnt create separate function to only generate grass
     def createGroundData(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
@@ -150,7 +152,7 @@ class GameData:
     def loadImages(self):
         f = open("res/json/imageMetaDataAlt.json")
         data = json.load(f)
-        mapData = data["mapRelated"]
+        mapData = self.mapData
         groundData = data["groundRelated"]
         projData = data["projRelated"]
 
@@ -234,7 +236,8 @@ class GameData:
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(projData[key]["colour"])
-    def writeRockTreeData(self,imagePath,projMaintPath):
+    def writeRockTreeData(self,imagePath,mapJsonPath,projMaintPath):
+        #also write the base image bath used too
         image = Image.new('RGB',(self.noBlockY,self.noBlockX))
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):
@@ -246,10 +249,16 @@ class GameData:
                     image.putpixel((y,x),curColor)
         image.save(imagePath)
 
+        with open(mapJsonPath,"w",encoding="utf-8") as jsonFile:
+            json.dump(self.mapData,jsonFile,ensure_ascii=False,indent=4)
+
         sourceFile = open(projMaintPath,'w')
         for proj in self.allProjectsList:
-            print(f"{proj.pos} {proj.maintenance}",file=sourceFile)
-    
+            projIndx = proj.tile
+            projName = self.indxImgMap[projIndx]
+            print(f"{projName}::{proj.pos}::{proj.maintenance}",file=sourceFile)
+
+
 #    def createProject(self,projName,pos,mode="normal"):
 #        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}
     def createProject(self,projName,pos,mode="normal"):
