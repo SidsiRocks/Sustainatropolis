@@ -4,6 +4,7 @@ from .statisticsUI import StatisticsWindow
 from .MessageWindow import MessageWindow
 from pygame import Rect
 from pygame_gui.core import ObjectID
+
 class WaterManagement:
 
     def __init__ (self,game) :
@@ -34,8 +35,11 @@ class WaterManagement:
         self.consSewageWater = 0
         self.countProjects = findDict["countProjects"]
         self.offSets = findDict["offsets"]
-        
+        self.population = 0 
         self.game = game
+    def getScore(self) :
+        print("self.population" , self.population)
+        return self.population
 
     def createNotEnoughWindow(self,manager,warnWinMessHTML):
         width = 300
@@ -79,7 +83,7 @@ class WaterManagement:
         statWin.setStats("Sewage Water",self.consSewageWater,self.sewageWater)
 
     def handleProj(self,project) :
-    
+        print(project)
         if project in self.countProjects :
             self.countProjects[project] += 1
         else : 
@@ -96,7 +100,7 @@ class WaterManagement:
         self.consStoreWater = 0
         self.sewageWater = 0
         self.consSewageWater = 0
-
+        self.population = 0 
         for proj in self.countProjects :
 
             if proj in self.JSONdict["produceUncleanWater"] :
@@ -115,8 +119,13 @@ class WaterManagement:
                 self.storeWater += (self.JSONdict["produceStoreWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
             
             if proj in self.JSONdict["consumeStoreWater"] :
+                print("here inside consume store water")
                 self.consStoreWater += (self.JSONdict["consumeStoreWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
-            
+                self.population += 100*self.countProjects[proj]
+                print("self.population",self.population)
+                print(self.countProjects[proj])
+                print(proj )
+                print(self.countProjects)
             if proj in self.JSONdict["produceSewage"] :
                 self.sewageWater += (self.JSONdict["produceSewage"][proj] + self.offSets[proj] ) * self.countProjects[proj]
             

@@ -77,9 +77,6 @@
     "#CityBuilding":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/city-building-1-bg-removed.png"}}
     },
-    "#Big CityBuilding":{
-        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/city-building-2.png"}}
-    },
 
     "#windowPrototype":{
         "misc":{

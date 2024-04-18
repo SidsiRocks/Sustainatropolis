@@ -10,8 +10,7 @@
         "WindMill",
         "Dam",
         "WaterTank",
-        "CityBuilding",
-        "Big CityBuilding"
+        "CityBuilding"
     ]
     ,"projectToCostMap":{
         "Water Treatment":1000,
@@ -24,7 +23,6 @@
         "WindMill":100,
         "Dam":140,
         "WaterTank":100,
-        "CityBuilding":1000,
-        "Big CityBuilding":1750
+        "CityBuilding":1000
     }
 }

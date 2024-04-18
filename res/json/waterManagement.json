@@ -17,16 +17,14 @@
         "WaterTank": 50000
     },
     "consumeStoreWater": {
-        "CityBuilding1": 5000,
-        "CityBuilding2": 10000
+        "CityBuilding": 5000
     },
     "comment": [
         "Houses go here"
     ],
     "produceSewage": {
-        "CityBuilding1": 2000,
-        "CityBuilding2": 4500
-    },
+        "CityBuilding": 2000
+            },
     "comment2": [
         "Houses go here"
     ],
@@ -40,8 +38,7 @@
         "sewagePlant" : 0 ,
         "waterTreatment" : 0 ,
         "WaterTank" : 0 ,
-        "CityBuilding1" : 0 ,
-        "CityBuilding2" : 0 
+        "CityBuilding" : 0 
     },
     "regular" : {
         "Dam" : 10000,
@@ -49,7 +46,7 @@
         "Purification Plant" : 7000,
         "sewagePlant" : 3000,
         "WaterTank" : 50000,
-        "CityBuilding1" : 5000
+        "CityBuilding" : 5000
     },
 
     "offsets" : {
@@ -59,8 +56,7 @@
         "sewagePlant" : 0 ,
         "waterTreatment" : 0 ,
         "WaterTank" : 0 ,
-        "CityBuilding1" : 0 ,
-        "CityBuilding2" : 0 
+        "CityBuilding" : 0  
     },
     "offsetsFromRegular": {
         "Drought": {
@@ -75,9 +71,7 @@
                 "waterPump" : -500,
             
             
-                "CityBuilding1": 1000,
-                "CityBUilding2": 2000
-            
+                "CityBuilding": 1000            
         },
         "Flood":{
             
@@ -86,18 +80,17 @@
            
         },
         "Tourists" :{
-                "CityBuilding1" : 3000,
-                "CityBuilding2" : 6000  
+                "CityBuilding" : 3000  
         },
         "Rain" :{
                 "Dam" : 2000,
                 "waterPump" : 1000
         },
         "Holi":{
-            "CityBuilding1" : 2000
+            "CityBuilding" : 2000
         },
         "Diwali":{
-            "CityBuilding2" : 2000
+         
         },
         "DamRelease":{
             "Dam":4000

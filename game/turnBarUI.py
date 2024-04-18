@@ -10,7 +10,7 @@ from pygame_gui.elements.ui_progress_bar import UIProgressBar
 from pygame_gui.elements.ui_label import UILabel
 from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
-
+from .highscore import HighScore
 from .customUIprogress import CustomUIprogressBar
 
 def createId(txt):
@@ -31,6 +31,7 @@ class TurnBarUI:
         self.waterManagementManager = self.game.waterManagement
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
+        self.highscore_db = HighScore()
     def createTurnBar(self,manager):
         width = manager.window_resolution[0]
         height = manager.window_resolution[1]
@@ -120,7 +121,7 @@ class TurnBarUI:
 
     def processEvents(self,event,maingameui,audioManager):
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
-            if self.crntYr < self.endYr:
+            if self.crntYr < self.endYr+1:
                 self.waterManagementManager.processNotifs("Reset")
                 self.setCrntYear(self.crntYr+1)
                 audioManager.playSound("celebration")
@@ -167,5 +168,13 @@ class TurnBarUI:
                     self.proceedEvent("Tourists",maingameui)
                 elif self.crntYr == 2040 : #Winter 
                     self.proceedEvent("Diwali",maingameui)
+                elif self.crntYr == 2041 : 
+                    self.highscore_db.save_high_score( "Arpit" ,self.waterManagementManager.getScore())
+                    scores = self.highscore_db.load_high_score()
+                    for x in scores : 
+                        print(x)
+                    # self.highscore_db.saveScores()
+                    # self.game.gameOver = True
+                    # self.game.mainGameUI.explainUI.showGameOver()
                 self.waterManagementManager.updateVals()
                 self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)

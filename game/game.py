@@ -149,6 +149,7 @@ class MainGameScene:
         eventslist = pg.event.get()
         # (pg.event.get().reverse)
         eventslist.reverse()
+        buttonClicked = False
         for event in eventslist:
             # print(templist)
             if event.type == pg.QUIT:
@@ -157,6 +158,7 @@ class MainGameScene:
                 if event.key == pg.K_ESCAPE:
                     self.quitScene()
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                buttonClicked = True
                 self.audioManager.playSound("click")
                 if event.ui_element == self.clearButton:
                     self.mainGameUI.notificationBox.clearHtmlText()
@@ -164,7 +166,7 @@ class MainGameScene:
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
                 self.mainGameUI.processEvents(event,self.audioManager)
 
-            elif event.type == pg.MOUSEBUTTONDOWN :
+            elif event.type == pg.MOUSEBUTTONDOWN and buttonClicked == False:
                 mouseX,mouseY = pg.mouse.get_pos()
                 coordinates = self.mainGameUI.projectUIWrapper.projectListWindow.rect
                 pos = self.findClickCoord(mouseX,mouseY)
