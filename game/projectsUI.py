@@ -17,6 +17,7 @@ from pygame_gui.windows.ui_message_window import UIMessageWindow
 from .statisticsUI import StatisticsWindow
 from .MessageWindow import MessageWindow
 from .powerManagement import PowerManagement
+from .waterManagement import WaterManagement
 
 #modifing ovject id to be common so styling can be done together
 def createObjectId(txt):
@@ -36,13 +37,13 @@ def extractMainObjectId(objId):
             return objId[i+1:]
     return objId
 class ProjectsUI:
-    def __init__(self,manager,statsWindow,game,notificationBox):
+    def __init__(self,manager,statsWindow,game,notificationBox,waterManager:WaterManagement):
         #order also important
         self.projectLst,self.projectToCostMap = self.loadProjectLstAndCost("res/json/projectCostData.json")
         self.projectNameButtonDct = {}
         self.projectListWindow = self.createProjectsList(statsWindow,manager)
         self.currentProject = None
-
+        self.waterManager = waterManager
         self.notificationBox = notificationBox
         #this will be read from and rednered to in game
         self.curTileDrawReq = {}
@@ -155,18 +156,21 @@ class ProjectsUI:
         # else :
         # else : 
                 # self.curTileDrawReq = None
-    def processEvent(self,event):
+    def processEvent(self,event,waterManager:WaterManagement):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
             if buttonName in self.projectNameButtonDct:
-                self.handleProjectButtonClick(buttonName)
-    def handleProjectButtonClick(self,buttonName):
+                self.handleProjectButtonClick(buttonName,waterManager)
+    def handleProjectButtonClick(self,buttonName,waterManager:WaterManagement):
         isEnoughMoney = self.notificationBox.money >= self.projectToCostMap[buttonName]
         # isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
         # waterError = self.game.waterManagement.validProjPlace(buttonName)
         # isWaterValid = (waterError == None)
 
         if isEnoughMoney: 
+            # generate warning 
+            notenoughResources = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
+            waterManager.validProjPlace(self.manager,buttonName)
             self.currentProject = buttonName
             
         else:
