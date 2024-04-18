@@ -1,11 +1,12 @@
 from .util import ldImage,parseColour,parseTuple
 from .InvalidPlacementException import InvalidPlacementException
+from .Project import Project
 import pygame as pg
 from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr"]
     def __init__(self,noBlockX,noBlockY,width,height,game,*args):
         self.width = width 
         self.height = height
@@ -15,13 +16,18 @@ class GameData:
         self.imgArr = []
         self.transpImgArr = []
         self.transRedArr = []
+        
         self.offsetArr = []
+        self.maintOffsetArr = []
+
         self.sizeArr = []
         self.game = game
         self.redTintColor = (255,0,0)
         #self.loadImages()
         self.projectNames = {}
         self.loadImages()
+
+        self.disableMaintBar = {"tree":0,"rock":0}
 
         if len(args) == 2 : 
             self.noBlockX = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_height()
@@ -107,6 +113,7 @@ class GameData:
                     raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]}")
         rockTreeData[x][y] = self.createProject(tileName,(x,y))
     def placeObject(self,x,y,tileName):
+        print("creating project with name:",tileName)
         curSize = self.sizeArr[self.imgIndxMap[tileName]]
         self.blockNeighbourSlots(x,y,curSize,self.rockTreeData,tileName)
         return True
@@ -160,6 +167,9 @@ class GameData:
 
             curOffset = (0,0)
             self.offsetArr.append(curOffset)
+
+            self.maintOffsetArr.append(None)
+
             curSize = (1,1)
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(blockData[key]["colour"])
@@ -178,6 +188,9 @@ class GameData:
 
             curOffset = (0,0)
             self.offsetArr.append(curOffset)
+
+            self.maintOffsetArr.append(None)
+
             curSize = (1,1)
             self.sizeArr.append(curSize)
     def loadProjectImages(self,projData):
@@ -200,6 +213,10 @@ class GameData:
             #check if can remove curCoord and offset as needed
             curCoord = parseTuple(projData[key]["offset"])
             self.offsetArr.append(curCoord)
+
+            curMaintOff = parseTuple(projData[key]["maintOffset"])
+            self.maintOffsetArr.append(curMaintOff)
+
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(projData[key]["colour"])
@@ -214,5 +231,17 @@ class GameData:
                     curColor = self.tileToColor[imgName]
                     image.putpixel((y,x),curColor)
         image.save(imagePath)
+#    def createProject(self,projName,pos,mode="normal"):
+#        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}
     def createProject(self,projName,pos,mode="normal"):
-        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}
+        projIndx = self.imgIndxMap[projName]
+        if projName in self.disableMaintBar:
+            return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,False)
+        else:
+            return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode)
+    def updateProjMaintBar(self,totalOffset):
+        for x in range(self.noBlockX):
+            for y in range(self.noBlockY):
+                if type(self.rockTreeData[x][y]) == Project:
+                    self.rockTreeData[x][y].updateMaintBar(totalOffset)
+        
