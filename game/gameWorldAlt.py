@@ -196,7 +196,16 @@ class GameData:
     def loadProjectImages(self,projData):
         for key in projData:
             self.projectNames[key] = 0
-            curImg = ldImage(projData[key]["path"]["normal"])
+
+            imgPaths = projData[key]["path"]["normal"]
+            curImg = None
+            if type(imgPaths) == list:
+                curImg = []
+                for imgPath in imgPaths:
+                    curImg.append(ldImage(imgPath))
+            else:
+                curImg = ldImage(imgPaths)
+
             curTransparent = None
             curTransparent = ldImage(projData[key]["path"]["transparent"])
 

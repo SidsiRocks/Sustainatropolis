@@ -142,11 +142,21 @@
         },
         "WindMill":{
             "path":{
-                "normal":"res/graphics/imgForPlacement/windMillIndivResize.png",
+                "normal":[
+                    "res/graphics/imgForPlacement/windMillAnimation/Img1.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img2.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img3.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img4.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img5.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img6.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img7.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img8.png",
+                    "res/graphics/imgForPlacement/windMillAnimation/Img9.png"
+                ],
                 "transparent":"res/graphics/imgAlternateTrans/windMillIndivResize.png"
             }
             ,"colour":"rgb(243,243,243)"
-            ,"offset":"(10,-15)"
+            ,"offset":"(10,10)"
             ,"size":"(1,1)"
             ,"comment":"may want to increase size in x direction here too to prevent weird rendering errors"
             ,"maintOffset":"(20,-200)"
