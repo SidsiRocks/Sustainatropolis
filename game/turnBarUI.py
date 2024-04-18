@@ -28,7 +28,7 @@ class TurnBarUI:
         self.crntYr = 2020
         self.endYr = 2040
         self.moneyPerYear = 20
-        self.waterManagementManager = WaterManagement()
+        self.waterManagementManager = self.game.waterManagement
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
     def createTurnBar(self,manager):

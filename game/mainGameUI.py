@@ -15,17 +15,14 @@ def createId(txt):
 
 
 class MainGameUI:
-    def __init__(self,manager,themePath,world,game):
+    def __init__(self,manager,themePath,game):
         #have to create manager correctly
         self.manager = manager
         self.loadTheme(themePath)
         self.statsWindowWrapper = StatisticsWindow(manager)
         self.turnBar = TurnBarUI(manager,game)
         self.notificationBox = NotificationsBoxUI(manager)
-        self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,self.notificationBox)
-        self.projectUIWrapper.setWorld(world)
-        self.projectUIWrapper.setGame(game)
-
+        self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,game,self.notificationBox)
         self.settingsUI = SettingsUI(manager,game.audioManager)
         self.explainUI = ExplanationUI(manager)
     def loadTheme(self,themePath):

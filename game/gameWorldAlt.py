@@ -5,8 +5,8 @@ from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap"]
-    def __init__(self,noBlockX,noBlockY,width,height,*args):
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game"]
+    def __init__(self,noBlockX,noBlockY,width,height,game,*args):
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
@@ -17,6 +17,7 @@ class GameData:
         self.transRedArr = []
         self.offsetArr = []
         self.sizeArr = []
+        self.game = game
         self.redTintColor = (255,0,0)
         #self.loadImages()
         self.projectNames = {}
@@ -119,6 +120,8 @@ class GameData:
                     if pixel == self.tileToColor[key]:
                         curSize = self.sizeArr[self.imgIndxMap[key]]
                         self.blockNeighbourSlots(x,y,curSize,rockTreeData,key)
+                        self.game.powerManagement.handleProj(key)
+                        self.game.waterManagement.handleProj(key)
         return rockTreeData
     def createGroundDataDebug(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
