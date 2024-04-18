@@ -16,10 +16,11 @@ class CustomUIprogressBar(UIStatusBar):
                  parent_element: Optional[UIElement] = None,
                  object_id: Optional[Union[ObjectID, str, ]] = None,
                  anchors: Optional[Dict[str, Union[str, UIElement]]] = None,
-                 visible: int = 1,current_progress:float=0,maximum_progess:float=100.0):
+                 visible: int = 1,current_progress:float=0,maximum_progess:float=100.0,projName=""):
 
         self.current_progress = current_progress
         self.maximum_progress = maximum_progess
+        self.projName = projName
 
         super().__init__(relative_rect=relative_rect,
                          manager=manager,
@@ -28,7 +29,6 @@ class CustomUIprogressBar(UIStatusBar):
                          object_id=object_id,
                          anchors=anchors,
                          visible=visible)
-
         #print("current and maximum progress in constructor",self.current_progress,self.maximum_progress)
         
     @property
@@ -40,7 +40,7 @@ class CustomUIprogressBar(UIStatusBar):
             return 0
     def status_text(self):
 #        print("current progress is:",self.current_progress,"maximum is:",self.maximum_progress)
-        return f"{self.current_progress:0.1f}/{self.maximum_progress:0.1f}"
+        return f"{self.current_progress:0.1f} {self.projName}/{self.maximum_progress:0.1f}"
         
     def set_current_progress(self,progress:float):
         if self.current_progress != progress:

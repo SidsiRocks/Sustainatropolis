@@ -9,11 +9,12 @@ class Project:
         #currently offset from proj (0,0) but would come from
         #a dictionary in general
         self.maintBar = None
-        if createMainBar:
+        if createMainBar and mode=="normal":
             self.maintBar = MaintanaceBarUI(self.pos,(0,0),
                                 relative_rect=Rect(0,0,100,30),
-                                manager=manager)
+                                manager=manager,projName=tile)
 
     def updateMaintBar(self,cameraOffset):
         if self.maintBar != None:
             self.maintBar.updateOffsetPos(cameraOffset)
+    
