@@ -113,6 +113,7 @@ class GameData:
                     raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]}")
         rockTreeData[x][y] = self.createProject(tileName,(x,y))
     def placeObject(self,x,y,tileName):
+        print("creating project with name:",tileName)
         curSize = self.sizeArr[self.imgIndxMap[tileName]]
         self.blockNeighbourSlots(x,y,curSize,self.rockTreeData,tileName)
         return True
@@ -213,7 +214,8 @@ class GameData:
             curCoord = parseTuple(projData[key]["offset"])
             self.offsetArr.append(curCoord)
 
-            self.maintOffsetArr.append(projData[key]["maintOffset"])
+            curMaintOff = parseTuple(projData[key]["maintOffset"])
+            self.maintOffsetArr.append(curMaintOff)
 
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)

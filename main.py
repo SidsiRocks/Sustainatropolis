@@ -3,8 +3,8 @@ from game.game import MainGameScene
 from pygame.locals import *
 import pygame_gui
 def main():
-    flag = FULLSCREEN | DOUBLEBUF 
-    #flag = DOUBLEBUF
+    #flag = FULLSCREEN | DOUBLEBUF 
+    flag = DOUBLEBUF
     running = True 
     playing = False 
     
@@ -21,8 +21,8 @@ def main():
     play_button = pygame_gui.elements.UIButton(relative_rect=pg.Rect((screen_width/2-100,screen_height/2-50),(200,100)),text="Play",manager=manager)
 
 
-    #screen = pg.display.set_mode((1600,800),flag,vsync=True)
-    screen = pg.display.set_mode((0,0),flag,vsync=True)
+    screen = pg.display.set_mode((1600,800),flag,vsync=True)
+    #screen = pg.display.set_mode((0,0),flag,vsync=True)
     clock = pg.time.Clock()
 
     game = MainGameScene(screen,clock)

@@ -32,6 +32,7 @@ class MaintanaceBarUI(CustomUIprogressBar):
                          maximum_progess=maximum_progress)
         self.isoPos = isoPos
         self.offsetFromProj = offsetFromProj
+        print("Offset from Proj for proj is",offsetFromProj)
         #self.status_changed variable is relevant
         self.isoRenderPos = isoCoordToRenderPos(self.isoPos,(0,0))
         self.pos = self.isoRenderPos
@@ -40,7 +41,7 @@ class MaintanaceBarUI(CustomUIprogressBar):
     def position(self):
         return self.pos
     def updateOffsetPos(self,cameraOffset):
-        newPos = (self.isoRenderPos[0] +cameraOffset[0] ,self.isoRenderPos[1] + cameraOffset[1])
+        newPos = (self.isoRenderPos[0] +cameraOffset[0]+self.offsetFromProj[0] ,self.isoRenderPos[1] + cameraOffset[1] + self.offsetFromProj[1])
         if newPos != self.pos:
             #print("Position changed")
             self.pos = newPos

@@ -98,7 +98,7 @@
             ,"offset":"(-60,120)"
             ,"size":"(3,4)"
             ,"comment":"Extended pipe size in y direction from 3 to 4 to prevent weird rendering glitches"
-            ,"maintOffset":"(0,0)"
+            ,"maintOffset":"(-50,-30)"
         },
         "Purification Plant":{
             "path":{
@@ -108,7 +108,7 @@
             ,"colour":"rgb(169,16,152)"
             ,"offset":"(-20,170)"
             ,"size":"(4,4)"
-            ,"maintOffset":"(0,0)"
+            ,"maintOffset":"(-50,-70)"
         },
         "Industrial Plant":{
             "path":{
@@ -149,7 +149,7 @@
             ,"offset":"(10,-15)"
             ,"size":"(1,1)"
             ,"comment":"may want to increase size in x direction here too to prevent weird rendering errors"
-            ,"maintOffset":"(0,0)"
+            ,"maintOffset":"(20,-200)"
         },
         "Dam":{
             "path":
