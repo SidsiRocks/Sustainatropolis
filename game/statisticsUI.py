@@ -41,7 +41,7 @@ class StatisticsWindow:
             maximum_progess=0
         )
         #have to explicitly call to set progress
-        prgrssBar.set_current_progress(100)
+        prgrssBar.set_current_progress(0)
         y += prgrssHt
         return (y,txtLbl,prgrssBar)
 

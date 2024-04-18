@@ -159,7 +159,7 @@ class MainGameScene:
                 if event.ui_element == self.appendButton:
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
                 self.mainGameUI.processEvents(event,self.audioManager)
-                skipMouseClickEvents = True
+
             elif event.type == pg.MOUSEBUTTONDOWN :
                 mouseX,mouseY = pg.mouse.get_pos()
                 coordinates = self.mainGameUI.projectUIWrapper.projectListWindow.rect
