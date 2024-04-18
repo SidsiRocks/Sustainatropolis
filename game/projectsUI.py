@@ -166,7 +166,10 @@ class ProjectsUI:
         # isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
         # waterError = self.game.waterManagement.validProjPlace(buttonName)
         # isWaterValid = (waterError == None)
-
+        if self.currentProject != None and self.currentProject == buttonName:
+            self.currentProject = None
+            return  
+            # self.currentProject = None 
         if isEnoughMoney: 
             # generate warning 
             notenoughResources = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
