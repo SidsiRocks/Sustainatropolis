@@ -44,12 +44,7 @@
     },
     "images":{"normal_image":{}}
     ,
-    "#Water Treatment":{
-        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/WaterTreatmentContainersRemovedResized.png"}}
-    },
-    "#Sewage Plant":{
-        "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/sewageTreatmentPlantResize.png"}}
-    },
+
     "#Water Pump":{
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/pumpingPlantRemoveBackgroundResized.png"}}
     },

@@ -73,7 +73,7 @@ class WaterManagement:
         if projName == "WaterTank" :
             if self.cleanWater < self.consCleanWater + self.regular[projName] :
                 self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
-        if projName == "CityBuilding1" : 
+        if projName == "CityBuilding" : 
             if self.storeWater < self.consStoreWater + self.regular[projName] :
                 self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
     def setStats(self,statWin:StatisticsWindow):
