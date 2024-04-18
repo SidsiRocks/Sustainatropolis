@@ -149,9 +149,9 @@ class ProjectsUI:
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
             if self.game.world.checkPlacementValid(x,y,self.currentProject):
-                self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"transparent"}
+                self.curTileDrawReq = self.game.world.createProject(self.currentProject,(x,y),"transparent")
             else:
-                self.curTileDrawReq = {"tile":self.currentProject,"pos":(x,y),"mode":"red"}
+                self.curTileDrawReq = self.game.world.createProject(self.currentProject,(x,y),"red")
         # else :
         # else : 
                 # self.curTileDrawReq = None

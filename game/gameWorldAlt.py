@@ -105,7 +105,7 @@ class GameData:
                     else:
                         tile = rockTreeData[overlapCoord[0]][overlapCoord[1]]["tile"]
                     raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]}")
-        rockTreeData[x][y] = {"tile":self.imgIndxMap[tileName]}
+        rockTreeData[x][y] = self.createProject(tileName,(x,y))
     def placeObject(self,x,y,tileName):
         curSize = self.sizeArr[self.imgIndxMap[tileName]]
         self.blockNeighbourSlots(x,y,curSize,self.rockTreeData,tileName)
@@ -214,3 +214,5 @@ class GameData:
                     curColor = self.tileToColor[imgName]
                     image.putpixel((y,x),curColor)
         image.save(imagePath)
+    def createProject(self,projName,pos,mode="normal"):
+        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}

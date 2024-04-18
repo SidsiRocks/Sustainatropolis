@@ -30,7 +30,7 @@ class RockTreeRender:
     def drawPlacementReq(self,curDict,screen):
         totalCenterOffset = self.calTotalOffset()
         if curDict != {}:
-            imgIndx = self.gameWorld.imgIndxMap[curDict["tile"]]
+            imgIndx = curDict["tile"]
             x,y = curDict["pos"]
             mode = curDict["mode"]
             curImg = None
