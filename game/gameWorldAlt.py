@@ -6,7 +6,7 @@ from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr"]
     def __init__(self,noBlockX,noBlockY,width,height,game,*args):
         self.width = width 
         self.height = height
@@ -16,7 +16,10 @@ class GameData:
         self.imgArr = []
         self.transpImgArr = []
         self.transRedArr = []
+        
         self.offsetArr = []
+        self.maintOffsetArr = []
+
         self.sizeArr = []
         self.game = game
         self.redTintColor = (255,0,0)
@@ -163,6 +166,9 @@ class GameData:
 
             curOffset = (0,0)
             self.offsetArr.append(curOffset)
+
+            self.maintOffsetArr.append(None)
+
             curSize = (1,1)
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(blockData[key]["colour"])
@@ -181,6 +187,9 @@ class GameData:
 
             curOffset = (0,0)
             self.offsetArr.append(curOffset)
+
+            self.maintOffsetArr.append(None)
+
             curSize = (1,1)
             self.sizeArr.append(curSize)
     def loadProjectImages(self,projData):
@@ -203,6 +212,9 @@ class GameData:
             #check if can remove curCoord and offset as needed
             curCoord = parseTuple(projData[key]["offset"])
             self.offsetArr.append(curCoord)
+
+            self.maintOffsetArr.append(projData[key]["maintOffset"])
+
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(projData[key]["colour"])
@@ -220,10 +232,11 @@ class GameData:
 #    def createProject(self,projName,pos,mode="normal"):
 #        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}
     def createProject(self,projName,pos,mode="normal"):
+        projIndx = self.imgIndxMap[projName]
         if projName in self.disableMaintBar:
-            return Project(self.imgIndxMap[projName],pos,self.game.manager,mode,False)
+            return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,False)
         else:
-            return Project(self.imgIndxMap[projName],pos,self.game.manager,mode)
+            return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode)
     def updateProjMaintBar(self,totalOffset):
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):

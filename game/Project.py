@@ -2,7 +2,7 @@ from pygame import Rect
 from .maintenanceBarUI import MaintanaceBarUI
 class Project:
     #see how to get manager here to create the UI
-    def __init__(self,tile,pos,manager,mode="normal",createMainBar = True):
+    def __init__(self,tile,pos,offsetFromProj,manager,mode="normal",createMainBar = True):
         self.tile = tile
         self.mode = mode 
         self.pos = pos
@@ -12,7 +12,7 @@ class Project:
         if createMainBar and mode=="normal":
             self.maintBar = MaintanaceBarUI(self.pos,(0,0),
                                 relative_rect=Rect(0,0,100,30),
-                                manager=manager,projName=tile)
+                                manager=manager)
 
     def updateMaintBar(self,cameraOffset):
         if self.maintBar != None:

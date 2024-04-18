@@ -20,8 +20,7 @@ class MaintanaceBarUI(CustomUIprogressBar):
                  parent_element: Optional[UIElement] = None,
                  object_id: Optional[Union[ObjectID,str,]] = None,
                  anchors: Optional[Dict[str,Union[str,UIElement]]] = None,
-                 visible:int = 1,current_progress:float = 0,maximum_progress:float = 100.0,
-                 projName = ""):
+                 visible:int = 1,current_progress:float = 0,maximum_progress:float = 100.0):
         super().__init__(relative_rect=relative_rect,
                          manager=manager,
                          container=container,
@@ -30,7 +29,7 @@ class MaintanaceBarUI(CustomUIprogressBar):
                          anchors=anchors,
                          visible=visible,
                          current_progress=current_progress,
-                         maximum_progess=maximum_progress,projName=projName)
+                         maximum_progess=maximum_progress)
         self.isoPos = isoPos
         self.offsetFromProj = offsetFromProj
         #self.status_changed variable is relevant
