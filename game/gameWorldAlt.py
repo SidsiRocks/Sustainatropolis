@@ -118,7 +118,7 @@ class GameData:
         if temp.tile != self.imgIndxMap["tree"] and temp.tile != self.imgIndxMap["rock"]:
             self.allProjectsList.append(temp)
     def placeObject(self,x,y,tileName):
-        print("creating project with name:",tileName)
+        # print("creating project with name:",tileName)
         curSize = self.sizeArr[self.imgIndxMap[tileName]]
         self.blockNeighbourSlots(x,y,curSize,self.rockTreeData,tileName)
         return True

@@ -21,7 +21,10 @@ class Project:
             self.maintBar.updateOffsetPos(cameraOffset)
     
     def decMaintenance(self,dec):
-        self.maintenance = self.maintenance - dec 
+        if self.maintenance - dec < 0:
+            self.maintenance = 0
+        else :
+            self.maintenance = self.maintenance - dec 
         self.maintBar.set_current_progress(self.maintenance)
     def setMaintenacne(self,maint):
         self.maintenance - maint 

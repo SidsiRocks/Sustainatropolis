@@ -39,16 +39,21 @@ class WaterManagement:
         self.currentlyDown = findDict["currentlyDown"] 
         self.game = game
     def getScore(self) :
-        print("self.population" , self.population)
+        # print("self.population" , self.population)
         return self.population
 
     def decreaseMaintenance(self) :
         for proj in self.game.world.allProjectsList :
-            print(proj) 
-            proj.decMaintenance(10)
-            if proj.maintenance == 0 :
-                proj.maintenance = 0
-                proj.maintBar.set_current_progress(0)
+            # print(proj) 
+            if proj.maintenance != 0 :
+                proj.decMaintenance(10)
+                if proj.maintenance == 0 :
+                    proj.maintenance = 0
+                    # self.currentlyDown[self.game.world.imgIndx] += 1
+                    self.currentlyDown[self.game.world.indxImgMap[proj.tile]] += 1
+                    # print("Priniting Currently Down")
+                    # print(self.currentlyDown)
+                    proj.maintBar.set_current_progress(0)
             # pass
             
 
@@ -75,12 +80,12 @@ class WaterManagement:
     
 
     def validProjPlace(self,manager,projName):
-        print(projName)
-        print("inside validProjPlace function")
+        # print(projName)
+        # print("inside validProjPlace function")
         if projName == "Purification Plant" : 
-            if self.unCleanWater < self.consUnCleanWater + self.regular[projName] : 
+            if self.unCleanWater < self.consUnCleanWater + self.regular[projName] + self.offSets[projName] : 
             # render warning
-                print("Came here")
+                # print("Came here")
                 self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
                 #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "WaterTank" :
@@ -100,7 +105,7 @@ class WaterManagement:
         statWin.setStats("Sewage Water",self.consSewageWater,self.sewageWater)
 
     def handleProj(self,project) :
-        print(project)
+        # print(project)
         if project in self.countProjects :
             self.countProjects[project] += 1
         else : 
@@ -121,33 +126,31 @@ class WaterManagement:
         for proj in self.countProjects :
 
             if proj in self.JSONdict["produceUncleanWater"] :
-                self.unCleanWater += (self.JSONdict["produceUncleanWater"][proj] + self.offSets[proj] )* self.countProjects[proj] 
+                self.unCleanWater += ((self.JSONdict["produceUncleanWater"][proj] + self.offSets[proj] ))* (self.countProjects[proj] - self.currentlyDown[proj])
             
             if proj in self.JSONdict["consumeUncleanWater"] :
-                self.consUnCleanWater += (self.JSONdict["consumeUncleanWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+                self.consUnCleanWater += (self.JSONdict["consumeUncleanWater"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
             
             if proj in self.JSONdict["produceCleanWater"] :
-                self.cleanWater += (self.JSONdict["produceCleanWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
-            
+                self.cleanWater += (self.JSONdict["produceCleanWater"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
             if proj in self.JSONdict["consumeCleanWater"] :
-                self.consCleanWater += (self.JSONdict["consumeCleanWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+                self.consCleanWater += (self.JSONdict["consumeCleanWater"][proj] + self.offSets[proj] ) * (self.countProjects[proj]- self.currentlyDown[proj])
             
             if proj in self.JSONdict["produceStoreWater"] :
-                self.storeWater += (self.JSONdict["produceStoreWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+                self.storeWater += (self.JSONdict["produceStoreWater"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
             
             if proj in self.JSONdict["consumeStoreWater"] :
-                print("here inside consume store water")
-                self.consStoreWater += (self.JSONdict["consumeStoreWater"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+                # print("here inside consume store water")
+                self.consStoreWater += (self.JSONdict["consumeStoreWater"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
                 self.population += 100*self.countProjects[proj]
-                print("self.population",self.population)
-                print(self.countProjects[proj])
-                print(proj )
-                print(self.countProjects)
+                # print("self.population",self.population)
+                # print(self.countProjects[proj])
+                # print(proj )
+                # print(self.countProjects)
             if proj in self.JSONdict["produceSewage"] :
-                self.sewageWater += (self.JSONdict["produceSewage"][proj] + self.offSets[proj] ) * self.countProjects[proj]
-            
+                self.sewageWater += (self.JSONdict["produceSewage"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
             if proj in self.JSONdict["consumeSewage"] :
-                self.consSewageWater += (self.JSONdict["consumeSewage"][proj] + self.offSets[proj] ) * self.countProjects[proj]
+                self.consSewageWater += (self.JSONdict["consumeSewage"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
 
         self.consUnCleanWater = min(self.consUnCleanWater,self.unCleanWater)
         self.cleanWater = min(self.cleanWater,self.consUnCleanWater)
