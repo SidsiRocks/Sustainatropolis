@@ -47,7 +47,7 @@ def cameraMovementKeyBoard(keyPress):
     elif keyPress == pg.K_a:
         return (-speed,0)
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock"]
+    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","uiEnable"]
     def __init__(self,screen,clock):
         self.screen = screen 
         self.clock = clock
@@ -91,6 +91,7 @@ class MainGameScene:
         self.groundCenterOffset = self.centerOffset
 
         self.renderTreeRock = RockTreeRender(self.camera,self.centerOffset,self.world,self.imgCenterOffset)
+        self.uiEnable = True
 
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
@@ -145,6 +146,8 @@ class MainGameScene:
             self.audioManager.setVolume(self.audioManager.getVolume()-0.1)
         if keys[pg.K_q]:
             self.audioManager.playSound("test")
+        if keys[pg.K_z]:
+            self.uiEnable = False
         # print("list og events" , pg.event.get())
         eventslist = pg.event.get()
         # (pg.event.get().reverse)
@@ -239,7 +242,10 @@ class MainGameScene:
         self.renderTreeRock.drawTreeRock(self.screen)
         self.renderTreeRock.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq,self.screen)
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
-        self.manager.draw_ui(self.screen)
+
+        if self.uiEnable:
+            self.manager.draw_ui(self.screen)
+
         pg.display.flip()
     def findIsoGridOrg(self):
         orgX = self.imgCenterOffset[0] - self.camera.getX() + isoCoordToRenderPos((0,0),self.groundCenterOffset)[0]+0

@@ -14,7 +14,7 @@ def main():
     screen_width, screen_height = pg.display.Info().current_w, pg.display.Info().current_h
     screen = pg.display.set_mode((screen_width, screen_height), flag, vsync=True)
 
-    bg_image = pg.image.load("res/graphics/imgTransparencyPlace/bg.png")
+    bg_image = pg.image.load("res/graphics/backgroundImage/ScreenShotSlightBlur.png")
     bg_image = pg.transform.scale(bg_image,(screen_width,screen_height))
 
     manager = pygame_gui.UIManager((screen_width, screen_height))
