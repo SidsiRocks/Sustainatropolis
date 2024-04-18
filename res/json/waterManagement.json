@@ -43,6 +43,15 @@
         "CityBuilding1" : 0 ,
         "CityBuilding2" : 0 
     },
+    "regular" : {
+        "Dam" : 10000,
+        "Water Pump" : 5000,
+        "Purification Plant" : 7000,
+        "sewagePlant" : 3000,
+        "WaterTank" : 50000,
+        "CityBuilding1" : 5000
+    },
+
     "offsets" : {
         "Dam" : 0 ,
         "purificationPlant" : 0 ,

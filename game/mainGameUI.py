@@ -22,8 +22,9 @@ class MainGameUI:
         self.statsWindowWrapper = StatisticsWindow(manager)
         self.turnBar = TurnBarUI(manager,game)
         self.notificationBox = NotificationsBoxUI(manager)
-        self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,game,self.notificationBox)
+        self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,game,self.notificationBox,game.waterManagement)
         self.settingsUI = SettingsUI(manager,game.audioManager)
+        self.waterManager = game.waterManagement
         self.explainUI = ExplanationUI(manager)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
@@ -32,7 +33,7 @@ class MainGameUI:
         self.settingsUI.update()
 
     def processEvents(self,event,audioManager):
-        self.projectUIWrapper.processEvent(event)
+        self.projectUIWrapper.processEvent(event,self.waterManager)
         self.turnBar.processEvents(event,self,audioManager)
         self.settingsUI.processEvent(event)
         self.explainUI.processEvent(event)
