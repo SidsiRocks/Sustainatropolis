@@ -19,5 +19,8 @@ def main():
     option = startScene.run()
     print("Option is:",option)
 
+    mainScene = MainGameScene(screen,clock)
+    mainScene.run()
+
 if __name__ == "__main__":
     main()

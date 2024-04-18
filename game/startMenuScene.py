@@ -15,6 +15,8 @@ from .audio import AudioManager
 from .groundRender import GroundRender
 from .renderTreeRock import RockTreeRender
 
+from pygame_gui.core import ObjectID
+
 
 class StartMenuScene:
     def __init__(self,screen,clock):
@@ -24,6 +26,9 @@ class StartMenuScene:
         self.width,self.height = self.screen.get_size() 
         self.manager = pygame_gui.UIManager((self.width,self.height))
 
+        self.loadFonts()
+        self.manager.get_theme().load_theme("res/json/startMenuTheme.json")
+
         self.buttonWidth = 250
         self.buttonHeight = 80
         self.padY = 50
@@ -32,7 +37,6 @@ class StartMenuScene:
         self.startButton,self.newGameButton,self.quitButton = self.createStartUI()
 
         self.backGroundImage = pg.image.load("res/graphics/backgroundImage/ScreenShotSlightBlur.png").convert_alpha()
-
     #can remove from loadFonts from other place
     def createStartUI(self):
         noButtons = 3
@@ -46,13 +50,21 @@ class StartMenuScene:
         newGameRect = Rect(left,top+self.buttonHeight+self.padY,self.buttonWidth,self.buttonHeight)
         quitRect = Rect(left,top+2*self.buttonHeight+2*self.padY,self.buttonWidth,self.buttonHeight)
 
-        startButton   = UIButton(relative_rect=startRect,text="Start",manager=self.manager)
-        newGameButton = UIButton(relative_rect=newGameRect,text="New Game",manager=self.manager) 
-        quitButton    = UIButton(relative_rect=quitRect,text="Quit",manager=self.manager)
+        startButton   = UIButton(relative_rect=startRect,text="Start",manager=self.manager,object_id=ObjectID("#startButton","@startMenuButtons"))
+        newGameButton = UIButton(relative_rect=newGameRect,text="New Game",manager=self.manager,object_id=ObjectID("#newGameButton","@startMenuButtons")) 
+        quitButton    = UIButton(relative_rect=quitRect,text="Quit",manager=self.manager,object_id=ObjectID("#quitButton","@startMenuButtons"))
 
         return startButton,newGameButton,quitButton
     def loadFonts(self):
-        pass 
+        self.manager.add_font_paths("Montserrat",
+                                    "./res/fonts/Montserrat-Regular.ttf",
+                                    "./res/fonts/Montserrat-Bold.ttf",
+                                    "./res/fonts/Montserrat-Italic.ttf",
+                                    "./res/fonts/Montserrat-BoldItalic.ttf")
+        self.manager.preload_fonts([
+            {'name':'Montserrat','html_size':'6','style':'bold'},
+            {'name':'Montserrat','html_size':'4','style':'regular'}
+        ])
     def run(self):
         while self.playing:
             self.clock.tick(60)
@@ -73,10 +85,12 @@ class StartMenuScene:
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == self.startButton:
                     print("Stating game now")
-                    self.option = "Load game" 
+                    self.option = "Load game"
+                    self.playing = False
                 elif event.ui_element == self.newGameButton:
                     print("Start a new game")
                     self.option = "New game"
+                    self.playing = False
                 elif event.ui_element == self.quitButton:
                     self.quitScene()
             self.manager.process_events(event)
