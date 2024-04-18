@@ -22,7 +22,7 @@ def createStartEndLabelId(txt):
 def createCurrentYearLabel(txt):
     return ObjectID(class_id="@"+"TurnCurrentYearLabel",object_id="#"+txt)
 class TurnBarUI:
-    def __init__(self,manager,game):
+    def __init__(self,manager,game,turnBarFilePath):
         self.game = game
         self.strtYr = 2020
         self.crntYr = 2020
@@ -31,6 +31,8 @@ class TurnBarUI:
         self.waterManagementManager = self.game.waterManagement
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
+
+        self.readTurnBarUI(filePath=turnBarFilePath)
         self.highscore_db = HighScore()
     def createTurnBar(self,manager):
         width = manager.window_resolution[0]
@@ -179,3 +181,13 @@ class TurnBarUI:
                     # self.game.mainGameUI.explainUI.showGameOver()
                 self.waterManagementManager.updateVals()
                 self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)
+
+    def writeTurnBarUI(self,filePath):
+        with open(filePath,'w') as turnFile:
+            print(self.crntYr,file=turnFile)
+    
+    def readTurnBarUI(self,filePath):
+        data = None
+        with open(filePath,"r") as turnFile:
+            data = turnFile.readline()
+        self.crntYr = int(data[:-1])        

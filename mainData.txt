@@ -1,14 +1,7 @@
-CityBuilding::(25, 15)::60
-Purification Plant::(24, 27)::60
-Industrial Plant::(26, 22)::60
-Solar PowerPlant::(29, 18)::60
-Purification Plant::(30, 15)::60
-Water Pump::(18, 13)::60
-WindMill::(15, 9)::60
-WindMill::(17, 9)::60
-Dam::(20, 34)::60
-Dam::(20, 38)::60
-Dam::(14, 44)::60
-Dam::(27, 43)::60
-WaterTank::(24, 22)::60
-WindMill::(24, 19)::60
+CityBuilding::(25, 15)::100
+Water Pump::(23, 27)::100
+Purification Plant::(27, 21)::100
+Industrial Plant::(30, 15)::100
+Solar PowerPlant::(23, 19)::100
+Purification Plant::(21, 16)::100
+WaterTank::(31, 17)::100
