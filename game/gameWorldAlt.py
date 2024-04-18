@@ -6,8 +6,9 @@ from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr","allProjectsList"]
     def __init__(self,noBlockX,noBlockY,width,height,game,*args):
+        self.allProjectsList = []
         self.width = width 
         self.height = height
         self.imgIndxMap = {}
@@ -28,7 +29,6 @@ class GameData:
         self.loadImages()
 
         self.disableMaintBar = {"tree":0,"rock":0}
-
         if len(args) == 2 : 
             self.noBlockX = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_height()
             self.noBlockY = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_width()
@@ -111,7 +111,12 @@ class GameData:
                     else:
                         tile = rockTreeData[overlapCoord[0]][overlapCoord[1]]["tile"]
                     raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]}")
-        rockTreeData[x][y] = self.createProject(tileName,(x,y))
+        
+        temp = self.createProject(tileName,(x,y))
+
+        rockTreeData[x][y] = temp 
+        if temp.tile != self.imgIndxMap["tree"] and temp.tile != self.imgIndxMap["rock"]:
+            self.allProjectsList.append(temp)
     def placeObject(self,x,y,tileName):
         print("creating project with name:",tileName)
         curSize = self.sizeArr[self.imgIndxMap[tileName]]
@@ -247,7 +252,10 @@ class GameData:
         if projName in self.disableMaintBar:
             return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,False)
         else:
+        
             return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode)
+            # segame.allProjectsList.append(temp)
+        
     def updateProjMaintBar(self,totalOffset):
         for x in range(self.noBlockX):
             for y in range(self.noBlockY):

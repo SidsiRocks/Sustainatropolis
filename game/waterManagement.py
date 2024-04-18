@@ -35,11 +35,22 @@ class WaterManagement:
         self.consSewageWater = 0
         self.countProjects = findDict["countProjects"]
         self.offSets = findDict["offsets"]
-        self.population = 0 
+        self.population = 0
+        self.currentlyDown = findDict["currentlyDown"] 
         self.game = game
     def getScore(self) :
         print("self.population" , self.population)
         return self.population
+
+    def decreaseMaintenance(self) :
+        for proj in self.game.world.allProjectsList :
+            print(proj) 
+            proj.decMaintenance(10)
+            if proj.maintenance == 0 :
+                proj.maintenance = 0
+                proj.maintBar.set_current_progress(0)
+            # pass
+            
 
     def createNotEnoughWindow(self,manager,warnWinMessHTML):
         width = 300
@@ -65,6 +76,7 @@ class WaterManagement:
 
     def validProjPlace(self,manager,projName):
         print(projName)
+        print("inside validProjPlace function")
         if projName == "Purification Plant" : 
             if self.unCleanWater < self.consUnCleanWater + self.regular[projName] : 
             # render warning
@@ -73,6 +85,8 @@ class WaterManagement:
                 #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "WaterTank" :
             if self.cleanWater < self.consCleanWater + self.regular[projName] :
+                self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
+        if projName == "CityBuilding" : 
                 self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
                 #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
         if projName == "CityBuilding1" : 

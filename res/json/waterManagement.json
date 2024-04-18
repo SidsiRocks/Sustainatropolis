@@ -1,14 +1,13 @@
 {
     "produceUncleanWater": {
         "Dam": 10000,
-        "waterPump": 5000
+        "Water Pump": 5000
     },
     "consumeUncleanWater": {
-        "purificationPlant": 7000
+        "Purification Plant": 7000
     },
     "produceCleanWater": {
-        "purificationPlant": 7000,
-        "sewagePlant": 3000
+        "Purification Plant": 7000
     },
     "consumeCleanWater": {
         "WaterTank": 50000
@@ -29,14 +28,12 @@
         "Houses go here"
     ],
     "consumeSewage": {
-        "sewagePlant": 4000
+        
     },
     "countProjects":{
         "Dam" : 0 ,
-        "purificationPlant" : 0 ,
-        "waterPump" : 0 , 
-        "sewagePlant" : 0 ,
-        "waterTreatment" : 0 ,
+        "Purification Plant" : 0 ,
+        "Water Pump" : 0 , 
         "WaterTank" : 0 ,
         "CityBuilding" : 0 
     },
@@ -44,17 +41,14 @@
         "Dam" : 10000,
         "Water Pump" : 5000,
         "Purification Plant" : 7000,
-        "sewagePlant" : 3000,
         "WaterTank" : 50000,
         "CityBuilding" : 5000
     },
 
     "offsets" : {
         "Dam" : 0 ,
-        "purificationPlant" : 0 ,
-        "waterPump" : 0 , 
-        "sewagePlant" : 0 ,
-        "waterTreatment" : 0 ,
+        "Purification Plant" : 0 ,
+        "Water Pump" : 0 , 
         "WaterTank" : 0 ,
         "CityBuilding" : 0  
     },
@@ -62,13 +56,13 @@
         "Drought": {
             
                 "Dam": -3000,
-                "waterPump": -1000
+                "Water Pump": -1000
             
         },
         "Summer": {
             
                 "Dam" : -2000 ,
-                "waterPump" : -500,
+                "Water Pump" : -500,
             
             
                 "CityBuilding": 1000            
@@ -76,7 +70,7 @@
         "Flood":{
             
                 "Dam" : 5000 ,
-                "waterPump" : 2000
+                "Water Pump" : 2000
            
         },
         "Tourists" :{
@@ -84,7 +78,7 @@
         },
         "Rain" :{
                 "Dam" : 2000,
-                "waterPump" : 1000
+                "Water Pump" : 1000
         },
         "Holi":{
             "CityBuilding" : 2000
@@ -100,5 +94,19 @@
     },
     "comments": [
         "Houses and such would go here"
-    ]
+    ],
+    "currentlyDown" : {
+        "Dam" : 0,
+        "Water Pump" : 0,
+        "Purification Plant" : 0,
+        "WaterTank" : 0,
+        "CityBuilding" : 0
+    },
+    "currentMaintenance" : {
+        "Dam" : 0,
+        "Water Pump" : 0,
+        "Purification Plant" : 0,
+        "WaterTank" : 0,
+        "CityBuilding" : 0
+    }
 }

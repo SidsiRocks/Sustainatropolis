@@ -160,6 +160,7 @@ class ProjectsUI:
                 self.curTileDrawReq = self.game.world.createProject(self.currentProject,(x,y),"transparent")
             else:
                 self.curTileDrawReq = self.game.world.createProject(self.currentProject,(x,y),"red")
+            # self.game.allProjectsList.append(self.curTileDrawReq)
         # else :
         # else : 
                 # self.curTileDrawReq = None
