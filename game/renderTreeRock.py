@@ -1,4 +1,5 @@
 from .util import isoCoordToRenderPos,isoRenderPosToImgRenderPos
+from .Project import Project
 class RockTreeRender:
     def __init__(self,camera,centerOffset,gameWorld,imgCenterOffset):
         self.camera = camera 
@@ -14,9 +15,9 @@ class RockTreeRender:
         for x in range(self.gameWorld.noBlockX):
             for y in range(self.gameWorld.noBlockY-1,-1,-1):
                 curDict =  rockTreeData[x][y]
-                if type(curDict) == dict:
+                if type(curDict) == Project:
                     renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
-                    tileName = curDict["tile"]
+                    tileName = curDict.tile
                     curImg = groundImgArr[tileName]
                     curOff = offsetArr[tileName]
                     imgRenderPos = isoRenderPosToImgRenderPos(renderPos,curImg.get_width(),curImg.get_height())
@@ -30,9 +31,9 @@ class RockTreeRender:
     def drawPlacementReq(self,curDict,screen):
         totalCenterOffset = self.calTotalOffset()
         if curDict != {}:
-            imgIndx = curDict["tile"]
-            x,y = curDict["pos"]
-            mode = curDict["mode"]
+            imgIndx = curDict.tile
+            x,y = curDict.pos
+            mode = curDict.mode
             curImg = None
             if mode == "transparent":
                 curImg = self.gameWorld.transpImgArr[imgIndx]

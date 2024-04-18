@@ -17,7 +17,6 @@ class CustomUIprogressBar(UIStatusBar):
                  object_id: Optional[Union[ObjectID, str, ]] = None,
                  anchors: Optional[Dict[str, Union[str, UIElement]]] = None,
                  visible: int = 1,current_progress:float=0,maximum_progess:float=100.0):
-
         self.current_progress = current_progress
         self.maximum_progress = maximum_progess
 
@@ -28,7 +27,6 @@ class CustomUIprogressBar(UIStatusBar):
                          object_id=object_id,
                          anchors=anchors,
                          visible=visible)
-
         #print("current and maximum progress in constructor",self.current_progress,self.maximum_progress)
         
     @property
