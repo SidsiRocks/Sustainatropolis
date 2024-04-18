@@ -190,6 +190,8 @@ class MainGameScene:
         (dx,dy) = cameraMovement(self.width,self.height)
         self.camera.moveCamera(dx,dy)
         self.mainGameUI.update()
+        totalOffset = self.renderTreeRock.calTotalOffset()
+        self.world.updateProjMaintBar(totalOffset)
     def drawToGroundBuff(self):
         groundImgArr = self.world.imgArr
         groundData = self.world.groundData
