@@ -69,13 +69,16 @@ class WaterManagement:
             if self.unCleanWater < self.consUnCleanWater + self.regular[projName] : 
             # render warning
                 print("Came here")
-                self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
+                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "WaterTank" :
             if self.cleanWater < self.consCleanWater + self.regular[projName] :
-                self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
+                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
         if projName == "CityBuilding1" : 
             if self.storeWater < self.consStoreWater + self.regular[projName] :
-                self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
+                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
     def setStats(self,statWin:StatisticsWindow):
         statWin.setStats("Unclean Water",self.consUnCleanWater,self.unCleanWater)
         statWin.setStats("Clean Water",self.consCleanWater,self.cleanWater)

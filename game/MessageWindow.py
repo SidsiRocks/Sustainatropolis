@@ -15,11 +15,11 @@ class MessageWindow(UIWindow):
                  paddingY:int,
                  paddingX:int,
                  manager: Optional[IUIManagerInterface] = None,
-                 window_title:str = 'Title bar',
+                 window_display_title:str = 'Title bar',
                  object_id:Union[ObjectID,str] = ObjectID("#message_window","@message_window"),
                  visible:int = 1):
         super().__init__(rect, manager,
-                         window_display_title=window_title,
+                         window_display_title=window_display_title,
                          object_id=object_id,
                          resizable=True,
                          visible=visible)

@@ -14,8 +14,9 @@ from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 from pygame_gui.windows.ui_message_window import UIMessageWindow
 
-from .statisticsUI import StatisticsWindow
 from .MessageWindow import MessageWindow
+from .onCloseWindoEvent import OnCloseWindow
+
 from .powerManagement import PowerManagement
 from .waterManagement import WaterManagement
 
@@ -49,6 +50,11 @@ class ProjectsUI:
         self.curTileDrawReq = {}
         self.manager = manager
         self.game = game
+        self.projPlaceAllowed = True
+    
+    def setProjAllowed(self,bol):
+        self.projPlaceAllowed = bol
+
     def loadProjectLstAndCost(self,jsonFilePath):
         data = json.load(open(jsonFilePath))
         projectLst = data["projectLists"]
@@ -136,16 +142,17 @@ class ProjectsUI:
         return projectListWindow
     def clickedOnWorld(self,x,y):
         #may want to add something to cancel placement like left clicking
-        if self.currentProject != None and self.game.world.checkPlacementValid(x,y,self.currentProject):
-            self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
-            self.game.world.placeObject(x,y,self.currentProject)
-            oldProjName = self.currentProject
-            self.currentProject = None
-            self.curTileDrawReq = {}
-            return oldProjName
-        else :
-            self.currentProject = None
-            self.curTileDrawReq = {}
+        if self.currentProject != None:
+            if self.game.world.checkPlacementValid(x,y,self.currentProject) and self.projPlaceAllowed:
+                self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
+                self.game.world.placeObject(x,y,self.currentProject)
+                oldProjName = self.currentProject
+                self.currentProject = None
+                self.curTileDrawReq = {}
+                return oldProjName
+            elif not self.game.world.checkPlacementValid(x,y,self.currentProject) and self.projPlaceAllowed :
+                self.currentProject = None
+                self.curTileDrawReq = {}
         return None
     def hoverOnWorld(self,x,y):
         if self.currentProject != None:
@@ -179,21 +186,6 @@ class ProjectsUI:
         else:
             notEnoughMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
             self.createNotEnoughWindow(notEnoughMoneyMsg)
-        # print(f"isEnoughPower:{isEnoughPower} for the projName:{buttonName}")
-        # if self.currentProject == buttonName:
-            # self.currentProject = None
-            # self.curTileDrawReq = {}
-        # elif isEnoughMoney and isEnoughPower and isWaterValid:
-            # self.currentProject = buttonName
-        # elif not isEnoughMoney:
-        #     notEnghMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
-        #     self.createNotEnoughWindow(notEnghMoneyMsg)
-        # elif not isEnoughPower:
-        #     notEnghPowerMsg = self.generateNotEnoughPowerMsg(buttonName,self.game.powerManagement)
-        #     self.createNotEnoughWindow(notEnghPowerMsg)
-        # elif waterError != None:
-        #     incrWaterErrorMsg = self.generateWaterErrorMsg(buttonName,waterError)
-        #     self.createNotEnoughWindow(incrWaterErrorMsg)
     #should create one and reload as needed possibly
     #also need to deactivate remaining components in the mean time
     def generateWaterErrorMsg(self,projName,waterError):
@@ -223,6 +215,8 @@ Require {projCost} to build
         """
         return txt
     def createNotEnoughWindow(self,warnWinMessHTML):
+        onCloseFunc = lambda:self.setProjAllowed(True)
+        self.setProjAllowed(False)
         width = 300
         height = 300
         winWidth = self.manager.window_resolution[0]
@@ -233,29 +227,9 @@ Require {projCost} to build
         buttonWdth = 100
         paddingY = 10
         paddingX = 15
-        warnWindow = MessageWindow(wanrWinRect,warnWinMessHTML,buttonHt,
-                                   buttonWdth,paddingY,paddingX,self.manager,
-                                   "Not Enough Money",
-                                   ObjectID(class_id="@warnWindow",object_id="#warnWindow"),1)
+        warnWindow = OnCloseWindow(wanrWinRect,warnWinMessHTML,buttonHt,
+                                   buttonWdth,paddingY,paddingX,
+                                   self.manager,window_display_title="Not Enough Money",
+                                   object_id=ObjectID(class_id="@warnWindow",object_id="#warnWindow"),
+                                   draggable=False,visible=1,onCloseFunc=onCloseFunc)
         return warnWindow
-
-"""
-    def createNotEnoughMoneyWindow(self,warnWinMessHTML):
-        width = 500
-        height = 500
-        winWidth = self.manager.window_resolution[0]
-        winHeight = self.manager.window_resolution[1]
-        wanrWinRect = Rect((winWidth-width)/2,(winHeight-height)/2,width,height)
-        warnWindow = UIMessageWindow(
-            rect=wanrWinRect,
-            html_message=warnWinMessHTML,
-            manager=self.manager,
-            window_title="Title",
-            object_id=ObjectID(class_id="@warnWindow",object_id="#warnWindow")
-        )
-        warnWindow.dismiss_button.relative_rect.height = 50
-        warnWindow.dismiss_button.relative_rect.height = 180
-        warnWindow.dismiss_button.set_text("Dismiss") 
-        warnWindow.set_blocking(True)
-        return warnWindow
-"""
