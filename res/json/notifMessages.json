@@ -1,9 +1,13 @@
 {
-    "Summer" : "It's Summer, People will need more water. You should start finding ways to increase clean water storage",
-    "Drought" : "It's Drought, GroundWater Level will drastically go down, Be aware!",
-    "Rainy" : "It's Rainy, People will need less water. You should start finding ways to decrease clean water storage",
-    "Winter" : "It's Winter, People will need less water. You should start finding ways to decrease clean water storage",
-    "Flood" : "It's Flood, Try gathering this water, purify it and store for future use",
-    "Tourists" : "It's a very important event in your city, lots of tourists will be visiting, Make sure no faces water supply Issue.",
-    "Rain" : "It's predicted that It will rain heavily this year, Be prepared to collect lots of water"
+    "Summer": "During the scorching summer months, water usage tends to spike as people use more water for various purposes like irrigation, cooling, and outdoor activities. Prepare to increase treated water production to meet the rising demand.",
+    "Drought": "A prolonged period of little to no rainfall has resulted in a drought, significantly reducing the availability of untreated water sources. Consider implementing water conservation measures and investing in alternative water sources such as bores to mitigate the impact of the drought.",
+    "Rainy": "Heavy rainfall is forecasted for the region, leading to an increase in the capture rate of untreated water. While this may temporarily alleviate water scarcity, be prepared to manage excess water flow and potential flooding risks.",
+    "Winter": "In the colder winter months, water demand may decrease slightly as outdoor water usage declines. Adjust treated water production accordingly to optimize resource allocation during this season.",
+    "Flood": "Exceptionally heavy rainfall or river overflow has caused flooding in the area, posing risks to infrastructure and water quality. Focus on emergency response measures to protect water sources and ensure the safety of the population.",
+    "Tourists": "A surge in tourist arrivals is expected, leading to an uptick in water demand for hospitality, recreation, and other tourist-related activities. Ramp up treated water production to accommodate the influx of visitors and maintain adequate supply for residents.",
+    "Rain": "Moderate rainfall has occurred, contributing to the replenishment of water sources. While not as drastic as a flood, this event may still affect water availability and quality. Monitor the situation and adjust water management strategies accordingly.",
+    "Holi": "The vibrant festival of Holi brings communities together in colorful celebrations, often involving water-based activities like water balloon fights and water spraying. Anticipate increased water usage during this festive period and ensure sufficient water supply to support the festivities.",
+    "Diwali": "The festival of lights, Diwali, is a time of joy and celebration marked by fireworks, feasts, and gatherings. As people come together to celebrate, water usage may rise for cooking, cleaning, and other purposes. Plan ahead to meet the heightened demand for treated water during this festive season.",
+    "DamRelease" :"Water authorities have released water from dams, impacting water levels downstream. Prepare for potential fluctuations in water availability and adjust your operations accordingly to maintain stability and meet demand.",
+    "InfraExp" : "Everything Seems Alright! .With the population growing steadily and future water demands expected to rise, it's crucial to focus on expanding your water infrastructure. Invest in building new treatment plants, pipelines, and reservoirs to ensure that your water supply system can meet the needs of the expanding population and accommodate future growth. Plan strategically to optimize resource allocation and minimize disruptions to existing services during the construction phase. "
 }

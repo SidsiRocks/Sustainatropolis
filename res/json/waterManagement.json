@@ -77,19 +77,23 @@
            
         },
         "Tourists" :{
-            
                 "CityBuilding1" : 3000,
-                "CityBuilding2" : 6000
-            
-            
+                "CityBuilding2" : 6000  
         },
-
         "Rain" :{
-            
                 "Dam" : 2000,
                 "waterPump" : 1000
-            
-            
+        },
+        "Holi":{
+            "CityBuilding1" : 2000
+        },
+        "Diwali":{
+            "CityBuilding2" : 2000
+        },
+        "DamRelease":{
+            "Dam":4000
+        },
+        "InfraExp":{
         }
     },
     "comments": [

@@ -96,11 +96,20 @@ class TurnBarUI:
         self.updatePrgrsBar()
 
     def createNotifMessage(self,year,message):
+        season = ""
+        if year%4==1 : 
+            season = "Summer"
+        elif year%4 == 2 :
+            season = "Rainy"
+        elif year%4 == 3 :
+            season = "Autumn"
+        else:
+            season = "Winter"
         ans = ""
-        ans += "<font face='Montserrat' color='#ffffff' size=6><b>"+str(year)+"</b></font>"
-        ans += "<font face='Montserrat' color='#ffffff' size=6><b>------------------------------</b></font>"
+        ans += "<font face='Montserrat' color='#ffffff' size=6><b>"+season+", " + str(2020 + (year+1-2020)//5) +   "</b></font>"
+        ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
         ans += "<font face='Montserrat' color='#f0f0f0' size=4>"+message+"</font>"
-        ans += "<font face='Montserrat' color='#ffffff' size=6><b>------------------------------</b></font>"
+        ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
 
         return ans 
 
@@ -115,22 +124,48 @@ class TurnBarUI:
                 self.waterManagementManager.processNotifs("Reset")
                 self.setCrntYear(self.crntYr+1)
                 audioManager.playSound("celebration")
-                if self.crntYr == 2021 : 
+                if self.crntYr == 2021 :  #summer
                     self.proceedEvent("Summer",maingameui)
-                elif self.crntYr == 2022 : 
-                    pass
-                elif self.crntYr == 2023 : 
-                    self.proceedEvent("Drought",maingameui)
-                elif self.crntYr == 2024 : 
-                    self.proceedEvent("Flood",maingameui)
-                elif self.crntYr == 2025 : 
-                    pass
-                elif self.crntYr == 2026 : 
+                    self.proceedEvent("Holi",maingameui)
+                elif self.crntYr == 2022 : #Rainy
+                    self.proceedEvent("Flood",maingameui)                 
+                elif self.crntYr == 2023 : #Autumn
+                    self.proceedEvent("Tourists",maingameui) 
+                    self.proceedEvent("DamRelease",maingameui)
+                elif self.crntYr == 2024 : #Winter          
+                    self.proceedEvent("Diwali",maingameui)   
+                elif self.crntYr == 2025 : #Summer
+                    self.proceedEvent("Drought",maingameui)                                   
+                    self.proceedEvent("Holi",maingameui)                                   
+                elif self.crntYr == 2026 : #Rainy
                     self.proceedEvent("Rain",maingameui)
-                elif self.crntYr == 2027 : 
+                elif self.crntYr == 2027 : #Autumn
                     self.proceedEvent("Tourists",maingameui)
-                elif self.crntYr == 2028 : 
+                elif self.crntYr == 2028 : #Winter
+                    self.proceedEvent("DamRelease",maingameui)
+                elif self.crntYr == 2029 : #Summer
                     self.proceedEvent("Summer",maingameui)
-                elif self.crntYr == 2031 :
+                elif self.crntYr == 2030 : #Rainy
+                    self.proceedEvent("Rain",maingameui)
+                elif self.crntYr == 2031 :  #Autumn
+                    self.proceedEvent("InfraExp",maingameui)
+                elif self.crntYr == 2032 :  #Winter
+                    self.proceedEvent("Diwali",maingameui)
+                elif self.crntYr == 2033 :  #Summer
                     self.proceedEvent("Drought",maingameui)
-                self.waterManagementManager.updateVals()                
+                elif self.crntYr == 2034 :  #Rainy
+                    self.proceedEvent("Flood",maingameui)
+                elif self.crntYr == 2035 :  #Autumn
+                    self.proceedEvent("Tourists",maingameui)
+                elif self.crntYr == 2036 :  #Winter
+                    self.proceedEvent("Rain",maingameui)
+                elif self.crntYr == 2037 :  #Summer
+                    self.proceedEvent("Summer",maingameui)
+                elif self.crntYr == 2038 :  #Rainy
+                    self.proceedEvent("Rain",maingameui)
+                elif self.crntYr == 2039 : #Autumn
+                    self.proceedEvent("Tourists",maingameui)
+                elif self.crntYr == 2040 : #Winter 
+                    self.proceedEvent("Diwali",maingameui)
+                self.waterManagementManager.updateVals()
+                self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)
