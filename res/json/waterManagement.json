@@ -94,5 +94,19 @@
     },
     "comments": [
         "Houses and such would go here"
-    ]
+    ],
+    "currentlyDown" : {
+        "Dam" : 0,
+        "Water Pump" : 0,
+        "Purification Plant" : 0,
+        "WaterTank" : 0,
+        "CityBuilding" : 0
+    },
+    "currentMaintenance" : {
+        "Dam" : 0,
+        "Water Pump" : 0,
+        "Purification Plant" : 0,
+        "WaterTank" : 0,
+        "CityBuilding" : 0
+    }
 }

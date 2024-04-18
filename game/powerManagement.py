@@ -12,8 +12,8 @@ class PowerManagement:
 
         self.noPowerPlantDict = self.createPlantDict(self.powerPlants)
         self.noPowerReqDict = self.createPowerDict(self.powerCons)
-        print(f"self.noPowerPlantDict is:{self.noPowerPlantDict}")
-        print(f"self.noPowerReqDict is:{self.noPowerReqDict}")
+        # print(f"self.noPowerPlantDict is:{self.noPowerPlantDict}")
+        # print(f"self.noPowerReqDict is:{self.noPowerReqDict}")
         
         self.curPowerProd = 0
         self.curPowerCons = 0

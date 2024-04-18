@@ -52,6 +52,7 @@ class MainGameScene:
         self.screen = screen 
         self.clock = clock
         self.width,self.height = self.screen.get_size()
+        # self.allProjectsList = []
 
         self.powerManagement = PowerManagement(self)        
         self.waterManagement = WaterManagement(self)
@@ -91,7 +92,6 @@ class MainGameScene:
         self.groundCenterOffset = self.centerOffset
 
         self.renderTreeRock = RockTreeRender(self.camera,self.centerOffset,self.world,self.imgCenterOffset)
-
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -164,7 +164,7 @@ class MainGameScene:
                     self.mainGameUI.notificationBox.clearHtmlText()
                 if event.ui_element == self.appendButton:
                     self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
-                self.mainGameUI.processEvents(event,self.audioManager)
+                self.mainGameUI.processEvents(event,self.audioManager,self.world)
 
             elif event.type == pg.MOUSEBUTTONDOWN and buttonClicked == False:
                 mouseX,mouseY = pg.mouse.get_pos()
@@ -182,6 +182,7 @@ class MainGameScene:
                         self.powerManagement.handleProj(projName)
                     if projName != None:
                         self.audioManager.playSound("construction")
+                        # self.game.allProjectsList.append()
                         self.waterManagement.handleProj(projName)   
                       
             self.manager.process_events(event)

@@ -123,6 +123,7 @@ class TurnBarUI:
         if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
             if self.crntYr < self.endYr+1:
                 self.waterManagementManager.processNotifs("Reset")
+                self.waterManagementManager.decreaseMaintenance()
                 self.setCrntYear(self.crntYr+1)
                 audioManager.playSound("celebration")
                 if self.crntYr == 2021 :  #summer
