@@ -4,6 +4,9 @@ from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.core import ObjectID
 from pygame_gui.elements.ui_window import UIWindow
 from pygame_gui.core.interfaces import IContainerLikeInterface, IUIManagerInterface
+from pygame_gui.elements.ui_image import UIImage
+
+from .util import ldImage
 
 import pygame_gui
 
@@ -11,7 +14,7 @@ from .hideOnCloseWindow import HideUIwindow
 
 class ExplanationUI:
     def __init__(self,manager:IUIManagerInterface):
-        self.mainWindow = (1100,750)
+        self.mainWindow = (1200,771)
 
         width = manager.window_resolution[0]
         height = manager.window_resolution[1]
@@ -20,22 +23,29 @@ class ExplanationUI:
         explainButtonHeight = 80
         padX = 10
 
-        mainExplainWinRect = Rect((width-self.mainWindow[0])/2,(height-self.mainWindow[1])/2
-                                       ,self.mainWindow[0],self.mainWindow[1])
-        
+        mainExplainWinRect = Rect((width-self.mainWindow[0])/2,
+                                  (height-self.mainWindow[1])/2
+                                  ,self.mainWindow[0],self.mainWindow[1])
         #have to remove window padding in styling and add ObjectID
         self.mainExplainWin = HideUIwindow(mainExplainWinRect,manager,"",
                                        resizable=False,draggable=False,
                                        object_id=ObjectID("#explainWin","@explainWin"),
                                        visible=0)
 
+        imgPadY = 100
+        buttonHeight = mainExplainWinRect.height -imgPadY
         buttonWidth = mainExplainWinRect.width
-        buttonHeight = mainExplainWinRect.height
 
         #replace with an image element
-        self.imgButton = UIButton(Rect(0,0,buttonWidth,buttonHeight),text="",
-                                  manager=manager,container=self.mainExplainWin,
-                                  object_id=ObjectID("#explainImg","@explainImg"))
+        #self.imgButton = UIButton(Rect(0,0,buttonWidth,buttonHeight),text="",
+        #                          manager=manager,container=self.mainExplainWin,
+        #                          object_id=ObjectID("#explainImg","@explainImg"))
+
+        explainImg = ldImage("res/graphics/imgForProjectUI/Explain_canva.png")
+
+        self.img = UIImage(Rect(0,0,buttonWidth,buttonHeight),image_surface=explainImg,
+                           manager=manager,container=self.mainExplainWin,
+                           object_id=ObjectID("#explainImg","@explainImg"))
 
         explainBtnRect = Rect(width-2*explainButtonWidth-padX,0,explainButtonWidth,explainButtonHeight)
         self.explainButton = UIButton(explainBtnRect,text="Explain",
