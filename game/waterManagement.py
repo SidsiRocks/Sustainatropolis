@@ -71,7 +71,7 @@ class WaterManagement:
         paddingX = 15
         warnWindow = MessageWindow(wanrWinRect,warnWinMessHTML,buttonHt,
                                    buttonWdth,paddingY,paddingX,manager,
-                                   "Not Enough Money",
+                                   "Not Enough Resources",
                                    ObjectID(class_id="@warnWindow",object_id="#warnWindow"),1)
         return warnWindow
     
