@@ -1,0 +1,13 @@
+CityBuilding::(25, 15)::100
+WindMill::(15, 35)::70
+WindMill::(10, 35)::70
+Purification Plant::(9, 32)::100
+Water Pump::(11, 25)::100
+Purification Plant::(6, 27)::100
+Dam::(21, 35)::100
+WaterTank::(16, 29)::100
+Dam::(12, 8)::100
+CityBuilding::(24, 20)::100
+CityBuilding::(21, 15)::100
+WaterTank::(25, 23)::100
+WaterTank::(27, 23)::100
