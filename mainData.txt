@@ -1,7 +1,6 @@
 CityBuilding::(25, 15)::100
 Water Pump::(23, 27)::100
-Purification Plant::(27, 21)::100
-Industrial Plant::(30, 15)::100
-Solar PowerPlant::(23, 19)::100
-Purification Plant::(21, 16)::100
-WaterTank::(31, 17)::100
+Purification Plant::(26, 22)::100
+Water Pump::(31, 15)::100
+Solar PowerPlant::(21, 19)::100
+PowerPlant::(20, 16)::100

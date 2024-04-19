@@ -30,7 +30,7 @@ def cameraMovementKeyBoard(keyPress):
         return (-speed,0)
 class MainGameScene:
     __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","uiEnable"]
-    def __init__(self,screen,clock):
+    def __init__(self,screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath):
         self.screen = screen 
         self.clock = clock
         self.width,self.height = self.screen.get_size()
@@ -42,14 +42,11 @@ class MainGameScene:
         self.audioManager = AudioManager()
         self.audioManager.playMusic()
         self.manager = pygame_gui.UIManager((self.width,self.height))
-
-        turnBarFilePath = "game/defaultStartGameData/turnBarYear.txt"
-        moneyFilePath = "game/defaultStartGameData/money.txt"
         self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self,turnBarFilePath=turnBarFilePath,writeMaintFilePath=moneyFilePath)
 
-        writeMaintFilePath = "game/defaultStartGameData/mapData.json"
-        mapDataDict = json.load(open(writeMaintFilePath))
-        self.world = GameData(self.width,self.height,self,mapDataDict,"game/defaultStartGameData/writeMaint.txt")
+        mapDataDict = json.load(open(mapDataFilePath))
+
+        self.world = GameData(self.width,self.height,self,mapDataDict,writeMaintFilePath)
         self.playing = True
 
         self.camera = Camera()
@@ -101,9 +98,13 @@ class MainGameScene:
         offY = -(self.world.noBlockX - self.world.noBlockY)*TILE_SIZE/4 + height/2
         return (offX,offY)
     def quitScene(self):
-        self.world.writeRockTreeData("playerData.png","mapUsed.json","mainData.txt")
-        self.mainGameUI.turnBar.writeTurnBarUI("yearOfTurn")
-        self.mainGameUI.notificationBox.writeMoney("money.txt")
+        mapJsonPath = "mapUsed.json"
+        projMaintPath = "mainData.txt"
+        turnBarPath = "yearOfTurn.txt"
+        moneyFilePath = "money.txt"
+        self.world.writeRockTreeData(mapJsonPath,projMaintPath)
+        self.mainGameUI.turnBar.writeTurnBarUI(turnBarPath)
+        self.mainGameUI.notificationBox.writeMoney(moneyFilePath)
         pg.quit()
         sys.exit()
     def mouseHoverEvents(self):
