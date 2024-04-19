@@ -1,25 +1,17 @@
 {
     "projectLists":[
-        "Water Treatment",
-        "Sewage Plant",
         "Water Pump",
         "Purification Plant",
-        "Industrial Plant",
         "Solar PowerPlant",
-        "PowerPlant",
         "WindMill",
         "Dam",
         "WaterTank",
         "CityBuilding"
     ]
     ,"projectToCostMap":{
-        "Water Treatment":1000,
-        "Sewage Plant":6000,
         "Water Pump":1000,
         "Purification Plant":800,
-        "Industrial Plant":1000,
         "Solar PowerPlant":5000,
-        "PowerPlant":10000,
         "WindMill":100,
         "Dam":140,
         "WaterTank":100,
