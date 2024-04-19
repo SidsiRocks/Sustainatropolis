@@ -124,8 +124,9 @@ Are you sure you want to quit the game?</font>"""
         self.world.writeRockTreeData(mapDataFilePath,writeMaintFilePath)
         self.mainGameUI.turnBar.writeTurnBarUI(turnBarFilePath)
         self.mainGameUI.notificationBox.writeMoney(moneyFilePath)
-        pg.quit()
-        sys.exit()
+
+        self.playing = False
+        print("Scene must be quit now")
     def mouseHoverEvents(self):
         x,y = pg.mouse.get_pos()
         isoX,isoY = self.findClickCoord(x,y)
