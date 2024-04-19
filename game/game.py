@@ -83,7 +83,7 @@ class MainGameScene:
         closeWinWidth,closeWinHeight = 400,300
         closeWindowRect = Rect((self.width - closeWinWidth)/2,(self.height -closeWinHeight)/2,
                             closeWinWidth,closeWinHeight)
-        closeWinMsg = f"""<font face='Montseraat' color="#ffffff">
+        closeWinMsg = f"""<font face='Montserrat' color="#ffffff" size=4.5>
 Are you sure you want to quit the game?</font>"""
         self.closeWindow = OnCloseWindowButton(closeWindowRect,
                         closeWinMsg,80,120,10,10,self.manager,
@@ -114,6 +114,8 @@ Are you sure you want to quit the game?</font>"""
                           {'name': 'Montserrat', 'html_size': 3, 'style': 'regular'},
                           {'name': 'Montserrat', 'html_size': 3, 'style': 'bold_italic'},
                           {'name': 'Montserrat', 'html_size': 3, 'style': 'italic'},
+                          {'name': 'Montserrat', 'html_size': 3, 'style': 'bold'},
+
 
                           {'name': 'Montserrat', 'html_size': 6, 'style': 'bold'},
                           {'name': 'Montserrat', 'html_size': 6, 'style': 'regular'},

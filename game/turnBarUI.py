@@ -79,7 +79,7 @@ class TurnBarUI:
 
         nextTurnButton = UIButton(relative_rect=nextTurnButtonRects,manager=manager,
                                   text="Next Turn",
-                                  object_id=ObjectID(object_id="#nextTurnButton",class_id="@nextTurnButton"))
+                                  object_id=ObjectID(object_id="#nextTurnButton",class_id="@nextTurnButton"),starting_height= 2)
 
         return (strtYrLbl,endYrLbl,crntYrLbl,turnBar,nextTurnButton)
 

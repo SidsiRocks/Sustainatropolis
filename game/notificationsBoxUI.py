@@ -47,7 +47,7 @@ class NotificationsBoxUI:
         txtBox = UITextBox(html_text= text,
             relative_rect=txtBoxRect,
             manager=manager,
-            object_id=createId("notifications Box"))
+            object_id=createId("notifications Box"),starting_height=2)
 
         currencyWidth = 250
         currenctHeight = 80
@@ -58,7 +58,7 @@ class NotificationsBoxUI:
         currencyTxt = f"<font face='Montserrat' color='#ffffff' size=5><b>Money:{self.money}</b></font><br>" 
         currentMoney = UIButton(relative_rect=currencyRect,
             text=f"Money: {self.money}",manager=manager,
-            object_id=ObjectID("@currencyButton","#currencyButton"))
+            object_id=ObjectID("@currencyButton","#currencyButton"),starting_height=2)
         #currentMoney = UITextBox(html_text="",relative_rect=currencyRect,
         #                         manager=manager,
         #                         object_id=

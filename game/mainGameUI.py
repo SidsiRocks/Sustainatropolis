@@ -25,9 +25,9 @@ class MainGameUI:
         # self.turnBar.processEvents( None, self , game.audioManager)
         self.notificationBox = NotificationsBoxUI(manager,writeMaintFilePath)
         self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,game,self.notificationBox,game.waterManagement)
-        self.settingsUI = SettingsUI(manager,game.audioManager)
         self.waterManager = game.waterManagement
         self.explainUI = ExplanationUI(manager)
+        self.settingsUI = SettingsUI(manager,game.audioManager)
         self.maintManager = MaintManager(game,self.manager)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
