@@ -79,6 +79,9 @@ class MainGameScene:
         self.renderTreeRock = RockTreeRender(self.camera,self.centerOffset,self.world,self.imgCenterOffset)
     
         onCloseFunc = lambda: self.quitScene()
+        self.mainGameUI.maintManager.setMaintAllowed(False)
+        self.mainGameUI.projectUIWrapper.setProjAllowed(False)
+        onCloseButtonFunc = lambda: (self.mainGameUI.maintManager.setMaintAllowed(True),self.mainGameUI.projectUIWrapper.setProjAllowed(True))
         closeWinWidth,closeWinHeight = 400,300
         closeWindowRect = Rect((self.width - closeWinWidth)/2,(self.height -closeWinHeight)/2,
                             closeWinWidth,closeWinHeight)
@@ -88,7 +91,7 @@ Are you sure you want to quit the game?</font>"""
                         closeWinMsg,80,120,10,10,self.manager,
                         "Exit Game?",object_id=ObjectID("#closeWindow","@closeWindow"),
                         onCloseFunc=onCloseFunc,draggable=False,
-                        buttonMsg = "Exit",visible=0)
+                        buttonMsg = "Exit",visible=0,onCloseButtonFunc=onCloseButtonFunc)
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",

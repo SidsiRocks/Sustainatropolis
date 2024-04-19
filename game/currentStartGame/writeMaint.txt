@@ -20,3 +20,6 @@ WindMill::(15, 28)::100
 WindMill::(14, 26)::100
 WindMill::(33, 29)::100
 WindMill::(32, 33)::100
+WindMill::(23, 12)::100
+WindMill::(38, 34)::100
+WindMill::(9, 28)::100
