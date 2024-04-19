@@ -50,12 +50,10 @@ class StartMenuScene:
 
         startRect = Rect(left,top,self.buttonWidth,self.buttonHeight)
         newGameRect = Rect(left,top+self.buttonHeight+self.padY,self.buttonWidth,self.buttonHeight)
-        # HighScoreGameRect = Rect(left,top+2*self.buttonHeight+2*self.padY,self.buttonWidth,self.buttonHeight)    
         quitRect = Rect(left,top+2*self.buttonHeight+2*self.padY,self.buttonWidth,self.buttonHeight)
 
         startButton   = UIButton(relative_rect=startRect,text="Start",manager=self.manager,object_id=ObjectID("#startButton","@startMenuButtons"))
         newGameButton = UIButton(relative_rect=newGameRect,text="New Game",manager=self.manager,object_id=ObjectID("#newGameButton","@startMenuButtons")) 
-        # HighScoreButton    = UIButton(relative_rect=HighScoreGameRect,text="High Score",manager=self.manager,object_id=ObjectID("#HighScoreButton","@startMenuButtons"))
         quitButton    = UIButton(relative_rect=quitRect,text="Quit",manager=self.manager,object_id=ObjectID("#quitButton","@startMenuButtons"))
 
         return startButton,newGameButton,quitButton
