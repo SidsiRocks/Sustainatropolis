@@ -98,12 +98,14 @@ class MainGameScene:
         offY = -(self.world.noBlockX - self.world.noBlockY)*TILE_SIZE/4 + height/2
         return (offX,offY)
     def quitScene(self):
-        mapJsonPath = "mapUsed.json"
-        projMaintPath = "mainData.txt"
-        turnBarPath = "yearOfTurn.txt"
-        moneyFilePath = "money.txt"
-        self.world.writeRockTreeData(mapJsonPath,projMaintPath)
-        self.mainGameUI.turnBar.writeTurnBarUI(turnBarPath)
+        turnBarFilePath = "game/currentStartGame/turnBarYear.txt"
+        moneyFilePath = "game/currentStartGame/money.txt"
+        writeMaintFilePath = "game/currentStartGame/writeMaint.txt"
+        mapDataFilePath = "game/currentStartGame/mapData.json"
+        
+
+        self.world.writeRockTreeData(mapDataFilePath,writeMaintFilePath)
+        self.mainGameUI.turnBar.writeTurnBarUI(turnBarFilePath)
         self.mainGameUI.notificationBox.writeMoney(moneyFilePath)
         pg.quit()
         sys.exit()

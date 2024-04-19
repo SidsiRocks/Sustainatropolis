@@ -28,11 +28,11 @@ class TurnBarUI:
         self.crntYr = 2020
         self.endYr = 2040
         self.moneyPerYear = 20
+        self.readTurnBarUI(filePath=turnBarFilePath)
         self.waterManagementManager = self.game.waterManagement
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
 
-        self.readTurnBarUI(filePath=turnBarFilePath)
         self.highscore_db = HighScore()
     def createTurnBar(self,manager):
         width = manager.window_resolution[0]
@@ -185,7 +185,7 @@ class TurnBarUI:
     def writeTurnBarUI(self,filePath):
         with open(filePath,'w') as turnFile:
             print(self.crntYr,file=turnFile)
-    
+            print("writing self.crntYr:",self.crntYr)
     def readTurnBarUI(self,filePath):
         data = None
         with open(filePath,"r") as turnFile:

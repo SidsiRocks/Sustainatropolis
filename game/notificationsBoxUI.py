@@ -19,8 +19,8 @@ def createId(txt):
 class NotificationsBoxUI:
     def __init__(self,manager,writeMaintFilePath):
         self.money = 10000
-        self.txtBox,self.moneyButton = self.createNotificationBox(manager)
         self.readMoney(writeMaintFilePath)
+        self.txtBox,self.moneyButton = self.createNotificationBox(manager)
     def setMoney(self,curMoney):
         self.money = curMoney
         self.moneyButton.set_text(f"Money: {self.money}")
@@ -29,7 +29,8 @@ class NotificationsBoxUI:
         self.moneyButton.set_text(f"Money: {self.money}")
     def writeMoney(self,moneyFilePath):
         with open(moneyFilePath,"w") as moneyFile:
-            print(self.money,moneyFile)
+            print(self.money,file=moneyFile)
+            print("Writing money self.money:",self.money)
     def readMoney(self,moneyFilePath):
         readMoney = 0
         with open(moneyFilePath,"r") as moneyFile:

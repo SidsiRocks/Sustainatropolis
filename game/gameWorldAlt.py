@@ -101,10 +101,10 @@ class GameData:
                     tile = None
                     if type(overLapObj) == tuple:
                         overlapCoord = (overlapCoord[0]+overLapObj[0],overlapCoord[1]+overLapObj[1])
-                        tile = rockTreeData[overlapCoord[0]][overlapCoord[1]]["tile"]
+                        tile = rockTreeData[overlapCoord[0]][overlapCoord[1]].tile
                     else:
-                        tile = rockTreeData[overlapCoord[0]][overlapCoord[1]]["tile"]
-                    raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]}")
+                        tile = rockTreeData[overlapCoord[0]][overlapCoord[1]].tile
+                    raise InvalidPlacementException(f"The placement of object is invalid there is overlap between some two objects located at:{x},{y} {tileName} and {overlapCoord[0]},{overlapCoord[1]} {self.indxImgMap[tile]} i is:{i} j is:{j}")
         
         temp = self.createProject(tileName,(x,y),maint=maint)
 
@@ -131,10 +131,11 @@ class GameData:
 
         with open(projMaintPath,"r") as projMaintFile:
             for line in projMaintFile:
+                print("line in projMaint file:",line)
                 tileName,posTuple,maintVal =  self.parseMaintFileIndvLine(line[:-1])
                 x,y = posTuple
                 curSize = self.sizeArr[self.imgIndxMap[tileName]]
-                self.blockNeighbourSlots(x,y,curSize,self.rockTreeData,tileName,maint=maintVal)
+                self.blockNeighbourSlots(x,y,curSize,rockTreeData,tileName,maint=maintVal)
         return rockTreeData
     def createGroundDataDebug(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]

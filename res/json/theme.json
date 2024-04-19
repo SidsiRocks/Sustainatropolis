@@ -371,6 +371,7 @@
     "#explainImg":{
         "prototype":"#projectButtonsProto",
         "images":{"normal_image":{"path":"res/graphics/imgForProjectUI/explanation.png"}}
+        
     },
     "@explainWin":{
         "misc":{
