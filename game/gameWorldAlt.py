@@ -6,7 +6,7 @@ from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr","allProjectsList","mapData"]
+    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr","allProjectsList","mapData","projCost"]
     def __init__(self,width,height,game,mapData,projMaintPath):
         self.allProjectsList = []
         self.width = width 
@@ -27,6 +27,7 @@ class GameData:
         #self.loadImages()
         self.projectNames = {}
         self.mapData = mapData
+        self.projCost = {}
         self.loadImages()
 
         self.disableMaintBar = {"tree":0,"rock":0}
@@ -34,6 +35,7 @@ class GameData:
         self.noBlockY = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_width()
         self.groundData = self.createGroundData()    
         self.rockTreeData = self.createRockTreeData(projMaintPath)
+
     #didnt create separate function to only generate grass
     def createGroundData(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
@@ -238,6 +240,9 @@ class GameData:
             curSize = parseTuple(projData[key]["size"])
             self.sizeArr.append(curSize)
             self.tileToColor[key] = parseColour(projData[key]["colour"])
+    
+            maintCost = projData[key]["maintCost"]
+            self.projCost[key] = maintCost 
     def writeRockTreeData(self,mapJsonPath,projMaintPath):
         #also write the base image bath used too
         #image = Image.new('RGB',(self.noBlockY,self.noBlockX))
@@ -272,10 +277,10 @@ class GameData:
     def createProject(self,projName,pos,mode="normal",maint=100):
         projIndx = self.imgIndxMap[projName]
         if projName in self.disableMaintBar:
-            return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,False,maint=maint)
+            return Project(projIndx,projName,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,False,maint=maint)
         else:
         
-            return Project(projIndx,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,maint=maint)
+            return Project(projIndx,projName,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,maint=maint)
             # segame.allProjectsList.append(temp)
         
     def updateProjMaintBar(self,totalOffset):
