@@ -139,7 +139,7 @@
     "#fontPrototype":{
         "font":{
             "name":"Montserrat",
-            "size":"20",
+            "size":"16",
             "bold":"1"
         },
         "regular_path":"./res/fonts/Montserrat-Regular.ttf",
@@ -148,7 +148,10 @@
         "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
     },
     "@statisticsLabel":{
-        "prototype":"#fontPrototype"
+        "prototype":"#fontPrototype",
+        "colours":{
+            "normal_text":"#ffffff"
+        }
     },
     "@statisticalProgress":{
         "prototype":"#fontPrototype",
@@ -169,16 +172,18 @@
             "shape_corner_radius":"20"
         },
         "colours":{
-            "normal_text":"#c5cbd8",
+            "normal_text":"#ffffff",
             "filled_bar":"#00ff00",
             "text_shadow":""
         }
     },
     "@TurnStartEndLabel":{
-        "prototype":"#fontPrototype"
+        "prototype":"#fontPrototype",
+        "colours":{"normal_text":"#ffffff"}
     },
     "@TurnCurrentYearLabel":{
-        "#prototype":"#fontPrototype"
+        "#prototype":"#fontPrototype",
+        "colours":{"normal_text":"#ffffff"}
     },
     "@NotificationsBox":
     {
@@ -232,7 +237,8 @@
             "hovered_border":"#e68a00",
             "disabled_border":"#e68a00",
             "selected_border":"#e68a00",
-            "active_border":"#e68a00"
+            "active_border":"#e68a00",
+            "normal_text":"#ffffff"
         },
         "misc":{
             "shape":"rounded_rectangle",
@@ -241,33 +247,28 @@
         }
     },
     "#currencyButton":{
-        "colours":{
-            "normal_bg":"#ffad33",
-            "hovered_bg":"#ffc266",
-            "disabled_bg":"#ffebcc",
-            "selected_bg":"#e68a00",
-            "active_bg":"#ffad33",
-            "normal_border":"#e68a00",
-            "hovered_border":"#e68a00",
-            "disabled_border":"#e68a00",
-            "selected_border":"#e68a00",
-            "active_border":"#e68a00"
+        "prototype":"#hoverButtonPrototype",
+        "font":{
+            "name":"Montserrat",
+            "size":"15",
+            "bold":"1"
         },
-        "misc":{
-            "shape":"rounded_rectangle",
-            "shape_corner_radius":"10",
-            "border_width":"5"
-        },
-        "prototype":"#fontPrototype"
+        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
+        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
+        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
+        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
     }
     ,"@currencyButton":{
-        "colours":{
-            "dark_bg":"#f5c242"
-            ,"normal_text":"#ffffff" 
-            ,"disabled_text":"" 
-            ,"text_shadow": "#a0a0a0"
+        "prototype":"#hoverButtonPrototype",
+        "font":{
+            "name":"Montserrat",
+            "size":"24",
+            "bold":"1"
         },
-        "prototype":"#fontPrototype"
+        "regular_path":"./res/fonts/Montserrat-Regular.ttf",
+        "bold_path":"./res/fonts/Montserrat-Bold.ttf",
+        "italic_path":"./res/fonts/Montserrat-Italic.ttf",
+        "bold_italic_path":"./res/fonts/Montserrat-BoldItalic.ttf"
     }
     ,"@warnWindow":{
         "colours":{
@@ -348,12 +349,25 @@
     "@settingsWin.#close_button":{
         "prototype":"#hoverButtonPrototype"
     },
-    "@projectDescLbl":{
-        "prototype":"#fontPrototype",
-        "font":{"size":"15"}
+    "#textBoxAsTextLblProto":{
+        "colours":{
+            "dark_bg":"#ffffff00",
+            "selected_bg":"#ffffff00",
+            "normal_border":"#ffffff00"
+        },
+        "misc":{
+            "text_horiz_alignment":"center",
+            "border_width":"0",
+            "shadow_width":"0",
+            "padding":"0"
+        }
     },
-
-
+    "@projectDescLbl":{
+        "prototype":"#textBoxAsTextLblProto"
+    },
+    "@projectDescLbl.#top_button":{},
+    "@projectDescLbl.#bottom_button":{},
+    "@projectDescLbl.#sliding_button":{},
 
     "#projectButtonsProto":
     {

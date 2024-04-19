@@ -49,12 +49,22 @@ class NotificationsBoxUI:
             manager=manager,
             object_id=createId("notifications Box"))
 
-        currencyWidth = 200
+        currencyWidth = 250
         currenctHeight = 80
         currencyRect = Rect(leftPad,txtBoxRect.top + height + topPad,currencyWidth,currenctHeight)
+
+
+
+        currencyTxt = f"<font face='Montserrat' color='#ffffff' size=5><b>Money:{self.money}</b></font><br>" 
         currentMoney = UIButton(relative_rect=currencyRect,
             text=f"Money: {self.money}",manager=manager,
-            object_id=createId("currencyButton"))
+            object_id=ObjectID("@currencyButton","#currencyButton"))
+        #currentMoney = UITextBox(html_text="",relative_rect=currencyRect,
+        #                         manager=manager,
+        #                         object_id=
+        #                         ObjectID("@currencyButton","#currencyButton"))
+        #currentMoney.append_html_text(currencyTxt)
+        #currentMoney.scroll_bar.hide()        
         return txtBox,currentMoney
     
     def clearHtmlText(self):
