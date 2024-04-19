@@ -1,7 +1,5 @@
 from typing import Union, Dict, Optional
-from pygame import Rect
 import pygame
-from pygame_gui.elements.ui_progress_bar import UIProgressBar
 from pygame_gui.core import ObjectID
 from pygame_gui.core.interfaces import IContainerLikeInterface, IUIManagerInterface
 from pygame_gui.core import UIElement

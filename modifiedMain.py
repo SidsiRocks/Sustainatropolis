@@ -4,6 +4,7 @@ from pygame.locals import *
 import pygame_gui
 
 from game.startMenuScene import StartMenuScene
+from game.introStoryScene import IntroStoryStoryScene
 
 def main():
     flag = FULLSCREEN | DOUBLEBUF
@@ -35,6 +36,9 @@ def main():
             moneyFilePath = "game/defaultStartGameData/money.txt"
             writeMaintFilePath = "game/defaultStartGameData/writeMaint.txt"
             mapDataFilePath = "game/defaultStartGameData/mapData.json"
+
+            introScene = IntroStoryStoryScene(screen,clock)
+            introScene.run()
         mainScene = MainGameScene(screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath)
         mainScene.run()
 

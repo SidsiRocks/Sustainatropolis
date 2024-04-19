@@ -1,0 +1,7 @@
+{
+    "test":"res/music/sound.mp3",
+    "construction":"res/audios/construction.wav",
+    "click":"res/audios/audio.mp3",
+    "celebration":"res/audios/yearChange.mp3",
+    "maintenance":"res/audios/maintenance.mp3"
+}

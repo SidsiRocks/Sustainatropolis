@@ -56,9 +56,6 @@ class ProjectsUI:
     
     def setProjAllowed(self,bol):
         self.projPlaceAllowed = bol
-        print(f"set {self.projPlaceAllowed}:{self.projPlaceAllowed} in the following trace back")
-        for line in traceback.format_stack():
-            print(line.strip())
 
     def loadProjectLstAndCost(self,jsonFilePath):
         data = json.load(open(jsonFilePath))
