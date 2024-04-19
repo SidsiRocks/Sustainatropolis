@@ -154,6 +154,8 @@ Are you sure you want to quit the game?</font>"""
                 self.quitScene()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
+                    self.mainGameUI.maintManager.setMaintAllowed(False)
+                    self.mainGameUI.projectUIWrapper.setProjAllowed(False)
                     self.closeWindow.show()
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 self.mainGameUI.processEvents(event,self.audioManager,self.world)
