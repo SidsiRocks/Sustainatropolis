@@ -34,31 +34,31 @@ class StartMenuScene:
         self.padY = 35
         self.option = None
 
-        self.startButton,self.newGameButton,self.HighScoreButton, self.quitButton = self.createStartUI()
+        self.startButton,self.newGameButton, self.quitButton = self.createStartUI()
 
         self.backGroundImage = pg.image.load("res/graphics/backgroundImage/BG1.png").convert_alpha()
         self.backGroundImage = pg.transform.scale(self.backGroundImage,(self.width,self.height))  
         #   bg_image = pg.transform.scale(bg_image,(screen_width,screen_height))
     #can remove from loadFonts from other place
     def createStartUI(self):
-        noButtons = 4
+        noButtons = 3
         subSectionHeight = self.buttonHeight * noButtons + self.padY * (noButtons - 1)
         subSectionWidth = self.buttonWidth
 
-        top = (self.height - subSectionHeight)/2
+        top = (self.height - subSectionHeight)/2 + 200
         left = (self.width - subSectionWidth)/2
 
         startRect = Rect(left,top,self.buttonWidth,self.buttonHeight)
         newGameRect = Rect(left,top+self.buttonHeight+self.padY,self.buttonWidth,self.buttonHeight)
-        HighScoreGameRect = Rect(left,top+2*self.buttonHeight+2*self.padY,self.buttonWidth,self.buttonHeight)    
-        quitRect = Rect(left,top+3*self.buttonHeight+3*self.padY,self.buttonWidth,self.buttonHeight)
+        # HighScoreGameRect = Rect(left,top+2*self.buttonHeight+2*self.padY,self.buttonWidth,self.buttonHeight)    
+        quitRect = Rect(left,top+2*self.buttonHeight+2*self.padY,self.buttonWidth,self.buttonHeight)
 
         startButton   = UIButton(relative_rect=startRect,text="Start",manager=self.manager,object_id=ObjectID("#startButton","@startMenuButtons"))
         newGameButton = UIButton(relative_rect=newGameRect,text="New Game",manager=self.manager,object_id=ObjectID("#newGameButton","@startMenuButtons")) 
-        HighScoreButton    = UIButton(relative_rect=HighScoreGameRect,text="High Score",manager=self.manager,object_id=ObjectID("#HighScoreButton","@startMenuButtons"))
+        # HighScoreButton    = UIButton(relative_rect=HighScoreGameRect,text="High Score",manager=self.manager,object_id=ObjectID("#HighScoreButton","@startMenuButtons"))
         quitButton    = UIButton(relative_rect=quitRect,text="Quit",manager=self.manager,object_id=ObjectID("#quitButton","@startMenuButtons"))
 
-        return startButton,newGameButton,HighScoreButton,quitButton
+        return startButton,newGameButton,quitButton
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -95,9 +95,6 @@ class StartMenuScene:
                     print("Start a new game")
                     self.option = "New game"
                     self.playing = False
-                elif event.ui_element == self.HighScoreButton:
-                    # Add Code here to display data stored in highscore.db
-                    pass
                 elif event.ui_element == self.quitButton:
                     self.quitScene()
             self.manager.process_events(event)
