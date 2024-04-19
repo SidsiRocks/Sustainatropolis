@@ -1,6 +1,7 @@
 import pygame 
 from pygame import Rect
 import json
+import shutil
 from .waterManagement import WaterManagement
 import pygame_gui
 from pygame_gui.elements import UIButton
@@ -12,6 +13,7 @@ from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 from .highscore import HighScore
 from .customUIprogress import CustomUIprogressBar
+from .onCloseButtonEvent import OnCloseWindowButton
 
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
@@ -96,10 +98,38 @@ class TurnBarUI:
         self.endYrLbl.set_text(str(endYr))
         self.updatePrgrsBar()
     def setCrntYear(self,crntYr):
-        self.crntYr = crntYr
-        self.crntYrLbl.set_text(str(crntYr))
-        self.updatePrgrsBar()
+        if crntYr <= self.endYr:
+            self.crntYr = crntYr
+            self.crntYrLbl.set_text(str(crntYr))
+            self.updatePrgrsBar()
+        else:
+            self.generateGameOverWindow()
+    
+    def handleGameExit(self):
+        self.game.stopPlaying()
+        shutil.copyfile("game/defaultStartGameData/mapData.json","game/currentStartGame/mapData.json")
+        shutil.copyfile("game/defaultStartGameData/money.txt","game/currentStartGame/money.txt")
+        shutil.copyfile("game/defaultStartGameData/turnBarYear.txt","game/currentStartGame/turnBarYear.txt")
+        shutil.copyfile("game/defaultStartGameData/writeMaint.txt","game/currentStartGame/writeMaint.txt")
 
+    def generateGameOverWindow(self):
+        onFuncButtonClose = lambda: self.handleGameExit()
+        closeWindowWidth = 400
+        closeWindowHeight = 400
+        gameOverRect = Rect((self.game.width-closeWindowWidth)/2,
+                            (self.game.height - closeWindowHeight)/2,
+                            closeWindowWidth,closeWindowHeight)
+        
+        gameOverTxt=f"""<font face='Montserrat' color="#ffffff" size=4.5>Game Over You had a final score of 'insert score here' </font>"""
+        gameOverWindow = OnCloseWindowButton(rect=gameOverRect,
+                            html_message=gameOverTxt,buttonHt=100,
+                            buttonWidth=80,paddingY=10,paddingX=10,
+                            manager=self.game.manager,
+                            window_display_title="Game Over",
+                            object_id=ObjectID("@gameOverWindow","#gameOverWindow"),
+                            resizable=False,draggable=False,onCloseFunc=onFuncButtonClose)
+        gameOverWindow.set_blocking(True)
+        
     def createNotifMessage(self,year,message , title):
         season = ""
         if year%4==1 : 
@@ -110,12 +140,6 @@ class TurnBarUI:
             season = "Autumn"
         else:
             season = "Winter"
-        # ans = ""
-        # ans += "<font face='Montserrat' color='#ffffff' size=6><b>" + title +"</b></font><br>" 
-        # ans += "<font face='Montserrat' color='#ffffff' size=4 align='right'>"+season+", " + str(2020 + (year+1-2020)//5) +   "</font><br>"
-        # ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
-        # ans += "<font face='Montserrat' color='#f0f0f0' size=4>"+message+"</font>"
-        # ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
         ans = ""
         ans += "<font face='Montserrat' color='#ffffff' size=6><b>" + title +"</b></font><br>" 
         ans += "<div style='text-align: right; font-size: 4; color: #ffffff;'>"+season+", " + str(2020 + (year-2017)//4) +   "</div>"

@@ -156,6 +156,9 @@ Are you sure you want to quit the game?</font>"""
 
         self.playing = False
         print("Scene must be quit now")
+    def stopPlaying(self):
+        print("Game playing set to false")
+        self.playing = False
     def mouseHoverEvents(self):
         x,y = pg.mouse.get_pos()
         isoX,isoY = self.findClickCoord(x,y)

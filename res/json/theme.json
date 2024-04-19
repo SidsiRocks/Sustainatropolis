@@ -89,7 +89,9 @@
             "active_border":"#e68a00"
         }
     },
-
+    "@gameOverWindow":{
+        "prototype":"#windowPrototype"
+    },
     "@statWindow":{
         "prototype":"#windowPrototype"
     },
