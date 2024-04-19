@@ -30,3 +30,11 @@ WaterTank::(32, 27)::100
 WaterTank::(33, 24)::100
 CityBuilding::(36, 26)::100
 Solar PowerPlant::(34, 8)::100
+WaterTank::(26, 35)::100
+WindMill::(30, 39)::100
+WindMill::(27, 38)::100
+WindMill::(33, 35)::100
+WindMill::(35, 29)::100
+WaterTank::(36, 31)::100
+WaterTank::(15, 49)::100
+WaterTank::(16, 49)::100
