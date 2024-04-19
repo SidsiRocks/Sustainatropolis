@@ -10,6 +10,7 @@
     "Diwali": "The festival of lights, Diwali, is a time of joy and celebration marked by fireworks, feasts, and gatherings. As people come together to celebrate, water usage may rise for cooking, cleaning, and other purposes. Plan ahead to meet the heightened demand for treated water during this festive season.",
     "DamRelease" :"Water authorities have released water from dams, impacting water levels downstream. Prepare for potential fluctuations in water availability and adjust your operations accordingly to maintain stability and meet demand.",
     "InfraExp" : "Everything Seems Alright! .With the population growing steadily and future water demands expected to rise, it's crucial to focus on expanding your water infrastructure. Invest in building new treatment plants, pipelines, and reservoirs to ensure that your water supply system can meet the needs of the expanding population and accommodate future growth. Plan strategically to optimize resource allocation and minimize disruptions to existing services during the construction phase. ",
+    "Welcome" : "Welcome!, In this box, you will get new notifications every turn about upcoming challenges or opportunities. For this turn, you can start by placing a Dam!, and get unclean water.",
     "Titles" : {
         "Summer": "Sunny Summer!" ,
         "Drought" : "Thirsty Drought!",
@@ -21,6 +22,7 @@
         "Holi" : "Holi!",
         "Diwali" : "Diwali!",
         "DamRelease" : "Dam Release",
-        "InfraExp" : "Infrastructure Expansion"
+        "InfraExp" : "Infrastructure Expansion",
+        "Welcome" : "Welcome"
     }
 }

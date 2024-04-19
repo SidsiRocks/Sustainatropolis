@@ -33,7 +33,9 @@ class TurnBarUI:
         (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
 
+        
         self.highscore_db = HighScore()
+        # self.processEvents(None,None,None)
     def createTurnBar(self,manager):
         width = manager.window_resolution[0]
         height = manager.window_resolution[1]
@@ -116,7 +118,7 @@ class TurnBarUI:
         # ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
         ans = ""
         ans += "<font face='Montserrat' color='#ffffff' size=6><b>" + title +"</b></font><br>" 
-        ans += "<div style='text-align: right; font-size: 4; color: #ffffff;'>"+season+", " + str(2020 + (year+1-2020)//5) +   "</div>"
+        ans += "<div style='text-align: right; font-size: 4; color: #ffffff;'>"+season+", " + str(2020 + (year-2017)//4) +   "</div>"
         ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
         ans += "<font face='Montserrat' color='#f0f0f0' size=4>"+message+"</font>"
         ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
@@ -125,13 +127,14 @@ class TurnBarUI:
 
         return ans 
 
-    def proceedEvent(self,event_name,maingameui) : 
-        self.waterManagementManager.processNotifs(event_name)
+    def proceedEvent(self,event_name,maingameui) :
+        if event_name != "Welcome" :
+            self.waterManagementManager.processNotifs(event_name)
         maingameui.notificationBox.appendHtmlText(self.createNotifMessage(self.crntYr,self.notifMessages[event_name],self.notifMessages["Titles"][event_name]))
 
 
     def processEvents(self,event,maingameui,audioManager):
-        if event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
+        if   event.type == pygame_gui.UI_BUTTON_PRESSED and event.ui_element == self.nextTurnButton:
             if self.crntYr < self.endYr+1:
                 self.waterManagementManager.processNotifs("Reset")
                 self.waterManagementManager.decreaseMaintenance()
@@ -139,6 +142,7 @@ class TurnBarUI:
                 audioManager.playSound("celebration")
                 print("Current Year is", self.crntYr)
                 if self.crntYr == 2021 :  #summer
+                    maingameui.notificationBox.clearHtmlText()
                     self.proceedEvent("Summer",maingameui)
                     self.proceedEvent("Holi",maingameui)
                 elif self.crntYr == 2022 : #Rainy
@@ -147,8 +151,10 @@ class TurnBarUI:
                     self.proceedEvent("Tourists",maingameui) 
                     self.proceedEvent("DamRelease",maingameui)
                 elif self.crntYr == 2024 : #Winter          
-                    self.proceedEvent("Diwali",maingameui)   
+                    self.proceedEvent("Diwali",maingameui)
+
                 elif self.crntYr == 2025 : #Summer
+                    maingameui.notificationBox.clearHtmlText()
                     self.proceedEvent("Drought",maingameui)                                   
                     self.proceedEvent("Holi",maingameui)                                   
                 elif self.crntYr == 2026 : #Rainy
@@ -158,6 +164,7 @@ class TurnBarUI:
                 elif self.crntYr == 2028 : #Winter
                     self.proceedEvent("DamRelease",maingameui)
                 elif self.crntYr == 2029 : #Summer
+                    maingameui.notificationBox.clearHtmlText()
                     self.proceedEvent("Summer",maingameui)
                 elif self.crntYr == 2030 : #Rainy
                     self.proceedEvent("LessRain",maingameui)
@@ -166,6 +173,7 @@ class TurnBarUI:
                 elif self.crntYr == 2032 :  #Winter
                     self.proceedEvent("Diwali",maingameui)
                 elif self.crntYr == 2033 :  #Summer
+                    maingameui.notificationBox.clearHtmlText()
                     self.proceedEvent("Drought",maingameui)
                 elif self.crntYr == 2034 :  #Rainy
                     self.proceedEvent("Flood",maingameui)
@@ -174,6 +182,7 @@ class TurnBarUI:
                 elif self.crntYr == 2036 :  #Winter
                     self.proceedEvent("LessRain",maingameui)
                 elif self.crntYr == 2037 :  #Summer
+                    maingameui.notificationBox.clearHtmlText()
                     self.proceedEvent("Summer",maingameui)
                 elif self.crntYr == 2038 :  #Rainy
                     self.proceedEvent("Rainy",maingameui)
@@ -182,6 +191,7 @@ class TurnBarUI:
                 elif self.crntYr == 2040 : #Winter 
                     self.proceedEvent("Diwali",maingameui)
                 elif self.crntYr == 2041 : 
+                    maingameui.notificationBox.clearHtmlText()
                     self.highscore_db.save_high_score( "Arpit" ,self.waterManagementManager.getScore())
                     scores = self.highscore_db.load_high_score()
                     for x in scores : 

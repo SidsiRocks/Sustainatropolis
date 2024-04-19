@@ -18,6 +18,13 @@
     "consumeStoreWater": {
         "CityBuilding": 10000
     },
+    "produceElectricity": {
+        "Solar PowerPlant": 2000,
+        "WindMill": 1000
+    },
+    "consumeElectricity": {
+        "CityBuilding": 10000
+    },
     "countProjects":{
         "Dam" : 0 ,
         "Purification Plant" : 0 ,
@@ -112,5 +119,14 @@
         "CityBuilding" : 0,
         "WindMill": 0,
         "Solar PowerPlant" : 0
+    },
+    "maintenanceRate" : {
+        "Dam" : 10,
+        "Water Pump" : 25,
+        "Purification Plant" : 20,
+        "WaterTank" : 10,
+        "CityBuilding" : 0,
+        "WindMill": 5,
+        "Solar PowerPlant" : 5
     }
 }

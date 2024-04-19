@@ -44,7 +44,7 @@ class MainGameScene:
         self.width,self.height = self.screen.get_size()
         # self.allProjectsList = []
 
-        self.powerManagement = PowerManagement(self)        
+        # self.powerManagement = PowerManagement(self)        
         self.waterManagement = WaterManagement(self)
 
         self.audioManager = AudioManager()
@@ -90,6 +90,7 @@ Are you sure you want to quit the game?</font>"""
                         "Exit Game?",object_id=ObjectID("#closeWindow","@closeWindow"),
                         onCloseFunc=onCloseFunc,draggable=False,
                         buttonMsg = "Exit",visible=0,onCloseButtonFunc=onCloseButtonFunc)
+        self.mainGameUI.turnBar.proceedEvent("Welcome" , self.mainGameUI)
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -210,8 +211,8 @@ Are you sure you want to quit the game?</font>"""
                 # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
                     #add set stats function to powerManagement
-                    if projName != None:
-                        self.powerManagement.handleProj(projName)
+                    # if projName != None:
+                    #     self.powerManagement.handleProj(projName)
                     if projName != None:
                         self.audioManager.playSound("construction")
                         # self.game.allProjectsList.append()

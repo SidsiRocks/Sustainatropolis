@@ -22,6 +22,7 @@ class MainGameUI:
         self.loadTheme(themePath)
         self.statsWindowWrapper = StatisticsWindow(manager)
         self.turnBar = TurnBarUI(manager,game,turnBarFilePath)
+        # self.turnBar.processEvents( None, self , game.audioManager)
         self.notificationBox = NotificationsBoxUI(manager,writeMaintFilePath)
         self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,game,self.notificationBox,game.waterManagement)
         self.settingsUI = SettingsUI(manager,game.audioManager)
