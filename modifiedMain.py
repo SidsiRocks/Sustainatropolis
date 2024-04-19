@@ -16,27 +16,27 @@ def main():
 
     startScene = StartMenuScene(screen,clock)
 
-    option = startScene.run()
-    print("Option is:",option)
+    while True:
+        startScene.playing = True
+        option = startScene.run()
+        print("Option is:",option)
 
-    turnBarFilePath = None 
-    moneyFilePath = None 
-    writeMaintFilePath = None 
-    mapDataFilePath = None
-    if option == "Load game":
-        turnBarFilePath = "game/currentStartGame/turnBarYear.txt"
-        moneyFilePath = "game/currentStartGame/money.txt"
-        writeMaintFilePath = "game/currentStartGame/writeMaint.txt"
-        mapDataFilePath = "game/currentStartGame/mapData.json"
-    elif option == "New game":
-        turnBarFilePath = "game/defaultStartGameData/turnBarYear.txt"
-        moneyFilePath = "game/defaultStartGameData/money.txt"
-        writeMaintFilePath = "game/defaultStartGameData/writeMaint.txt"
-        mapDataFilePath = "game/defaultStartGameData/mapData.json"
-
-
-    mainScene = MainGameScene(screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath)
-    mainScene.run()
+        turnBarFilePath = None 
+        moneyFilePath = None 
+        writeMaintFilePath = None 
+        mapDataFilePath = None
+        if option == "Load game":
+            turnBarFilePath = "game/currentStartGame/turnBarYear.txt"
+            moneyFilePath = "game/currentStartGame/money.txt"
+            writeMaintFilePath = "game/currentStartGame/writeMaint.txt"
+            mapDataFilePath = "game/currentStartGame/mapData.json"
+        elif option == "New game":
+            turnBarFilePath = "game/defaultStartGameData/turnBarYear.txt"
+            moneyFilePath = "game/defaultStartGameData/money.txt"
+            writeMaintFilePath = "game/defaultStartGameData/writeMaint.txt"
+            mapDataFilePath = "game/defaultStartGameData/mapData.json"
+        mainScene = MainGameScene(screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath)
+        mainScene.run()
 
 if __name__ == "__main__":
     main()

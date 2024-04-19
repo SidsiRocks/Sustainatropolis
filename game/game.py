@@ -15,6 +15,8 @@ from pygame_gui.elements.ui_button import UIButton
 from .audio import AudioManager
 from .groundRender import GroundRender
 from .renderTreeRock import RockTreeRender
+from .onCloseButtonEvent import OnCloseWindowButton
+from pygame_gui.core import ObjectID
 
 def cameraMovement(width,height):
     return (0,0)
@@ -33,7 +35,7 @@ def cameraMovementKeyBoard(keyPress):
 
 
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","uiEnable"]
+    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","closeWindow"]
     def __init__(self,screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath):
         self.screen = screen 
         self.clock = clock
@@ -79,8 +81,18 @@ class MainGameScene:
         self.groundCenterOffset = self.centerOffset
 
         self.renderTreeRock = RockTreeRender(self.camera,self.centerOffset,self.world,self.imgCenterOffset)
-        self.uiEnable = True
-
+    
+        onCloseFunc = lambda: self.quitScene()
+        closeWinWidth,closeWinHeight = 400,300
+        closeWindowRect = Rect((self.width - closeWinWidth)/2,(self.height -closeWinHeight)/2,
+                            closeWinWidth,closeWinHeight)
+        closeWinMsg = f"""<font face='Montseraat' color="#ffffff">
+Are you sure you want to quit the game?</font>"""
+        self.closeWindow = OnCloseWindowButton(closeWindowRect,
+                        closeWinMsg,80,120,10,10,self.manager,
+                        "Exit Game?",object_id=ObjectID("#closeWindow","@closeWindow"),
+                        onCloseFunc=onCloseFunc,draggable=False,
+                        buttonMsg = "Exit",visible=0)
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
@@ -112,8 +124,9 @@ class MainGameScene:
         self.world.writeRockTreeData(mapDataFilePath,writeMaintFilePath)
         self.mainGameUI.turnBar.writeTurnBarUI(turnBarFilePath)
         self.mainGameUI.notificationBox.writeMoney(moneyFilePath)
-        pg.quit()
-        sys.exit()
+
+        self.playing = False
+        print("Scene must be quit now")
     def mouseHoverEvents(self):
         x,y = pg.mouse.get_pos()
         isoX,isoY = self.findClickCoord(x,y)
@@ -143,8 +156,6 @@ class MainGameScene:
             self.audioManager.setVolume(self.audioManager.getVolume()-0.1)
         if keys[pg.K_q]:
             self.audioManager.playSound("test")
-        if keys[pg.K_z]:
-            self.uiEnable = False
         # print("list og events" , pg.event.get())
         eventslist = pg.event.get()
         # (pg.event.get().reverse)
@@ -156,7 +167,7 @@ class MainGameScene:
                 self.quitScene()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
-                    self.quitScene()
+                    self.closeWindow.show()
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 buttonClicked = True
                 self.audioManager.playSound("click")
@@ -241,8 +252,7 @@ class MainGameScene:
         self.renderTreeRock.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq,self.screen)
         drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
 
-        if self.uiEnable:
-            self.manager.draw_ui(self.screen)
+        self.manager.draw_ui(self.screen)
 
         pg.display.flip()
     def findIsoGridOrg(self):

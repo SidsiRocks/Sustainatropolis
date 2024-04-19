@@ -4,13 +4,13 @@ from pygame_gui.core import ObjectID
 from typing import Union, Tuple, Optional
 from pygame_gui.elements.ui_window import UIWindow
 from pygame_gui.core.interfaces import IUIManagerInterface
-
+from pygame_gui import UI_BUTTON_PRESSED
 from .MessageWindow import MessageWindow
 
 def emptyFunc():
     pass
 
-class OnCloseWindow(MessageWindow):
+class OnCloseWindowButton(MessageWindow):
     def __init__(self,
                  rect:pygame.Rect,
                  html_message:str,
@@ -32,7 +32,28 @@ class OnCloseWindow(MessageWindow):
                         window_display_title,object_id,
                         visible,buttonMsg=buttonMsg)
         self.onCloseFunc = onCloseFunc
+
     def kill(self):
-        self.onCloseFunc()
         super().kill()
+
+    def process_event(self, event: pygame.event.Event) -> bool:
+        """
+        Process any events relevant to the message window. In this case we just close the window
+        when the dismiss button is pressed.
+
+        :param event: a pygame.Event.
+
+        :return: Return True if we 'consumed' this event and don't want to pass it on to the rest
+                 of the UI.
+
+        """
+        consumed_event = super().process_event(event)
+
+        if event.type == UI_BUTTON_PRESSED and event.ui_element == self.dismissButton:
+            self.kill()
+            self.onCloseFunc()
+        return consumed_event
+    
+    def on_close_window_button_pressed(self):
+        self.hide()
     

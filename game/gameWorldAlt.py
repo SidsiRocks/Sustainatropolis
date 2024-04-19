@@ -126,8 +126,6 @@ class GameData:
                     if pixel == self.tileToColor[key]:
                         curSize = self.sizeArr[self.imgIndxMap[key]]
                         self.blockNeighbourSlots(x,y,curSize,rockTreeData,key)
-                        self.game.powerManagement.handleProj(key)
-                        self.game.waterManagement.handleProj(key)
 
         with open(projMaintPath,"r") as projMaintFile:
             for line in projMaintFile:
@@ -136,6 +134,10 @@ class GameData:
                 x,y = posTuple
                 curSize = self.sizeArr[self.imgIndxMap[tileName]]
                 self.blockNeighbourSlots(x,y,curSize,rockTreeData,tileName,maint=maintVal)
+
+                print(f"Adding project {tileName} in the read maint file function")
+                self.game.powerManagement.handleProj(tileName)
+                self.game.waterManagement.handleProj(tileName)
         return rockTreeData
     def createGroundDataDebug(self):
         groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
