@@ -76,7 +76,7 @@ class MaintManager:
         maintWinRect = Rect((self.width - maintWinWidth)/2,(self.height - maintWinHeight)/2,
                             maintWinWidth,maintWinHeight)
         maintWindow  = OnDismissCallFunc( maintWinRect,text,buttonHt=50,buttonWidth=100,paddingX=15,
-                                          paddingY=10,window_display_title="Reapir Project",manager=self.manager,
+                                          paddingY=10,window_display_title="Repair Project",manager=self.manager,
                                           object_id= ObjectID(class_id = "@projMaintCostWindow",object_id = "#projMaintCostWindow"),
                                           resizable=False,draggable=False,buttonMsg=f"Pay {projMaintCost}",visible=1)
         maintWindow.set_blocking(True)
@@ -84,5 +84,6 @@ class MaintManager:
 
     ###Arpit add code to handle maintenance increase and decrease here
     def fixMaintenaceFunc(self,proj,projMaintCost):
+        print(f"fix maintenance of function was called with {proj.tileName}")
         proj.setMaintenacne(100)
         self.game.mainGameUI.notificationBox.diffMoney(projMaintCost)

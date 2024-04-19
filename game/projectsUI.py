@@ -2,6 +2,8 @@ import pygame
 import json
 from pygame import Rect
 
+import traceback
+
 import pygame_gui
 
 from pygame_gui.elements import UIButton
@@ -54,6 +56,9 @@ class ProjectsUI:
     
     def setProjAllowed(self,bol):
         self.projPlaceAllowed = bol
+        print(f"set {self.projPlaceAllowed}:{self.projPlaceAllowed} in the following trace back")
+        for line in traceback.format_stack():
+            print(line.strip())
 
     def loadProjectLstAndCost(self,jsonFilePath):
         data = json.load(open(jsonFilePath))
@@ -142,7 +147,7 @@ class ProjectsUI:
         return projectListWindow
     def clickedOnWorld(self,x,y):
         #may want to add something to cancel placement like left clicking
-        print(f"self.projPlaceAllowed:{self.projPlaceAllowed}")
+        #print(f"self.projPlaceAllowed:{self.projPlaceAllowed}")
         if self.currentProject != None:
             if self.game.world.checkPlacementValid(x,y,self.currentProject) and self.projPlaceAllowed:
                 self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
