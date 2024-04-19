@@ -66,7 +66,8 @@ class ProjectsUI:
         projectToCostMap = data["projectToCostMap"] 
         return projectLst,projectToCostMap       
     def createCurrencyButton(self,projButton,projButRect:Rect,projName,manager,projLstWinScroll):
-        width = 30
+        chrWidth = 20
+        width = chrWidth*len(str(self.projectToCostMap[projName]))
         height = 30
         buttonWdth = projButRect.width 
         buttonHt = projButRect.height
@@ -81,10 +82,15 @@ class ProjectsUI:
             class_id="@currencyButton")
             ,manager=manager,container=projLstWinScroll)
     def createProjectLabel(self,labelWidth,labelTxt,projLstWinScroll,projButtonRect,manager):
-        labelHeight = 30
+        labelHeight = 50
         padY = 10
         labelRect = Rect(projButtonRect.left,projButtonRect.top + padY,labelWidth,labelHeight)
-        curLabl = UILabel(relative_rect=labelRect,text=labelTxt,manager=manager,container=projLstWinScroll,object_id=ObjectID("#"+labelTxt+"Lbl","@projectDescLbl"))
+
+        curLablText = f"<font face='Montserrat' color='#ffffff' size=3><b>{labelTxt}</b></font><br>" 
+        curLabl = UITextBox(relative_rect=labelRect,html_text=curLablText,manager=manager,
+                            container=projLstWinScroll,
+                            object_id=ObjectID("#"+labelTxt+"Lbl","@projectDescLbl"))
+        curLabl.scroll_bar.hide()
         return curLabl
     def createProjectButton(self,projLstWinScroll,x,projName,manager):
         imgBtnWidth = 170

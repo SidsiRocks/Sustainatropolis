@@ -69,7 +69,7 @@ class StatisticsWindow:
             self.statProgressBarDict[stName] = curDict
         
     def createStatsWindow(self,manager):
-        statsWindowRect = Rect(0,0,400,520)
+        statsWindowRect = Rect(0,0,400,420)
         statsWindowRect.bottomright = (manager.window_resolution[0] -10,manager.window_resolution[1] -10)
         #have to ensure this window cannot be closed 
         statsWindow = UIWindow(rect=statsWindowRect,manager=manager,

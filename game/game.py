@@ -50,6 +50,7 @@ class MainGameScene:
         self.audioManager = AudioManager()
         self.audioManager.playMusic()
         self.manager = pygame_gui.UIManager((self.width,self.height))
+        self.loadFonts()
         self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self,turnBarFilePath=turnBarFilePath,writeMaintFilePath=moneyFilePath)
 
         mapDataDict = json.load(open(mapDataFilePath))
@@ -71,7 +72,6 @@ class MainGameScene:
 
 
 
-        self.loadFonts()
 
         self.timeDelta = self.clock.tick(60)/1000.0
         self.groundCenterOffset = self.centerOffset
@@ -98,9 +98,38 @@ Are you sure you want to quit the game?</font>"""
                                     "./res/fonts/Montserrat-Italic.ttf",
                                     "./res/fonts/Montserrat-BoldItalic.ttf")
         self.manager.preload_fonts([
-            {'name':'Montserrat','html_size':'6','style':'bold'},
-            {'name':'Montserrat','html_size':'4','style':'regular'}
-        ])
+                          {'name': 'Montserrat', 'point_size': 24, 'style': 'italic'},
+
+                          {'name': 'Montserrat', 'html_size': 2, 'style': 'regular'},
+                          {'name': 'Montserrat', 'html_size': 2, 'style': 'bold'},
+                          {'name': 'Montserrat', 'html_size': 2, 'style': 'bold_italic'},
+                          {'name': 'Montserrat', 'html_size': 2, 'style': 'italic'},
+
+                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'bold'},
+                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'italic'},
+                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'bold_italic'},
+                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'regular'},
+                        
+
+                          {'name': 'Montserrat', 'html_size': 3, 'style': 'regular'},
+                          {'name': 'Montserrat', 'html_size': 3, 'style': 'bold_italic'},
+                          {'name': 'Montserrat', 'html_size': 3, 'style': 'italic'},
+
+                          {'name': 'Montserrat', 'html_size': 6, 'style': 'bold'},
+                          {'name': 'Montserrat', 'html_size': 6, 'style': 'regular'},
+                          {'name': 'Montserrat', 'html_size': 6, 'style': 'bold_italic'},
+                          {'name': 'Montserrat', 'html_size': 6, 'style': 'italic'},
+                          
+                          {'name': 'Montserrat', 'html_size': 4, 'style': 'bold'},
+                          {'name': 'Montserrat', 'html_size': 4, 'style': 'regular'},
+                          {'name': 'Montserrat', 'html_size': 4, 'style': 'italic'},
+                          {'name': 'Montserrat', 'html_size': 4, 'style': 'bold_italic'},
+
+                          {'name': 'Montserrat', 'html_size': 5, 'style': 'bold'},
+                          {'name': 'Montserrat', 'html_size': 5, 'style': 'regular'},
+                          {'name': 'Montserrat', 'html_size': 5, 'style': 'italic'},
+                          {'name': 'Montserrat', 'html_size': 5, 'style': 'bold_italic'},
+                          ])
     def run(self):
         
         while self.playing:
