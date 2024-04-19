@@ -1,0 +1,35 @@
+[
+{"name": "Montserrat", "point_size": 24, "style": "italic"},
+
+{"name": "Montserrat", "html_size": 2, "style": "regular"},
+{"name": "Montserrat", "html_size": 2, "style": "bold"},
+{"name": "Montserrat", "html_size": 2, "style": "bold_italic"},
+{"name": "Montserrat", "html_size": 2, "style": "italic"},
+
+{"name": "Montserrat", "html_size": 4.5, "style": "bold"},
+{"name": "Montserrat", "html_size": 4.5, "style": "italic"},
+{"name": "Montserrat", "html_size": 4.5, "style": "bold_italic"},
+{"name": "Montserrat", "html_size": 4.5, "style": "regular"},
+
+
+{"name": "Montserrat", "html_size": 3, "style": "regular"},
+{"name": "Montserrat", "html_size": 3, "style": "bold_italic"},
+{"name": "Montserrat", "html_size": 3, "style": "italic"},
+{"name": "Montserrat", "html_size": 3, "style": "bold"},
+
+
+{"name": "Montserrat", "html_size": 6, "style": "bold"},
+{"name": "Montserrat", "html_size": 6, "style": "regular"},
+{"name": "Montserrat", "html_size": 6, "style": "bold_italic"},
+{"name": "Montserrat", "html_size": 6, "style": "italic"},
+
+{"name": "Montserrat", "html_size": 4, "style": "bold"},
+{"name": "Montserrat", "html_size": 4, "style": "regular"},
+{"name": "Montserrat", "html_size": 4, "style": "italic"},
+{"name": "Montserrat", "html_size": 4, "style": "bold_italic"},
+
+{"name": "Montserrat", "html_size": 5, "style": "bold"},
+{"name": "Montserrat", "html_size": 5, "style": "regular"},
+{"name": "Montserrat", "html_size": 5, "style": "italic"},
+{"name": "Montserrat", "html_size": 5, "style": "bold_italic"}
+]

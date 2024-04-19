@@ -36,7 +36,7 @@ class MainGameScene:
         self.clock = clock
         self.width,self.height = self.screen.get_size()
 
-       
+
         self.waterManagement = WaterManagement(self)
 
         self.audioManager = AudioManager()
@@ -86,41 +86,7 @@ Are you sure you want to quit the game?</font>"""
                                     "./res/fonts/Montserrat-Bold.ttf",
                                     "./res/fonts/Montserrat-Italic.ttf",
                                     "./res/fonts/Montserrat-BoldItalic.ttf")
-        self.manager.preload_fonts([
-                          {'name': 'Montserrat', 'point_size': 24, 'style': 'italic'},
-
-                          {'name': 'Montserrat', 'html_size': 2, 'style': 'regular'},
-                          {'name': 'Montserrat', 'html_size': 2, 'style': 'bold'},
-                          {'name': 'Montserrat', 'html_size': 2, 'style': 'bold_italic'},
-                          {'name': 'Montserrat', 'html_size': 2, 'style': 'italic'},
-
-                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'bold'},
-                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'italic'},
-                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'bold_italic'},
-                          {'name': 'Montserrat', 'html_size': 4.5, 'style': 'regular'},
-                        
-
-                          {'name': 'Montserrat', 'html_size': 3, 'style': 'regular'},
-                          {'name': 'Montserrat', 'html_size': 3, 'style': 'bold_italic'},
-                          {'name': 'Montserrat', 'html_size': 3, 'style': 'italic'},
-                          {'name': 'Montserrat', 'html_size': 3, 'style': 'bold'},
-
-
-                          {'name': 'Montserrat', 'html_size': 6, 'style': 'bold'},
-                          {'name': 'Montserrat', 'html_size': 6, 'style': 'regular'},
-                          {'name': 'Montserrat', 'html_size': 6, 'style': 'bold_italic'},
-                          {'name': 'Montserrat', 'html_size': 6, 'style': 'italic'},
-                          
-                          {'name': 'Montserrat', 'html_size': 4, 'style': 'bold'},
-                          {'name': 'Montserrat', 'html_size': 4, 'style': 'regular'},
-                          {'name': 'Montserrat', 'html_size': 4, 'style': 'italic'},
-                          {'name': 'Montserrat', 'html_size': 4, 'style': 'bold_italic'},
-
-                          {'name': 'Montserrat', 'html_size': 5, 'style': 'bold'},
-                          {'name': 'Montserrat', 'html_size': 5, 'style': 'regular'},
-                          {'name': 'Montserrat', 'html_size': 5, 'style': 'italic'},
-                          {'name': 'Montserrat', 'html_size': 5, 'style': 'bold_italic'},
-                          ])
+        self.manager.preload_fonts(json.load(open("res/json/fontsDictionary.json")))
     def run(self):
         
         while self.playing:
