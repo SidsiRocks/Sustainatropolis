@@ -9,7 +9,6 @@ import json
 import pygame_gui 
 from game.mainGameUI import MainGameUI
 from pygame import Rect
-from pygame_gui.elements.ui_button import UIButton
 from .audio import AudioManager
 from .groundRender import GroundRender
 from .renderTreeRock import RockTreeRender
@@ -17,8 +16,6 @@ from .onCloseButtonEvent import OnCloseWindowButton
 from .Project import Project
 from pygame_gui.core import ObjectID
 
-def cameraMovement(width,height):
-    return (0,0)
 def cameraMovementKeyBoard(keyPress):
     speed = 25
     if keyPress == pg.K_w:
@@ -34,14 +31,12 @@ def cameraMovementKeyBoard(keyPress):
 
 
 class MainGameScene:
-    __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","closeWindow"]
     def __init__(self,screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath):
         self.screen = screen 
         self.clock = clock
         self.width,self.height = self.screen.get_size()
-        # self.allProjectsList = []
 
-        # self.powerManagement = PowerManagement(self)        
+       
         self.waterManagement = WaterManagement(self)
 
         self.audioManager = AudioManager()
@@ -56,15 +51,12 @@ class MainGameScene:
         self.playing = True
 
         self.camera = Camera()
-        #
         self.groundBuffSize = self.calGroundSurfaceSize()
         self.centerOffset = self.calCenterOffset(self.groundBuffSize[0],self.groundBuffSize[1])
 
         imgOffsetX = (self.width - self.groundBuffSize[0])/2
         imgOffsetY = (self.height - self.groundBuffSize[1])/2
         self.imgCenterOffset =(imgOffsetX,imgOffsetY)
-        #self.groundSurface = pg.Surface(self.groundBuffSize).convert_alpha()
-        #self.firstRender = True
         self.groundRender = GroundRender(self.camera,self.groundBuffSize,self.centerOffset,self.imgCenterOffset,self.world)
 
 
@@ -208,14 +200,9 @@ Are you sure you want to quit the game?</font>"""
                 if not(mouseX < coordinates[0] or mouseX > coordinates[0]+coordinates[2] or mouseY < coordinates[1] or mouseY > coordinates[1]+coordinates[3]):
                     pass
                 else : 
-                # self.world.rockTreeData[posX][posY] = {"tile":self.world.imgIndxMap["building01"]} 
                     projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
-                    #add set stats function to powerManagement
-                    # if projName != None:
-                    #     self.powerManagement.handleProj(projName)
                     if projName != None:
                         self.audioManager.playSound("construction")
-                        # self.game.allProjectsList.append()
                         self.waterManagement.handleProj(projName)   
                     
                     curDrawReq = self.mainGameUI.projectUIWrapper.curTileDrawReq
@@ -223,11 +210,8 @@ Are you sure you want to quit the game?</font>"""
                         self.mainGameUI.maintManager.handleClick(posX,posY)
             self.manager.process_events(event)
             
-        #perhaps next statement outside loop recheck later
         self.manager.update(self.timeDelta)
     def update(self):
-        (dx,dy) = cameraMovement(self.width,self.height)
-        self.camera.moveCamera(dx,dy)
         self.mainGameUI.update()
         totalOffset = self.renderTreeRock.calTotalOffset()
         self.world.updateProjMaintBar(totalOffset)
@@ -251,9 +235,7 @@ Are you sure you want to quit the game?</font>"""
         groundImgArr = self.world.imgArr
         offsetArr = self.world.offsetArr
         for x in range(self.world.noBlockX):
-        # for x in range(self.world.noBlockX-1,-1,-1):
             for y in range(self.world.noBlockY-1,-1,-1):
-            # for y in range(self.world.noBlockY):    
                 curDict =  rockTreeData[x][y]
                 if type(curDict) == dict:
                     renderPos = isoCoordToRenderPos((x,y),totalCenterOffset)
