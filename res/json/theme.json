@@ -288,6 +288,44 @@
         },
         "prototype":"#hoverButtonPrototype"
     }
+    ,"@explainBtn":{
+        "colours":{
+            "normal_bg":"#ffffff00",
+            "hovered_bg":"#ffffff00",
+            "disabled_bg":"#ffffff00",
+            "selected_bg":"#ffffff00",
+            "active_bg":"#ffffff00",
+            "normal_border":"#ffffff00",
+            "hovered_border":"#ffffff00",
+            "disabled_border":"#ffffff00",
+            "selected_border":"#ffffff00",
+            "active_border":"#ffffff00"
+        },
+        "images":{
+            "normal_image":{
+                "path":"res/graphics/imgForProjectUI/helpButton80by80.png"
+            }
+        }
+    }
+    ,"@settingsButton":{
+        "colours":{
+            "normal_bg":"#ffffff00",
+            "hovered_bg":"#ffffff00",
+            "disabled_bg":"#ffffff00",
+            "selected_bg":"#ffffff00",
+            "active_bg":"#ffffff00",
+            "normal_border":"#ffffff00",
+            "hovered_border":"#ffffff00",
+            "disabled_border":"#ffffff00",
+            "selected_border":"#ffffff00",
+            "active_border":"#ffffff00"
+        },
+        "images":{
+            "normal_image":{
+                "path":"res/graphics/imgForProjectUI/setting.png"
+            }
+        }
+    }
     ,"@messageTextBox":
     {
         "prototype":"#windowPrototype"

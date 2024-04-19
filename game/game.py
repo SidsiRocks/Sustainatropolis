@@ -83,7 +83,7 @@ class MainGameScene:
         closeWinWidth,closeWinHeight = 400,300
         closeWindowRect = Rect((self.width - closeWinWidth)/2,(self.height -closeWinHeight)/2,
                             closeWinWidth,closeWinHeight)
-        closeWinMsg = f"""<font face='Montseraat' color="#ffffff">
+        closeWinMsg = f"""<font face='Montserrat' color="#ffffff" size=4.5>
 Are you sure you want to quit the game?</font>"""
         self.closeWindow = OnCloseWindowButton(closeWindowRect,
                         closeWinMsg,80,120,10,10,self.manager,

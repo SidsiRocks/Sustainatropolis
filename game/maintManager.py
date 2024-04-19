@@ -43,7 +43,7 @@ class MaintManager:
             if maint != 100:
                 self.createMaintenanceWindow(proj,projName,maint,projMaintCost)
     def createMaintenanceWindow(self,proj,projName,maint,projMaintCost):
-        text = f"""<font face='Montseraat' color="#ffffff">{projName} has current maintenance {maint} it would cost
+        text = f"""<font face='Montserrat' color="#ffffff" size=4.5>{projName} has current maintenance {maint} it would cost
 {projMaintCost} to fix it</font>"""
         
         projUIWrapper = self.game.mainGameUI.projectUIWrapper

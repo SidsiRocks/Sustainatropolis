@@ -22,7 +22,7 @@ class SettingsUI:
         settButtonHeight = 80
         settingsRect = Rect(windowWidth-settButtonWidth,0,settButtonWidth,settButtonHeight)
         settingsButton = UIButton(relative_rect=settingsRect,
-                                  text="Settings",manager=manager,
+                                  text="",manager=manager,
                                   object_id=ObjectID("#settingsButton","@settingsButton"),starting_height=2)
 
         settingsWinRect = Rect((windowWidth-settingsWinWidth)//2,(windowHeight-settingsWinHeight)//2,

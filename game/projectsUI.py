@@ -205,7 +205,7 @@ class ProjectsUI:
         typeOfError = waterError[0]
         waterVal1 = waterError[1][0]
         waterVal2 = waterError[1][1]
-        txt = f"""<font face='Montseraat' color="#ffffff" size=3>
+        txt = f"""<font face='Montserrat' color="#ffffff" size=3>
 Require {typeOfError} of quantity:{waterVal2} to build
 {projName} but currently only have {waterVal1}</font>
 """
@@ -215,14 +215,14 @@ Require {typeOfError} of quantity:{waterVal2} to build
         totalPower = powerManag.getPowerCons() + projPower
         curPower = powerManag.getPowerProd()
 
-        txt = f"""<font face='Montseraat' color="#ffffff" size=4.5>
+        txt = f"""<font face='Montserrat' color="#ffffff" size=4.5>
 Require power production {totalPower} to build
 {projName} but currently only have {curPower}</font>
 """
         return txt
     def generateNotEnoughMoneyMsg(self,projName,curMoney):
         projCost = self.projectToCostMap[projName]
-        txt = f"""<font face='Montseraat' color="#ffffff" size=4.5>
+        txt = f"""<font face='Montserrat' color="#ffffff" size=4.5>
 Require {projCost} to build
 {projName} but currently only have {curMoney}</font>
         """
