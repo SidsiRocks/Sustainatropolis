@@ -278,7 +278,7 @@ Are you sure you want to quit the game?</font>"""
         #print("fps is:",fps)
         self.renderTreeRock.drawTreeRock(self.screen)
         self.renderTreeRock.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq,self.screen)
-        drawDebugText(self.screen,"fps={}".format(fps),(255,255,255),(550,550))
+        drawDebugText(self.screen,"FPS={}".format(fps),(255,255,255),(350,10))
 
         self.manager.draw_ui(self.screen)
 
