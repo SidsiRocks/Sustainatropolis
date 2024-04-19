@@ -13,7 +13,7 @@ class SettingsUI:
         self.audioManager = audioManager
     def createSettingsWindow(self,manager):
         settingsWinWidth = 380
-        settingsWinHeight = 500
+        settingsWinHeight = 200
 
         windowWidth = manager.window_resolution[0]
         windowHeight = manager.window_resolution[1]
