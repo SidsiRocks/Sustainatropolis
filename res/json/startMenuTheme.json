@@ -10,7 +10,8 @@
             "hovered_border":"#e68a00",
             "disabled_border":"#e68a00",
             "selected_border":"#e68a00",
-            "active_border":"#e68a00"
+            "active_border":"#e68a00",
+            "normal_text" : "#ffffff"
         },
         "misc":{
             "shape":"rounded_rectangle",

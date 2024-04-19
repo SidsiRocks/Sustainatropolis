@@ -32,7 +32,7 @@ class TurnBarUI:
         self.moneyPerYear = 20
         self.readTurnBarUI(filePath=turnBarFilePath)
         self.waterManagementManager = self.game.waterManagement
-        (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton,self.scoreLbl) = self.createTurnBar(manager)
+        (self.crntYrLbl,self.turnBar,self.nextTurnButton,self.scoreLbl) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
 
         
@@ -52,7 +52,7 @@ class TurnBarUI:
 
         strtLblTxt  = str(self.strtYr)
         endLblTxt = str(self.endYr)
-        crntLblTxt = str(self.crntYr)
+        crntLblTxt = str(2020 + (self.crntYr-2017)//4)
 
         prgrsBarRect = Rect((width-turnBarWidth)//2,0,turnBarWidth,turnBarHeight)
         prgrsBarLeft = prgrsBarRect.left
@@ -61,7 +61,7 @@ class TurnBarUI:
 
         startYearLblRect = Rect(prgrsBarLeft-txtLblWidth,0,txtLblWidth,txtLblHeight)
         endYearLblRect = Rect(prgrsBarRight,0,txtLblWidth,txtLblHeight)
-        crntYearLblRect = Rect((width-txtLblWidth)/2,prgrsBarBottom,txtLblWidth,txtLblHeight,text=strtLblTxt)
+        crntYearLblRect = Rect((width-txtLblWidth)/2,prgrsBarBottom,txtLblWidth,txtLblHeight)
 
         nextTurnButtonRects = Rect((width-nextTurnButtonWidth)/2,
                                    crntYearLblRect.top + crntYearLblRect.height,
@@ -75,8 +75,8 @@ class TurnBarUI:
         )
         turnBar.set_current_progress(self.crntYr-self.strtYr)
 
-        strtYrLbl = UILabel(relative_rect=startYearLblRect,manager=manager,text=strtLblTxt,object_id=createStartEndLabelId("startYrLbl"))
-        endYrLbl = UILabel(relative_rect=endYearLblRect,manager=manager,text=endLblTxt,object_id=createStartEndLabelId("endYrLbl"))
+        # strtYrLbl = UILabel(relative_rect=startYearLblRect,manager=manager,text=strtLblTxt,object_id=createStartEndLabelId("startYrLbl"))
+        # endYrLbl = UILabel(relative_rect=endYearLblRect,manager=manager,text=endLblTxt,object_id=createStartEndLabelId("endYrLbl"))
         crntYrLbl = UILabel(relative_rect=crntYearLblRect,manager=manager,text=crntLblTxt,object_id=createStartEndLabelId("curYrLbl"))
 
         nextTurnButton = UIButton(relative_rect=nextTurnButtonRects,manager=manager,
@@ -91,7 +91,7 @@ class TurnBarUI:
         scoreLblRect = Rect(nextTurnXmid - scoreLblWidth/2,nextTurnXbottom,scoreLblWidth,scoreLblHeight)
         scoreLbl = UILabel(relative_rect=scoreLblRect,text="0",object_id=ObjectID("@scoreLbl","#scoreLbl"),manager=self.game.manager)
 
-        return (strtYrLbl,endYrLbl,crntYrLbl,turnBar,nextTurnButton,scoreLbl)
+        return (crntYrLbl,turnBar,nextTurnButton,scoreLbl)
 
     def setScore(self,scoreNum):
         self.scoreLbl.set_text(str(scoreNum))
@@ -111,7 +111,7 @@ class TurnBarUI:
     def setCrntYear(self,crntYr):
         if crntYr <= self.endYr:
             self.crntYr = crntYr
-            self.crntYrLbl.set_text(str(crntYr))
+            self.crntYrLbl.set_text(str(2020 + (crntYr-2017)//4))
             self.updatePrgrsBar()
         else:
             self.generateGameOverWindow()
