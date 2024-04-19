@@ -28,5 +28,5 @@ class Project:
             self.maintenance = self.maintenance - dec 
         self.maintBar.set_current_progress(self.maintenance)
     def setMaintenacne(self,maint):
-        self.maintenance - maint 
+        self.maintenance = maint 
         self.maintBar.set_current_progress(self.maintenance)
