@@ -309,6 +309,12 @@
             }
         }
     }
+    ,"@scoreLbl":{
+        "prototype":"#fontPrototype",
+        "colours":{
+            "normal_text":"#ffffff"
+        }
+    }
     ,"@settingsButton":{
         "colours":{
             "normal_bg":"#ffffff00",

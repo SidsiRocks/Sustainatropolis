@@ -32,7 +32,7 @@ class TurnBarUI:
         self.moneyPerYear = 20
         self.readTurnBarUI(filePath=turnBarFilePath)
         self.waterManagementManager = self.game.waterManagement
-        (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton) = self.createTurnBar(manager)
+        (self.strtYrLbl,self.endYrLbl,self.crntYrLbl,self.turnBar,self.nextTurnButton,self.scoreLbl) = self.createTurnBar(manager)
         self.notifMessages = json.load(open("res/json/notifMessages.json"))
 
         
@@ -83,7 +83,18 @@ class TurnBarUI:
                                   text="Next Turn",
                                   object_id=ObjectID(object_id="#nextTurnButton",class_id="@nextTurnButton"),starting_height= 2)
 
-        return (strtYrLbl,endYrLbl,crntYrLbl,turnBar,nextTurnButton)
+        nextTurnXmid = nextTurnButtonRects.left + nextTurnButtonRects.width/2
+        nextTurnXbottom = nextTurnButtonRects.top + nextTurnButtonRects.height
+
+        scoreLblWidth = 180
+        scoreLblHeight = 40
+        scoreLblRect = Rect(nextTurnXmid - scoreLblWidth/2,nextTurnXbottom,scoreLblWidth,scoreLblHeight)
+        scoreLbl = UILabel(relative_rect=scoreLblRect,text="0",object_id=ObjectID("@scoreLbl","#scoreLbl"),manager=self.game.manager)
+
+        return (strtYrLbl,endYrLbl,crntYrLbl,turnBar,nextTurnButton,scoreLbl)
+
+    def setScore(self,scoreNum):
+        self.scoreLbl.set_text(str(scoreNum))
 
     def updatePrgrsBar(self):
         self.turnBar.set_current_progress(self.crntYr-self.strtYr)
@@ -120,7 +131,8 @@ class TurnBarUI:
                             (self.game.height - closeWindowHeight)/2,
                             closeWindowWidth,closeWindowHeight)
         
-        gameOverTxt=f"""<font face='Montserrat' color="#ffffff" size=4.5>Game Over You had a final score of 'insert score here' </font>"""
+        score = self.game.waterManagement.score
+        gameOverTxt=f"""<font face='Montserrat' color="#ffffff" size=4.5>Game Over You had a final score of {score} </font>"""
         gameOverWindow = OnCloseWindowButton(rect=gameOverRect,
                             html_message=gameOverTxt,buttonHt=100,
                             buttonWidth=80,paddingY=10,paddingX=10,
