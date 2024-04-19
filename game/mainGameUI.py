@@ -9,6 +9,7 @@ from .notificationsBoxUI import NotificationsBoxUI
 from .turnBarUI import TurnBarUI
 from .settingsUI import SettingsUI
 from .explanationUI import ExplanationUI
+from .maintManager import MaintManager
 
 def createId(txt):
     return ObjectID(class_id="@"+txt,object_id="#"+txt)
@@ -26,6 +27,7 @@ class MainGameUI:
         self.settingsUI = SettingsUI(manager,game.audioManager)
         self.waterManager = game.waterManagement
         self.explainUI = ExplanationUI(manager)
+        self.maintManager = MaintManager(game,self.manager)
     def loadTheme(self,themePath):
         self.manager.get_theme().load_theme(themePath)
     
