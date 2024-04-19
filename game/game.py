@@ -16,6 +16,8 @@ from .audio import AudioManager
 from .groundRender import GroundRender
 from .renderTreeRock import RockTreeRender
 from .onCloseButtonEvent import OnCloseWindowButton
+from .maintManager import MaintManager
+from .Project import Project
 from pygame_gui.core import ObjectID
 
 def cameraMovement(width,height):
@@ -49,6 +51,8 @@ class MainGameScene:
         self.audioManager.playMusic()
         self.manager = pygame_gui.UIManager((self.width,self.height))
         self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self,turnBarFilePath=turnBarFilePath,writeMaintFilePath=moneyFilePath)
+
+        self.maintManager = MaintManager(self,self.manager)
 
         mapDataDict = json.load(open(mapDataFilePath))
 
@@ -195,7 +199,10 @@ Are you sure you want to quit the game?</font>"""
                         self.audioManager.playSound("construction")
                         # self.game.allProjectsList.append()
                         self.waterManagement.handleProj(projName)   
-                      
+                    
+                    curDrawReq = self.mainGameUI.projectUIWrapper.curTileDrawReq
+                    if type(curDrawReq) != Project:
+                        self.maintManager.handleClick(posX,posY)
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later
