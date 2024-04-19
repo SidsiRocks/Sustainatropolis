@@ -44,7 +44,7 @@ class IntroStoryStoryScene:
                                    object_id=
                                    ObjectID("@startMenuButtons","#nextStoryButton"))
 
-        self.storyImagePaths = ["res/graphics/Page1.png","res/graphics/Page2.png"]
+        self.storyImagePaths = ["res/graphics/Page1.png","res/graphics/Page2.png","res/graphics/Page3.png"]
         self.storyImages =  self.loadStoryImages()
         self.curStoryIndx = 0
     def loadFonts(self):
