@@ -20,7 +20,7 @@ def createProgessLabelId(txt):
     return ObjectID(class_id="@"+"statisticalProgress",object_id="#Progress_"+txt)
 class StatisticsWindow:
     def __init__(self,manager):
-        self.statNames = ["Unclean Water","Clean Water","Store Water","Power Usage"]
+        self.statNames = ["Unclean Water","Clean Water","Store Water","Power Usage","Population"]
         self.statProgressBarDict = {}
         self.statsWindow = self.createStatsWindow(manager)
         self.populateStatsWindow(manager)
@@ -69,7 +69,7 @@ class StatisticsWindow:
             self.statProgressBarDict[stName] = curDict
         
     def createStatsWindow(self,manager):
-        statsWindowRect = Rect(0,0,400,420)
+        statsWindowRect = Rect(0,0,400,520)
         statsWindowRect.bottomright = (manager.window_resolution[0] -10,manager.window_resolution[1] -10)
         #have to ensure this window cannot be closed 
         statsWindow = UIWindow(rect=statsWindowRect,manager=manager,

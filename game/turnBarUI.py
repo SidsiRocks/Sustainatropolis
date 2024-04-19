@@ -223,6 +223,7 @@ class TurnBarUI:
                     # self.highscore_db.saveScores()
                     # self.game.gameOver = True
                     # self.game.mainGameUI.explainUI.showGameOver()
+                self.game.mainGameUI.notificationBox.money += self.game.waterManagement.population * 50
                 self.waterManagementManager.updateScore()
                 self.waterManagementManager.updateVals()
                 self.waterManagementManager.setStats(self.game.mainGameUI.statsWindowWrapper)

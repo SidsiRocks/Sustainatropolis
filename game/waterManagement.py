@@ -50,7 +50,7 @@ class WaterManagement:
 
     def decreaseMaintenance(self) :
         for proj in self.game.world.allProjectsList : 
-            if proj.maintenance != 0 :
+            if proj.maintenance != 0 and self.game.world.indxImgMap[proj.tile] != "CityBuilding":
                 proj.decMaintenance(self.maintenanceRates[self.game.world.indxImgMap[proj.tile]])
                 if proj.maintenance == 0 :
                     proj.maintenance = 0
@@ -90,17 +90,31 @@ class WaterManagement:
     def validProjPlace(self,manager,projName):
         if projName == "Purification Plant" : 
             if self.unCleanWater < self.consUnCleanWater + self.regular[projName] + self.offSets[projName] : 
-                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You do not have enough unclean water supply that you case use to purify."))
+            # render warning
+                # print("Came here")
+                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify completely."))
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "WaterTank" :
-            self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You do not have enough clean water supply that you can store in the water tank."))
+            if self.cleanWater < self.consCleanWater + self.regular[projName] + self.offSets[projName] :
+                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText( "Warning! \n Right Now, You're not having enough clean water supply that you case use to store."))
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
+            # self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "CityBuilding" : 
-            self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You do not have enough stored water to support the full population of the city"))
+            if self.storeWater < self.consStoreWater + self.regular[projName] + self.offSets[projName] or self.produceElectricity < self.consElectricity + self.regular[projName] + self.offSets[projName]:
+                self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population."))
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
+            # self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
+        # if projName == "CityBuilding1" : 
+        #     if self.storeWater < self.consStoreWater + self.regular[projName] :
+        #         self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
+                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
     def setStats(self,statWin:StatisticsWindow):
         statWin.setStats("Unclean Water",self.consUnCleanWater,self.unCleanWater)
         statWin.setStats("Clean Water",self.consCleanWater,self.cleanWater)
         statWin.setStats("Store Water",self.consStoreWater,self.storeWater)
         statWin.setStats("Power Usage",self.consElectricity,self.produceElectricity)
-        
+        statWin.setStats("Population",self.population, self.countProjects["CityBuilding"]*100)
 
 
     def handleProj(self,project) :
@@ -139,7 +153,7 @@ class WaterManagement:
             
             if proj in self.JSONdict["consumeStoreWater"] :
                 self.consStoreWater += (self.JSONdict["consumeStoreWater"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
-                self.population += 100*self.countProjects[proj]
+                
 
             if proj in self.JSONdict["produceElectricity"] :
                 self.produceElectricity += (self.JSONdict["produceElectricity"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
@@ -147,15 +161,20 @@ class WaterManagement:
             if proj in self.JSONdict["consumeElectricity"] :
                 self.consElectricity += (self.JSONdict["consumeElectricity"][proj] + self.offSets[proj] ) * (self.countProjects[proj] - self.currentlyDown[proj])
 
+        self.population = 100 * self.countProjects["CityBuilding"]
         self.consUnCleanWater = min(self.consUnCleanWater,self.unCleanWater)
         self.cleanWater = min(self.cleanWater,self.consUnCleanWater)
         self.consCleanWater = min(self.consCleanWater,self.cleanWater)
         self.storeWater = min(self.storeWater,self.consCleanWater)
         self.consStoreWater = min(self.consStoreWater,self.storeWater)
-        self.population = min(self.population,self.consStoreWater/100)
         self.consElectricity = min(self.consElectricity,self.produceElectricity)
+        self.population = min(self.population,self.consStoreWater//100)
+        # self.population = min(self.population , self.countProjects["CityBuilding"]*100)
+        self.population = min(self.population,self.consElectricity//100)
+        print("debug" , self.countProjects["CityBuilding"] , self.population , self.consStoreWater , self.consElectricity)
+        self.consElectricity = self.population * 100 
+        self.consStoreWater = self.population * 100
         self.setStats(self.game.mainGameUI.statsWindowWrapper)
-
     def processNotifs(self,notif) :
         if notif == "Reset" :
             for proj,changes in self.offSets.items() : 
