@@ -46,6 +46,10 @@ def cameraMovementKeyBoard(keyPress):
         return (speed,0)
     elif keyPress == pg.K_a:
         return (-speed,0)
+
+
+
+
 class MainGameScene:
     __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","uiEnable"]
     def __init__(self,screen,clock):
@@ -105,6 +109,7 @@ class MainGameScene:
             {'name':'Montserrat','html_size':'4','style':'regular'}
         ])
     def run(self):
+        
         while self.playing:
             self.clock.tick(60)
             self.events()

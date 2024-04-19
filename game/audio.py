@@ -15,6 +15,7 @@ class AudioManager :
         self.loadSound("construction","res/audios/construction.wav")
         self.loadSound("click","res/audios/audio.mp3")
         self.loadSound("celebration","res/audios/celebration.wav")
+        self.loadSound("maintenance","res/audios/maintenance.mp3")
     def loadSound(self,soundName,soundPath):
         self.sounds[soundName] = mixer.Sound(soundPath)
     def playSound(self,soundName):

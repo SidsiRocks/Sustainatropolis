@@ -96,7 +96,7 @@ class TurnBarUI:
         self.crntYrLbl.set_text(str(crntYr))
         self.updatePrgrsBar()
 
-    def createNotifMessage(self,year,message):
+    def createNotifMessage(self,year,message , title):
         season = ""
         if year%4==1 : 
             season = "Summer"
@@ -106,17 +106,26 @@ class TurnBarUI:
             season = "Autumn"
         else:
             season = "Winter"
+        # ans = ""
+        # ans += "<font face='Montserrat' color='#ffffff' size=6><b>" + title +"</b></font><br>" 
+        # ans += "<font face='Montserrat' color='#ffffff' size=4 align='right'>"+season+", " + str(2020 + (year+1-2020)//5) +   "</font><br>"
+        # ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
+        # ans += "<font face='Montserrat' color='#f0f0f0' size=4>"+message+"</font>"
+        # ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
         ans = ""
-        ans += "<font face='Montserrat' color='#ffffff' size=6><b>"+season+", " + str(2020 + (year+1-2020)//5) +   "</b></font>"
+        ans += "<font face='Montserrat' color='#ffffff' size=6><b>" + title +"</b></font><br>" 
+        ans += "<div style='text-align: right; font-size: 4; color: #ffffff;'>"+season+", " + str(2020 + (year+1-2020)//5) +   "</div>"
         ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
         ans += "<font face='Montserrat' color='#f0f0f0' size=4>"+message+"</font>"
         ans += "<font face='Montserrat' color='#ffffff' size=6><b>---------------------------</b></font>"
+
+
 
         return ans 
 
     def proceedEvent(self,event_name,maingameui) : 
         self.waterManagementManager.processNotifs(event_name)
-        maingameui.notificationBox.appendHtmlText(self.createNotifMessage(self.crntYr,self.notifMessages[event_name]))
+        maingameui.notificationBox.appendHtmlText(self.createNotifMessage(self.crntYr,self.notifMessages[event_name],self.notifMessages["Titles"][event_name]))
 
 
     def processEvents(self,event,maingameui,audioManager):
@@ -141,7 +150,7 @@ class TurnBarUI:
                     self.proceedEvent("Drought",maingameui)                                   
                     self.proceedEvent("Holi",maingameui)                                   
                 elif self.crntYr == 2026 : #Rainy
-                    self.proceedEvent("Rain",maingameui)
+                    self.proceedEvent("Rainy",maingameui)
                 elif self.crntYr == 2027 : #Autumn
                     self.proceedEvent("Tourists",maingameui)
                 elif self.crntYr == 2028 : #Winter
@@ -149,7 +158,7 @@ class TurnBarUI:
                 elif self.crntYr == 2029 : #Summer
                     self.proceedEvent("Summer",maingameui)
                 elif self.crntYr == 2030 : #Rainy
-                    self.proceedEvent("Rain",maingameui)
+                    self.proceedEvent("LessRain",maingameui)
                 elif self.crntYr == 2031 :  #Autumn
                     self.proceedEvent("InfraExp",maingameui)
                 elif self.crntYr == 2032 :  #Winter
@@ -161,11 +170,11 @@ class TurnBarUI:
                 elif self.crntYr == 2035 :  #Autumn
                     self.proceedEvent("Tourists",maingameui)
                 elif self.crntYr == 2036 :  #Winter
-                    self.proceedEvent("Rain",maingameui)
+                    self.proceedEvent("LessRain",maingameui)
                 elif self.crntYr == 2037 :  #Summer
                     self.proceedEvent("Summer",maingameui)
                 elif self.crntYr == 2038 :  #Rainy
-                    self.proceedEvent("Rain",maingameui)
+                    self.proceedEvent("Rainy",maingameui)
                 elif self.crntYr == 2039 : #Autumn
                     self.proceedEvent("Tourists",maingameui)
                 elif self.crntYr == 2040 : #Winter 

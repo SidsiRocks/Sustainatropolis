@@ -2,6 +2,8 @@ import pygame as pg
 from game.game import MainGameScene
 from pygame.locals import *
 import pygame_gui
+
+
 def main():
     flag = FULLSCREEN | DOUBLEBUF 
     #flag = DOUBLEBUF
@@ -42,9 +44,9 @@ def main():
                         # manager.clear_and_reset()
                         #game.run()
         screen.blit(bg_image,(0,0))
-
+        
         if playing:
-            game.run()
+                game.run()
         else:
             manager.update(time_delta=clock.tick(60)/1000.0)
             manager.draw_ui(screen)
@@ -53,15 +55,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-# {
-#     "Summer": "It's Summer, People will need more water. You should start finding ways to increase clean water storage",
-#     "Drought": "It's Drought, GroundWater Level will drastically go down, Be aware!",
-#     "Rainy": "It's Rainy, People will need less water. You should start finding ways to decrease clean water storage",
-#     "Winter": "It's Winter, People will need less water. You should start finding ways to decrease clean water storage",
-#     "Flood": "It's Flood, Try gathering this water, purify it and store for future use",
-#     "Tourists": "It's a very important event in your city, lots of tourists will be visiting, Make sure no faces water supply Issue.",
-#     "Rain": "It's predicted that It will rain heavily this year, Be prepared to collect lots of water",
-#     "Holi": "Festival of colors, People will need more water, You should start finding ways to increase water storage",
-#     "Diwali": "People from all different cities will come to your city to celebrate Diwali, Make sure you have enough water for everyone"
-# }

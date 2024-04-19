@@ -51,8 +51,9 @@ class WaterManagement:
                 proj.decMaintenance(10)
                 if proj.maintenance == 0 :
                     proj.maintenance = 0
-                    self.game.mainGameUI.notificationBox.appendHtmlText(self.game.mainGameUI.turnBar.createNotifMessage(self.game.mainGameUI.turnBar.crntYr,self.game.world.indxImgMap[proj.tile] + " is now down due to maintenance issues."))
+                    self.game.mainGameUI.notificationBox.appendHtmlText(self.game.mainGameUI.turnBar.createNotifMessage(self.game.mainGameUI.turnBar.crntYr,self.game.world.indxImgMap[proj.tile] + " is now down due to maintenance issues." , "Maintenance Needed!"))
                     self.currentlyDown[self.game.world.indxImgMap[proj.tile]] += 1
+                    self.game.audioManager.playSound("maintenance")
                     proj.maintBar.set_current_progress(0)
         self.updateVals()
             
