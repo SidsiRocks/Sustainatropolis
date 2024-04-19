@@ -95,6 +95,9 @@ class StartMenuScene:
                     print("Start a new game")
                     self.option = "New game"
                     self.playing = False
+                elif event.ui_element == self.HighScoreButton:
+                    # Add Code here to display data stored in highscore.db
+                    pass
                 elif event.ui_element == self.quitButton:
                     self.quitScene()
             self.manager.process_events(event)
