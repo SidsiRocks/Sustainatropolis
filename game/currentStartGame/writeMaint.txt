@@ -26,3 +26,7 @@ WindMill::(9, 28)::100
 WindMill::(22, 41)::100
 CityBuilding::(21, 46)::100
 CityBuilding::(10, 36)::100
+WaterTank::(32, 27)::100
+WaterTank::(33, 24)::100
+CityBuilding::(36, 26)::100
+Solar PowerPlant::(34, 8)::100
