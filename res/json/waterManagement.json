@@ -19,8 +19,9 @@
         "CityBuilding": 10000
     },
     "produceElectricity": {
-        "Solar PowerPlant": 2000,
-        "WindMill": 1000
+        "Solar PowerPlant": 8000,
+        "WindMill": 4000,
+        "Dam" : 10000
     },
     "consumeElectricity": {
         "CityBuilding": 10000
@@ -40,8 +41,8 @@
         "Purification Plant" : 7000,
         "WaterTank" : 12000,
         "CityBuilding" : 10000,
-        "WindMill" : 1000,
-        "Solar PowerPlant" : 2000
+        "WindMill" : 4000,
+        "Solar PowerPlant" : 8000
     },
 
     "offsets" : {
@@ -56,47 +57,46 @@
     "offsetsFromRegular": {
         "Drought": {
             
-                "Dam": -3000,
-                "Water Pump": -1000
-            
+                "Dam": -1000,
+                "Water Pump": -400
         },
         "Summer": {
             
-                "Dam" : -2000 ,
+                "Dam" : -800 ,
                 "Water Pump" : -500,
-            
-            
-                "CityBuilding": 1000            
+                "Solar PowerPlant" : 1000
         },
         "Flood":{
             
-                "Dam" : 5000 ,
-                "Water Pump" : 2000
-           
+                "Dam" : 2000 ,
+                "Water Pump" : 1000
+            
         },
         "Tourists" :{
-                "CityBuilding" : 3000  
+                  
         },
         "Rainy" :{
                 "Dam" : 2000,
                 "Water Pump" : 1000
         },
         "Holi":{
-            "CityBuilding" : 2000
+            
         },
         "Diwali":{
-         
+            
         },
         "DamRelease":{
             "Dam":4000
         },
         "InfraExp":{
-        },
-        "Winter":{
 
         },
+        "Winter":{
+            "Solar PowerPlant" : -1000
+        },
         "LessRain" :{
-            
+            "Dam" : -2000,
+            "Water Pump" : -1000
         }
     },
     "comments": [

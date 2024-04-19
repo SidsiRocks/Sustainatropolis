@@ -30,7 +30,7 @@ class GameData:
         self.projCost = {}
         self.loadImages()
 
-        self.disableMaintBar = {"tree":0,"rock":0}
+        self.disableMaintBar = {"tree":0,"rock":0,"CityBuilding":0}
         self.noBlockX = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_height()
         self.noBlockY = self.imgArr[self.imgIndxMap["mapWaterGrass"]].get_width()
         self.groundData = self.createGroundData()    

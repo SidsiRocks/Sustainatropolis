@@ -11,9 +11,9 @@
     ,"projectToCostMap":{
         "Water Pump":1000,
         "Purification Plant":800,
-        "Solar PowerPlant":5000,
-        "WindMill":100,
-        "Dam":140,
+        "Solar PowerPlant":1000,
+        "WindMill":700,
+        "Dam":1400,
         "WaterTank":100,
         "CityBuilding":1000
     }
