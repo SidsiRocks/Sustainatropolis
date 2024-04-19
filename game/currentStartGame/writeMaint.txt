@@ -1,4 +1,4 @@
-CityBuilding::(25, 15)::30
-Purification Plant::(9, 32)::30
-WindMill::(5, 30)::70
-Dam::(10, 45)::70
+CityBuilding::(25, 15)::0
+Purification Plant::(9, 32)::0
+WindMill::(5, 30)::20
+Dam::(10, 45)::20

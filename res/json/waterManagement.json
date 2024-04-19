@@ -10,39 +10,31 @@
         "Purification Plant": 7000
     },
     "consumeCleanWater": {
-        "WaterTank": 50000
+        "WaterTank": 12000
     },
     "produceStoreWater": {
-        "WaterTank": 50000
+        "WaterTank": 12000
     },
     "consumeStoreWater": {
-        "CityBuilding": 5000
-    },
-    "comment": [
-        "Houses go here"
-    ],
-    "produceSewage": {
-        "CityBuilding": 2000
-            },
-    "comment2": [
-        "Houses go here"
-    ],
-    "consumeSewage": {
-        
+        "CityBuilding": 10000
     },
     "countProjects":{
         "Dam" : 0 ,
         "Purification Plant" : 0 ,
         "Water Pump" : 0 , 
         "WaterTank" : 0 ,
-        "CityBuilding" : 0 
+        "CityBuilding" : 0 ,
+        "Solar PowerPlant" : 0,
+        "WindMill" : 0
     },
     "regular" : {
         "Dam" : 10000,
         "Water Pump" : 5000,
         "Purification Plant" : 7000,
-        "WaterTank" : 50000,
-        "CityBuilding" : 5000
+        "WaterTank" : 12000,
+        "CityBuilding" : 10000,
+        "WindMill" : 1000,
+        "Solar PowerPlant" : 2000
     },
 
     "offsets" : {
@@ -106,7 +98,9 @@
         "Water Pump" : 0,
         "Purification Plant" : 0,
         "WaterTank" : 0,
-        "CityBuilding" : 0
+        "CityBuilding" : 0,
+        "WindMill": 0,
+        "Solar PowerPlant" : 0
     },
     "currentMaintenance" : {
         "Dam" : 0,
