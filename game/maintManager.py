@@ -87,3 +87,5 @@ class MaintManager:
         print(f"fix maintenance of function was called with {proj.tileName}")
         proj.setMaintenacne(100)
         self.game.mainGameUI.notificationBox.diffMoney(projMaintCost)
+        self.game.waterManagement.upagain(proj)
+        self.game.waterManagement.updateVals()

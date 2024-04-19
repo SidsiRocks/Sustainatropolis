@@ -138,7 +138,7 @@ class GameData:
                 self.blockNeighbourSlots(x,y,curSize,rockTreeData,tileName,maint=maintVal)
 
                 print(f"Adding project {tileName} in the read maint file function")
-                self.game.powerManagement.handleProj(tileName)
+                # self.game.powerManagement.handleProj(tileName)
                 self.game.waterManagement.handleProj(tileName)
         return rockTreeData
     def createGroundDataDebug(self):
