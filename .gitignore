@@ -1,1 +1,5 @@
+# Ignore Python bytecode files
 game/__pycache__/*
+
+# Ignore the currentStartGame directory and its contents
+game/currentStartGame/
