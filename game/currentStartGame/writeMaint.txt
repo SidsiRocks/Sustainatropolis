@@ -5,3 +5,6 @@ Solar PowerPlant::(29, 18)::40
 Purification Plant::(30, 15)::40
 WaterTank::(26, 17)::90
 Dam::(21, 34)::100
+Dam::(19, 38)::100
+WindMill::(27, 24)::100
+WaterTank::(24, 20)::100
