@@ -90,6 +90,7 @@ Are you sure you want to quit the game?</font>"""
                         "Exit Game?",object_id=ObjectID("#closeWindow","@closeWindow"),
                         onCloseFunc=onCloseFunc,draggable=False,
                         buttonMsg = "Exit",visible=0,onCloseButtonFunc=onCloseButtonFunc)
+        self.mainGameUI.turnBar.proceedEvent("Welcome" , self.mainGameUI)
     def loadFonts(self):
         self.manager.add_font_paths("Montserrat",
                                     "./res/fonts/Montserrat-Regular.ttf",
