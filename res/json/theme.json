@@ -97,6 +97,13 @@
     {
         "prototype":"#windowPrototype"
     },
+    "@closeWindow":
+    {
+        "prototype":"#windowPrototype",
+        "misc":{
+            "enable_title_bar":"1"
+        }
+    },
     "@projectScrollingContainer.horizontal_scroll_bar":
     {
         "colours":{

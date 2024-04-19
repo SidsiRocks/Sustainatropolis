@@ -1,10 +1,13 @@
-CityBuilding::(25, 15)::40
-Water Pump::(24, 27)::40
-Industrial Plant::(26, 22)::40
-Solar PowerPlant::(29, 18)::40
-Purification Plant::(30, 15)::40
-WaterTank::(26, 17)::90
-Dam::(21, 34)::100
-Dam::(19, 38)::100
-WindMill::(27, 24)::100
-WaterTank::(24, 20)::100
+CityBuilding::(25, 15)::30
+Water Pump::(24, 27)::30
+Industrial Plant::(26, 22)::30
+Solar PowerPlant::(29, 18)::30
+Purification Plant::(30, 15)::30
+WaterTank::(26, 17)::80
+Dam::(21, 34)::90
+Dam::(19, 38)::90
+WindMill::(27, 24)::90
+WaterTank::(24, 20)::90
+WindMill::(15, 9)::90
+WindMill::(17, 13)::90
+CityBuilding::(18, 15)::90
