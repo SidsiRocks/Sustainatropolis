@@ -118,7 +118,8 @@ Are you sure you want to quit the game?</font>"""
         x,y = pg.mouse.get_pos()
         isoX,isoY = self.findClickCoord(x,y)
         #print(f"hover on coordinates {isoX} {isoY}")
-        self.mainGameUI.projectUIWrapper.hoverOnWorld(isoX,isoY)
+        if isoX >= 0 and isoY >= 0 and isoX < self.world.noBlockX and isoY < self.world.noBlockY:
+            self.mainGameUI.projectUIWrapper.hoverOnWorld(isoX,isoY)
     def events(self):
         self.timeDelta = self.clock.tick(60)/1000.0
         keys = pg.key.get_pressed()
@@ -164,7 +165,8 @@ Are you sure you want to quit the game?</font>"""
                 if not(mouseX < coordinates[0] or mouseX > coordinates[0]+coordinates[2] or mouseY < coordinates[1] or mouseY > coordinates[1]+coordinates[3]):
                     pass
                 else : 
-                    projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
+                    if posX >= 0 and posY >= 0 and posX < self.world.noBlockX and posY < self.world.noBlockY:
+                        projName = self.mainGameUI.projectUIWrapper.clickedOnWorld(posX,posY)
                     if projName != None:
                         self.audioManager.playSound("construction")
                         self.waterManagement.handleProj(projName)   
