@@ -14,6 +14,7 @@ class AudioManager :
         self.loadSound("test","res/music/sound.mp3")
         self.loadSound("construction","res/audios/construction.wav")
         self.loadSound("click","res/audios/audio.mp3")
+        
         self.loadSound("celebration","res/audios/yearChange.mp3")
         self.loadSound("maintenance","res/audios/maintenance.mp3")
     def loadSound(self,soundName,soundPath):
