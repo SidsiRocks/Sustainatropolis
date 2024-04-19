@@ -16,4 +16,4 @@ the sustainable development of cities.
     or simply 
     > python main.py
 
-    Depending on waht your python installation is called
+    Depending on what your python installation is called
