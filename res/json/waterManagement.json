@@ -42,7 +42,9 @@
         "Purification Plant" : 0 ,
         "Water Pump" : 0 , 
         "WaterTank" : 0 ,
-        "CityBuilding" : 0  
+        "CityBuilding" : 0  ,
+        "WindMill" : 0,
+        "Solar PowerPlant" : 0
     },
     "offsetsFromRegular": {
         "Drought": {
@@ -107,6 +109,8 @@
         "Water Pump" : 0,
         "Purification Plant" : 0,
         "WaterTank" : 0,
-        "CityBuilding" : 0
+        "CityBuilding" : 0,
+        "WindMill": 0,
+        "Solar PowerPlant" : 0
     }
 }
