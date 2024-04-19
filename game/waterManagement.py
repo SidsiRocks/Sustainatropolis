@@ -43,10 +43,11 @@ class WaterManagement:
         self.game = game
         self.maintenanceRates = findDict["maintenanceRate"]
     def getScore(self) :
-        return self.population
+        return self.score
 
     def updateScore(self): 
         self.score += self.population * 100 
+        self.game.mainGameUI.turnBar.setScore(self.score)
 
     def decreaseMaintenance(self) :
         for proj in self.game.world.allProjectsList : 
