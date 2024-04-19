@@ -2,15 +2,10 @@ import pygame
 from pygame import Rect
 import json
 import shutil
-from .waterManagement import WaterManagement
 import pygame_gui
 from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
-from pygame_gui.elements.ui_window import UIWindow
-from pygame_gui.elements.ui_progress_bar import UIProgressBar
 from pygame_gui.elements.ui_label import UILabel
-from pygame_gui.elements.ui_text_box import UITextBox
-from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 from .customUIprogress import CustomUIprogressBar
 from .onCloseButtonEvent import OnCloseWindowButton
 
@@ -226,8 +221,7 @@ class TurnBarUI:
                     self.proceedEvent("Diwali",maingameui)
                 elif self.crntYr == 2041 : 
                     maingameui.notificationBox.clearHtmlText()
-                    # self.game.gameOver = True
-                    # self.game.mainGameUI.explainUI.showGameOver()
+
                 self.game.mainGameUI.notificationBox.money += self.game.waterManagement.population * 50
                 self.game.mainGameUI.notificationBox.setMoney(self.game.mainGameUI.notificationBox.money)
                 self.waterManagementManager.updateScore()

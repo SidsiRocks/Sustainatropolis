@@ -1,14 +1,9 @@
-import pygame 
 from pygame import Rect
 
-import pygame_gui
 
-from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
 from pygame_gui.elements.ui_window import UIWindow
 from pygame_gui.elements.ui_label import UILabel
-from pygame_gui.elements.ui_text_box import UITextBox
-from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 
 from .customUIprogress import CustomUIprogressBar
 

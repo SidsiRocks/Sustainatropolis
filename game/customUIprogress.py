@@ -25,11 +25,9 @@ class CustomUIprogressBar(UIStatusBar):
                          object_id=object_id,
                          anchors=anchors,
                          visible=visible)
-        #print("current and maximum progress in constructor",self.current_progress,self.maximum_progress)
         
     @property
     def progress_percentage(self):
-#        print("current progress is:",self.current_progress,"maximum is:",self.maximum_progress)
         if self.maximum_progress != 0:
             return min(self.current_progress/ self.maximum_progress,1)
         else:

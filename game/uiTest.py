@@ -21,12 +21,8 @@ uiExmplWin = pygame_gui.elements.UIWindow(
 clock = pygame.time.Clock()
 isRunning = True 
 
-#rect given by left top width height
 buttonLayoutRect = pygame.Rect(30,20,100,20)
-#helloButton = pygame_gui.elements.UIButton(relative_rect=
-#buttonLayoutRect,text="Say Hello",
-#manager=manager,anchors={'right':'right','bottom':'bottom'}) #container = specifies which container is specified
-#trying to make button fill size not working that well
+
 helloButton = pygame_gui.elements.UIButton(relative_rect=
 buttonLayoutRect,text="Say Hello",
 manager=manager,anchors=

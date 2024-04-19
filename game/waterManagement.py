@@ -91,25 +91,13 @@ class WaterManagement:
     def validProjPlace(self,manager,projName):
         if projName == "Purification Plant" : 
             if self.unCleanWater < self.consUnCleanWater + self.regular[projName] + self.offSets[projName] : 
-            # render warning
-                # print("Came here")
                 self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify completely."))
-                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "WaterTank" :
             if self.cleanWater < self.consCleanWater + self.regular[projName] + self.offSets[projName] :
                 self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText( "Warning! \n Right Now, You're not having enough clean water supply that you case use to store."))
-                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
-            # self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough unclean water supply that you case use to purify.")
         if projName == "CityBuilding" : 
             if self.storeWater < self.consStoreWater + self.regular[projName] + self.offSets[projName] or self.produceElectricity < self.consElectricity + self.regular[projName] + self.offSets[projName]:
                 self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow(self.textToHtmlText("Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population."))
-                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
-            # self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
-                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough clean water supply that you case use to store.")
-        # if projName == "CityBuilding1" : 
-        #     if self.storeWater < self.consStoreWater + self.regular[projName] :
-        #         self.game.mainGameUI.projectUIWrapper.createNotEnoughWindow("Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
-                #self.createNotEnoughWindow(manager,"Warning! \n Right Now, You're not having enough stored water supply that you can supply to increase population.")
     def setStats(self,statWin:StatisticsWindow):
         statWin.setStats("Unclean Water",self.consUnCleanWater,self.unCleanWater)
         statWin.setStats("Clean Water",self.consCleanWater,self.cleanWater)
@@ -170,7 +158,6 @@ class WaterManagement:
         self.consStoreWater = min(self.consStoreWater,self.storeWater)
         self.consElectricity = min(self.consElectricity,self.produceElectricity)
         self.population = min(self.population,self.consStoreWater//100)
-        # self.population = min(self.population , self.countProjects["CityBuilding"]*100)
         self.population = min(self.population,self.consElectricity//100)
         print("debug" , self.countProjects["CityBuilding"] , self.population , self.consStoreWater , self.consElectricity)
         self.consElectricity = self.population * 100 

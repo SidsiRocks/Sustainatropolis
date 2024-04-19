@@ -38,8 +38,7 @@ class StartMenuScene:
 
         self.backGroundImage = pg.image.load("res/graphics/backgroundImage/BG1.png").convert_alpha()
         self.backGroundImage = pg.transform.scale(self.backGroundImage,(self.width,self.height))  
-        #   bg_image = pg.transform.scale(bg_image,(screen_width,screen_height))
-    #can remove from loadFonts from other place
+
     def createStartUI(self):
         noButtons = 3
         subSectionHeight = self.buttonHeight * noButtons + self.padY * (noButtons - 1)

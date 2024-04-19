@@ -143,13 +143,9 @@ Are you sure you want to quit the game?</font>"""
             self.audioManager.setVolume(self.audioManager.getVolume()-0.1)
         if keys[pg.K_q]:
             self.audioManager.playSound("test")
-        # print("list og events" , pg.event.get())
         eventslist = pg.event.get()
-        # (pg.event.get().reverse)
         eventslist.reverse()
-        buttonClicked = False
         for event in eventslist:
-            # print(templist)
             if event.type == pg.QUIT:
                 self.quitScene()
             if event.type == pg.KEYDOWN:
@@ -219,10 +215,8 @@ Are you sure you want to quit the game?</font>"""
         return (width,height)
     def draw(self):
         self.screen.fill((0,0,0))
-        #self.drawGround()
         self.groundRender.drawGround(self.screen)
         fps = round(self.clock.get_fps())
-        #print("fps is:",fps)
         self.renderTreeRock.drawTreeRock(self.screen)
         self.renderTreeRock.drawPlacementReq(self.mainGameUI.projectUIWrapper.curTileDrawReq,self.screen)
         drawDebugText(self.screen,"FPS={}".format(fps),(255,255,255),(350,10))

@@ -25,7 +25,6 @@ class ExplanationUI:
         mainExplainWinRect = Rect((width-self.mainWindow[0])/2,
                                   (height-self.mainWindow[1])/2
                                   ,self.mainWindow[0],self.mainWindow[1])
-        #have to remove window padding in styling and add ObjectID
         self.mainExplainWin = HideUIwindow(mainExplainWinRect,manager,"",
                                        resizable=False,draggable=False,
                                        object_id=ObjectID("#explainWin","@explainWin"),

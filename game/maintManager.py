@@ -82,7 +82,6 @@ class MaintManager:
         maintWindow.set_blocking(True)
         return maintWindow
 
-    ###Arpit add code to handle maintenance increase and decrease here
     def fixMaintenaceFunc(self,proj,projMaintCost):
         print(f"fix maintenance of function was called with {proj.tileName}")
         proj.setMaintenacne(100)

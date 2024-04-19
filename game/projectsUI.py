@@ -1,8 +1,6 @@
-import pygame 
 import json
 from pygame import Rect
 
-import traceback
 
 import pygame_gui
 
@@ -10,11 +8,9 @@ from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
 
 from pygame_gui.elements.ui_window import UIWindow
-from pygame_gui.elements.ui_progress_bar import UIProgressBar
 from pygame_gui.elements.ui_label import UILabel
 from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
-from pygame_gui.windows.ui_message_window import UIMessageWindow
 
 from .MessageWindow import MessageWindow
 from .onCloseWindoEvent import OnCloseWindow
@@ -144,13 +140,10 @@ class ProjectsUI:
             x = z
             self.projectNameButtonDct[name] = curBtn
 
-        #set scrollable window size here will be different
-        #doesnt seem to be working either
         projectListScrollable.set_scrollable_area_dimensions((x,projectListScrollableRect.height))
         return projectListWindow
     def clickedOnWorld(self,x,y):
-        #may want to add something to cancel placement like left clicking
-        #print(f"self.projPlaceAllowed:{self.projPlaceAllowed}")
+
         if self.currentProject != None:
             if self.game.world.checkPlacementValid(x,y,self.currentProject) and self.projPlaceAllowed:
                 self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
@@ -169,10 +162,7 @@ class ProjectsUI:
                 self.curTileDrawReq = self.game.world.createProject(self.currentProject,(x,y),"transparent")
             else:
                 self.curTileDrawReq = self.game.world.createProject(self.currentProject,(x,y),"red")
-            # self.game.allProjectsList.append(self.curTileDrawReq)
-        # else :
-        # else : 
-                # self.curTileDrawReq = None
+
     def processEvent(self,event,waterManager:WaterManagement):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             buttonName = getTxtFromObjectId(extractMainObjectId(event.ui_object_id))
@@ -180,15 +170,11 @@ class ProjectsUI:
                 self.handleProjectButtonClick(buttonName,waterManager)
     def handleProjectButtonClick(self,buttonName,waterManager:WaterManagement):
         isEnoughMoney = self.notificationBox.money >= self.projectToCostMap[buttonName]
-        # isEnoughPower = self.game.powerManagement.validProjPlace(buttonName)
-        # waterError = self.game.waterManagement.validProjPlace(buttonName)
-        # isWaterValid = (waterError == None)
+
         if self.currentProject != None and self.currentProject == buttonName:
             self.currentProject = None
             return  
-            # self.currentProject = None 
         if isEnoughMoney: 
-            # generate warning 
             notenoughResources = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
             waterManager.validProjPlace(self.manager,buttonName)
             self.currentProject = buttonName
@@ -196,8 +182,6 @@ class ProjectsUI:
         else:
             notEnoughMoneyMsg = self.generateNotEnoughMoneyMsg(buttonName,self.notificationBox.money)
             self.createNotEnoughWindow(notEnoughMoneyMsg)
-    #should create one and reload as needed possibly
-    #also need to deactivate remaining components in the mean time
     def generateWaterErrorMsg(self,projName,waterError):
         typeOfError = waterError[0]
         waterVal1 = waterError[1][0]

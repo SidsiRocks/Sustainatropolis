@@ -6,7 +6,6 @@ from PIL import Image
 import json
 #should have two layers of images for grass and water and then separately for grass and such
 class GameData:
-    __slots__ = ["noBlockX","noBlockY","width","height","imgIndxMap","imgArr","groundData","rockTreeData","tileToColor","offsetArr","sizeArr","transpImgArr","redTintColor","transRedArr","projectNames","indxImgMap","game","disableMaintBar","maintOffsetArr","allProjectsList","mapData","projCost"]
     def __init__(self,width,height,game,mapData,projMaintPath):
         self.allProjectsList = []
         self.width = width 

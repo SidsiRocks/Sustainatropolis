@@ -12,7 +12,6 @@ def drawDebugText(screen,text,colour,pos):
 
     txtImg = font.render(text,True,colour)
     txtBoundBox = txtImg.get_rect(topleft=pos)
-    #print("drawing text here text is:",text,"colour is:",colour,"pos is:",pos)
     screen.blit(txtImg,txtBoundBox)            
 
 def isoCoordToRenderPos(posXY,centreOffset):

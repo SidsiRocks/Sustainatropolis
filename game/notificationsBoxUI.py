@@ -1,15 +1,9 @@
-import pygame 
 from pygame import Rect
 
-import pygame_gui
 
 from pygame_gui.elements import UIButton
 from pygame_gui.core import ObjectID
-from pygame_gui.elements.ui_window import UIWindow
-from pygame_gui.elements.ui_progress_bar import UIProgressBar
-from pygame_gui.elements.ui_label import UILabel
 from pygame_gui.elements.ui_text_box import UITextBox
-from pygame_gui.elements.ui_scrolling_container import UIScrollingContainer
 
 text = """"""
 
@@ -59,12 +53,7 @@ class NotificationsBoxUI:
         currentMoney = UIButton(relative_rect=currencyRect,
             text=f"Money: {self.money}",manager=manager,
             object_id=ObjectID("@currencyButton","#currencyButton"),starting_height=2)
-        #currentMoney = UITextBox(html_text="",relative_rect=currencyRect,
-        #                         manager=manager,
-        #                         object_id=
-        #                         ObjectID("@currencyButton","#currencyButton"))
-        #currentMoney.append_html_text(currencyTxt)
-        #currentMoney.scroll_bar.hide()        
+
         return txtBox,currentMoney
     
     def clearHtmlText(self):

@@ -6,8 +6,7 @@ class Project:
         self.tile = tile
         self.mode = mode 
         self.pos = pos
-        #currently offset from proj (0,0) but would come from
-        #a dictionary in general
+
         self.maintBar = None
         self.maintenance = maint
         self.tileName = tileName

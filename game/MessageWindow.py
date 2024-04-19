@@ -3,7 +3,6 @@ from pygame_gui.elements import UIButton,UITextBox,UIWindow
 from pygame_gui.core.interfaces import IUIManagerInterface
 from pygame import Rect
 import pygame
-import pygame_gui
 from pygame_gui.core import ObjectID
 from pygame_gui import UI_BUTTON_PRESSED
 
@@ -38,8 +37,7 @@ class MessageWindow(UIWindow):
                                       container=self,
                                       object_id=ObjectID("#messageDismissButton","@messageDismissButton"),
                                       )
-        #may want to add text kw args for html if want to 
-        #add more html styling perhaps have to see the purpose first
+
         self.textBox = UITextBox(html_message,txtBlockRect,manager,container=self,
                                  object_id=ObjectID("#messageTextBox","@messageTextBox"))
     def process_event(self, event: pygame.event.Event) -> bool:

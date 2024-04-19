@@ -17,12 +17,12 @@ def createId(txt):
 
 class MainGameUI:
     def __init__(self,manager,themePath,game,turnBarFilePath,writeMaintFilePath):
-        #have to create manager correctly
+
         self.manager = manager
         self.loadTheme(themePath)
         self.statsWindowWrapper = StatisticsWindow(manager)
         self.turnBar = TurnBarUI(manager,game,turnBarFilePath)
-        # self.turnBar.processEvents( None, self , game.audioManager)
+
         self.notificationBox = NotificationsBoxUI(manager,writeMaintFilePath)
         self.projectUIWrapper = ProjectsUI(manager,self.statsWindowWrapper.statsWindow,game,self.notificationBox,game.waterManagement)
         self.waterManager = game.waterManagement

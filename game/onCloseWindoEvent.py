@@ -2,7 +2,6 @@ import pygame
 
 from pygame_gui.core import ObjectID
 from typing import Union, Tuple, Optional
-from pygame_gui.elements.ui_window import UIWindow
 from pygame_gui.core.interfaces import IUIManagerInterface
 
 from .MessageWindow import MessageWindow
