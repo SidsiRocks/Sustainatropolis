@@ -52,8 +52,6 @@ class MainGameScene:
         self.manager = pygame_gui.UIManager((self.width,self.height))
         self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self,turnBarFilePath=turnBarFilePath,writeMaintFilePath=moneyFilePath)
 
-        self.maintManager = MaintManager(self,self.manager)
-
         mapDataDict = json.load(open(mapDataFilePath))
 
         self.world = GameData(self.width,self.height,self,mapDataDict,writeMaintFilePath)
@@ -75,12 +73,6 @@ class MainGameScene:
 
         self.loadFonts()
 
-        self.clearButton = UIButton(Rect(500,500,100,50),"Clear HTML",self.manager)
-        self.appendButton = UIButton(Rect(600,600,100,50),"Append HTML",self.manager)
-        self.appendingTxt = """<br>
-        <b>Simple test</b>
-        </br>
-        """
         self.timeDelta = self.clock.tick(60)/1000.0
         self.groundCenterOffset = self.centerOffset
 
@@ -174,13 +166,7 @@ Are you sure you want to quit the game?</font>"""
                     self.closeWindow.show()
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 buttonClicked = True
-                self.audioManager.playSound("click")
-                if event.ui_element == self.clearButton:
-                    self.mainGameUI.notificationBox.clearHtmlText()
-                if event.ui_element == self.appendButton:
-                    self.mainGameUI.notificationBox.appendHtmlText(self.appendingTxt)
                 self.mainGameUI.processEvents(event,self.audioManager,self.world)
-
             elif event.type == pg.MOUSEBUTTONDOWN and buttonClicked == False:
                 mouseX,mouseY = pg.mouse.get_pos()
                 coordinates = self.mainGameUI.projectUIWrapper.projectListWindow.rect
@@ -202,7 +188,7 @@ Are you sure you want to quit the game?</font>"""
                     
                     curDrawReq = self.mainGameUI.projectUIWrapper.curTileDrawReq
                     if type(curDrawReq) != Project:
-                        self.maintManager.handleClick(posX,posY)
+                        self.mainGameUI.maintManager.handleClick(posX,posY)
             self.manager.process_events(event)
             
         #perhaps next statement outside loop recheck later
