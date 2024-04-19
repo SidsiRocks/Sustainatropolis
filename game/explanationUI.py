@@ -1,14 +1,13 @@
 from pygame_gui.elements import UIButton
 from pygame import Rect
-from pygame_gui.elements.ui_text_box import UITextBox
 from pygame_gui.core import ObjectID
-from pygame_gui.elements.ui_window import UIWindow
-from pygame_gui.core.interfaces import IContainerLikeInterface, IUIManagerInterface
+from pygame_gui.core.interfaces import IUIManagerInterface
 from pygame_gui.elements.ui_image import UIImage
 
 from .util import ldImage
 
 import pygame_gui
+import json
 
 from .hideOnCloseWindow import HideUIwindow
 
@@ -36,12 +35,8 @@ class ExplanationUI:
         buttonHeight = mainExplainWinRect.height -imgPadY
         buttonWidth = mainExplainWinRect.width
 
-        #replace with an image element
-        #self.imgButton = UIButton(Rect(0,0,buttonWidth,buttonHeight),text="",
-        #                          manager=manager,container=self.mainExplainWin,
-        #                          object_id=ObjectID("#explainImg","@explainImg"))
-
-        explainImg = ldImage("res/graphics/imgForProjectUI/Explain_canva.png")
+        miscImagesDict = json.load(open("res/json/miscImages.json"))
+        explainImg = ldImage(miscImagesDict["ExplanationImg"])
 
         self.img = UIImage(Rect(0,0,buttonWidth,buttonHeight),image_surface=explainImg,
                            manager=manager,container=self.mainExplainWin,
