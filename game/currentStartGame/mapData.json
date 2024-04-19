@@ -1,13 +1,13 @@
 {
-    "mapWaterGrass": {
-        "path": {
-            "normal": "res/graphics/imgForPlacement/mapWaterGrasscopy.png"
-        },
-        "comment": "dummy size not actually used"
+    "mapWaterGrass":{
+        "path":{
+            "normal":"res/graphics/imgForPlacement/mapWaterGrasscopy.png"
+        }
+        ,"comment":"dummy size not actually used"
     },
-    "mapTreeRock": {
-        "path": {
-            "normal": "res/graphics/imgAlternateTrans/mapWaterGrasscopy2.png"
+    "mapTreeRock":{
+        "path":{
+            "normal":"res/graphics/imgAlternateTrans/mapWaterGrasscopy2.png"
         }
     }
 }
