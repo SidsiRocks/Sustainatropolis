@@ -25,13 +25,16 @@ class OnDismissCallFunc(MessageWindow):
                  resizable: bool = False,
                  visible: int = 1,
                  draggable: bool = True,
-                 onCloseFunc = emptyFunc,buttonMsg:str = "Dismiss"):
+                 onCloseFunc = emptyFunc,buttonMsg:str = "Dismiss",
+                 onCloseButtonFunc = emptyFunc):
+
         super().__init__(rect,html_message,
                         buttonHt,buttonWidth,
                         paddingY,paddingX,manager,
                         window_display_title,object_id,
                         visible,buttonMsg=buttonMsg)
         self.onCloseFunc = onCloseFunc
+        self.onCLoseButtonFunc = onCloseButtonFunc
 
     def kill(self):
         super().kill()
@@ -55,4 +58,5 @@ class OnDismissCallFunc(MessageWindow):
         return consumed_event
     
     def on_close_window_button_pressed(self):
+        self.onCLoseButtonFunc()
         self.kill()

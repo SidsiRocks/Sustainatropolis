@@ -13,3 +13,10 @@ Purification Plant::(21, 19)::40
 WaterTank::(24, 23)::100
 WaterTank::(23, 21)::100
 WaterTank::(22, 26)::100
+WindMill::(18, 33)::100
+WindMill::(18, 31)::100
+WindMill::(17, 29)::100
+WindMill::(15, 28)::100
+WindMill::(14, 26)::100
+WindMill::(33, 29)::100
+WindMill::(32, 33)::100
