@@ -17,16 +17,27 @@ def createId(txt):
     return ObjectID(class_id="@"+"NotificationsBox",object_id="#"+txt)
 
 class NotificationsBoxUI:
-    def __init__(self,manager):
+    def __init__(self,manager,writeMaintFilePath):
         self.money = 10000
+        self.readMoney(writeMaintFilePath)
         self.txtBox,self.moneyButton = self.createNotificationBox(manager)
-        
     def setMoney(self,curMoney):
         self.money = curMoney
         self.moneyButton.set_text(f"Money: {self.money}")
     def diffMoney(self,incMoney):
         self.money += incMoney
         self.moneyButton.set_text(f"Money: {self.money}")
+    def writeMoney(self,moneyFilePath):
+        with open(moneyFilePath,"w") as moneyFile:
+            print(self.money,file=moneyFile)
+            print("Writing money self.money:",self.money)
+    def readMoney(self,moneyFilePath):
+        readMoney = 0
+        with open(moneyFilePath,"r") as moneyFile:
+            line = moneyFile.readline()
+            print("money line is:",line)
+            readMoney = line[:-1]
+            self.money = int(readMoney)
     def createNotificationBox(self,manager):
         topPad = 10
         leftPad = 10

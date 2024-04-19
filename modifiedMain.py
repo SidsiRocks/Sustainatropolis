@@ -19,7 +19,23 @@ def main():
     option = startScene.run()
     print("Option is:",option)
 
-    mainScene = MainGameScene(screen,clock)
+    turnBarFilePath = None 
+    moneyFilePath = None 
+    writeMaintFilePath = None 
+    mapDataFilePath = None
+    if option == "Load game":
+        turnBarFilePath = "game/currentStartGame/turnBarYear.txt"
+        moneyFilePath = "game/currentStartGame/money.txt"
+        writeMaintFilePath = "game/currentStartGame/writeMaint.txt"
+        mapDataFilePath = "game/currentStartGame/mapData.json"
+    elif option == "New game":
+        turnBarFilePath = "game/defaultStartGameData/turnBarYear.txt"
+        moneyFilePath = "game/defaultStartGameData/money.txt"
+        writeMaintFilePath = "game/defaultStartGameData/writeMaint.txt"
+        mapDataFilePath = "game/defaultStartGameData/mapData.json"
+
+
+    mainScene = MainGameScene(screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath)
     mainScene.run()
 
 if __name__ == "__main__":

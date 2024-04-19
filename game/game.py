@@ -6,6 +6,7 @@ from .powerManagement import PowerManagement
 from .waterManagement import WaterManagement
 from .camera import Camera
 
+import json
 import sys
 import pygame_gui 
 from game.mainGameUI import MainGameUI
@@ -14,26 +15,7 @@ from pygame_gui.elements.ui_button import UIButton
 from .audio import AudioManager
 from .groundRender import GroundRender
 from .renderTreeRock import RockTreeRender
-"""
-def cameraMovement(width,height):
-    mouse_pos = pg.mouse.get_pos()
-    fractionY = 0.03 
-    fractionX = 0.03
-    dx = 0
-    dy = 0
-    speed = 25
-    if mouse_pos[0] > width*(1-fractionX):
-        dx = speed
-    elif mouse_pos[0] < width*fractionX:
-        dx = -speed
-    
-    if mouse_pos[1] > height*(1-fractionY):
-        dy = speed
-    elif mouse_pos[1] < height*fractionY:
-        dy = -speed
-    
-    return (dx,dy)
-"""
+
 def cameraMovement(width,height):
     return (0,0)
 def cameraMovementKeyBoard(keyPress):
@@ -52,7 +34,7 @@ def cameraMovementKeyBoard(keyPress):
 
 class MainGameScene:
     __slot__ = ["screen","clock","width","height","world","playing","cameraPos","centreOffset","groundBuffSize","firstRender","manager","mainGameGUI","clearButton","appendButton","groundCenterOffset","imgCenterOffset","powerManagement","renderTreeRock","uiEnable"]
-    def __init__(self,screen,clock):
+    def __init__(self,screen,clock,turnBarFilePath,moneyFilePath,writeMaintFilePath,mapDataFilePath):
         self.screen = screen 
         self.clock = clock
         self.width,self.height = self.screen.get_size()
@@ -64,10 +46,11 @@ class MainGameScene:
         self.audioManager = AudioManager()
         self.audioManager.playMusic()
         self.manager = pygame_gui.UIManager((self.width,self.height))
-        self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self)
-        self.world = GameData(50,50,self.width,self.height,self,
-                              "res/graphics/imgForPlacement/mapWaterGrasscopy.png",
-                              "res/graphics/imgForPlacement/mapWaterGrasscopy2.png")
+        self.mainGameUI = MainGameUI(self.manager,"./res/json/theme.json",self,turnBarFilePath=turnBarFilePath,writeMaintFilePath=moneyFilePath)
+
+        mapDataDict = json.load(open(mapDataFilePath))
+
+        self.world = GameData(self.width,self.height,self,mapDataDict,writeMaintFilePath)
         self.playing = True
 
         self.camera = Camera()
@@ -120,7 +103,15 @@ class MainGameScene:
         offY = -(self.world.noBlockX - self.world.noBlockY)*TILE_SIZE/4 + height/2
         return (offX,offY)
     def quitScene(self):
-        self.world.writeRockTreeData("playerData.png")
+        turnBarFilePath = "game/currentStartGame/turnBarYear.txt"
+        moneyFilePath = "game/currentStartGame/money.txt"
+        writeMaintFilePath = "game/currentStartGame/writeMaint.txt"
+        mapDataFilePath = "game/currentStartGame/mapData.json"
+        
+
+        self.world.writeRockTreeData(mapDataFilePath,writeMaintFilePath)
+        self.mainGameUI.turnBar.writeTurnBarUI(turnBarFilePath)
+        self.mainGameUI.notificationBox.writeMoney(moneyFilePath)
         pg.quit()
         sys.exit()
     def mouseHoverEvents(self):

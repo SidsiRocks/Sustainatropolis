@@ -54,4 +54,8 @@ class CustomUIprogressBar(UIStatusBar):
         if maxVal != self.maximum_progress:
             self.maximum_progress = maxVal
             self.status_changed = True 
+            if self.maximum_progress != 0:
+                self.percent_full = min((self.current_progress*100)/self.maximum_progress,1)
+            else:
+                self.percent_full = 0
     
