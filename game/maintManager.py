@@ -40,7 +40,8 @@ class MaintManager:
             #generate not enough money error message
             self.createNotEnoughMoneyWindow(proj,projName,maint,projMaintCost,curMoney)
         else:
-            self.createMaintenanceWindow(proj,projName,maint,projMaintCost)
+            if maint != 100:
+                self.createMaintenanceWindow(proj,projName,maint,projMaintCost)
     def createMaintenanceWindow(self,proj,projName,maint,projMaintCost):
         text = f"""<font face='Montseraat' color="#ffffff">{projName} has current maintenance {maint} it would cost
 {projMaintCost} to fix it</font>"""
@@ -51,6 +52,7 @@ class MaintManager:
         onCloseFunc = lambda: (self.fixMaintenaceFunc(proj,projMaintCost),
                                projUIWrapper.setProjAllowed(True),
                                self.setMaintAllowed(True))
+        onCloseButtonFunc = lambda: (projUIWrapper.setProjAllowed(True),self.setMaintAllowed(True))
 
         maintWinWidth  = 400
         maintWinHeight = 400
@@ -60,7 +62,8 @@ class MaintManager:
                                           paddingY=10,window_display_title="Reapir Project",
                                           object_id= ObjectID(class_id = "@projMaintCostWindow",object_id = "#projMaintCostWindow"),
                                           resizable=False,draggable=False,manager=self.manager,
-                                          onCloseFunc=onCloseFunc,buttonMsg=f"Pay {projMaintCost}",visible=1)
+                                          onCloseFunc=onCloseFunc,buttonMsg=f"Pay {projMaintCost}",visible=1,
+                                          onCloseButtonFunc=onCloseButtonFunc)
         maintWindow.set_blocking(True)
         return maintWindow
 

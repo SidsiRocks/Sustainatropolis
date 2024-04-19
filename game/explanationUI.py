@@ -31,6 +31,8 @@ class ExplanationUI:
 
         buttonWidth = mainExplainWinRect.width
         buttonHeight = mainExplainWinRect.height
+
+        #replace with an image element
         self.imgButton = UIButton(Rect(0,0,buttonWidth,buttonHeight),text="",
                                   manager=manager,container=self.mainExplainWin,
                                   object_id=ObjectID("#explainImg","@explainImg"))

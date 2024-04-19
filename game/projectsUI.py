@@ -142,6 +142,7 @@ class ProjectsUI:
         return projectListWindow
     def clickedOnWorld(self,x,y):
         #may want to add something to cancel placement like left clicking
+        print(f"self.projPlaceAllowed:{self.projPlaceAllowed}")
         if self.currentProject != None:
             if self.game.world.checkPlacementValid(x,y,self.currentProject) and self.projPlaceAllowed:
                 self.notificationBox.diffMoney(-self.projectToCostMap[self.currentProject])
