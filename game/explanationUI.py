@@ -50,7 +50,7 @@ class ExplanationUI:
         explainBtnRect = Rect(width-2*explainButtonWidth-padX,0,explainButtonWidth,explainButtonHeight)
         self.explainButton = UIButton(explainBtnRect,text="Explain",
                                   manager=manager,
-                                  object_id=ObjectID("#explainBtn","@explainBtn"))
+                                  object_id=ObjectID("#explainBtn","@explainBtn"),starting_height=2)
     
     def processEvent(self,event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
