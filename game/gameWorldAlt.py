@@ -141,16 +141,6 @@ class GameData:
                 # self.game.powerManagement.handleProj(tileName)
                 self.game.waterManagement.handleProj(tileName)
         return rockTreeData
-    def createGroundDataDebug(self):
-        groundData = [[-1 for y in range(self.noBlockY)] for x in range(self.noBlockX)]
-        for x in range(self.noBlockX):
-            for y in range(self.noBlockY):
-                curDict = {"tile":self.imgIndxMap["block"]}
-        return groundData
-    def createRockTreeDebug(self):
-        rockTreeData = [[None for y in range(self.noBlockY)] for x in range(self.noBlockX)]
-        return rockTreeData
-    #temporarily removing reload offsets
     def reloadOffsets(self):
         pass
     def loadImages(self):
@@ -244,17 +234,6 @@ class GameData:
             maintCost = projData[key]["maintCost"]
             self.projCost[key] = maintCost 
     def writeRockTreeData(self,mapJsonPath,projMaintPath):
-        #also write the base image bath used too
-        #image = Image.new('RGB',(self.noBlockY,self.noBlockX))
-        #for x in range(self.noBlockX):
-        #    for y in range(self.noBlockY):
-        #        curDict = self.rockTreeData[x][y]
-        #        if type(curDict) == dict:
-        #            imgIndx = curDict["tile"]
-        #            imgName = self.indxImgMap[imgIndx]
-        #            curColor = self.tileToColor[imgName]
-        #            image.putpixel((y,x),curColor)
-        #image.save(imagePath)
 
         with open(mapJsonPath,"w",encoding="utf-8") as jsonFile:
             json.dump(self.mapData,jsonFile,ensure_ascii=False,indent=4)
@@ -272,8 +251,7 @@ class GameData:
         maintVal = int(args[2])
     
         return tileName,posTuple,maintVal
-#    def createProject(self,projName,pos,mode="normal"):
-#        return {"tile":self.imgIndxMap[projName],"pos":pos,"mode":mode}
+
     def createProject(self,projName,pos,mode="normal",maint=100):
         projIndx = self.imgIndxMap[projName]
         if projName in self.disableMaintBar:
@@ -281,7 +259,6 @@ class GameData:
         else:
         
             return Project(projIndx,projName,pos,self.maintOffsetArr[projIndx],self.game.manager,mode,maint=maint)
-            # segame.allProjectsList.append(temp)
         
     def updateProjMaintBar(self,totalOffset):
         for x in range(self.noBlockX):
